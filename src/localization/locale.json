@@ -1,0 +1,59 @@
+{
+  "uz": {
+    "seo": {
+      "title": "Ubay | internet magazin"
+    },
+    "header": {
+      "search_placeholder": "Katalog qidiruvi",
+      "between": {
+        "compare": "Taqqoslash",
+        "favorites": "Tanlanganlar",
+        "cart": "Savat",
+        "user": "Kirish"
+      }
+    },
+    "home": {
+      "sidebar": {
+        "title": "Kategoriyalar"
+      }
+    }
+  },
+  "уз": {
+    "seo": {
+      "title": "Ubay | интернет магазин"
+    },
+    "header": {
+      "search_placeholder": "Каталог Қидируви",
+      "between": {
+        "compare": "Таққослаш",
+        "favorites": "Танланганлар",
+        "cart": "Сават",
+        "user": "Кириш"
+      }
+    },
+    "home": {
+      "sidebar": {
+        "title": "Категориялар"
+      }
+    }
+  },
+  "ru": {
+    "seo": {
+      "title": "Ubay | интернет-магазин"
+    },
+    "header": {
+      "search_placeholder": "Поиск по каталогу",
+      "between": {
+        "compare": "Сравнение",
+        "favorites": "Избранное",
+        "cart": "Корзина",
+        "user": "Войти"
+      }
+    },
+    "home": {
+      "sidebar": {
+        "title": "Категории"
+      }
+    }
+  }
+}

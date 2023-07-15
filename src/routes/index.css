@@ -1,0 +1,24 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    line-height: 1;
+    text-decoration: none;
+    outline: none;
+    font-family: sans-serif;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-height: 100vh;
+    height: 100%;
+}
+
+main {
+    overflow-y: auto;
+    flex: 1;
+}
