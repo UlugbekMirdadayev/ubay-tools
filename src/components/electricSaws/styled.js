@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 
 export const StyledElectricSaws = styled.div`
   display: flex;
+  margin-bottom: 3.125vw;
   .card_electric_saws {
     display: flex;
     width: 15.104166666666666vw;
