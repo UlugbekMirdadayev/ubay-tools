@@ -1,40 +1,102 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Change, Like } from "../icon";
 import { StyledSalesHits } from "./styles";
+import Selectors from "../../redux/selectors";
+import { api } from "../../api";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../redux/loading-slice";
+import { setTopProducts } from "../../redux/products-slice";
+import { API } from "../../utils/constants";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Link } from "react-router-dom";
 
-function SalesHits() {
+function SalesHits({ lang, langData }) {
+  const dispatch = useDispatch();
+  const categories = Selectors.useCategories();
+  const { topProducts } = Selectors.useProducts();
+  const sliderRef = useRef();
+  const [active, setActive] = useState(null);
+
+  const topCategories = [...categories]?.reverse();
+
+  const handleFilterProducts = (sub_ident) => {
+    setActive(sub_ident);
+    dispatch(setLoading(true));
+    api
+      .get_products({
+        show_products: { main_ident: 0, sub_ident },
+      })
+      .then(({ data }) => {
+        dispatch(setLoading(false));
+        if (data?.res_id === 200) {
+          dispatch(setTopProducts(data?.result));
+        } else {
+          dispatch(setTopProducts(data?.result));
+        }
+      })
+      .catch((err) => {
+        dispatch(setLoading(false));
+        console.log(err, "error");
+      });
+  };
+
+  const isActiveCategory = topCategories?.find(({ ident }) => ident === active);
   return (
     <StyledSalesHits>
       <div className="sales">
-        <h1>Хиты продаж</h1>
-        <p>
-          В нашем интернет-магазине представлен профессиональный инструмент и
-          оборудование ведущих мировых производителей.
-        </p>
-        {[0, 1, 2, 3, 4, 5].map((item) => (
-          <button>Садовая техника</button>
+        <h1>{langData.sales_hits.title}</h1>
+        <p>{langData.sales_hits.text}</p>
+        {topCategories?.map((category) => (
+          <button
+            onClick={() =>
+              category?.ident === active
+                ? null
+                : handleFilterProducts(category?.ident)
+            }
+            className={active === category?.ident ? "active" : null}
+            key={category?.ident}
+          >
+            {category[lang === "uz" ? "iconfile" : "name"] || category?.ident}
+          </button>
         ))}
       </div>
-      <div className="motorcycle_cultivator">
-        {[0, 1, 2, 3, 4, 5].map((item) => (
-          <div className="motorcycle_cultivator_card">
-            <img
-              src="https://api.ubaytools.com/Images/3c0dafacc66a74bf447e5c0c7aa77f30.webp"
-              alt="..."
-            />
-            <h2>Мотокультиватор RD-GT790</h2>
-            <button>Drell category</button>
-            <h1>23 990 So’m</h1>
-            <div className="motorcycle_cultivator_cart">
-              <button>В корзину</button>
-              <Change />
+      <Swiper
+        ref={sliderRef}
+        slidesPerView={"auto"}
+        className="motorcycle_cultivator"
+      >
+        {topProducts?.map((product) => (
+          <SwiperSlide
+            key={product?.ident}
+            className="motorcycle_cultivator_card"
+          >
+            <div className="hover_body">
+              <Link to={`/product/${product?.ident}`}>
+                <img
+                  src={API.baseURL_IMAGE + product?.photo}
+                  alt={product?.name}
+                />
+              </Link>
+              <h2>{product?.name}</h2>
+              <button>
+                <Link to={`/category/${isActiveCategory?.ident}`}>
+                  {isActiveCategory[lang === "uz" ? "iconfile" : "name"] ||
+                    isActiveCategory?.ident}
+                </Link>
+              </button>
+              <h1>23 990 So’m</h1>
+              <div className="motorcycle_cultivator_cart">
+                <button>В корзину</button>
+                <Change />
+              </div>
+              <div className="like_button">
+                <Like />
+              </div>
             </div>
-            <div className="like_button">
-              <Like />
-            </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </StyledSalesHits>
   );
 }

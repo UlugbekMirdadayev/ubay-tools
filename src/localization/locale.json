@@ -15,25 +15,11 @@
     "home": {
       "sidebar": {
         "title": "Kategoriyalar"
-      }
-    }
-  },
-  "уз": {
-    "seo": {
-      "title": "Ubay | интернет магазин"
-    },
-    "header": {
-      "search_placeholder": "Каталог Қидируви",
-      "between": {
-        "compare": "Таққослаш",
-        "favorites": "Танланганлар",
-        "cart": "Сават",
-        "user": "Кириш"
-      }
-    },
-    "home": {
-      "sidebar": {
-        "title": "Категориялар"
+      },
+      "more": "Batafsil",
+      "sales_hits": {
+        "title": "Savdo xitlari",
+        "text": "Bizning onlayn-do'konimizda dunyodagi etakchi ishlab chiqaruvchilarning professional vositalari va uskunalari mavjud."
       }
     }
   },
@@ -53,6 +39,11 @@
     "home": {
       "sidebar": {
         "title": "Категории"
+      },
+      "more": "Больше",
+      "sales_hits": {
+        "title": "Хиты продаж",
+        "text": "В нашем интернет-магазине представлен профессиональный инструмент и оборудование ведущих мировых производителей."
       }
     }
   }

@@ -7,11 +7,9 @@ export const StyledSalesHits = styled.div`
 
   .sales {
     width: 20.677083333333332vw;
-    height: 29.322916666666668vw;
     padding: 2.7604166666666665vw 1.5625vw;
     margin-right: 2.1354166666666665vw;
-    border-top: 0.052083333333333336vw solid #e2e2e2;
-    border-right: 0.052083333333333336vw solid #e2e2e2;
+    border: 0.052083333333333336vw solid #e2e2e2;
     background: #fff;
     h1 {
       color: #1d2f77;
@@ -27,34 +25,51 @@ export const StyledSalesHits = styled.div`
     p {
       margin-bottom: 1.8229166666666667vw;
       color: #999;
-      font-family: TT Travels;
       font-size: 0.7291666666666666vw;
-      font-style: normal;
       font-weight: 500;
       line-height: 1.2395833333333333vw;
     }
     button {
       color: #000;
       text-align: center;
-      font-family: TT Travels;
       font-size: 0.6770833333333334vw;
-      font-style: normal;
       font-weight: 500;
-      line-height: 1.25vw; /* 184.615% */
+      line-height: 1.25vw;
       text-transform: uppercase;
       padding: 0.15625vw 0.7291666666666666vw;
       border-radius: 0.625vw;
       border: 0.10416666666666667vw solid #e2e2e2;
       margin-bottom: 0.4166666666666667vw;
       margin-right: 0.4166666666666667vw;
+      background-color: #fff;
+      cursor: pointer;
+
+      &.active {
+        border-color: #ffa73d;
+      }
     }
   }
   .motorcycle_cultivator {
-    display: flex;
-
+    flex: 1;
     .motorcycle_cultivator_card {
-      padding: 1.71875vw 0.7291666666666666vw;
-      position: relative;
+      width: 14.0625vw;
+      padding: 0.5vw 0.2vw;
+      min-height: 29.34796875vw;
+
+      .hover_body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        transition: 300ms ease;
+        position: relative;
+        padding: 1.21875vw 0.5291666666666666vw;
+        height: 100%;
+        &:hover {
+          box-shadow: 0 0 4px 1px #00000026;
+        }
+      }
+
       .like_button {
         position: absolute;
         top: 0;
@@ -67,20 +82,15 @@ export const StyledSalesHits = styled.div`
       }
       h2 {
         color: #1d2f77;
-        font-family: TT Travels;
         font-size: 15.677px;
-        font-style: normal;
         font-weight: 700;
         line-height: 19.603px;
         margin-bottom: 1.3020833333333333vw;
       }
       button {
         color: #00132c;
-        font-family: SF Pro;
         font-size: 16.405px;
-        font-style: normal;
         font-weight: 274;
-        line-height: normal;
         text-decoration-line: underline;
         background: transparent;
         border: none;
@@ -89,9 +99,7 @@ export const StyledSalesHits = styled.div`
       }
       h1 {
         color: #000;
-        font-family: TT Travels;
         font-size: 1.8229166666666667vw;
-        font-style: normal;
         font-weight: 700;
         line-height: 39.987px;
         margin-bottom: 1.6666666666666667vw;
@@ -101,14 +109,11 @@ export const StyledSalesHits = styled.div`
         button {
           color: #fff;
           text-align: center;
-          font-family: TT Travels;
           font-size: 14px;
-          font-style: normal;
           font-weight: 600;
           line-height: 44px; /* 314.286% */
           letter-spacing: 0.16px;
           text-transform: uppercase;
-          text-decoration: none;
           background: #015ccf;
           padding: 0.140625vw 2.4479166666666665vw;
           margin-right: 0.6770833333333334vw;

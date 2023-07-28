@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const HeaderStyled = styled.div`
   nav {
-    padding: 0 13.020833333333334vw;
+    padding: 0 10vw;
     width: 100%;
     display: flex;
     align-items: center;
@@ -38,9 +38,10 @@ const HeaderStyled = styled.div`
     }
   }
   .navbar {
-    padding: 1.0416666666666667vw 13.020833333333334vw;
+    padding: 1.0416666666666667vw 10vw;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     .space {
       display: flex;
       align-items: center;

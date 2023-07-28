@@ -1,12 +1,12 @@
 import React, { useMemo } from "react";
-import { useLang } from "../../redux/selectors";
+import Selectors from "../../redux/selectors";
 import locale from "../../localization/locale.json";
 import HomeStyled from "./style";
 import Sidebar from "./sidebar";
 import ScrollArea from "./scrollArea";
 
 const Home = () => {
-  const lang = useLang();
+  const lang = Selectors.useLang();
   const langData = useMemo(() => locale[lang]["home"], [lang]);
 
   return (

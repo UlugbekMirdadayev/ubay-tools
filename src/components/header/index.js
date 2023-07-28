@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useCallback } from "react";
 import HeaderStyled from "./styles";
 import {
   CartIcon,
@@ -8,17 +8,17 @@ import {
   Search,
   UserIcon,
 } from "../icon";
-import { useLang } from "../../redux/selectors";
+import Selector from "../../redux/selectors";
 import { useDispatch } from "react-redux";
 import { setLang } from "../../redux/lang-slice";
 import locale from "../../localization/locale.json";
 import { NavLink } from "react-router-dom";
 
 const languages = [
-  {
-    title: "Ўзб",
-    key: "уз",
-  },
+  // {
+  //   title: "Ўзб",
+  //   key: "уз",
+  // },
   {
     title: "Uz",
     key: "uz",
@@ -54,16 +54,15 @@ const links = [
 
 const Header = () => {
   const dispatch = useDispatch();
-  const lang = useLang();
+  const lang = Selector.useLang();
   const langData = useMemo(() => locale[lang]["header"], [lang]);
-  const handleChangeLang = (lang_) => dispatch(setLang(lang_.target.value));
-
-  useEffect(() => {
-    const titleChange = () => (document.title = locale[lang].seo.title);
-    return () => {
-      titleChange();
-    };
-  }, [lang]);
+  document.title = locale[lang].seo.title;
+  const handleChangeLang = useCallback(
+    (lang_) => {
+      dispatch(setLang(lang_.target.value));
+    },
+    [dispatch]
+  );
 
   return (
     <HeaderStyled>
