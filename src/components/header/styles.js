@@ -13,7 +13,7 @@ const HeaderStyled = styled.div`
       font-size: 1.0416666666666667vw;
       font-style: normal;
       font-weight: 700;
-      font-family: "Roboto", sans-serif;
+      font-family: "SF Pro Display";
       margin-right: 1.25vw;
     }
 
@@ -69,6 +69,7 @@ const HeaderStyled = styled.div`
           flex: 1;
           border: 0;
           background: transparent;
+          font-family: "Raleway";
           color: #000;
           font-size: 0.7936458333333333vw;
           &::placeholder {
@@ -121,6 +122,7 @@ const HeaderStyled = styled.div`
           font-size: 0.6944270833333334vw;
           color: #111;
           font-weight: 500;
+          font-family: "Raleway";
         }
       }
     }

@@ -7,7 +7,11 @@ const App = () => {
   const { isLoading } = Selectors.useLoading();
   return (
     <div className="app">
-      {isLoading && <div className={"loading"} />}
+      {isLoading && (
+        <div className={"loading"}>
+          <div className="loader" />
+        </div>
+      )}
       <Header />
       {/* main components with scrollbar */}
       <RootRoutes />

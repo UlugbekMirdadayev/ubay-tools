@@ -13,7 +13,6 @@ export const StyledSalesHits = styled.div`
     background: #fff;
     h1 {
       color: #1d2f77;
-      font-family: TT Travels;
       font-size: 1.6666666666666667vw;
       font-style: normal;
       font-weight: 700;
@@ -52,11 +51,11 @@ export const StyledSalesHits = styled.div`
   .motorcycle_cultivator {
     flex: 1;
     .motorcycle_cultivator_card {
-      width: 14.0625vw;
+      width: max-content;
       padding: 0.5vw 0.2vw;
-      min-height: 29.34796875vw;
 
       .hover_body {
+        width: 14.0625vw;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -64,7 +63,8 @@ export const StyledSalesHits = styled.div`
         transition: 300ms ease;
         position: relative;
         padding: 1.21875vw 0.5291666666666666vw;
-        height: 100%;
+        min-height: 28vw;
+        gap: 1.5vw;
         &:hover {
           box-shadow: 0 0 4px 1px #00000026;
         }
@@ -72,55 +72,66 @@ export const StyledSalesHits = styled.div`
 
       .like_button {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 1vw;
+        right: 1vw;
+        cursor: pointer;
+
+        svg {
+          width: 0.8333333333333334vw;
+          height: 0.8333333333333334vw;
+        }
       }
       img {
         width: 12.65625vw;
         height: 11.40625vw;
-        margin-bottom: 1.71875vw;
       }
       h2 {
         color: #1d2f77;
-        font-size: 15.677px;
+        font-size: 0.8165104166666667vw;
         font-weight: 700;
-        line-height: 19.603px;
-        margin-bottom: 1.3020833333333333vw;
       }
-      button {
+      .link-category {
+        display: inline-flex;
         color: #00132c;
-        font-size: 16.405px;
-        font-weight: 274;
-        text-decoration-line: underline;
-        background: transparent;
-        border: none;
-        margin-bottom: 2.7083333333333335vw;
-        cursor: pointer;
+        font-size: 0.8544270833333333vw;
+        text-decoration: underline;
       }
       h1 {
         color: #000;
-        font-size: 1.8229166666666667vw;
+        font-size: 0.9375vw;
         font-weight: 700;
-        line-height: 39.987px;
-        margin-bottom: 1.6666666666666667vw;
       }
       .motorcycle_cultivator_cart {
         display: flex;
-        button {
+        justify-content: space-between;
+        width: 100%;
+        .button {
           color: #fff;
           text-align: center;
-          font-size: 14px;
+          font-size: 0.7291666666666666vw;
           font-weight: 600;
-          line-height: 44px; /* 314.286% */
-          letter-spacing: 0.16px;
           text-transform: uppercase;
           background: #015ccf;
-          padding: 0.140625vw 2.4479166666666665vw;
+          padding: 0.140625vw 0;
+          margin: 0;
           margin-right: 0.6770833333333334vw;
           cursor: pointer;
+          border: 0;
+          width: 100%;
         }
-        svg {
+        .compare-btn {
           cursor: pointer;
+          background: #FFDA00;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.78125vw;
+          border: 0;
+
+          svg {
+            width: 1vw;
+            height: 1vw;
+          }
         }
       }
     }

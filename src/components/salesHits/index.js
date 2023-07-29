@@ -6,7 +6,7 @@ import { api } from "../../api";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../redux/loading-slice";
 import { setTopProducts } from "../../redux/products-slice";
-import { API } from "../../utils/constants";
+import { API, currencyString } from "../../utils/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
@@ -79,16 +79,19 @@ function SalesHits({ lang, langData }) {
                 />
               </Link>
               <h2>{product?.name}</h2>
-              <button>
-                <Link to={`/category/${isActiveCategory?.ident}`}>
-                  {isActiveCategory[lang === "uz" ? "iconfile" : "name"] ||
-                    isActiveCategory?.ident}
-                </Link>
-              </button>
-              <h1>23 990 So’m</h1>
+              <Link
+                className="link-category"
+                to={`/category/${isActiveCategory?.ident}`}
+              >
+                {isActiveCategory[lang === "uz" ? "iconfile" : "name"] ||
+                  isActiveCategory?.ident}
+              </Link>
+              <h1>{currencyString(product?.main_price)}</h1>
               <div className="motorcycle_cultivator_cart">
-                <button>В корзину</button>
-                <Change />
+                <button className="button">В корзину</button>
+                <button className="compare-btn">
+                  <Change />
+                </button>
               </div>
               <div className="like_button">
                 <Like />
