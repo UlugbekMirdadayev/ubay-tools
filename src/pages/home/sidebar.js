@@ -5,11 +5,48 @@ import Selectors from "../../redux/selectors";
 import { setCategories } from "../../redux/categories-slice";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../redux/loading-slice";
+import {
+  CartIcon,
+  CloseArrow,
+  CompareIcon,
+  HeartIcon,
+  UserIcon,
+} from "../../components/icon";
+import { setSidebarVisible } from "../../redux/sidebar-slice";
 
-const Sidebar = ({ langData }) => {
+const Sidebar = ({ langData, lang }) => {
   const dispatch = useDispatch();
   const categories = Selectors.useCategories();
-  const lang = Selectors.useLang();
+  const sidebar = Selectors.useSidebar();
+  const favorites = Selectors.useFavorites();
+  const cartItems = Selectors.useCart();
+  const compareItems = Selectors.useCompare();
+
+  const links = [
+    {
+      key: "compare",
+      link: "/compare",
+      icon: <CompareIcon />,
+      count: compareItems?.length,
+    },
+    {
+      key: "favorites",
+      link: "/favorites",
+      icon: <HeartIcon />,
+      count: favorites?.length,
+    },
+    {
+      key: "cart",
+      link: "/cart",
+      icon: <CartIcon />,
+      count: cartItems?.length,
+    },
+    {
+      key: "user",
+      link: "/user",
+      icon: <UserIcon />,
+    },
+  ];
 
   const getCategories = useCallback(() => {
     if (categories?.length) return null;
@@ -37,16 +74,39 @@ const Sidebar = ({ langData }) => {
     };
   }, [getCategories]);
 
+  const handleSidebarChange = useCallback(() => {
+    dispatch(setSidebarVisible(false));
+  }, [dispatch]);
+
   return (
-    <article>
-      <h1 className="title-c">{langData.title}</h1>
-      <ul>
+    <article className={sidebar ? "opened" : ""}>
+      <h1 className="title-c">
+        <CloseArrow onClick={handleSidebarChange} />
+        {langData.title}
+      </h1>
+      <ul className="scroll-custome">
         {categories?.map((category) => (
-          <NavLink key={category?.ident} to={`/category/${category?.ident}`}>
-            {category[lang === "uz" ? "iconfile" : "name"]}
+          <NavLink
+            onClick={handleSidebarChange}
+            key={category?.ident}
+            to={`/category/${category?.ident}`}
+          >
+            {category[lang === "uz" ? "name_uz" : "name"]}
           </NavLink>
         ))}
       </ul>
+      <div className="mobile_bar">
+        {links.map((item) => (
+          <NavLink to={item.link} key={item.key} className="box">
+            <div className="icon">
+              {item.count ? (
+                <span>{item?.count > 9 ? "9+" : item?.count}</span>
+              ) : null}
+              {item.icon}
+            </div>
+          </NavLink>
+        ))}
+      </div>
     </article>
   );
 };

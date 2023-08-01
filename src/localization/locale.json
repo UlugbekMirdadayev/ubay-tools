@@ -12,6 +12,36 @@
         "user": "Kirish"
       }
     },
+    "footer": {
+      "desc": [
+        "Mahsulot saytda fotosuratlar, fotosuratlar, matnli, sxematik va reklama materiallari bilan taqdim etiladi - sotuvchining mulki. Xaridorning iltimosiga binoan sotuvchi mahsulot to'g'risida taqdim etilgan aloqa vositalari to'g'risida batafsil ma'lumot berishi mumkin.",
+        "Ushbu saytda joylashtirilgan ma'lumotlar Rossiya Federatsiyasi fuqarolik kodeksining 437-moddasi 2-bandida, shuningdek Rossiya federatsiyasi yoki xorijiy davlatning fuqarolik qonunchiligining boshqa har qanday normalarida nazarda tutilgan ommaviy taklif emas. Ushbu ma'lumot ma'lum bir shaxslar doirasi va noma'lum shaxslar doirasi bilan har qanday munosabatlarni yakunlash uchun mahsulot to'g'risidagi ma'lumotlarni joylashtirgan sub'ektning irodasini ifoda etmaydi.ushbu saytda taqdim etilgan ma'lumotlar faqat sayt egasi erisha olgan ishlab chiqarish (yoki ulgurji savdo) sohasidagi yutuqlar to'g'risidagi ma'lumotdir. Ushbu saytda taqdim etilgan ma'lumotlardan masofadan turib tuzilgan oldi-sotdi shartnomasini tuzish, bajarish va bekor qilish uchun foydalanish mumkin emas."
+      ],
+      "contact": {
+        "title": "Buyurtma bering va\nmaslahat\nmutaxassis",
+        "name": "Ism va familiya",
+        "email": "Elektron pochta",
+        "submit": "Yuborish"
+      },
+      "info_contact": "Aloqa ma'lumotlari",
+      "about_company": "Kompaniya haqida",
+      "products": "Mahsulotlar",
+      "we_are_social": "Biz ijtimoiy tarmoqlarda",
+      "payment": "Biz to'lovni qabul qilamiz",
+      "hotline": "Ishonch telefoni",
+      "organizations": "Tashkilotlar",
+      "landlords": "Arendatel",
+      "contacts": "Kontaktlar",
+      "about_us": "Biz haqimizda",
+      "news": "Yangiliklar",
+      "our_stores": "Bizning do’konlar",
+      "sales": "Aksiyalar",
+      "vacancies": "Vakansiyalar",
+      "batteries_lion": "Lion batareyalari",
+      "hand_tools": "Qo'l asboblari",
+      "branches": "Filiallar",
+      "certificates": "Sertifikatlar"
+    },
     "home": {
       "sidebar": {
         "title": "Kategoriyalar"
@@ -20,7 +50,21 @@
       "sales_hits": {
         "title": "Savdo xitlari",
         "text": "Bizning onlayn-do'konimizda dunyodagi etakchi ishlab chiqaruvchilarning professional vositalari va uskunalari mavjud."
-      }
+      },
+      "show_all": "Hammasini ko'rish",
+      "news_title": "Yangiliklar",
+      "all_news": "Barcha yangiliklar",
+      "btn_more": "Batafsil bilish",
+      "more_video": "Batafsil video",
+      "ubay_tool_text": "Sizni macbro elektronika do'koni kutib oladi. Bu erda siz barcha Apple mahsulotlarini topishingiz mumkin. 14 yildan ortiq vaqt davomida biz mijozlarimiz uchun kerakli gadjet bilan maslahatlashdik va tanladik. Bozorda mavjud bo'lgan vaqtimiz davomida biz shaharlararo etkazib berishni optimallashtirishga muvaffaq bo'ldik, shunda siz gadgetni uch kun ichida olasiz va agar sizga shahar bo'ylab etkazib berish kerak bo'lsa, biz gadgetni 2 soat ichida etkazib beramiz. Mijozlarimizning 90 foizi doimiy mijozlarga aylanadi, chunki biz bir yillik kafolat beramiz.",
+      "load_catalog": "Katalogni yuklab olish",
+      "pc_load": "Kompyuterga yuklash",
+      "warranty": "Kafolat haqida",
+      "production": "Ishlab chiqarish",
+      "our_address": "Bizning manzilimiz",
+      "questions_title": "Tez tez beriladigan savollar F.A.Q.",
+      "online_time": "8.00 dan 22.00 gacha aloqadamiz",
+      "tg_questions": "Telegram orqali savol"
     }
   },
   "ru": {
@@ -36,6 +80,36 @@
         "user": "Войти"
       }
     },
+    "footer": {
+      "desc": [
+        "Товар представлен на Сайте фотоматериалами, фотообразцами, текстовыми, схематическими, и рекламными материалами - являются собственностью Продавца. По просьбе Покупателя Продавец может предоставить подробную информацию, по предусмотренным средствам связи о Товаре.",
+        "Информация, размещенная на настоящем сайте, не является публичной офертой, предусмотренной п.2 статьи 437 Гражданского кодекса РФ, а так же возможно любыми другими нормами Гражданского законодательства РФ или иностранного государства. Данная информация не выражает волю субъекта, разместившего информацию о товаре на заключение каких-либо отношений, как определенным кругом лиц, так и с неопределенным кругом лиц. Информация, представленная на настоящем сайте, является лишь информацией о достижениях в производственной (или оптово-торговой) сфере, которые смог достигнуть собственник сайта. Информация, предоставленная на настоящем сайте, не может быть использована для заключения, исполнения и прекращения договора купли-продажи, заключаемого дистанционным способом."
+      ],
+      "contact": {
+        "title": "Сделать заказ и\nконсультацию\nспециалиста",
+        "name": "Имя и фамилия",
+        "email": "Электронная почта",
+        "submit": "Отправить"
+      },
+      "info_contact": "Контактная информация",
+      "about_company": "О компании",
+      "products": "Продукты",
+      "we_are_social": "Мы в соцсетях",
+      "payment": "Принимаем к оплате",
+      "hotline": "Горячая линия",
+      "organizations": "Организации",
+      "landlords": "Арендодателям",
+      "contacts": "Контакты",
+      "about_us": "О нас",
+      "news": "Новости",
+      "our_stores": "Наши магазины",
+      "sales": "Акции",
+      "vacancies": "Вакансии",
+      "batteries_lion": "Lion батареи",
+      "hand_tools": "Ручные инструменты",
+      "branches": "Филиалы",
+      "certificates": "Сертификаты"
+    },
     "home": {
       "sidebar": {
         "title": "Категории"
@@ -44,7 +118,21 @@
       "sales_hits": {
         "title": "Хиты продаж",
         "text": "В нашем интернет-магазине представлен профессиональный инструмент и оборудование ведущих мировых производителей."
-      }
+      },
+      "show_all": "Показать  все",
+      "news_title": "Новости",
+      "all_news": "Все новости",
+      "btn_more": "Узнать больше",
+      "more_video": "Подробное видео",
+      "ubay_tool_text": "Вас приветствует магазин электроники MacBro. У нас вы можете найти всю продукцию Apple. Уже более 14 лет мы консультируем и подбираем нужный гаджет для наших покупателей. За время нашего существования на рынке мы успели оптимизировать доставку по межгороду, так что вы получите гаджет в течении трех дней, а если вам необходима доставка по городу мы доставим гаджет в течении 2 часов. 90% наших клиентов становятся постоянными покупателями, потому что мы даем гарантию на один год.",
+      "load_catalog": "Скачать каталог",
+      "pc_load": "Загрузка на компьютер",
+      "warranty": "О гарантии",
+      "production": "Производство",
+      "our_address": "Наш адрес",
+      "questions_title": "Быстрые вопросы F.A.Q.",
+      "online_time": "Мы на связи с 8.00 до 22.00",
+      "tg_questions": "Вопрос по телеграмме"
     }
   }
 }

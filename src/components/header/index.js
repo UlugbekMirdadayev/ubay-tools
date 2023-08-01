@@ -5,6 +5,7 @@ import {
   CompareIcon,
   HeartIcon,
   Logo,
+  MenuIcon,
   Search,
   UserIcon,
 } from "../icon";
@@ -13,12 +14,9 @@ import { useDispatch } from "react-redux";
 import { setLang } from "../../redux/lang-slice";
 import locale from "../../localization/locale.json";
 import { NavLink } from "react-router-dom";
+import { setSidebarVisible } from "../../redux/sidebar-slice";
 
 const languages = [
-  // {
-  //   title: "Ўзб",
-  //   key: "уз",
-  // },
   {
     title: "Uz",
     key: "uz",
@@ -29,40 +27,49 @@ const languages = [
   },
 ];
 
-const links = [
-  {
-    key: "compare",
-    link: "/compare",
-    icon: <CompareIcon />,
-  },
-  {
-    key: "favorites",
-    link: "/favorites",
-    icon: <HeartIcon />,
-  },
-  {
-    key: "cart",
-    link: "/cart",
-    icon: <CartIcon />,
-  },
-  {
-    key: "user",
-    link: "/user",
-    icon: <UserIcon />,
-  },
-];
-
 const Header = () => {
   const dispatch = useDispatch();
   const lang = Selector.useLang();
+  const favorites = Selector.useFavorites();
+  const cartItems = Selector.useCart();
+  const compareItems = Selector.useCompare();
   const langData = useMemo(() => locale[lang]["header"], [lang]);
   document.title = locale[lang].seo.title;
   const handleChangeLang = useCallback(
     (lang_) => {
-      dispatch(setLang(lang_.target.value));
+      dispatch(setLang(lang_));
     },
     [dispatch]
   );
+  const links = [
+    {
+      key: "compare",
+      link: "/compare",
+      icon: <CompareIcon />,
+      count: compareItems?.length,
+    },
+    {
+      key: "favorites",
+      link: "/favorites",
+      icon: <HeartIcon />,
+      count: favorites?.length,
+    },
+    {
+      key: "cart",
+      link: "/cart",
+      icon: <CartIcon />,
+      count: cartItems?.length,
+    },
+    {
+      key: "user",
+      link: "/user",
+      icon: <UserIcon />,
+    },
+  ];
+  
+  const handleSidebarChange = useCallback(() => {
+    dispatch(setSidebarVisible(true));
+  }, [dispatch]);
 
   return (
     <HeaderStyled>
@@ -72,9 +79,8 @@ const Header = () => {
           {languages.map((language) => (
             <button
               className={language.key === lang ? "active" : null}
-              onClick={handleChangeLang}
+              onClick={() => handleChangeLang(language.key)}
               key={language.title}
-              value={language.key}
             >
               {language.title}
             </button>
@@ -82,6 +88,9 @@ const Header = () => {
         </div>
       </nav>
       <div className="navbar">
+        <button className="mb-btn" onClick={handleSidebarChange}>
+          <MenuIcon />
+        </button>
         <div className="space">
           <NavLink to={"/"} className="logo_box">
             <Logo className="logo" />
@@ -95,7 +104,9 @@ const Header = () => {
           {links.map((item) => (
             <NavLink to={item.link} key={item.key} className="box">
               <div className="icon">
-                {item.key === "cart" ? <span>9+</span> : null}
+                {item.count ? (
+                  <span>{item?.count > 9 ? "9+" : item?.count}</span>
+                ) : null}
                 {item.icon}
               </div>
               <p>{langData.between[item.key]}</p>

@@ -11,7 +11,7 @@ const Home = () => {
 
   return (
     <HomeStyled>
-      <Sidebar langData={langData.sidebar} />
+      <Sidebar lang={lang} langData={langData.sidebar} />
       <ScrollArea />
     </HomeStyled>
   );

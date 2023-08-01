@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = JSON.parse(localStorage["favorites_ubay"] || "[]");
 
 const favoritesSlice = createSlice({
   name: "favorites",
@@ -9,8 +9,11 @@ const favoritesSlice = createSlice({
     setLiked(state, { payload }) {
       const isLiked = state.find(({ ident }) => ident === payload?.ident);
       if (isLiked) {
-        return state?.filter(({ ident }) => ident !== payload?.ident);
+        const response = state?.filter(({ ident }) => ident !== payload?.ident);
+        localStorage.setItem("favorites_ubay", JSON.stringify(response));
+        return response;
       }
+      localStorage.setItem("favorites_ubay", JSON.stringify([...state, payload]));
       return [...state, payload];
     },
   },

@@ -1,6 +1,7 @@
 @import url("../fonts/TTTravels/stylesheet.css");
 @import url("../fonts/SFPro/stylesheet.css");
 @import url("../fonts/Raleway/stylesheet.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 * {
   margin: 0;
@@ -19,14 +20,8 @@
   min-height: 100vh;
   max-height: 100vh;
   height: 100%;
+  overflow-x: hidden;
 }
-
-main {
-  overflow-y: auto;
-  flex: 1;
-}
-
-
 
 @keyframes loading {
   to {
@@ -46,13 +41,23 @@ main {
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 22;
+  z-index: 101;
   transition: 300ms ease;
   position: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(.5vw);
+}
+
+.isLoading {
+  background: linear-gradient(100deg,
+      rgba(255, 255, 255, 0.5) 40%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0.5) 60%) #ededed99;
+  background-size: 200% 100%;
+  background-position-x: 180%;
+  animation: 1s loading ease-in-out infinite;
 }
 
 .loader {
@@ -104,5 +109,17 @@ main {
   right: 0;
   top: 0;
   transform-origin: center center;
- 
+}
+
+.scroll-custome::-webkit-scrollbar{ 
+  width: 0.5vw;
+  height: 0.5vw;
+  background: #1d59d141;
+  border-radius: 1vw;
+}
+.scroll-custome::-webkit-scrollbar-thumb{ 
+  width: 1vw;
+  height: 1vw;
+  border-radius: 1vw;
+  background: #1d59d1;
 }

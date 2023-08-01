@@ -11,12 +11,22 @@ class Api {
   }
 
   async get_categories(body = { main_catalog: {} }) {
-    return this.post(body, "main_catalog/", {});
+    return this.post(body, "show/main_catalog/", {});
   }
   async get_products(body = { main_catalog: {} }) {
-    return this.post(body, "show_products/", {});
+    return this.post(body, "show/show_products/", {});
   }
-
+  async set_products_rating(body = {}) {
+    return this.post(body, "insert/product_rating/", {});
+  }
+  async get_news(body = {}) {
+    return this.post(body, "show/news/", {});
+  }
+  async get_questions(body = {}) {
+    return this.post(body, "show/info_add/", {});
+  }
+  
+  
 }
 
 export default Api;

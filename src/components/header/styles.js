@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
-const HeaderStyled = styled.div`
+const HeaderStyled = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: #fff;
+  width: 100%;
+
   nav {
     padding: 0 10vw;
     width: 100%;
@@ -69,11 +76,11 @@ const HeaderStyled = styled.div`
           flex: 1;
           border: 0;
           background: transparent;
-          font-family: "Raleway";
           color: #000;
           font-size: 0.7936458333333333vw;
           &::placeholder {
             color: #999;
+            font-family: "Raleway";
           }
         }
         svg {
@@ -124,6 +131,78 @@ const HeaderStyled = styled.div`
           font-weight: 500;
           font-family: "Raleway";
         }
+      }
+    }
+  }
+  .mb-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  @media screen and (max-width: 768px) {
+    nav {
+      padding: 4.325699745547074vw;
+      padding-top: 10vw;
+      a,
+      .flex-group button {
+        font-size: 3.87735368956743vw;
+        margin: 0;
+      }
+      .flex-group {
+        gap: 6.361323155216285vw;
+        border-color: rgba(217, 217, 217, 0.2);
+        border-width: 0.5089058524173028vw;
+        margin-left: 1.7811704834605597vw;
+        padding: 0 1.7811704834605597vw;
+      }
+    }
+    .navbar {
+      padding: 4.325699745547074vw;
+      padding-top: 6.6157760814249365vw;
+      background-color: #015ccf;
+      align-items: unset;
+      .mb-btn {
+        display: flex;
+        background-color: #fffdfd;
+        border: 0;
+        padding: 2.544529262086514vw 1.5267175572519085vw;
+        svg {
+          width: 6.6157760814249365vw;
+          height: 4.580152671755725vw;
+        }
+      }
+      .space {
+        margin: 0;
+        .logo {
+          width: 27.480916030534353vw;
+          height: 9.16030534351145vw;
+          position: absolute;
+          top: 10vw;
+          left: 4.325699745547074vw;
+          path {
+            fill: #fff;
+            &:nth-child(2) {
+              fill: #ffda00;
+            }
+          }
+        }
+        .search-bar {
+          padding: 2.544529262086514vw;
+          width: 80.1526717557252vw;
+          margin-left: 0;
+
+          input {
+            font-size: 4.071246819338422vw;
+          }
+
+          svg {
+            width: 4.919083969465649vw;
+            height: 4.919083969465649vw;
+          }
+        }
+      }
+      .between {
+        display: none;
       }
     }
   }

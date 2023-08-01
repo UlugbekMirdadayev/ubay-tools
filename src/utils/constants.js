@@ -1,5 +1,5 @@
 export const API = {
-  baseURL: "https://api.ubaytools.com/onlinemarket/show/",
+  baseURL: "https://api.ubaytools.com/onlinemarket/",
   baseURL_IMAGE: "https://api.ubaytools.com/Images/",
 };
 
