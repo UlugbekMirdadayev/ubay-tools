@@ -32,11 +32,7 @@ const Questions = ({ langData, lang }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    const result = () => getQuestions();
-
-    return () => {
-      result();
-    };
+    getQuestions();
   }, [getQuestions]);
   return (
     <QuestionSection>
