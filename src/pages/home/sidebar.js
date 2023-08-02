@@ -67,10 +67,7 @@ const Sidebar = ({ langData, lang }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    const getResult = () => getCategories();
-    return () => {
-      getResult();
-    };
+    getCategories();
   }, [getCategories]);
 
   const handleSidebarChange = useCallback(() => {
