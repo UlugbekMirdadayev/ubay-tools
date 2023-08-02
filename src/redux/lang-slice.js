@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = localStorage["lang-ubay"] || "uz";
+const initialState = localStorage["lang-ubay"] || "ru";
 
 const langSlice = createSlice({
   name: "lang",
