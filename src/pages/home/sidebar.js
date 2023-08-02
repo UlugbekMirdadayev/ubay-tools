@@ -49,7 +49,6 @@ const Sidebar = ({ langData, lang }) => {
   ];
 
   const getCategories = useCallback(() => {
-    if (categories?.length) return null;
     dispatch(setLoading(true));
     api
       .get_categories()
@@ -65,7 +64,7 @@ const Sidebar = ({ langData, lang }) => {
         dispatch(setLoading(false));
         console.error(err?.code);
       });
-  }, [categories.length, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     const getResult = () => getCategories();
