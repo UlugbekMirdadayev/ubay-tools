@@ -59,9 +59,9 @@ export const FooterStyled = styled.footer`
       display: flex;
       flex-direction: column;
       gap: 0.78125vw;
-      width: 100%;
       @media screen and (max-width: 768px) {
         gap: 1.5267175572519085vw;
+        width: 100%;
       }
     }
     .row {
