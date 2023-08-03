@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import TopSliderMain from "./topSliderMain/index";
+import TopSliderMain from "./topSliderMain";
 import ElectricSaws from "./electricSaws";
 import SalesHits from "./salesHits";
 import { ScrollAreaView } from "./style";

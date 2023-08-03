@@ -11,6 +11,7 @@ const useCompare = () => useSelector(({ compare }) => compare);
 const useNews = () => useSelector(({ news }) => news);
 const useQuestions = () => useSelector(({ questions }) => questions);
 const useSidebar = () => useSelector(({ sidebar }) => sidebar);
+const useSlider = () => useSelector(({ slider }) => slider);
 
 const Selectors = {
   useUser,
@@ -24,6 +25,7 @@ const Selectors = {
   useNews,
   useQuestions,
   useSidebar,
+  useSlider,
 };
 
 export default Selectors;

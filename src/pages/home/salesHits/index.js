@@ -6,7 +6,12 @@ import { api } from "../../../api";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../redux/loading-slice";
 import { setTopProducts } from "../../../redux/products-slice";
-import { API, currencyString } from "../../../utils/constants";
+import {
+  API,
+  currencyString,
+  isSelectedProduct,
+  skeletionData,
+} from "../../../utils/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
@@ -28,7 +33,7 @@ function SalesHits({ lang, langData }) {
   const sliderRef = useRef();
   const [active, setActive] = useState(null);
 
-  const topCategories = [...categories]?.splice(0, 5);
+  const topCategories = [...categories]?.reverse()?.splice(0, 5);
 
   const handleFilterProducts = useCallback(
     (sub_ident) => {
@@ -43,7 +48,7 @@ function SalesHits({ lang, langData }) {
           if (data?.res_id === 200) {
             dispatch(setTopProducts(data?.result));
           } else {
-            dispatch(setTopProducts(data?.result));
+            console.log(data);
           }
         })
         .catch((err) => {
@@ -55,22 +60,21 @@ function SalesHits({ lang, langData }) {
   );
 
   useEffect(() => {
-    if (topCategories?.length && !active) {
-      handleFilterProducts(topCategories[0]?.ident);
-    }
+    return () => {
+      if (topCategories?.length && !active) {
+        handleFilterProducts(topCategories[0]?.ident);
+      }
+    };
   }, [topCategories, active, handleFilterProducts]);
-
-  const isSelectedProduct = (product, arrayList) =>
-    arrayList.find(({ ident }) => ident === product?.ident);
 
   const isActiveCategory = topCategories?.find(({ ident }) => ident === active);
 
   const handleFavorite = (product) => {
-    dispatch(setLiked(product));
+    dispatch(setLiked(product?.ident));
   };
 
   const handleCompare = (product) => {
-    dispatch(setCompare(product));
+    dispatch(setCompare(product?.ident));
   };
 
   const handleCart = (product) => {
@@ -91,26 +95,31 @@ function SalesHits({ lang, langData }) {
         <div className="sales">
           <h1>{langData.sales_hits.title}</h1>
           <p>{langData.sales_hits.text}</p>
-          {topCategories?.map((category) => (
-            <button
-              onClick={() =>
-                category?.ident === active
-                  ? null
-                  : handleFilterProducts(category?.ident)
-              }
-              className={active === category?.ident ? "active" : null}
-              key={category?.ident}
-            >
-              {category[lang === "uz" ? "name_uz" : "name"] || category?.ident}
-            </button>
-          ))}
+          {topCategories?.length
+            ? topCategories?.map((category) => (
+                <button
+                  onClick={() =>
+                    category?.ident === active
+                      ? null
+                      : handleFilterProducts(category?.ident)
+                  }
+                  className={active === category?.ident ? "active" : null}
+                  key={category?.ident}
+                >
+                  {category[lang === "uz" ? "name_uz" : "name"] ||
+                    category?.ident}
+                </button>
+              ))
+            : skeletionData.slider.map((key) => (
+                <button key={key} className="isLoading empty-btn" />
+              ))}
         </div>
         <Swiper
           ref={sliderRef}
           slidesPerView={"auto"}
           className="motorcycle_cultivator"
         >
-          {isActiveCategory?.name
+          {topProducts?.length
             ? topProducts?.map((product) => (
                 <SwiperSlide
                   key={product?.ident}
@@ -185,7 +194,12 @@ function SalesHits({ lang, langData }) {
                   </div>
                 </SwiperSlide>
               ))
-            : null}
+            : skeletionData.slider.map((key) => (
+                <SwiperSlide
+                  key={key}
+                  className="motorcycle_cultivator isLoading"
+                />
+              ))}
         </Swiper>
       </div>
       <Link to={"/top-products"} className="show_all">

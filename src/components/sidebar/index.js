@@ -11,10 +11,11 @@ import {
   CompareIcon,
   HeartIcon,
   UserIcon,
-} from "../../components/icon";
+} from "../icon";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
+import { SideabarStyled } from "./style";
 
-const Sidebar = ({ langData, lang }) => {
+const Sidebar = ({ langData, lang, isMobile }) => {
   const dispatch = useDispatch();
   const categories = Selectors.useCategories();
   const sidebar = Selectors.useSidebar();
@@ -49,6 +50,7 @@ const Sidebar = ({ langData, lang }) => {
   ];
 
   const getCategories = useCallback(() => {
+    console.log("get categories");
     dispatch(setLoading(true));
     api
       .get_categories()
@@ -67,7 +69,9 @@ const Sidebar = ({ langData, lang }) => {
   }, [dispatch]);
 
   useEffect(() => {
-    getCategories();
+    return () => {
+      getCategories();
+    };
   }, [getCategories]);
 
   const handleSidebarChange = useCallback(() => {
@@ -75,10 +79,16 @@ const Sidebar = ({ langData, lang }) => {
   }, [dispatch]);
 
   return (
-    <article className={sidebar ? "opened" : ""}>
+    <SideabarStyled
+      aria-label={`sidebar ${sidebar}`}
+      aria-colcount={2}
+      className={`${sidebar ? "opened" : ""} ${
+        isMobile ? "mobile-sidebar" : "pc-header"
+      }`}
+    >
       <h1 className="title-c">
         <CloseArrow onClick={handleSidebarChange} />
-        {langData.title}
+        <span>{langData.title}</span>
       </h1>
       <ul className="scroll-custome">
         {categories?.map((category) => (
@@ -103,7 +113,7 @@ const Sidebar = ({ langData, lang }) => {
           </NavLink>
         ))}
       </div>
-    </article>
+    </SideabarStyled>
   );
 };
 

@@ -83,10 +83,13 @@ export const StyledElectricSaws = styled.div`
   .card_electric_saws {
     display: flex;
     width: 15.104166666666666vw;
-    background: linear-gradient(0deg, #ffda00 0%, #ffda00 100%),
-      linear-gradient(90deg, #ffa842 0%, #f7d75b 100%);
+
     padding: 1.25vw;
     margin-right: 1.09375vw;
+    &:not(.isLoading) {
+      background: linear-gradient(0deg, #ffda00 0%, #ffda00 100%),
+        linear-gradient(90deg, #ffa842 0%, #f7d75b 100%);
+    }
 
     @media screen and (max-width: 768px) {
       width: 44.020356234096695vw;

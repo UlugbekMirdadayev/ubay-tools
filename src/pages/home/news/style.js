@@ -20,6 +20,10 @@ export const NewsSectionContainer = styled.section`
 
     .card {
       width: 18.979166666666668vw;
+      &.isLoading {
+        min-height: 20vh;
+        margin: 1vw;
+      }
       @media screen and (max-width: 768px) {
         width: 44.529262086513995vw;
         margin-bottom: 5vw;

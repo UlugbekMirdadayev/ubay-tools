@@ -173,13 +173,15 @@ export const AboutSectionCont = styled.div`
       flex-direction: column;
       gap: 0.8333333333333334vw;
       margin-top: 0.7291666666666666vw;
+      &.isLoading {
+        min-height: 20vh;
+      }
       @media screen and (max-width: 768px) {
         width: 44.020356234096695vw;
         margin-right: 4.071246819338422vw;
         margin-top: 4.071246819338422vw;
         gap: 2.035623409669211vw;
       }
-
       iframe {
         width: 100%;
         height: 9.895833333333334vw;

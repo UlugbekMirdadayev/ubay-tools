@@ -7,13 +7,16 @@ const favoritesSlice = createSlice({
   initialState,
   reducers: {
     setLiked(state, { payload }) {
-      const isLiked = state.find(({ ident }) => ident === payload?.ident);
+      const isLiked = state.find((ident) => ident === payload);
       if (isLiked) {
-        const response = state?.filter(({ ident }) => ident !== payload?.ident);
+        const response = state?.filter((ident) => ident !== payload);
         localStorage.setItem("favorites_ubay", JSON.stringify(response));
         return response;
       }
-      localStorage.setItem("favorites_ubay", JSON.stringify([...state, payload]));
+      localStorage.setItem(
+        "favorites_ubay",
+        JSON.stringify([...state, payload])
+      );
       return [...state, payload];
     },
   },

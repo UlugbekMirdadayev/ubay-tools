@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { api } from "../../../api";
-import { API, currencyString } from "../../../utils/constants";
+import {
+  API,
+  currencyString,
+  isSelectedProduct,
+} from "../../../utils/constants";
 import { setLiked } from "../../../redux/favorites-slice";
 import { setCompare } from "../../../redux/compare-slice";
 import {
@@ -17,15 +21,12 @@ const Slider = ({ product, dispatch }) => {
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
 
-  const isSelectedProduct = (product, arrayList) =>
-    arrayList.find(({ ident }) => ident === product?.ident);
-
   const handleFavorite = (product) => {
-    dispatch(setLiked(product));
+    dispatch(setLiked(product?.ident));
   };
 
   const handleCompare = (product) => {
-    dispatch(setCompare(product));
+    dispatch(setCompare(product?.ident));
   };
 
   const handleCart = (product) => {
@@ -68,10 +69,11 @@ const Slider = ({ product, dispatch }) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err, "err");
+        console.log(err, "err set products rating");
       });
   };
-  return (
+
+  return product?.ident ? (
     <div className={`hover_body ${isLoading ? "isLoading" : ""}`}>
       <Link to={`/product/${product?.ident}`}>
         <img src={API.baseURL_IMAGE + product?.photo} alt={product?.name} />
@@ -128,6 +130,8 @@ const Slider = ({ product, dispatch }) => {
         <Like liked={!!isSelectedProduct(product, favorites)} />
       </div>
     </div>
+  ) : (
+    <div className="hover_body isLoading" />
   );
 };
 

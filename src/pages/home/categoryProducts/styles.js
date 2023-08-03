@@ -4,6 +4,7 @@ export const StyledSalesHits = styled.div`
   .full-image {
     max-width: 100%;
     width: 100%;
+    min-height: 40vh;
   }
   .flex {
     display: flex;

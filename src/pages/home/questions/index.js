@@ -13,6 +13,8 @@ const Questions = ({ langData, lang }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const getQuestions = useCallback(() => {
+    if (questions?.lenght) return null;
+    console.log("get questions");
     setIsLoading(true);
     api
       .get_questions({ info_add: { type: 1 } })
@@ -26,13 +28,14 @@ const Questions = ({ langData, lang }) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        console.log(err, "err");
+        console.log(err, "err get questions");
       });
-    console.log("err");
-  }, [dispatch]);
+  }, [dispatch, questions?.lenght]);
 
   useEffect(() => {
-    getQuestions();
+    return () => {
+      getQuestions();
+    };
   }, [getQuestions]);
   return (
     <QuestionSection>
@@ -58,15 +61,20 @@ const Questions = ({ langData, lang }) => {
           </div>
         </div>
       </div>
-      {isLoading
-        ? null
-        : questions.map((question) => (
-            <Accord
-              key={question?.ident}
-              title={question?.name}
-              body={question?.value}
-            />
-          ))}
+      {isLoading ? (
+        <div className="isLoading empty" />
+      ) : questions.length ? (
+        questions.map((question) => (
+          <Accord
+            key={question?.ident}
+            title={question?.name}
+            body={question?.value}
+          />
+        ))
+      ) : (
+        <div className="isLoading empty" />
+      )}
+
       <div className="row ismobile">
         <a href={"tel:+998 99 011 89 34"}>
           <span>+998 99 011 89 34</span>

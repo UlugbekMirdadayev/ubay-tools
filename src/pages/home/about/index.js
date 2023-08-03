@@ -78,20 +78,24 @@ const AboutSection = ({ lang, langData }) => {
           <div className="space full-cards">
             <h1 className="title">Ubay tools</h1>
             <Swiper slidesPerView={"auto"} className="row">
-              {[1, 1, 1, 1, 1, 1, 1, 1]?.map((_, index) => (
-                <SwiperSlide key={index} className="card">
-                  <iframe
-                    src="https://www.youtube.com/embed/UrdRNXAnxYQ"
-                    title="Ubay"
-                    allowFullScreen
-                  />
-                  <div className="title_card">Ubay electro tools</div>
-                  <div className="prg_card">
-                    Вас приветствует магазин электроники MacBro. У нас вы можете
-                    найти всю продукцию Apple. Уже более 14 лет
-                  </div>
-                </SwiperSlide>
-              ))}
+              {true
+                ? [1, 1, 1, 1, 1, 1, 1, 1]?.map((_, index) => (
+                    <SwiperSlide key={index} className="card">
+                      <iframe
+                        src="https://www.youtube.com/embed/UrdRNXAnxYQ"
+                        title="Ubay"
+                        allowFullScreen
+                      />
+                      <div className="title_card">Ubay electro tools</div>
+                      <div className="prg_card">
+                        Вас приветствует магазин электроники MacBro. У нас вы
+                        можете найти всю продукцию Apple. Уже более 14 лет
+                      </div>
+                    </SwiperSlide>
+                  ))
+                : [1, 1, 1, 1, 1, 1, 1, 1]?.map((_, index) => (
+                    <SwiperSlide key={index} className="card isLoading" />
+                  ))}
             </Swiper>
           </div>
         </div>

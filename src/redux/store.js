@@ -10,6 +10,7 @@ import compare from "./compare-slice";
 import news from "./news-slice.js";
 import questions from "./questions-slice.js";
 import sidebar from "./sidebar-slice";
+import slider from "./slider-slice";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     news,
     questions,
     sidebar,
+    slider,
   },
 });
 

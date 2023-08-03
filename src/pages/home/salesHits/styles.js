@@ -66,6 +66,10 @@ export const StyledSalesHits = styled.div`
         margin-right: 0.4166666666666667vw;
         background-color: #fff;
         cursor: pointer;
+        &.empty-btn {
+          padding: 1vw;
+          border: 0;
+        }
 
         &.active {
           border-color: #ffa73d;
@@ -82,6 +86,9 @@ export const StyledSalesHits = styled.div`
     }
     .motorcycle_cultivator {
       flex: 1;
+      &.isLoading {
+        margin-right: 1vw;
+      }
       @media screen and (max-width: 768px) {
         width: 100%;
         margin-top: 12.72264631043257vw;
@@ -169,6 +176,7 @@ export const StyledSalesHits = styled.div`
           display: flex;
           justify-content: space-between;
           width: 100%;
+
           .button {
             color: #fff;
             text-align: center;
@@ -196,6 +204,7 @@ export const StyledSalesHits = styled.div`
               justify-content: center;
             }
           }
+
           .compare-btn {
             cursor: pointer;
             background: #ffda00;

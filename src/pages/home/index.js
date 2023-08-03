@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import Selectors from "../../redux/selectors";
 import locale from "../../localization/locale.json";
 import HomeStyled from "./style";
-import Sidebar from "./sidebar";
+import Sidebar from "../../components/sidebar";
 import ScrollArea from "./scrollArea";
 
 const Home = () => {

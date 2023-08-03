@@ -128,4 +128,8 @@ export const QuestionSection = styled.div`
       }
     }
   }
+  .empty{ 
+    width: 100%;
+    min-height: 20vh;
+  }
 `;

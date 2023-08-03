@@ -15,6 +15,7 @@ import { setLang } from "../../redux/lang-slice";
 import locale from "../../localization/locale.json";
 import { NavLink } from "react-router-dom";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
+import Sidebar from "../sidebar";
 
 const languages = [
   {
@@ -73,6 +74,7 @@ const Header = () => {
 
   return (
     <HeaderStyled>
+      <Sidebar lang={lang} langData={locale[lang].home.sidebar} isMobile={true}/>
       <nav>
         <a href="tel:+998 (71) 011 89 34">+998 (71) 011 89 34</a>
         <div className="flex-group">

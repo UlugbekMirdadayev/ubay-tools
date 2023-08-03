@@ -21,9 +21,9 @@ const cartSlice = createSlice({
       }
       localStorage.setItem(
         "cart_ubay",
-        JSON.stringify([...state, { ...payload, cart_count: 1 }])
+        JSON.stringify([...state, { ident: payload?.ident, cart_count: 1 }])
       );
-      return [...state, { ...payload, cart_count: 1 }];
+      return [...state, { ident: payload?.ident, cart_count: 1 }];
     },
     setCartAddCount(state, { payload }) {
       const response = state?.map((product) => ({

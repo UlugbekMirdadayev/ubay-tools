@@ -84,7 +84,12 @@ export const FooterStyled = styled.footer`
         padding: 3.5623409669211195vw 4.0600508905852415vw;
         border-width: 0.2544529262086514vw;
       }
-
+      p {
+        font-size: 0.8333333333333334vw;
+        @media screen and (max-width: 768px) {
+          font-size: 4.0600508905852415vw;
+        }
+      }
       span {
         padding: 0.5729166666666666vw 0;
         padding-right: 0.5729166666666666vw;

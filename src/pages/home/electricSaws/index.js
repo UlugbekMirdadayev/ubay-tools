@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
 import { SlideArrow } from "../../../components/icon";
+import {skeletionData} from "../../../utils/constants"
 
 function ElectricSaws({ lang, langData }) {
   const categories = Selectors.useCategories();
@@ -28,22 +29,22 @@ function ElectricSaws({ lang, langData }) {
         slidesPerView={"auto"}
         onSlideChange={({ activeIndex }) => setActive(activeIndex)}
       >
-        {categories.map((category) => {
-          return (
-            <SwiperSlide key={category?.ident} className="card_electric_saws">
-              <div className="title">
-                <h1>{category[lang === "uz" ? "name_uz" : "name"]}</h1>
-                <Link to={`/category/${category?.ident}`}>{langData.more}</Link>
-              </div>
-              <div className="saws_image">
-                <img
-                  src="https://ubaytools.com/static/media/item1.efb0870565f2a2552f7e.png"
-                  alt="..."
-                />
-              </div>
-            </SwiperSlide>
-          );
-        })}
+        {categories?.length ? categories.map((category) => (
+          <SwiperSlide key={category?.ident} className="card_electric_saws">
+            <div className="title">
+              <h1>{category[lang === "uz" ? "name_uz" : "name"]}</h1>
+              <Link to={`/category/${category?.ident}`}>{langData.more}</Link>
+            </div>
+            <div className="saws_image">
+              <img
+                src="https://ubaytools.com/static/media/item1.efb0870565f2a2552f7e.png"
+                alt="..."
+              />
+            </div>
+          </SwiperSlide>
+        )): skeletionData.categories.map((key) => (
+          <SwiperSlide  key={key} className="card_electric_saws isLoading" />
+        ))}
       </Swiper>
       <div className="mb-controller">
         <button onClick={handlePrev}>

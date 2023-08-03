@@ -7,9 +7,9 @@ const compareSlice = createSlice({
   initialState,
   reducers: {
     setCompare(state, { payload }) {
-      const isLiked = state.find(({ ident }) => ident === payload?.ident);
+      const isLiked = state.find((ident) => ident === payload);
       if (isLiked) {
-        const response = state?.filter(({ ident }) => ident !== payload?.ident);
+        const response = state?.filter((ident) => ident !== payload);
         localStorage.setItem("compare_ubay", JSON.stringify(response));
         return response;
       }
