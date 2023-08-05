@@ -128,7 +128,7 @@ export const StyledSalesHits = styled.div`
           display: inline-flex;
           color: #00132c;
           font-size: 0.8544270833333333vw;
-          text-decoration: underline;
+          cursor: pointer;
           @media screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
           }

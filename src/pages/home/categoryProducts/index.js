@@ -1,8 +1,7 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useCallback, useInsertionEffect } from "react";
 import { StyledSalesHits } from "./styles";
 import { api } from "../../../api";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../../redux/loading-slice";
 import { setProducts } from "../../../redux/products-slice";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,17 +14,16 @@ function CategoryProducts() {
   const dispatch = useDispatch();
   const sliderRef = useRef();
   const { products } = Selectors.useProducts();
+  const favorites = Selectors.useFavorites();
+  const cartItems = Selectors.useCart();
+  const compareItems = Selectors.useCompare();
 
   const handleFilterProducts = useCallback(() => {
-    if (products?.length) return null;
-    console.log("get Products");
-    dispatch(setLoading(true));
     api
       .get_products({
         show_products: { main_ident: 0, sub_ident: 0 },
       })
       .then(({ data }) => {
-        dispatch(setLoading(false));
         if (data?.res_id === 200) {
           dispatch(setProducts(data?.result));
         } else {
@@ -33,16 +31,13 @@ function CategoryProducts() {
         }
       })
       .catch((err) => {
-        dispatch(setLoading(false));
         console.log(err, "error");
       });
-  }, [dispatch, products?.length]);
+  }, [dispatch]);
 
-  useEffect(() => {
-    return () => {
-      handleFilterProducts();
-    };
-  }, [handleFilterProducts]);
+  useInsertionEffect(() => {
+    handleFilterProducts();
+  }, []);
 
   return (
     <StyledSalesHits>
@@ -69,7 +64,13 @@ function CategoryProducts() {
                   key={product?.ident}
                   className="motorcycle_cultivator_card"
                 >
-                  <Slider dispatch={dispatch} product={product} />
+                  <Slider
+                    favorites={favorites}
+                    cartItems={cartItems}
+                    compareItems={compareItems}
+                    dispatch={dispatch}
+                    product={product}
+                  />
                 </SwiperSlide>
               ))
             : skeletionData.categories.map((key) => (
@@ -77,7 +78,13 @@ function CategoryProducts() {
                   key={key}
                   className="motorcycle_cultivator_card isLoading"
                 >
-                  <Slider dispatch={dispatch} product={{}} />
+                  <Slider
+                    favorites={favorites}
+                    cartItems={cartItems}
+                    compareItems={compareItems}
+                    dispatch={dispatch}
+                    product={{}}
+                  />
                 </SwiperSlide>
               ))}
         </Swiper>
@@ -105,7 +112,13 @@ function CategoryProducts() {
                   key={product?.ident}
                   className="motorcycle_cultivator_card"
                 >
-                  <Slider dispatch={dispatch} product={product} />
+                  <Slider
+                    favorites={favorites}
+                    cartItems={cartItems}
+                    compareItems={compareItems}
+                    dispatch={dispatch}
+                    product={product}
+                  />
                 </SwiperSlide>
               ))
             : skeletionData.categories.map((key) => (
@@ -113,7 +126,13 @@ function CategoryProducts() {
                   key={key}
                   className="motorcycle_cultivator_card isLoading"
                 >
-                  <Slider dispatch={dispatch} product={{}} />
+                  <Slider
+                    favorites={favorites}
+                    cartItems={cartItems}
+                    compareItems={compareItems}
+                    dispatch={dispatch}
+                    product={{}}
+                  />
                 </SwiperSlide>
               ))}
         </Swiper>

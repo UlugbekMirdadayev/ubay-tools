@@ -1,18 +1,14 @@
 import { useState } from "react";
-import { api } from "../../../api";
-import {
-  API,
-  currencyString,
-  isSelectedProduct,
-} from "../../../utils/constants";
-import { setLiked } from "../../../redux/favorites-slice";
-import { setCompare } from "../../../redux/compare-slice";
+import { api } from "../../api";
+import { API, currencyString, isSelectedProduct } from "../../utils/constants";
+import { setLiked } from "../../redux/favorites-slice";
+import { setCompare } from "../../redux/compare-slice";
 import {
   setCart,
   setCartAddCount,
   setCartRemoveCount,
-} from "../../../redux/cart-slice";
-import { Change, Like, MinusIcon, PlusIcon } from "../../../components/icon";
+} from "../../redux/cart-slice";
+import { Change, Like, MinusIcon, PlusIcon } from "../../components/icon";
 import { Link } from "react-router-dom";
 
 const Slider = ({ product, dispatch, favorites, cartItems, compareItems }) => {

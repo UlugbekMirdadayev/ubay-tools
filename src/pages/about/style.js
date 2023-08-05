@@ -180,4 +180,46 @@ export const AboutStyled = styled.section`
       }
     }
   }
+  .statistics {
+    width: 100vw;
+    background-color: rgba(2, 71, 66, 0.04);
+    padding: 2.7083333333333335vw 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2.6041666666666665vw;
+    margin-top: 6.25vw;
+    margin-left: -10vw;
+    @media screen and (max-width: 768px) {
+      margin-left: 0;
+      flex-wrap: wrap;
+      row-gap: 5vw;
+    }
+    .card_statistics {
+      min-width: 15%;
+      @media screen and (max-width: 768px) {
+        min-width: 40%;
+        text-align: center;
+      }
+
+      .text {
+        font-size: 0.8333333333333334vw;
+        margin-bottom: 1.0416666666666667vw;
+
+        @media screen and (max-width: 768px) {
+          font-size: 3vw;
+          margin-bottom: 2vw;
+        }
+      }
+      .number {
+        font-size: 3.6458333333333335vw;
+        color: #015ccf;
+        font-weight: 700;
+
+        @media screen and (max-width: 768px) {
+          font-size: 5vw;
+        }
+      }
+    }
+  }
 `;

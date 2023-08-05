@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import { Change, Like, MinusIcon, PlusIcon } from "../../../components/icon";
 import { StyledSalesHits } from "./styles";
 import Selectors from "../../../redux/selectors";
@@ -33,7 +33,7 @@ function SalesHits({ lang, langData }) {
   const sliderRef = useRef();
   const [active, setActive] = useState(null);
 
-  const topCategories = [...categories]?.reverse()?.splice(0, 5);
+  const topCategories = [...categories]?.splice(0, 5);
 
   const handleFilterProducts = useCallback(
     (sub_ident) => {
@@ -58,14 +58,6 @@ function SalesHits({ lang, langData }) {
     },
     [dispatch]
   );
-
-  useEffect(() => {
-    return () => {
-      if (topCategories?.length && !active) {
-        handleFilterProducts(topCategories[0]?.ident);
-      }
-    };
-  }, [topCategories, active, handleFilterProducts]);
 
   const isActiveCategory = topCategories?.find(({ ident }) => ident === active);
 
@@ -119,7 +111,7 @@ function SalesHits({ lang, langData }) {
           slidesPerView={"auto"}
           className="motorcycle_cultivator"
         >
-          {topProducts?.length
+          {isActiveCategory?.ident && topProducts?.length
             ? topProducts?.map((product) => (
                 <SwiperSlide
                   key={product?.ident}

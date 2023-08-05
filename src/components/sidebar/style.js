@@ -27,6 +27,8 @@ export const SideabarStyled = styled.article`
 
     &.opened {
       left: 0;
+      max-height: none;
+      height: 100vh;
     }
   }
 
@@ -59,9 +61,9 @@ export const SideabarStyled = styled.article`
     overflow-y: auto;
     height: calc(100vh - 14vw);
     @media screen and (max-width: 768px) {
-      padding-top: 7vw;
       background-color: #fff;
-      height: calc(100vh - 35vw);
+      height: calc(100vh - 34vw);
+      padding: 0 4vw;
     }
 
     a {
@@ -82,7 +84,7 @@ export const SideabarStyled = styled.article`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 5vw;
+      padding: 5vw 4vw;
       background-color: #fff;
 
       .box {

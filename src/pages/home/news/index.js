@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useInsertionEffect } from "react";
 import { NewsSectionContainer } from "./style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -15,7 +15,6 @@ const NewsSection = ({ lang, langData }) => {
   const news = Selectors.useNews();
 
   const getNews = useCallback(() => {
-    if (news?.length) return null;
     console.log("get News");
     api
       .get_news({ news: {} })
@@ -27,12 +26,10 @@ const NewsSection = ({ lang, langData }) => {
       .catch((err) => {
         console.log(err, "err get News");
       });
-  }, [dispatch, news?.length]);
+  }, [dispatch]);
 
-  useEffect(() => {
-    return () => {
-      getNews();
-    };
+  useInsertionEffect(() => {
+    getNews();
   }, [getNews]);
   return (
     <NewsSectionContainer>

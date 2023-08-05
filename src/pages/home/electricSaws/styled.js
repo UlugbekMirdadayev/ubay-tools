@@ -44,6 +44,7 @@ export const StyledElectricSaws = styled.div`
     gap: 3.816793893129771vw;
     @media screen and (max-width: 768px) {
       display: flex;
+      margin-top: 3vw;
       button {
         border: 0;
         background: none;

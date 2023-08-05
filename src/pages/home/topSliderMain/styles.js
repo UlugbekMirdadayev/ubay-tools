@@ -4,7 +4,7 @@ export const StyledImageSlider = styled.div`
   margin-bottom: 6.6458333333333335vw;
   max-width: 100%;
   @media screen and (max-width: 768px) {
-    margin-bottom: 0;
+    margin-bottom: 5vw;
   }
   .img {
     width: 60.833333333333336vw;

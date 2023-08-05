@@ -12,7 +12,10 @@ import {
 
 const About = () => {
   const lang = Selectors.useLang();
-  const langData = useMemo(() => locale[lang]["home"], [lang]);
+  const [langData, { statistics }] = useMemo(
+    () => [locale[lang]["home"], locale[lang]["about"]],
+    [lang]
+  );
   return (
     <AboutStyled className="page-container">
       <div className="flex">
@@ -20,7 +23,11 @@ const About = () => {
           <h1 className="title">Ubay tools</h1>
           <div className="prg">{langData.ubay_tool_text}</div>
           <div className="row">
-            <a href="tel:+998 (71) 011 89 34" className="link-btn" to={"/about"}>
+            <a
+              href="tel:+998 (71) 011 89 34"
+              className="link-btn"
+              to={"/about"}
+            >
               {langData.call_me}
             </a>
             <Link className="link-btn" to={"/address"}>
@@ -50,6 +57,8 @@ const About = () => {
             <div className="column">
               <h3 className="text-3 title">{langData.load_catalog}</h3>
               <a
+                rel="noopener noreferrer"
+                target="_blank"
                 href="https://www.instagram.com/ubaytools.uz/"
                 className="text-small"
               >
@@ -76,6 +85,14 @@ const About = () => {
         className="full-img-bottom"
         alt="..."
       />
+      <div className="statistics">
+        {statistics.map((statis, key) => (
+          <div key={key} className="card_statistics">
+            <div className="text">{statis.title}</div>
+            <div className="number">{statis.number}</div>
+          </div>
+        ))}
+      </div>
     </AboutStyled>
   );
 };

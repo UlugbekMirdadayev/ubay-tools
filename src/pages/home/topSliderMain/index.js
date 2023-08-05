@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useInsertionEffect } from "react";
 import { StyledImageSlider } from "./styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -22,7 +22,6 @@ function TopSliderMain() {
   }, []);
 
   const getSliderData = useCallback(() => {
-    if (sliderData?.length) return null;
     console.log("get SliderData");
     api
       .get_questions({ info_add: { type: 2 } })
@@ -36,12 +35,10 @@ function TopSliderMain() {
       .catch((err) => {
         console.log(err, "getSliderData");
       });
-  }, [dispatch, sliderData?.length]);
+  }, [dispatch]);
 
-  useEffect(() => {
-    return () => {
-      getSliderData();
-    };
+  useInsertionEffect(() => {
+    getSliderData();
   }, [getSliderData]);
 
   return (
@@ -49,7 +46,6 @@ function TopSliderMain() {
       <Swiper
         ref={sliderRef}
         autoplay={{ delay: 3000 }}
-        loop={true}
         modules={[Autoplay]}
         slidesPerView={"auto"}
         onSlideChange={({ activeIndex }) => handleChangeSlide(activeIndex)}

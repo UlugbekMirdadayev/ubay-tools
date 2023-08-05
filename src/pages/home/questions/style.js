@@ -128,7 +128,7 @@ export const QuestionSection = styled.div`
       }
     }
   }
-  .empty{ 
+  .empty {
     width: 100%;
     min-height: 20vh;
   }

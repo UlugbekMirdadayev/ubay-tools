@@ -66,6 +66,18 @@
       "questions_title": "Tez tez beriladigan savollar F.A.Q.",
       "online_time": "8.00 dan 22.00 gacha aloqadamiz",
       "tg_questions": "Telegram orqali savol"
+    },
+    "about": {
+      "statistics": [
+        { "number": "15yil+", "title": "Tajriba" },
+        { "number": "20+", "title": "Professional hodimlar" },
+        { "number": "300+", "title": "Hamkor Do'konlar" },
+        { "number": "1000+", "title": "Dan ortiq uskunalar" }
+      ]
+    },
+    "favorites": {
+      "title": "Tanlanganlar",
+      "empty_text": "Sevimli mahsulotlar ro'yxati shu yerda ko'rinadi"
     }
   },
   "ru": {
@@ -135,6 +147,18 @@
       "questions_title": "Быстрые вопросы F.A.Q.",
       "online_time": "Мы на связи с 8.00 до 22.00",
       "tg_questions": "Вопрос по телеграмме"
+    },
+    "about": {
+      "statistics": [
+        { "number": "15лет+", "title": "Опыт" },
+        { "number": "20+", "title": "Профессиональный персонал" },
+        { "number": "300+", "title": "Магазины-Партнеры" },
+        { "number": "1000+", "title": "Более оборудования" }
+      ]
+    },
+    "favorites": {
+      "title": "Избранное",
+      "empty_text": "Список любимых продуктов появится здесь"
     }
   }
 }

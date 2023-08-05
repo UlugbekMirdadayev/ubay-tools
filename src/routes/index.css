@@ -2,6 +2,7 @@
 @import url("../fonts/SFPro/stylesheet.css");
 @import url("../fonts/Raleway/stylesheet.css");
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,700&display=swap");
 
 * {
   margin: 0;
@@ -139,5 +140,11 @@
 
   .app {
     margin-top: 46vw;
+    max-height: calc(100vh - 46vw);
   }
+}
+
+label,
+button {
+  cursor: pointer;
 }

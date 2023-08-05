@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useCallback, useInsertionEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { api } from "../../api";
 import Selectors from "../../redux/selectors";
 import { setCategories } from "../../redux/categories-slice";
@@ -22,6 +22,7 @@ const Sidebar = ({ langData, lang, isMobile }) => {
   const favorites = Selectors.useFavorites();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
+  const { pathname } = useLocation();
 
   const links = [
     {
@@ -50,7 +51,8 @@ const Sidebar = ({ langData, lang, isMobile }) => {
   ];
 
   const getCategories = useCallback(() => {
-    console.log("get categories");
+    if ((pathname === "/" && isMobile) || categories?.length) return null;
+    console.log(`get categories  isMobile:${isMobile}`);
     dispatch(setLoading(true));
     api
       .get_categories()
@@ -66,13 +68,11 @@ const Sidebar = ({ langData, lang, isMobile }) => {
         dispatch(setLoading(false));
         console.error(err?.code);
       });
-  }, [dispatch]);
+  }, [dispatch, isMobile, pathname, categories?.length]);
 
-  useEffect(() => {
-    return () => {
-      getCategories();
-    };
-  }, [getCategories]);
+  useInsertionEffect(() => {
+    getCategories();
+  }, []);
 
   const handleSidebarChange = useCallback(() => {
     dispatch(setSidebarVisible(false));
@@ -103,7 +103,7 @@ const Sidebar = ({ langData, lang, isMobile }) => {
       </ul>
       <div className="mobile_bar">
         {links.map((item) => (
-          <NavLink to={item.link} key={item.key} className="box">
+          <NavLink to={item.link} key={item.key} className="box" onClick={handleSidebarChange}>
             <div className="icon">
               {item.count ? (
                 <span>{item?.count > 9 ? "9+" : item?.count}</span>

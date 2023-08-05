@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useInsertionEffect } from "react";
 import { QuestionSection } from "./style";
 import { TelegramIcon } from "../../../components/icon";
 import Accord from "../../../components/accord";
@@ -10,16 +10,12 @@ import { setQuestions } from "../../../redux/questions-slice";
 const Questions = ({ langData, lang }) => {
   const dispatch = useDispatch();
   const questions = Selectors.useQuestions();
-  const [isLoading, setIsLoading] = useState(false);
 
   const getQuestions = useCallback(() => {
-    if (questions?.lenght) return null;
-    console.log("get questions");
-    setIsLoading(true);
+    console.log('get questions');
     api
       .get_questions({ info_add: { type: 1 } })
       .then(({ data }) => {
-        setIsLoading(false);
         if (data?.res_id) {
           dispatch(setQuestions(data?.result));
         } else {
@@ -27,16 +23,13 @@ const Questions = ({ langData, lang }) => {
         }
       })
       .catch((err) => {
-        setIsLoading(false);
         console.log(err, "err get questions");
       });
-  }, [dispatch, questions?.lenght]);
+  }, [dispatch]);
 
-  useEffect(() => {
-    return () => {
-      getQuestions();
-    };
-  }, [getQuestions]);
+  useInsertionEffect(() => {
+    getQuestions();
+  }, []);
   return (
     <QuestionSection>
       <div className="header">
@@ -61,9 +54,7 @@ const Questions = ({ langData, lang }) => {
           </div>
         </div>
       </div>
-      {isLoading ? (
-        <div className="isLoading empty" />
-      ) : questions.length ? (
+      {questions.length ? (
         questions.map((question) => (
           <Accord
             key={question?.ident}
