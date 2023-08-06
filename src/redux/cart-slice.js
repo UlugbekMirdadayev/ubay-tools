@@ -36,6 +36,23 @@ const cartSlice = createSlice({
       localStorage.setItem("cart_ubay", JSON.stringify(response));
       return response;
     },
+    setCartSetCount(state, { payload }) {
+      if (+payload.cart_count) {
+        const response = state?.map((product) => ({
+          ...product,
+          cart_count:
+            payload?.ident === product?.ident
+              ? payload?.cart_count
+              : product?.cart_count || 1,
+        }));
+        localStorage.setItem("cart_ubay", JSON.stringify(response));
+        return response;
+      } else {
+        const response = state?.filter(({ ident }) => ident !== payload?.ident);
+        localStorage.setItem("cart_ubay", JSON.stringify(response));
+        return response;
+      }
+    },
     setCartRemoveCount(state, { payload }) {
       const isProduct = state.find(({ ident }) => ident === payload?.ident);
       if (isProduct?.cart_count === 1) {
@@ -69,6 +86,7 @@ const { actions, reducer } = cartSlice;
 export const {
   setCart,
   setCartAddCount,
+  setCartSetCount,
   setCartRemoveCount,
   setRemoveCart,
   setClearCart,

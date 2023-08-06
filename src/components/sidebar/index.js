@@ -1,10 +1,7 @@
-import React, { useCallback, useInsertionEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { api } from "../../api";
+import React, { useCallback } from "react";
+import { NavLink } from "react-router-dom";
 import Selectors from "../../redux/selectors";
-import { setCategories } from "../../redux/categories-slice";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../redux/loading-slice";
 import {
   CartIcon,
   CloseArrow,
@@ -22,7 +19,6 @@ const Sidebar = ({ langData, lang, isMobile }) => {
   const favorites = Selectors.useFavorites();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
-  const { pathname } = useLocation();
 
   const links = [
     {
@@ -49,30 +45,6 @@ const Sidebar = ({ langData, lang, isMobile }) => {
       icon: <UserIcon />,
     },
   ];
-
-  const getCategories = useCallback(() => {
-    if ((pathname === "/" && isMobile) || categories?.length) return null;
-    console.log(`get categories  isMobile:${isMobile}`);
-    dispatch(setLoading(true));
-    api
-      .get_categories()
-      .then(({ data }) => {
-        dispatch(setLoading(false));
-        if (data?.result?.length) {
-          dispatch(
-            setCategories(data?.result?.sort((a, b) => a?.ident - b?.ident))
-          );
-        }
-      })
-      .catch((err) => {
-        dispatch(setLoading(false));
-        console.error(err?.code);
-      });
-  }, [dispatch, isMobile, pathname, categories?.length]);
-
-  useInsertionEffect(() => {
-    getCategories();
-  }, []);
 
   const handleSidebarChange = useCallback(() => {
     dispatch(setSidebarVisible(false));
@@ -103,7 +75,12 @@ const Sidebar = ({ langData, lang, isMobile }) => {
       </ul>
       <div className="mobile_bar">
         {links.map((item) => (
-          <NavLink to={item.link} key={item.key} className="box" onClick={handleSidebarChange}>
+          <NavLink
+            to={item.link}
+            key={item.key}
+            className="box"
+            onClick={handleSidebarChange}
+          >
             <div className="icon">
               {item.count ? (
                 <span>{item?.count > 9 ? "9+" : item?.count}</span>

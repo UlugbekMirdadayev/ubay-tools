@@ -78,6 +78,16 @@
     "favorites": {
       "title": "Tanlanganlar",
       "empty_text": "Sevimli mahsulotlar ro'yxati shu yerda ko'rinadi"
+    },
+    "product_single": {
+      "add_cart": "Savatga qo'shish",
+      "buy_now": "Hoziroq sotib olish",
+      "count": "{{count}}-dona",
+      "info_delivery": "Yetkazib berish haqida:",
+      "standart_delivery": "Standart yetkazib berish",
+      "text_delivery": "1-3 ish kuni ichida kiritilgan manzilga yetkazib beriladi",
+      "add_favorite": "Yoqimlilarga qo'shish",
+      "description": "Tavsif"
     }
   },
   "ru": {
@@ -159,6 +169,16 @@
     "favorites": {
       "title": "Избранное",
       "empty_text": "Список любимых продуктов появится здесь"
+    },
+    "product_single": {
+      "add_cart": "Добавить в корзину",
+      "buy_now": "Купить в один клик",
+      "count": "{{count}}-мелочей",
+      "info_delivery": "Информация о доставке:",
+      "standart_delivery": "Стандартная доставка",
+      "text_delivery": "Доставка от 1 до 3 рабочих дней исходя от адреса доставки",
+      "add_favorite": "Добавить в избранное",
+      "description": "Описание"
     }
   }
 }

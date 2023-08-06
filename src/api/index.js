@@ -10,6 +10,8 @@ const get_products = (body = { main_catalog: {} }) => post(body, "show/show_prod
 const set_products_rating = (body = {}) => post(body, "insert/product_rating/", {})
 const get_news = (body = {}) => post(body, "show/news/", {});
 const get_questions = (body = {}) => post(body, "show/info_add/", {});
+const get_top_products = (body = {}) => post(body, "show/product_top/", {});
+const get_products_single = (body = {}) => post(body, "show/view_product/", {});
 
 export const api = {
   get_categories,
@@ -17,4 +19,6 @@ export const api = {
   set_products_rating,
   get_news,
   get_questions,
+  get_top_products,
+  get_products_single
 };
