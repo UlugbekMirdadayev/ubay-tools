@@ -64,6 +64,9 @@ export const StyledSalesHits = styled.div`
         border: 0.10416666666666667vw solid #e2e2e2;
         margin-bottom: 0.4166666666666667vw;
         margin-right: 0.4166666666666667vw;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         background-color: #fff;
         cursor: pointer;
         &.empty-btn {
@@ -76,9 +79,9 @@ export const StyledSalesHits = styled.div`
         }
         @media screen and (max-width: 768px) {
           font-size: 3.3078880407124682vw;
-          line-height: 6.106870229007634vw;
+          line-height: 1;
           border-radius: 3.053435114503817vw;
-          padding: 0 3.5623409669211195vw;
+          padding: 3.5623409669211195vw;
           margin-bottom: 2.7989821882951653vw;
           margin-right: 2.7989821882951653vw;
         }

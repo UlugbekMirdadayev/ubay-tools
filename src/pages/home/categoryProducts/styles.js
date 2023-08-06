@@ -5,6 +5,9 @@ export const StyledSalesHits = styled.div`
     max-width: 100%;
     width: 100%;
     min-height: 40vh;
+    @media screen and (max-width: 768px) {
+      object-fit: contain;
+    }
   }
   .flex {
     display: flex;
@@ -49,6 +52,9 @@ export const StyledSalesHits = styled.div`
         margin-bottom: 0.4166666666666667vw;
         margin-right: 0.4166666666666667vw;
         background-color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
 
         &.active {
