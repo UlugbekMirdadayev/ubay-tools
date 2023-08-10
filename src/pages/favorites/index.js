@@ -30,7 +30,7 @@ function Favorites() {
         if (data?.res_id === 200) {
           dispatch(setProducts(data?.result));
         } else {
-          dispatch(setProducts(data?.result));
+          console.log(data);
         }
       })
       .catch((err) => {

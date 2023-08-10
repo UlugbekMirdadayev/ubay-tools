@@ -19,7 +19,9 @@ const formatter = new Intl.NumberFormat("en-US", {
 });
 
 export const currencyString = (string = "") =>
-  formatter.format(string)?.replaceAll(",", " ");
+  formatter.format(string).split("UZS")[1]?.trim()?.replaceAll(",", " ") +
+  " " +
+  formatter.resolvedOptions().currency;
 
 export const isSelectedProduct = (product, arrayList) =>
   arrayList.find((ident) => {

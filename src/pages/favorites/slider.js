@@ -100,7 +100,14 @@ const Slider = ({ product, dispatch, favorites, cartItems, compareItems }) => {
                 <MinusIcon />
               </span>
               <span>{isSelectedProduct(product, cartItems)?.cart_count}</span>
-              <span onClick={() => handleCartAddCount(product)}>
+              <span
+                onClick={() =>
+                  isSelectedProduct(product, cartItems)?.cart_count <
+                  product?.count
+                    ? handleCartAddCount(product)
+                    : null
+                }
+              >
                 <PlusIcon />
               </span>
             </>

@@ -88,6 +88,18 @@
       "text_delivery": "1-3 ish kuni ichida kiritilgan manzilga yetkazib beriladi",
       "add_favorite": "Yoqimlilarga qo'shish",
       "description": "Tavsif"
+    },
+    "cart": {
+      "title": "Savat",
+      "more": "Batafsil ko’rish",
+      "empty": "Savatchangiz bo'sh",
+      "go_main": "Asosiy sahifaga",
+      "total_value": "Jami qiymat:",
+      "promokod": "Promokod:",
+      "shipping_cost": "Yetkazib berish narxi:",
+      "payment_type": "To’lov turi:",
+      "address": "Manzil:",
+      "order_booking": "Buyurtmani rasmiylashtirish"
     }
   },
   "ru": {
@@ -179,6 +191,18 @@
       "text_delivery": "Доставка от 1 до 3 рабочих дней исходя от адреса доставки",
       "add_favorite": "Добавить в избранное",
       "description": "Описание"
+    },
+    "cart": {
+      "title": "Корзинка",
+      "more": "Посмотреть подробнее",
+      "empty": "Корзина пуста",
+      "go_main": "На главную",
+      "total_value": "Общая стоимость:",
+      "promokod": "Промокод:",
+      "shipping_cost": "Стоимость доставки:",
+      "payment_type": "Тип оплаты:",
+      "address": "Адрес:",
+      "order_booking": "Оформить заказ"
     }
   }
 }

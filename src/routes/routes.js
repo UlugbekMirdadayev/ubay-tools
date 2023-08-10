@@ -1,4 +1,5 @@
 import About from "../pages/about";
+import Cart from "../pages/cart";
 import Favorites from "../pages/favorites";
 import Home from "../pages/home";
 import News from "../pages/news";
@@ -25,6 +26,10 @@ export const routes = [
   {
     path: "/favorites",
     element: <Favorites />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
   },
   {
     path: "/top-products",
