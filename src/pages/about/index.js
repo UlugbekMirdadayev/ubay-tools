@@ -30,7 +30,7 @@ const About = () => {
             >
               {langData.call_me}
             </a>
-            <Link className="link-btn" to={"/address"}>
+            <Link className="link-btn" to={"/our-address"}>
               {langData.our_address}
             </Link>
             <a
@@ -67,14 +67,14 @@ const About = () => {
             </div>
           </div>
           <div className="link-btns">
-            <Link className="primary" to={"/garantiya"}>
+            <Link className="primary" to={"/warranty"}>
               {langData.warranty}
             </Link>
-            <Link className="secondary" to={"/working"}>
+            <Link className="secondary" to={"/production"}>
               <DotListStyle />
               {langData.production}
             </Link>
-            <Link className="primary" to={"/address"}>
+            <Link className="primary" to={"/our-address"}>
               {langData.our_address}
             </Link>
           </div>

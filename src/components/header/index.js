@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import HeaderStyled from "./styles";
 import {
   CartIcon,
@@ -16,6 +16,7 @@ import locale from "../../localization/locale.json";
 import { NavLink } from "react-router-dom";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
 import Sidebar from "../sidebar";
+import UserModal from "../userModal";
 
 const languages = [
   {
@@ -34,7 +35,11 @@ const Header = () => {
   const favorites = Selector.useFavorites();
   const cartItems = Selector.useCart();
   const compareItems = Selector.useCompare();
+  const user = Selector.useUser();
+  const [open, setOpen] = useState(false);
+
   const langData = useMemo(() => locale[lang]["header"], [lang]);
+
   document.title = locale[lang].seo.title;
   const handleChangeLang = useCallback(
     (lang_) => {
@@ -42,6 +47,15 @@ const Header = () => {
     },
     [dispatch]
   );
+
+  const openUserModal = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setOpen(true);
+  };
+
+  const closeUserModal = () => setOpen(false);
+
   const links = [
     {
       key: "compare",
@@ -65,16 +79,21 @@ const Header = () => {
       key: "user",
       link: "/user",
       icon: <UserIcon />,
+      onClick: user.id ? null : openUserModal,
     },
   ];
-  
+
   const handleSidebarChange = useCallback(() => {
     dispatch(setSidebarVisible(true));
   }, [dispatch]);
 
   return (
     <HeaderStyled>
-      <Sidebar lang={lang} langData={locale[lang].home.sidebar} isMobile={true}/>
+      <Sidebar
+        lang={lang}
+        langData={locale[lang].home.sidebar}
+        isMobile={true}
+      />
       <nav>
         <a href="tel:+998 (71) 011 89 34">+998 (71) 011 89 34</a>
         <div className="flex-group">
@@ -104,7 +123,12 @@ const Header = () => {
         </div>
         <div className="between">
           {links.map((item) => (
-            <NavLink to={item.link} key={item.key} className="box">
+            <NavLink
+              to={item.link}
+              key={item.key}
+              onClick={item.onClick}
+              className="box"
+            >
               <div className="icon">
                 {item.count ? (
                   <span>{item?.count > 9 ? "9+" : item?.count}</span>
@@ -116,6 +140,7 @@ const Header = () => {
           ))}
         </div>
       </div>
+      {open ? <UserModal handleClose={closeUserModal} /> : null}
     </HeaderStyled>
   );
 };

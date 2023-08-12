@@ -100,6 +100,29 @@
       "payment_type": "To’lov turi:",
       "address": "Manzil:",
       "order_booking": "Buyurtmani rasmiylashtirish"
+    },
+    "warranty": {
+      "array": [
+        "Sifatli mahsulotlarni almashtirish va qaytarish Sotuvchi, xaridor tovar sotib olingan kundan boshlab 7 kun ichida quyidagi hollarda sifatli tovardan voz kechishi mumkinligini kafolatlaydi:",
+        "Mahsulot ishlatilmagan va taqdimoti bor, barcha yorliqlari bo'lgan paketda va mahsulotni sotib olish uchun hujjatlar mavjud; tovarlar sifatli mahsulotlar ro'yxatiga kiritilmagan, qaytarilishi va almashtirilishi shart emas. Xaridor sifatli tovarlarni ushbu tovarning boshqa savdo taklifiga yoki qiymati bo'yicha bir xil bo'lgan boshqa mahsulotga yoki qo'shimcha to'lov yoki narx farqini qaytarish bilan boshqa mahsulotga almashtirish huquqiga ega.",
+        "Sifatsiz mahsulotlarni almashtirish va qaytarish Agar xaridor tovarni sotib olgandan keyin uning kamchiliklarini aniqlasa, u sotuvchidan almashtirishni talab qilishi mumkin. O'zgartirish so'rov yuborilgan kundan boshlab 7 kun ichida amalga oshirilishi kerak. Tovarlarning belgilangan standartlarga muvofiqligi uchun ekspertiza tayinlangan taqdirda, almashtirish 20 kun ichida amalga oshirilishi kerak.",
+        "Noto'g'ri sifatga ega bo'lgan texnik jihatdan murakkab tovarlar bir xil tovar yoki boshqa markadagi shunga o'xshash mahsulot bilan almashtiriladi. Qaytish oldi-sotdi shartnomasini bekor qilish va tovar qiymati miqdoridagi summani qaytarish orqali amalga oshiriladi."
+      ]
+    },
+    "production": {
+      "array": [
+        "Ubay, sifatli ishlab chiqarish bosqichlarini amalga oshirishda katta e'tiborga ega bo'lgan bir brenddir. Ularning sifatli ishlab chiqarish jarayoni quyidagilardan iborat bo'lishi mumkin:",
+        "Kengaytirilgan lozimliklarni tushunish: Ubay, o'z mijozlarining talablari va so'rovlari haqida to'liq ma'lumotga ega bo'lishi uchun lozimliklarni tushunishga alohida e'tibor beradi. Bunda mijozlarning xususiy talablari, so'nggi bozor tendentsiyalari, yuqori sifatli mahsulotlar va ergonomik dizayn ko'rishlaridan foydalaniladi.",
+        "Texnologiyalardan foydalanish: Ubay, ishlab chiqarish jarayonida yangi texnologiyalardan foydalanishga katta e'tibor beradi. Ularning muhandislik jamoasi, yangi innovatsiyalarni o'rganish va ularni mahsulotlarga integratsiya qilishni o'z ichiga oladi. Bu, avtomatlashtirilgan ish jarayonlari, energiya samaradorligini oshirish, yoritilgan biriktirish tizimi, batareya texnologiyalari va boshqalar kabi turli texnologiyalarni o'z ichiga oladi.",
+        "Sifatni kuzatish va monitoring: Ubay, ishlab chiqarish jarayonida sifatni kuzatish va monitoringga katta e'tibor beradi. Ularning kengaygan sifat boshqaruv tizimlari, avtomatlashtirilgan test jarayonlari va monitoring vositalari, har bir bosqichda sifatni ta'minlash va sifatni nazorat qilish imkonini beradi.",
+        "Materiallarni tanlash va ishlab chiqarish: Ubay, yuqori sifatli materiallardan foydalanish va ularni ishlab chiqarish jarayonida amalga oshirishda katta e'tibor beradi. Ular, eng yaxshi texnologiyalardan foydalanish orqali metallardan, plastmassalardan va boshqa materiallardan foydalanishni ta'minlaydi. Bu, mahsulotlarning uzun muddatli ishlashi va yuqori yorug'likda ishga tushishini ta'minlashga yordam beradi.",
+        "Ubay brendi, sifatli ishlab chiqarish bosqichlariga e'tibor berish, yangi texnologiyalardan foydalanish va sifatni kuzatish va monitoring jarayonlarini o'z ichiga olish bilan mashhurdir."
+      ]
+    },
+    "compare": {
+      "title": "Maxsulotlarni taqqoslash",
+      "price": "Narxi",
+      "name": "Mahsulot Nomi"
     }
   },
   "ru": {
@@ -203,6 +226,29 @@
       "payment_type": "Тип оплаты:",
       "address": "Адрес:",
       "order_booking": "Оформить заказ"
+    },
+    "warranty": {
+      "array": [
+        "Обмен и возврат качественного товара Продавец гарантирует, что покупатель может отказаться от качественного товара в течение 7 дней с момента покупки в следующих случаях:",
+        "Товар не использовался и представлен, в упаковке со всеми этикетками и документами на покупку товара; товар не входит в перечень качественных товаров, возврату и обмену не подлежит. Покупатель имеет право обменять качественный товар на другое предложение продажи этого товара или на другой товар той же стоимости или на другой товар с доплатой или возвратом разницы в цене.",
+        "Обмен и возврат бракованного товара Если покупатель обнаружит недостатки товара после его приобретения, он может потребовать замены у продавца. Изменение должно быть внесено в течение 7 дней с момента отправки запроса. В случае назначения экспертизы на соответствие товара установленным нормам замена должна быть осуществлена ​​в течение 20 дней.",
+        "Технически сложный товар ненадлежащего качества заменяется товаром той же марки или аналогичным товаром другой марки. Возврат осуществляется путем расторжения договора купли-продажи и возврата суммы, равной стоимости товара."
+      ]
+    },
+    "production": {
+      "array": [
+        "Ubay — это бренд, который уделяет большое внимание качественному производству. Процесс их качественного производства может включать:",
+        "Расширенное понимание требований: Ubay уделяет особое внимание пониманию требований своих клиентов, чтобы они имели полное представление об их требованиях и запросах. Он использует уникальные требования клиентов, последние тенденции рынка, высокое качество продукции и эргономичный дизайн.",
+        "Использование технологий: Ubay уделяет большое внимание использованию новых технологий в производственном процессе. Их команда инженеров занимается исследованием новых инноваций и их интеграцией в продукты. Это включает в себя различные технологии, такие как автоматизированные рабочие процессы, повышение энергоэффективности, системы крепления с подсветкой, аккумуляторные технологии и многое другое.",
+        "Отслеживание и мониторинг качества: Ubay уделяет большое внимание отслеживанию и мониторингу качества в процессе производства. Их передовые системы управления качеством, автоматизированные процессы тестирования и средства мониторинга обеспечивают обеспечение качества и контроль качества на каждом этапе.",
+        "Выбор материалов и производство: Ubay уделяет большое внимание использованию высококачественных материалов и их внедрению в производственный процесс. Они обеспечивают использование металлов, пластмасс и других материалов с использованием лучших технологий. Это помогает обеспечить долгосрочную производительность продуктов и высокую светоотдачу.",
+        "Бренд Ubay известен своей ориентацией на этапы качественного производства, использование новых технологий, а также включение процессов контроля и мониторинга качества."
+      ]
+    },
+    "compare": {
+      "title": "Сравнение продуктов",
+      "price": "Стоимость",
+      "name": "Название Продукта"
     }
   }
 }

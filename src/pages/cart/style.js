@@ -107,6 +107,9 @@ export const CartStyled = styled.section`
                 font-size: 0.625vw;
                 font-weight: 600;
                 color: red;
+                @media screen and (max-width: 768px) {
+                  font-size: 2.625vw;
+                }
               }
             }
             .btn-more {

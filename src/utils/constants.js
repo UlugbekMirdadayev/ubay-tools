@@ -29,3 +29,5 @@ export const isSelectedProduct = (product, arrayList) =>
       return ident?.ident === product?.ident;
     } else return ident === product?.ident;
   });
+
+export const removeDuplicates = (arr) => [...new Set(arr)];

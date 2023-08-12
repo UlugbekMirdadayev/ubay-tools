@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Selectors from "../../redux/selectors";
 import { useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ import {
 } from "../icon";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
 import { SideabarStyled } from "./style";
+import UserModal from "../userModal";
 
 const Sidebar = ({ langData, lang, isMobile }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,14 @@ const Sidebar = ({ langData, lang, isMobile }) => {
   const favorites = Selectors.useFavorites();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
+  const user = Selectors.useUser();
+  const [open, setOpen] = useState(false);
+
+  const openUserModal = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setOpen(true);
+  };
 
   const links = [
     {
@@ -43,12 +52,15 @@ const Sidebar = ({ langData, lang, isMobile }) => {
       key: "user",
       link: "/user",
       icon: <UserIcon />,
+      onClick: user.id ? null : openUserModal,
     },
   ];
 
   const handleSidebarChange = useCallback(() => {
     dispatch(setSidebarVisible(false));
   }, [dispatch]);
+
+  const closeUserModal = () => setOpen(false);
 
   return (
     <SideabarStyled
@@ -58,6 +70,7 @@ const Sidebar = ({ langData, lang, isMobile }) => {
         isMobile ? "mobile-sidebar" : "pc-header"
       }`}
     >
+      {open ? <UserModal handleClose={closeUserModal} /> : null}
       <h1 className="title-c">
         <CloseArrow onClick={handleSidebarChange} />
         <span>{langData.title}</span>
@@ -79,7 +92,10 @@ const Sidebar = ({ langData, lang, isMobile }) => {
             to={item.link}
             key={item.key}
             className="box"
-            onClick={handleSidebarChange}
+            onClick={(e) => {
+              item?.onClick && item?.onClick(e);
+              handleSidebarChange();
+            }}
           >
             <div className="icon">
               {item.count ? (

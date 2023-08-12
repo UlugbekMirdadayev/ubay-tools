@@ -61,14 +61,14 @@ const AboutSection = ({ lang, langData }) => {
               </div>
             </div>
             <div className="link-btns">
-              <Link className="primary" to={"/garantiya"}>
+              <Link className="primary" to={"/warranty"}>
                 {langData.warranty}
               </Link>
-              <Link className="secondary" to={"/working"}>
+              <Link className="secondary" to={"/production"}>
                 <DotListStyle />
                 {langData.production}
               </Link>
-              <Link className="primary" to={"/address"}>
+              <Link className="primary" to={"/our-address"}>
                 {langData.our_address}
               </Link>
             </div>
