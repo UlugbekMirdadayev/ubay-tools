@@ -80,8 +80,13 @@ const Footer = () => {
     ],
   ];
 
+  const isRight = useMemo(
+    () => pathname === "/" || ["category"].includes(pathname?.split("/")[1]),
+    [pathname]
+  );
+
   return (
-    <FooterStyled path={pathname}>
+    <FooterStyled style={isRight ? {} : { marginRight: "auto" }}>
       {langData.desc.map((text, key) => (
         <p key={key} className="desc">
           {text}
@@ -92,7 +97,11 @@ const Footer = () => {
         <div className="col">
           <label className={`input_card ${errors.name ? "error" : ""}`}>
             <p>{langData.contact.name}</p>
-            <input type="text" placeholder="John Doe" {...register("name", { required: true })} />
+            <input
+              type="text"
+              placeholder="John Doe"
+              {...register("name", { required: true })}
+            />
           </label>
           <div className="row">
             <label
@@ -100,13 +109,18 @@ const Footer = () => {
             >
               <span>+998</span>
               <input
-                type="tel" placeholder="771234567"
+                type="tel"
+                placeholder="771234567"
                 {...register("number", { required: true, maxLength: 9 })}
               />
             </label>
             <label className={`input_card ${errors.email ? "error" : ""}`}>
               <p>{langData.contact.email}</p>
-              <input type="email" placeholder="ok@gmail.com" {...register("email", { required: true })} />
+              <input
+                type="email"
+                placeholder="ok@gmail.com"
+                {...register("email", { required: true })}
+              />
             </label>
           </div>
         </div>

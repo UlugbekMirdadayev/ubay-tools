@@ -1,5 +1,6 @@
 import About from "../pages/about";
 import Cart from "../pages/cart";
+import Categoty from "../pages/category";
 import Comparison from "../pages/compare";
 import Favorites from "../pages/favorites";
 import Home from "../pages/home";
@@ -58,5 +59,9 @@ export const routes = [
   {
     path: "/compare",
     element: <Comparison />,
+  },
+  {
+    path: "/category/:id",
+    element: <Categoty />,
   },
 ];

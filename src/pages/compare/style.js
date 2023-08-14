@@ -84,8 +84,38 @@ export const CompareStyled = styled.section`
 
       .slide {
         width: 18vw;
+        position: relative;
+        border-right: 0.052083333333333336vw solid #dedede;
         @media screen and (max-width: 768px) {
-          width: 33vw;
+          width: 32.5vw;
+        }
+
+        .remove {
+          position: absolute;
+          top: 0.8333333333333334vw;
+          right: 0.8333333333333334vw;
+          border-radius: 1.6666666666666667vw;
+          border: 0.052083333333333336vw solid #ececec;
+          background: #fff;
+          width: 1.6666666666666667vw;
+          height: 1.6666666666666667vw;
+          padding: 0.3125vw;
+
+          svg {
+            width: 100%;
+            height: 100%;
+            path {
+              stroke: #babac0;
+            }
+          }
+          @media screen and (max-width: 768px) {
+            width: 4.071246819338422vw;
+            height: 4.071246819338422vw;
+            border-radius: 4.071246819338422vw;
+            padding: 1vw;
+            top: 1vw;
+            right: 1vw;;
+          }
         }
       }
     }

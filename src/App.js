@@ -41,9 +41,7 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    return () => {
-      getCategories();
-    };
+    getCategories();
   }, [getCategories]);
 
   return (
