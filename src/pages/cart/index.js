@@ -20,14 +20,14 @@ import {
   MinusIcon,
   PlusIcon,
 } from "../../components/icon";
-import { setLiked } from "../../redux/favorites-slice";
+import { setLiked } from "../../redux/wishes-slice";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const lang = Selectors.useLang();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const { products } = Selectors.useProducts();
   const langData = useMemo(() => locale[lang]["cart"], [lang]);
 
@@ -65,7 +65,7 @@ const Cart = () => {
     dispatch(setCompare(product?.ident));
   };
 
-  const handleFavorite = (product) => {
+  const handleWishes = (product) => {
     dispatch(setLiked(product?.ident));
   };
   const handleCartAddCount = (product) => {
@@ -183,9 +183,9 @@ const Cart = () => {
                       </button>
                       <button
                         className={`primary ${
-                          isSelectedProduct(product, favorites) ? "active" : ""
+                          isSelectedProduct(product, wishes) ? "active" : ""
                         }`}
-                        onClick={() => handleFavorite(product)}
+                        onClick={() => handleWishes(product)}
                       >
                         <Like color="#015CCF" />
                       </button>

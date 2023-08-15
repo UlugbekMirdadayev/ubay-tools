@@ -15,7 +15,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
-import { setLiked } from "../../../redux/favorites-slice";
+import { setLiked } from "../../../redux/wishes-slice";
 import {
   setCart,
   setCartAddCount,
@@ -26,7 +26,7 @@ import { setCompare } from "../../../redux/compare-slice";
 function SalesHits({ lang, langData }) {
   const dispatch = useDispatch();
   const categories = Selectors.useCategories();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
   const { topProducts } = Selectors.useProducts();
@@ -61,7 +61,7 @@ function SalesHits({ lang, langData }) {
 
   const isActiveCategory = topCategories?.find(({ ident }) => ident === active);
 
-  const handleFavorite = (product) => {
+  const handleWishes = (product) => {
     dispatch(setLiked(product?.ident));
   };
 
@@ -179,9 +179,9 @@ function SalesHits({ lang, langData }) {
                     </div>
                     <div
                       className="like_button"
-                      onClick={() => handleFavorite(product)}
+                      onClick={() => handleWishes(product)}
                     >
-                      <Like liked={!!isSelectedProduct(product, favorites)} />
+                      <Like liked={!!isSelectedProduct(product, wishes)} />
                     </div>
                   </div>
                 </SwiperSlide>

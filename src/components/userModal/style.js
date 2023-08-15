@@ -70,9 +70,9 @@ export const ModalStyled = styled.div`
       border: 1px solid #015ccf;
       display: flex;
       align-items: center;
-      margin-bottom: 3.75vw;
+      margin-bottom: 0.7291666666666666vw;
       @media only screen and (max-width: 768px) {
-        margin-bottom: 12.72264631043257vw;
+        margin-bottom: 3.5623409669211195vw;
       }
       &.error {
         border-color: #f50;
@@ -80,7 +80,7 @@ export const ModalStyled = styled.div`
           border-color: #f50;
         }
       }
-
+      .span,
       span {
         border-right: 1px solid #015ccf;
         padding: 0.7291666666666666vw 0.5729166666666666vw;
@@ -94,6 +94,19 @@ export const ModalStyled = styled.div`
           margin-right: 2.2900763358778624vw;
           font-size: 2.9806615776081427vw;
           line-height: 4.325699745547074vw;
+        }
+      }
+      .span {
+        border: 0;
+        margin: 0;
+      }
+      &:has(input:read-only) {
+        input {
+          opacity: 0.5;
+          cursor: no-drop;
+        }
+        span {
+          cursor: alias;
         }
       }
       input {
@@ -111,9 +124,13 @@ export const ModalStyled = styled.div`
       }
     }
     .submit {
-      background: #ffda00;
+      &:not(.isLoading) {
+        background: #ffda00;
+        color: #000;
+      }
+
       padding: 0.8333333333333334vw;
-      color: #000;
+      color: #a7a7a7;
       font-size: 0.7702083333333333vw;
       font-weight: 500;
       width: 80%;
@@ -121,7 +138,9 @@ export const ModalStyled = styled.div`
       left: 50%;
       transform: translateX(-50%);
       border: 0.052083333333333336vw solid #ffda00;
+      margin-top: 3.75vw;
       @media only screen and (max-width: 768px) {
+        margin-top: 12.72264631043257vw;
         font-size: 2.9806615776081427vw;
         line-height: 4.325699745547074vw;
         padding: 3.5623409669211195vw;

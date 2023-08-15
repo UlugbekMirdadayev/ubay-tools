@@ -7,13 +7,13 @@ import "swiper/css";
 import Slider from "./slider";
 import Selectors from "../../redux/selectors";
 import { skeletionData } from "../../utils/constants";
-import { FavoritesStyled } from "./style";
+import { WishesStyled } from "./style";
 
 function TopProducts() {
   const dispatch = useDispatch();
   const sliderRef = useRef();
   const { topProducts } = Selectors.useProducts();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
 
@@ -37,7 +37,7 @@ function TopProducts() {
   }, []);
 
   return (
-    <FavoritesStyled>
+    <WishesStyled>
       <div className="flex">
         <Swiper
           ref={sliderRef}
@@ -51,7 +51,7 @@ function TopProducts() {
                   className="motorcycle_cultivator_card"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}
@@ -65,7 +65,7 @@ function TopProducts() {
                   className="motorcycle_cultivator_card isLoading"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}
@@ -75,7 +75,7 @@ function TopProducts() {
               ))}
         </Swiper>
       </div>
-    </FavoritesStyled>
+    </WishesStyled>
   );
 }
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FavoritesStyled = styled.section`
+export const WishesStyled = styled.section`
   width: 80vw;
   margin: 0 auto;
   @media screen and (max-width: 768px) {

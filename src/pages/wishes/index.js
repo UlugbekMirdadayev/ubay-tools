@@ -7,18 +7,18 @@ import "swiper/css";
 import Slider from "./slider";
 import Selectors from "../../redux/selectors";
 import { isSelectedProduct, skeletionData } from "../../utils/constants";
-import { FavoritesStyled } from "./style";
+import { WishesStyled } from "./style";
 import locale from "../../localization/locale.json";
 
-function Favorites() {
+function WishesScreen() {
   const dispatch = useDispatch();
   const sliderRef = useRef();
   const { products } = Selectors.useProducts();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
   const lang = Selectors.useLang();
-  const langData = useMemo(() => locale[lang]["favorites"], [lang]);
+  const langData = useMemo(() => locale[lang]["wishes"], [lang]);
 
   const handleFilterProducts = useCallback(() => {
     if (products?.length) return null;
@@ -43,12 +43,12 @@ function Favorites() {
   }, []);
 
   const productsLiked = useMemo(
-    () => products?.filter((product) => isSelectedProduct(product, favorites)),
-    [products, favorites]
+    () => products?.filter((product) => isSelectedProduct(product, wishes)),
+    [products, wishes]
   );
 
   return (
-    <FavoritesStyled>
+    <WishesStyled>
       <h1 className="title">{langData.title}</h1>
       <div className="flex">
         <Swiper
@@ -64,7 +64,7 @@ function Favorites() {
                   className="motorcycle_cultivator_card"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}
@@ -82,7 +82,7 @@ function Favorites() {
                 className="motorcycle_cultivator_card isLoading"
               >
                 <Slider
-                  favorites={favorites}
+                  wishes={wishes}
                   cartItems={cartItems}
                   compareItems={compareItems}
                   dispatch={dispatch}
@@ -93,8 +93,8 @@ function Favorites() {
           )}
         </Swiper>
       </div>
-    </FavoritesStyled>
+    </WishesStyled>
   );
 }
 
-export default Favorites;
+export default WishesScreen;

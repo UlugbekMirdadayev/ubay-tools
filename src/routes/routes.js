@@ -2,12 +2,13 @@ import About from "../pages/about";
 import Cart from "../pages/cart";
 import Categoty from "../pages/category";
 import Comparison from "../pages/compare";
-import Favorites from "../pages/favorites";
+import Wishes from "../pages/wishes";
 import Home from "../pages/home";
 import News from "../pages/news";
 import OurAddress from "../pages/our-address";
 import ProductSingle from "../pages/productSingle";
 import Production from "../pages/production";
+import Profile from "../pages/profile";
 import TopProducts from "../pages/topProducts";
 import Warranty from "../pages/warranty";
 
@@ -29,8 +30,8 @@ export const routes = [
     element: <News />,
   },
   {
-    path: "/favorites",
-    element: <Favorites />,
+    path: "/wishes",
+    element: <Wishes />,
   },
   {
     path: "/cart",
@@ -59,6 +60,14 @@ export const routes = [
   {
     path: "/compare",
     element: <Comparison />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/profile/:route",
+    element: <Profile />,
   },
   {
     path: "/category/:id",

@@ -22,7 +22,7 @@ import {
 } from "../../components/icon";
 import Selectors from "../../redux/selectors";
 import { useDispatch } from "react-redux";
-import { setLiked } from "../../redux/favorites-slice";
+import { setLiked } from "../../redux/wishes-slice";
 import {
   setCart,
   setCartAddCount,
@@ -45,7 +45,7 @@ const ProductSingle = () => {
   ];
   const lang = Selectors.useLang();
   const cartItems = Selectors.useCart();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const compareItems = Selectors.useCompare();
   const [products, setProducts] = useState([]);
   const langData = useMemo(() => locale[lang]["product_single"], [lang]);
@@ -87,7 +87,7 @@ const ProductSingle = () => {
       });
   }, [id]);
 
-  const handleFavorite = () => {
+  const handleWishes = () => {
     dispatch(setLiked(id));
   };
 
@@ -197,16 +197,16 @@ const ProductSingle = () => {
         </div>
         <div>
           <button
-            className={`add_favorite ${
-              isSelectedProduct({ ident: id }, favorites) ? "active" : ""
+            className={`add_wishes ${
+              isSelectedProduct({ ident: id }, wishes) ? "active" : ""
             }`}
-            onClick={handleFavorite}
+            onClick={handleWishes}
           >
             <Like
               color="#015CCF"
-              liked={!!isSelectedProduct({ ident: id }, favorites)}
+              liked={!!isSelectedProduct({ ident: id }, wishes)}
             />
-            <span>{langData.add_favorite}</span>
+            <span>{langData.add_wishes}</span>
           </button>
           <div className="cart_card">
             <div className="price">{currencyString(data?.main_price)}</div>
@@ -310,7 +310,7 @@ const ProductSingle = () => {
               className="motorcycle_cultivator_card"
             >
               <Slider
-                favorites={favorites}
+                wishes={wishes}
                 cartItems={cartItems}
                 compareItems={compareItems}
                 dispatch={dispatch}

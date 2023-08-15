@@ -363,7 +363,7 @@ export const ProductStyled = styled.section`
       }
     }
   }
-  .add_favorite {
+  .add_wishes {
     border: 0;
     background: none;
     position: relative;

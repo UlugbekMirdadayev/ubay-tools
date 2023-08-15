@@ -56,7 +56,7 @@ export const CompareStyled = styled.section`
     }
     .product_photo {
       height: 15vw;
-      display: block;
+      display: flex;
       @media screen and (max-width: 768px) {
         height: 25vw;
       }
@@ -65,6 +65,7 @@ export const CompareStyled = styled.section`
         width: 12.047812500000001vw;
         object-fit: contain;
         height: 100%;
+        margin: 0 auto;
         @media screen and (max-width: 768px) {
           width: 25vw;
         }

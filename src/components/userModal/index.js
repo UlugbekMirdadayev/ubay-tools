@@ -1,57 +1,157 @@
-import { useState, useId } from "react";
+import { useId, useMemo, useState } from "react";
 import { CloseArrow } from "../icon";
 import { ModalStyled } from "./style";
+import { api } from "../../api";
+import locale from "../../localization/locale.json";
+import Selectors from "../../redux/selectors";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { setLogin } from "../../redux/user-slice";
 
 const UserModal = ({ handleClose }) => {
-  const inputID = useId();
-  const [phone, setPhone] = useState({
-    value: "",
-    error: false,
-    touched: false,
-  });
+  const dispatch = useDispatch();
+  const lang = Selectors.useLang();
+  const [phoneID, nameID, famID, passID] = [useId(), useId(), useId(), useId()];
+  const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(null);
 
-  const handleChange = ({ target: { value } }) => {
-    if (value?.length <= 9) {
-      if (value?.length === 9) {
-        setPhone({ value, error: false, touched: true });
-      } else {
-        setPhone((state) => ({ ...state, error: true, value }));
-      }
+  const {
+    handleSubmit,
+    formState: { errors },
+    register,
+    setValue,
+  } = useForm();
+  const langData = useMemo(() => locale[lang]["profile"], [lang]);
+
+  const handleSearchNumber = (number) => {
+    setLoading(true);
+    api
+      .search_user({
+        phone_search: {
+          phone: "998" + number,
+        },
+      })
+      .then(({ data }) => {
+        setLoading(false);
+        if (data.res_id === 200) {
+          setStep(1);
+          setIsSignUp(data.result.new_user);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "err");
+      });
+  };
+  const handleLogin = ({ phone, password }) => {
+    setLoading(true);
+    api
+      .login_user({
+        phoneandpassword_search: { phone: "998" + phone, password },
+      })
+      .then(({ data }) => {
+        setLoading(false);
+        if (data.res_id === 200) {
+          dispatch(setLogin(data?.result));
+          handleClose();
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.log(err, "err");
+      });
+  };
+
+  const onSubmit = (formData) => {
+    if (step) {
+      handleLogin(formData);
+    } else {
+      handleSearchNumber(formData.phone);
     }
   };
 
-  const onSubmit = () => {
-    if (phone.value?.length !== 9) {
-      return setPhone((state) => ({ ...state, error: true, touched: true }));
-    }
-    console.log({ phone: "+998" + phone.value });
-    handleClose();
+  const editPhone = () => {
+    setValue("phone", "");
+    setStep(0);
   };
 
   return (
     <ModalStyled className="scroll-custome">
       <div className="overlay" onClick={handleClose} />
-      <div className="modal-body">
+      <form onSubmit={handleSubmit(onSubmit)} className="modal-body">
         <button className="closer" onClick={handleClose}>
           <CloseArrow />
         </button>
-        <h1 className="title">Войти или создать профиль</h1>
-        <label htmlFor={inputID}>Номер телефона</label>
-        <div
-          className={`input_row ${phone.touched && phone.error ? "error" : ""}`}
-        >
-          <span>+998</span>
+        <h1 className="title">{langData.login}</h1>
+        <label htmlFor={phoneID}>{langData.phone}</label>
+        <div className={`input_row ${errors.phone ? "error" : ""}`}>
+          <span onClick={step ? editPhone : null}>+998</span>
           <input
             type="tel"
-            id={inputID}
-            onChange={handleChange}
-            value={phone.value}
+            id={phoneID}
+            readOnly={loading || step}
+            {...register("phone", {
+              required: true,
+              maxLength: {
+                value: 9,
+              },
+              minLength: {
+                value: 9,
+              },
+              pattern: {
+                value: /^(0|[1-9]\d*)(\.\d+)?$/,
+              },
+            })}
           />
         </div>
-        <button onClick={onSubmit} className="submit">
-          Yuborish
+        {step ? (
+          isSignUp ? (
+            <>
+              <label htmlFor={nameID}>{langData.name}</label>
+              <div className={`input_row ${errors.ism ? "error" : ""}`}>
+                <input
+                  type="text"
+                  className="span"
+                  readOnly={loading}
+                  id={nameID}
+                  {...register("ism", { required: true, minLength: 3 })}
+                />
+              </div>
+
+              <label htmlFor={famID}>{langData.surename}</label>
+              <div className={`input_row ${errors.fam ? "error" : ""}`}>
+                <input
+                  className="span"
+                  readOnly={loading}
+                  type="text"
+                  id={famID}
+                  {...register("fam", { required: true, minLength: 3 })}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <label htmlFor={passID}>{langData.password}</label>
+              <div className={`input_row ${errors.password ? "error" : ""}`}>
+                <input
+                  className="span"
+                  readOnly={loading}
+                  type="text"
+                  id={passID}
+                  {...register("password", { required: true, minLength: 3 })}
+                />
+              </div>
+            </>
+          )
+        ) : null}
+        <button
+          disabled={loading}
+          className={`submit ${loading ? "isLoading" : ""}`}
+        >
+          {langData.send}
         </button>
-      </div>
+      </form>
     </ModalStyled>
   );
 };

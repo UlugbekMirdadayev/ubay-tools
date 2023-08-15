@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import HeaderStyled from "./styles";
 import {
   CartIcon,
@@ -17,6 +17,8 @@ import { NavLink } from "react-router-dom";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
 import Sidebar from "../sidebar";
 import UserModal from "../userModal";
+import { api } from "../../api";
+import { setLogOut, setLogin } from "../../redux/user-slice";
 
 const languages = [
   {
@@ -32,7 +34,7 @@ const languages = [
 const Header = () => {
   const dispatch = useDispatch();
   const lang = Selector.useLang();
-  const favorites = Selector.useFavorites();
+  const wishes = Selector.useWishes();
   const cartItems = Selector.useCart();
   const compareItems = Selector.useCompare();
   const user = Selector.useUser();
@@ -56,6 +58,27 @@ const Header = () => {
 
   const closeUserModal = () => setOpen(false);
 
+  useEffect(() => {
+    const userLocale = JSON.parse(localStorage["ubay-user-data"] || "{}");
+    if (userLocale.phone) {
+      api
+        .search_user({
+          phone_search: { phone: userLocale.phone },
+        })
+        .then(({ data }) => {
+          if (data.res_id === 200) {
+            dispatch(setLogin(data?.result));
+          } else {
+            dispatch(setLogOut());
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(setLogOut());
+        });
+    }
+  }, [dispatch]);
+
   const links = [
     {
       key: "compare",
@@ -64,10 +87,10 @@ const Header = () => {
       count: compareItems?.length,
     },
     {
-      key: "favorites",
-      link: "/favorites",
+      key: "wishes",
+      link: "/wishes",
       icon: <HeartIcon />,
-      count: favorites?.length,
+      count: wishes?.length,
     },
     {
       key: "cart",
@@ -77,9 +100,10 @@ const Header = () => {
     },
     {
       key: "user",
-      link: "/user",
+      link: "/profile/user",
       icon: <UserIcon />,
-      onClick: user.id ? null : openUserModal,
+      onClick: user?.id ? null : openUserModal,
+      user_name: user?.ism ? langData.between.cabinent  : null,
     },
   ];
 
@@ -135,7 +159,7 @@ const Header = () => {
                 ) : null}
                 {item.icon}
               </div>
-              <p>{langData.between[item.key]}</p>
+              <p>{item?.user_name || langData.between[item.key]}</p>
             </NavLink>
           ))}
         </div>

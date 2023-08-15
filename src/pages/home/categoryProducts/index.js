@@ -14,7 +14,7 @@ function CategoryProducts() {
   const dispatch = useDispatch();
   const sliderRef = useRef();
   const { products } = Selectors.useProducts();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
 
@@ -65,7 +65,7 @@ function CategoryProducts() {
                   className="motorcycle_cultivator_card"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}
@@ -79,7 +79,7 @@ function CategoryProducts() {
                   className="motorcycle_cultivator_card isLoading"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}
@@ -113,7 +113,7 @@ function CategoryProducts() {
                   className="motorcycle_cultivator_card"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}
@@ -127,7 +127,7 @@ function CategoryProducts() {
                   className="motorcycle_cultivator_card isLoading"
                 >
                   <Slider
-                    favorites={favorites}
+                    wishes={wishes}
                     cartItems={cartItems}
                     compareItems={compareItems}
                     dispatch={dispatch}

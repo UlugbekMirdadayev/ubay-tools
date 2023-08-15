@@ -5,7 +5,7 @@ import {
   currencyString,
   isSelectedProduct,
 } from "../../../utils/constants";
-import { setLiked } from "../../../redux/favorites-slice";
+import { setLiked } from "../../../redux/wishes-slice";
 import { setCompare } from "../../../redux/compare-slice";
 import {
   setCart,
@@ -15,8 +15,8 @@ import {
 import { Change, Like, MinusIcon, PlusIcon } from "../../../components/icon";
 import { Link } from "react-router-dom";
 
-const Slider = ({ product, dispatch, favorites, cartItems, compareItems }) => {
-  const handleFavorite = (product) => {
+const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
+  const handleWishes = (product) => {
     dispatch(setLiked(product?.ident));
   };
 
@@ -121,8 +121,8 @@ const Slider = ({ product, dispatch, favorites, cartItems, compareItems }) => {
           <Change color="#fff" />
         </button>
       </div>
-      <div className="like_button" onClick={() => handleFavorite(product)}>
-        <Like liked={!!isSelectedProduct(product, favorites)} />
+      <div className="like_button" onClick={() => handleWishes(product)}>
+        <Like liked={!!isSelectedProduct(product, wishes)} />
       </div>
     </div>
   ) : (

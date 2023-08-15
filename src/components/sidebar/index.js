@@ -17,7 +17,7 @@ const Sidebar = ({ langData, lang, isMobile }) => {
   const dispatch = useDispatch();
   const categories = Selectors.useCategories();
   const sidebar = Selectors.useSidebar();
-  const favorites = Selectors.useFavorites();
+  const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
   const user = Selectors.useUser();
@@ -37,10 +37,10 @@ const Sidebar = ({ langData, lang, isMobile }) => {
       count: compareItems?.length,
     },
     {
-      key: "favorites",
-      link: "/favorites",
+      key: "wishes",
+      link: "/wishes",
       icon: <HeartIcon />,
-      count: favorites?.length,
+      count: wishes?.length,
     },
     {
       key: "cart",

@@ -7,9 +7,10 @@
       "search_placeholder": "Katalog qidiruvi",
       "between": {
         "compare": "Taqqoslash",
-        "favorites": "Tanlanganlar",
+        "wishes": "Tanlanganlar",
         "cart": "Savat",
-        "user": "Kirish"
+        "user": "Kirish",
+        "cabinent": "Kabinet"
       }
     },
     "footer": {
@@ -75,7 +76,7 @@
         { "number": "1000+", "title": "Dan ortiq uskunalar" }
       ]
     },
-    "favorites": {
+    "wishes": {
       "title": "Tanlanganlar",
       "empty_text": "Sevimli mahsulotlar ro'yxati shu yerda ko'rinadi"
     },
@@ -86,7 +87,7 @@
       "info_delivery": "Yetkazib berish haqida:",
       "standart_delivery": "Standart yetkazib berish",
       "text_delivery": "1-3 ish kuni ichida kiritilgan manzilga yetkazib beriladi",
-      "add_favorite": "Yoqimlilarga qo'shish",
+      "add_wishes": "Yoqimlilarga qo'shish",
       "description": "Tavsif"
     },
     "cart": {
@@ -123,6 +124,37 @@
       "title": "Maxsulotlarni taqqoslash",
       "price": "Narxi",
       "name": "Mahsulot Nomi"
+    },
+    "profile": {
+      "login": "Kirish yoki yangi hisob ochish",
+      "phone": "Telefon raqami",
+      "name": "Ism",
+      "surename": "Familiya",
+      "full_name": "Ism va familiya",
+      "id_user":"Foydalanuvchi ID'si:",
+      "password": "Parol",
+      "send": "Yuborish",
+      "info_user":"Shaxsiy\nma'lumotlar",
+      "current_password":"Joriy parol",
+      "edit":"O'zgartirish",
+      "delivery_address":"Yetkazib berish manzili",
+      "add":"Qo'shish +",
+      "empty_address":"Manzil qo'shilmagan",
+      "my_orders":"Mening buyurtmalarim",
+      "addresses":"Manzillar",
+      "wishes":"Tanlangan mahsulotlar",
+      "region":"Region",
+      "city":"Shahar",
+      "breadcrumb": [
+        {
+          "link": "/",
+          "text": "Asosiy"
+        },
+        {
+          "link": "/profile",
+          "text": "Kabinet"
+        }
+      ]
     }
   },
   "ru": {
@@ -133,9 +165,10 @@
       "search_placeholder": "Поиск по каталогу",
       "between": {
         "compare": "Сравнение",
-        "favorites": "Избранное",
+        "wishes": "Избранное",
         "cart": "Корзина",
-        "user": "Войти"
+        "user": "Войти",
+        "cabinent": "Кабинет"
       }
     },
     "footer": {
@@ -201,7 +234,7 @@
         { "number": "1000+", "title": "Более оборудования" }
       ]
     },
-    "favorites": {
+    "wishes": {
       "title": "Избранное",
       "empty_text": "Список любимых продуктов появится здесь"
     },
@@ -212,7 +245,7 @@
       "info_delivery": "Информация о доставке:",
       "standart_delivery": "Стандартная доставка",
       "text_delivery": "Доставка от 1 до 3 рабочих дней исходя от адреса доставки",
-      "add_favorite": "Добавить в избранное",
+      "add_wishes": "Добавить в избранное",
       "description": "Описание"
     },
     "cart": {
@@ -249,6 +282,37 @@
       "title": "Сравнение продуктов",
       "price": "Стоимость",
       "name": "Название Продукта"
+    },
+    "profile": {
+      "login": "Войти или создать профиль",
+      "phone": "Номер телефона",
+      "name": "Имя",
+      "surename": "Фамилия",
+      "full_name":"Имя и фамилия:",
+      "info_user":"Персональные\nданные",
+      "id_user":"ID пользователя:",
+      "password": "Пароль",
+      "current_password":"Текущий пароль",
+      "edit":"Изменить",
+      "send": "Отправить",
+      "delivery_address":"Адрес доставки",
+      "add":"Добавить +",
+      "empty_address":"Адрес не добавлен",
+      "my_orders":"Мои заказы",
+      "addresses":"Адреса",
+      "wishes":"Избранные товары",
+      "region":"Регион",
+      "city":"Город",
+      "breadcrumb": [
+        {
+          "link": "/",
+          "text": "Главная"
+        },
+        {
+          "link": "/profile",
+          "text": "Кабинет"
+        }
+      ]
     }
   }
 }
