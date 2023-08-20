@@ -6,11 +6,13 @@ import Wishes from "../pages/wishes";
 import Home from "../pages/home";
 import News from "../pages/news";
 import OurAddress from "../pages/our-address";
-import ProductSingle from "../pages/productSingle";
+import ProductSingle from "../pages/product-single";
 import Production from "../pages/production";
 import Profile from "../pages/profile";
 import TopProducts from "../pages/topProducts";
 import Warranty from "../pages/warranty";
+import BookingOrder from "../pages/order-booking";
+import NotFound from "../components/404";
 
 export const routes = [
   {
@@ -72,5 +74,13 @@ export const routes = [
   {
     path: "/category/:id",
     element: <Categoty />,
+  },
+  {
+    path: "/order-booking",
+    element: <BookingOrder />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ];

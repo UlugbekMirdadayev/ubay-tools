@@ -6,12 +6,12 @@ export const AboutSectionCont = styled.div`
   .container_ {
     border: 0.052083333333333336vw solid #e2e2e2;
     border-bottom: 0;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       border: 0;
     }
     .flex {
       display: flex;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         flex-direction: column;
       }
     }
@@ -19,7 +19,7 @@ export const AboutSectionCont = styled.div`
       width: 40.416666666666664vw;
       padding: 1.6666666666666667vw;
       border-right: 0.052083333333333336vw solid #e2e2e2;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 100%;
         border: 0;
         padding: 0;
@@ -32,7 +32,7 @@ export const AboutSectionCont = styled.div`
       height: 8vw;
       border-radius: 0.625vw;
       object-fit: cover;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         margin-top: 5.089058524173028vw;
         height: 50.89058524173028vw;
         border-radius: 2.625vw;
@@ -40,7 +40,7 @@ export const AboutSectionCont = styled.div`
     }
     .title {
       font-size: 1.25vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 6.106870229007634vw;
       }
     }
@@ -49,7 +49,7 @@ export const AboutSectionCont = styled.div`
       font-weight: 400;
       margin: 1.25vw 0;
       line-height: 150%;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.5623409669211195vw;
         margin: 3.816793893129771vw 0;
       }
@@ -76,7 +76,7 @@ export const AboutSectionCont = styled.div`
         &:nth-child(2) {
           color: #00132c;
         }
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.322900763358778vw;
           padding: 3.053435114503817vw 0;
           width: 50%;
@@ -84,7 +84,7 @@ export const AboutSectionCont = styled.div`
         &.icon {
           padding: 0.5729166666666666vw;
           border-radius: 50%;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             display: none;
           }
           svg {
@@ -102,7 +102,7 @@ export const AboutSectionCont = styled.div`
       width: 18.75vw;
       padding: 2.34375vw;
       border-right: 0.052083333333333336vw solid #e2e2e2;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 100%;
       }
       .qr_code {
@@ -120,7 +120,7 @@ export const AboutSectionCont = styled.div`
       display: inline-flex;
       color: #000;
       text-decoration-line: underline;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.053435114503817vw;
         margin-top: 2vw;
       }
@@ -136,7 +136,7 @@ export const AboutSectionCont = styled.div`
         padding: 0.8854166666666666vw 1.5vw;
         font-size: 1.0416666666666667vw;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 100%;
           padding: 5.089058524173028vw 0;
           font-size: 5.089058524173028vw;
@@ -158,7 +158,7 @@ export const AboutSectionCont = styled.div`
           svg {
             width: 0.7291666666666666vw;
             height: 0.7291666666666666vw;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               width: 3.5623409669211195vw;
               height: 3.5623409669211195vw;
             }
@@ -176,7 +176,7 @@ export const AboutSectionCont = styled.div`
       &.isLoading {
         min-height: 20vh;
       }
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 44.020356234096695vw;
         margin-right: 4.071246819338422vw;
         margin-top: 4.071246819338422vw;
@@ -187,7 +187,7 @@ export const AboutSectionCont = styled.div`
         height: 9.895833333333334vw;
         object-fit: cover;
         pointer-events: none;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           height: 24.818575063613235vw;
         }
       }
@@ -195,14 +195,14 @@ export const AboutSectionCont = styled.div`
       .title_card {
         font-size: 0.9375vw;
         font-weight: 700;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.053435114503817vw;
         }
       }
       .prg_card {
         font-size: 0.7291666666666666vw;
         font-weight: 400;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.053435114503817vw;
         }
       }
@@ -210,7 +210,7 @@ export const AboutSectionCont = styled.div`
     .full-cards {
       width: 100%;
       border-top: 0.052083333333333336vw solid #e2e2e2;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         border: 0;
       }
     }

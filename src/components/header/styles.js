@@ -60,7 +60,12 @@ const HeaderStyled = styled.header`
         width: 5.625vw;
         height: 1.875vw;
       }
-
+      .overlay {
+        position: fixed;
+        z-index: 1;
+        inset: 0;
+        background: #0006;
+      }
       .search-bar {
         position: relative;
         display: flex;
@@ -71,6 +76,10 @@ const HeaderStyled = styled.header`
         padding: 0.625vw 0;
         padding-right: 1.3541666666666667vw;
         margin-left: 1.9270833333333333vw;
+        z-index: 2;
+        &.focused {
+          border-radius: 0.625vw;
+        }
         input {
           padding: 0 1.25vw;
           flex: 1;
@@ -78,6 +87,7 @@ const HeaderStyled = styled.header`
           background: transparent;
           color: #000;
           font-size: 0.7936458333333333vw;
+
           &::placeholder {
             color: #999;
             font-family: "Raleway";
@@ -86,6 +96,88 @@ const HeaderStyled = styled.header`
         svg {
           width: 0.9895833333333334vw;
           height: 0.9895833333333334vw;
+          min-width: 0.9895833333333334vw;
+          min-height: 0.9895833333333334vw;
+        }
+
+        .list_products {
+          position: absolute;
+          top: calc(100% + 0.2604166666666667vw);
+          left: 0;
+          background-color: #fff;
+          overflow: hidden;
+          width: 100%;
+          box-shadow: 0px 0.7291666666666666vw 1.0416666666666667vw -0.8333333333333334vw
+            #000;
+          display: grid;
+          z-index: 5;
+          border-radius: 0.625vw;
+          padding: 0.2vw;
+
+          .scroll-custome {
+            min-height: 50vh;
+            max-height: 80vh;
+            overflow-y: auto;
+            @media only screen and (max-width: 768px) {
+              max-height: calc(100vh - 40vw);
+            }
+            &.empty {
+              display: grid;
+              place-content: center;
+            }
+          }
+
+          a {
+            color: #111;
+            font-size: 0.8333333333333334vw;
+            display: flex;
+            padding: 0 0.8333333333333334vw;
+
+            @media only screen and (max-width: 768px) {
+              font-size: 4.071246819338422vw;
+              padding: 0 2.035623409669211vw;
+            }
+
+            &:hover {
+              background-color: #f2f2f2;
+            }
+            img {
+              width: 2.34375vw;
+              height: 2.34375vw;
+              object-fit: contain;
+              @media only screen and (max-width: 768px) {
+                width: 10.178117048346056vw;
+                height: 10.178117048346056vw;
+              }
+            }
+            .row {
+              border-bottom: 0.052083333333333336vw solid #e2e2e2;
+              flex: 1;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 0.2604166666666667vw 0.5208333333333334vw;
+              &.empty {
+                border: 0;
+              }
+
+              @media only screen and (max-width: 768px) {
+                padding: 1.272264631043257vw 2.035623409669211vw;
+                padding-right: 0;
+              }
+
+              span {
+                line-height: 120%;
+              }
+
+              svg {
+                transform: rotate(-90deg);
+                path {
+                  fill: #999999;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -139,7 +231,7 @@ const HeaderStyled = styled.header`
     align-items: center;
     justify-content: center;
   }
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     nav {
       padding: 4.325699745547074vw;
       padding-top: 10vw;
@@ -190,6 +282,7 @@ const HeaderStyled = styled.header`
           padding: 2.544529262086514vw;
           width: 80.1526717557252vw;
           margin-left: 0;
+          position: relative;
 
           input {
             font-size: 4.071246819338422vw;
@@ -198,6 +291,8 @@ const HeaderStyled = styled.header`
           svg {
             width: 4.919083969465649vw;
             height: 4.919083969465649vw;
+            min-width: 4.919083969465649vw;
+            min-height: 4.919083969465649vw;
           }
         }
       }

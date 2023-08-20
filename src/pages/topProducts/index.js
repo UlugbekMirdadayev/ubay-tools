@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useInsertionEffect } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import { api } from "../../api";
 import { useDispatch } from "react-redux";
 import { setTopProducts } from "../../redux/products-slice";
@@ -8,6 +8,7 @@ import Slider from "./slider";
 import Selectors from "../../redux/selectors";
 import { skeletionData } from "../../utils/constants";
 import { WishesStyled } from "./style";
+import { toast } from "react-toastify";
 
 function TopProducts() {
   const dispatch = useDispatch();
@@ -25,16 +26,18 @@ function TopProducts() {
           dispatch(setTopProducts(data?.result));
         } else {
           dispatch(setTopProducts(data?.result));
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "error");
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     handleFilterProducts();
-  }, []);
+  }, [handleFilterProducts]);
 
   return (
     <WishesStyled>

@@ -134,7 +134,7 @@
   width: 80vw;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   .page-container {
     width: 100%;
   }
@@ -148,4 +148,8 @@
 label,
 button {
   cursor: pointer;
+}
+
+.Roboto {
+  font-family: "Roboto";
 }

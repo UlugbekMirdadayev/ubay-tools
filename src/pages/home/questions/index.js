@@ -1,4 +1,4 @@
-import React, { useCallback, useInsertionEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { QuestionSection } from "./style";
 import { TelegramIcon } from "../../../components/icon";
 import Accord from "../../../components/accord";
@@ -6,13 +6,14 @@ import { api } from "../../../api";
 import Selectors from "../../../redux/selectors";
 import { useDispatch } from "react-redux";
 import { setQuestions } from "../../../redux/questions-slice";
+import { toast } from "react-toastify";
 
 const Questions = ({ langData, lang }) => {
   const dispatch = useDispatch();
   const questions = Selectors.useQuestions();
 
   const getQuestions = useCallback(() => {
-    console.log('get questions');
+    console.log("get questions");
     api
       .get_questions({ info_add: { type: 1 } })
       .then(({ data }) => {
@@ -20,16 +21,18 @@ const Questions = ({ langData, lang }) => {
           dispatch(setQuestions(data?.result));
         } else {
           console.log(data);
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "err get questions");
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     getQuestions();
-  }, []);
+  }, [getQuestions]);
   return (
     <QuestionSection>
       <div className="header">

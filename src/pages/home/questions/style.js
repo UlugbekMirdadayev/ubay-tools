@@ -7,14 +7,14 @@ export const QuestionSection = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       border: 0;
     }
 
     .row {
       display: flex;
       flex-direction: row;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         display: none;
       }
       a {
@@ -68,7 +68,7 @@ export const QuestionSection = styled.div`
       padding-left: 2.4479166666666665vw;
       font-size: 1.25vw;
       font-weight: 700;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 5.089058524173028vw;
         padding-left: 0;
       }
@@ -76,7 +76,7 @@ export const QuestionSection = styled.div`
   }
   .ismobile {
     display: none;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
       padding-top: 3.5623409669211195vw;

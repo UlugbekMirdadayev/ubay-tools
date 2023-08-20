@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const WishesStyled = styled.section`
   width: 80vw;
   margin: 0 auto;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 0 4.325699745547074vw;
   }
   h1.title {
     font-size: 1.4583333333333333vw;
     padding-bottom: 2.6041666666666665vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 7.124681933842239vw;
       padding-bottom: 5.089058524173028vw;
     }
@@ -19,13 +19,13 @@ export const WishesStyled = styled.section`
     font-size: 1vw;
     color: #000;
     min-height: 20vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 5vw;
     }
   }
   .motorcycle_cultivator {
     flex: 1;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
       margin-top: 12.72264631043257vw;
     }
@@ -46,12 +46,12 @@ export const WishesStyled = styled.section`
         gap: 1.5vw;
         &:hover {
           box-shadow: 0 0 4px 1px #00000026;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             box-shadow: none;
           }
         }
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 47vw;
           gap: 5.089058524173028vw;
           padding: 0 2.5vw;
@@ -68,7 +68,7 @@ export const WishesStyled = styled.section`
         svg {
           width: 0.8333333333333334vw;
           height: 0.8333333333333334vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 4.071246819338422vw;
             height: 4.071246819338422vw;
           }
@@ -78,7 +78,7 @@ export const WishesStyled = styled.section`
         width: 12.65625vw;
         height: 11.40625vw;
         object-fit: contain;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 34.01246819338423vw;
           height: 27.28091603053435vw;
         }
@@ -87,7 +87,7 @@ export const WishesStyled = styled.section`
         color: #1d2f77;
         font-size: 0.8165104166666667vw;
         font-weight: 700;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 2.8343511450381675vw;
         }
       }
@@ -96,7 +96,7 @@ export const WishesStyled = styled.section`
         color: #00132c;
         font-size: 0.8544270833333333vw;
         cursor: pointer;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 2.480152671755725vw;
         }
       }
@@ -104,7 +104,7 @@ export const WishesStyled = styled.section`
         color: #000;
         font-size: 0.9375vw;
         font-weight: 700;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 4.78295165394402vw;
         }
       }
@@ -128,7 +128,7 @@ export const WishesStyled = styled.section`
           display: flex;
           align-items: center;
           justify-content: center;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
             padding: 3vw 0;
           }
@@ -148,7 +148,7 @@ export const WishesStyled = styled.section`
           padding: 0.78125vw;
           border: 0;
 
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
             padding: 3vw;
           }
@@ -160,7 +160,7 @@ export const WishesStyled = styled.section`
           svg {
             width: 1vw;
             height: 1vw;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               width: 3vw;
               height: 3vw;
             }

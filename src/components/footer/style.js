@@ -4,7 +4,7 @@ export const FooterStyled = styled.footer`
   width: 80vw;
   margin-top: 3.125vw;
   margin-left: auto;
-  @media screen and (max-width:768px) {
+  @media only screen and (max-width:768px) {
     width: 100%;
     padding: 4.071246819338422vw;
   }
@@ -16,7 +16,7 @@ export const FooterStyled = styled.footer`
     line-height: 0.8333333333333334vw;
     padding: 0 3.6458333333333335vw;
     margin-bottom: 0.8333333333333334vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       display: none;
     }
   }
@@ -30,7 +30,7 @@ export const FooterStyled = styled.footer`
     position: relative;
     align-items: end;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-direction: column;
       align-items: flex-start;
       padding: 6.361323155216285vw 3.5623409669211195vw;
@@ -45,7 +45,7 @@ export const FooterStyled = styled.footer`
       line-height: 2.0833333333333335vw;
       margin-right: 5.208333333333333vw;
       max-width: 14.229166666666668vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         max-width: 64.8854961832061vw;
         font-size: 7.612468193384225vw;
         line-height: 1;
@@ -58,7 +58,7 @@ export const FooterStyled = styled.footer`
       display: flex;
       flex-direction: column;
       gap: 0.78125vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         gap: 1.5267175572519085vw;
         width: 100%;
       }
@@ -67,7 +67,7 @@ export const FooterStyled = styled.footer`
       display: flex;
       flex-direction: row;
       gap: 0.78125vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         flex-direction: column;
         gap: 1.5267175572519085vw;
       }
@@ -79,13 +79,13 @@ export const FooterStyled = styled.footer`
       font-family: "Roboto";
       border: 0.052083333333333336vw solid transparent;
 
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         padding: 3.5623409669211195vw 4.0600508905852415vw;
         border-width: 0.2544529262086514vw;
       }
       p {
         font-size: 0.8333333333333334vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 4.0600508905852415vw;
         }
       }
@@ -98,7 +98,7 @@ export const FooterStyled = styled.footer`
         line-height: 1.8333333333333334vw;
         border-right: 0.052083333333333336vw solid #e4e4e4;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           padding: 4.8346055979643765vw;
           font-size: 4.0600508905852415vw;
           margin-right: 4.0600508905852415vw;
@@ -110,7 +110,7 @@ export const FooterStyled = styled.footer`
         background: transparent;
         width: 100%;
         font-size: 0.8333333333333334vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 4.0600508905852415vw;
         }
       }
@@ -133,7 +133,7 @@ export const FooterStyled = styled.footer`
       font-weight: 400;
       cursor: pointer;
       margin-left: 0.9375vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         padding: 4.0600508905852415vw;
         margin-left: 0;
         font-size: 4.567430025445293vw;
@@ -148,7 +148,7 @@ export const FooterStyled = styled.footer`
       right: 0;
       bottom: 0;
       pointer-events: none;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         display: none;
       }
     }
@@ -159,7 +159,7 @@ export const FooterStyled = styled.footer`
     justify-content: space-between;
     padding: 2.5vw;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-direction: column;
       padding: 0;
       gap: 10.178117048346056vw;
@@ -177,7 +177,7 @@ export const FooterStyled = styled.footer`
     font-size: 0.8854166666666666vw;
     font-weight: 700;
     line-height: 1.25vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 4.325699745547074vw;
       line-height: 6.106870229007634vw;
     }
@@ -187,7 +187,7 @@ export const FooterStyled = styled.footer`
     display: flex;
     flex-direction: column;
     gap: 0.78125vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       gap: 3.816793893129771vw;
     }
     a {
@@ -196,7 +196,7 @@ export const FooterStyled = styled.footer`
       font-size: 0.7291666666666666vw;
       font-weight: 400;
       line-height: 0.8333333333333334vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.5623409669211195vw;
         line-height: 4.071246819338422vw;
       }
@@ -207,7 +207,7 @@ export const FooterStyled = styled.footer`
     display: flex;
     flex-direction: column;
     gap: 0.5208333333333334vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       margin-bottom: 10.178117048346056vw;
       gap: 2.2900763358778624vw;
     }
@@ -217,7 +217,7 @@ export const FooterStyled = styled.footer`
       font-size: 0.625vw;
       font-weight: 400;
       line-height: 0.9375vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 4.071246819338422vw;
         line-height: 1;
       }
@@ -227,7 +227,7 @@ export const FooterStyled = styled.footer`
       font-size: 0.8854166666666666vw;
       font-weight: 700;
       line-height: 1.25vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 4.325699745547074vw;
         line-height: 1;
       }
@@ -235,7 +235,7 @@ export const FooterStyled = styled.footer`
   }
   .row_links {
     margin-bottom: 1.8229166666666667vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       margin-bottom: 10.178117048346056vw;
 
       width: max-content;
@@ -247,7 +247,7 @@ export const FooterStyled = styled.footer`
     align-items: center;
     justify-content: space-between;
     gap: 0.78125vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       gap: 5vw;
     }
     a {
@@ -256,14 +256,14 @@ export const FooterStyled = styled.footer`
     img {
       max-width: 3.6458333333333335vw;
       object-fit: contain;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         max-width: 20vw;
       }
     }
     svg {
       width: 1.5vw;
       height: 1.5vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 6.106870229007634vw;
         height: 6.106870229007634vw;
       }
@@ -276,7 +276,7 @@ export const FooterStyled = styled.footer`
     gap: 1.40625vw;
     align-items: center;
     justify-content: center;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       display: none;
     }
     span {

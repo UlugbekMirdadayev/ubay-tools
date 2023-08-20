@@ -76,7 +76,8 @@ const cartSlice = createSlice({
       return response;
     },
     setClearCart(state, actions) {
-      return [];
+      localStorage.removeItem("cart_ubay");
+      return (state = []);
     },
   },
 });

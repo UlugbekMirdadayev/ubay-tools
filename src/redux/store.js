@@ -12,6 +12,8 @@ import questions from "./questions-slice.js";
 import sidebar from "./sidebar-slice";
 import slider from "./slider-slice";
 import userAddress from "./userAddress-slice";
+import orders from "./orders-slice";
+import modals from "./modals-slice";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +30,8 @@ const store = configureStore({
     sidebar,
     slider,
     userAddress,
+    orders,
+    modals,
   },
 });
 

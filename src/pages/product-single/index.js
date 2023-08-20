@@ -30,6 +30,7 @@ import {
 } from "../../redux/cart-slice";
 import locale from "../../localization/locale.json";
 import Slider from "../home/categoryProducts/slider";
+import { toast } from "react-toastify";
 
 const ProductSingle = () => {
   const dispatch = useDispatch();
@@ -79,11 +80,13 @@ const ProductSingle = () => {
         if (data.res_id === 200) {
           setData(data.result[0]);
         } else {
+          toast.error(data?.mess);
           console.log(data);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [id]);
 
@@ -185,8 +188,8 @@ const ProductSingle = () => {
         </div>
         <div className="options scroll-custome">
           <ul>
-            {data?.parametrs?.map((params) => (
-              <li key={params.parametr_ident}>
+            {data?.parametrs?.map((params,key) => (
+              <li key={key}>
                 <span className="key">
                   {params[lang === "uz" ? "comment" : "name"] || ""}
                 </span>

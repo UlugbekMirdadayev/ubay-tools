@@ -7,14 +7,18 @@ import Selectors from "../../redux/selectors";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/user-slice";
+import { setOpenLoginModal } from "../../redux/modals-slice";
+import { toast } from "react-toastify";
 
-const UserModal = ({ handleClose }) => {
+const UserModal = () => {
   const dispatch = useDispatch();
   const lang = Selectors.useLang();
+  const { login } = Selectors.useModalOpen();
   const [phoneID, nameID, famID, passID] = [useId(), useId(), useId(), useId()];
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(null);
+  const user = Selectors.useUser();
 
   const {
     handleSubmit,
@@ -23,6 +27,8 @@ const UserModal = ({ handleClose }) => {
     setValue,
   } = useForm();
   const langData = useMemo(() => locale[lang]["profile"], [lang]);
+
+  const handleClose = () => dispatch(setOpenLoginModal(false));
 
   const handleSearchNumber = (number) => {
     setLoading(true);
@@ -39,9 +45,10 @@ const UserModal = ({ handleClose }) => {
           setIsSignUp(data.result.new_user);
         }
       })
-      .catch((err) => {
+      .catch(({ message = "" }) => {
         setLoading(false);
-        console.log(err, "err");
+        toast.error(message);
+        console.log(message);
       });
   };
   const handleLogin = ({ phone, password }) => {
@@ -54,12 +61,16 @@ const UserModal = ({ handleClose }) => {
         setLoading(false);
         if (data.res_id === 200) {
           dispatch(setLogin(data?.result));
+          toast.success("Success");
           handleClose();
+        }else{
+          toast.error(data.mess);
         }
       })
-      .catch((err) => {
+      .catch(({ message = "" }) => {
         setLoading(false);
-        console.log(err, "err");
+        toast.error(message);
+        console.log(message);
       });
   };
 
@@ -75,6 +86,8 @@ const UserModal = ({ handleClose }) => {
     setValue("phone", "");
     setStep(0);
   };
+
+  if (user?.id || !login) return <></>;
 
   return (
     <ModalStyled className="scroll-custome">

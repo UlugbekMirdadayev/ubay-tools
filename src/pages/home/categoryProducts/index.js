@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useInsertionEffect } from "react";
+import React, { useRef, useCallback, useEffect } from "react";
 import { StyledSalesHits } from "./styles";
 import { api } from "../../../api";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import "swiper/css";
 import Slider from "./slider";
 import Selectors from "../../../redux/selectors";
 import { skeletionData } from "../../../utils/constants";
+import { toast } from "react-toastify";
 
 function CategoryProducts() {
   const dispatch = useDispatch();
@@ -28,16 +29,18 @@ function CategoryProducts() {
           dispatch(setProducts(data?.result));
         } else {
           dispatch(setProducts(data?.result));
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "error");
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     handleFilterProducts();
-  }, []);
+  }, [handleFilterProducts]);
 
   return (
     <StyledSalesHits>

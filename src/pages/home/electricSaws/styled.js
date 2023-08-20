@@ -42,7 +42,7 @@ export const StyledElectricSaws = styled.div`
     align-items: center;
     justify-content: center;
     gap: 3.816793893129771vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       display: flex;
       margin-top: 3vw;
       button {
@@ -74,7 +74,7 @@ export const StyledElectricSaws = styled.div`
       }
     }
   }
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     display: block;
     &::after,
     &::before {
@@ -92,7 +92,7 @@ export const StyledElectricSaws = styled.div`
         linear-gradient(90deg, #ffa842 0%, #f7d75b 100%);
     }
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 44.020356234096695vw;
       padding: 5vw 0;
       margin-right: 4.071246819338422vw;
@@ -102,7 +102,7 @@ export const StyledElectricSaws = styled.div`
   }
   .title {
     z-index: 2;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -117,7 +117,7 @@ export const StyledElectricSaws = styled.div`
       color: #000;
       font-size: 0.9375vw;
       font-weight: 700;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 4.071246819338422vw;
       }
     }
@@ -128,7 +128,7 @@ export const StyledElectricSaws = styled.div`
       font-size: 0.7291666666666666vw;
       font-weight: 400;
       text-decoration-line: underline;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.053435114503817vw;
         margin-top: 5.089058524173028vw;
         padding: 2.544529262086514vw;
@@ -136,7 +136,7 @@ export const StyledElectricSaws = styled.div`
     }
   }
   .saws_image {
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       height: 34.15368956743002vw;
     }
     img {
@@ -147,7 +147,7 @@ export const StyledElectricSaws = styled.div`
       height: 11.71875vw;
       z-index: 1;
       object-fit: contain;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 19.733333333333334vw;
         height: 34.15368956743002vw;
         bottom: 5vw;

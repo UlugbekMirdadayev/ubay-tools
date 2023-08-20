@@ -1,4 +1,4 @@
-import React, { useCallback, useInsertionEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { NewsSectionContainer } from "./style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setNews } from "../../../redux/news-slice";
 import moment from "moment/moment";
 import { API, skeletionData } from "../../../utils/constants";
+import { toast } from "react-toastify";
 
 const NewsSection = ({ lang, langData }) => {
   const dispatch = useDispatch();
@@ -21,14 +22,18 @@ const NewsSection = ({ lang, langData }) => {
       .then(({ data }) => {
         if (data?.res_id === 200) {
           dispatch(setNews(data?.result));
+        } else {
+          console.log(data);
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "err get News");
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     getNews();
   }, [getNews]);
   return (

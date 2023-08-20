@@ -4,7 +4,7 @@ export const AboutStyled = styled.section`
   .flex {
     display: flex;
     justify-content: space-between;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-direction: column;
       padding: 0 4.071246819338422vw;
     }
@@ -12,14 +12,14 @@ export const AboutStyled = styled.section`
   .space {
     width: 60vw;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
     }
   }
   .title {
     font-size: 1.4583333333333333vw;
     margin-bottom: 1.1979166666666667vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 7.124681933842239vw;
       margin-bottom: 3.053435114503817vw;
       margin-top: 2.2900763358778624vw;
@@ -29,7 +29,7 @@ export const AboutStyled = styled.section`
     font-size: 0.7291666666666666vw;
     line-height: 140%;
     margin-bottom: 1.1979166666666667vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 3.5623409669211195vw;
       margin-bottom: 3.053435114503817vw;
     }
@@ -46,7 +46,7 @@ export const AboutStyled = styled.section`
       font-size: 1.0416666666666667vw;
       border-radius: 0.7871875vw;
 
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 100%;
         padding: 5.089058524173028vw 0;
         font-size: 5.089058524173028vw;
@@ -68,7 +68,7 @@ export const AboutStyled = styled.section`
         svg {
           width: 0.7291666666666666vw;
           height: 0.7291666666666666vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 3.5623409669211195vw;
             height: 3.5623409669211195vw;
           }
@@ -79,7 +79,7 @@ export const AboutStyled = styled.section`
   .middle {
     width: 15vw;
     padding: 2.34375vw 0;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 72.64758269720102vw;
       margin: 0 auto;
       margin-top: 10vw;
@@ -88,13 +88,13 @@ export const AboutStyled = styled.section`
       display: grid;
       grid-template-columns: 5vw 8vw;
       justify-content: space-between;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         grid-template-columns: 50% 50%;
       }
       .qr_code {
         width: 5.520833333333333vw;
         height: 5.520833333333333vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 100%;
           height: auto;
         }
@@ -111,7 +111,7 @@ export const AboutStyled = styled.section`
     display: inline-flex;
     color: #000;
     text-decoration-line: underline;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 3.053435114503817vw;
       margin-top: 2vw;
     }
@@ -121,7 +121,7 @@ export const AboutStyled = styled.section`
     height: 14.0625vw;
     border-radius: 1.25vw;
     object-fit: cover;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       padding: 4.071246819338422vw;
       height: 40.20356234096692vw;
       border-radius: 0;
@@ -132,7 +132,7 @@ export const AboutStyled = styled.section`
     flex-direction: row;
     align-items: center;
     gap: 1.0416666666666667vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-wrap: wrap;
       justify-content: center;
       gap: 7vw 4.071246819338422vw;
@@ -153,7 +153,7 @@ export const AboutStyled = styled.section`
         color: #fff;
         background: #015ccf;
       }
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         padding: 2.7989821882951653vw;
         font-size: 3.367684478371501vw;
         width: 43vw;
@@ -161,7 +161,7 @@ export const AboutStyled = styled.section`
       &.icon {
         padding: 0.5729166666666666vw;
         border-radius: 50%;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 12.43994910941476vw;
           height: 12.43994910941476vw;
           padding: 3.053435114503817vw;
@@ -169,7 +169,7 @@ export const AboutStyled = styled.section`
         svg {
           width: 1.0416666666666667vw;
           height: 1.0416666666666667vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 100%;
             height: 100%;
           }
@@ -190,14 +190,14 @@ export const AboutStyled = styled.section`
     gap: 2.6041666666666665vw;
     margin-top: 6.25vw;
     margin-left: -10vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       margin-left: 0;
       flex-wrap: wrap;
       row-gap: 5vw;
     }
     .card_statistics {
       min-width: 15%;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         min-width: 40%;
         text-align: center;
       }
@@ -206,7 +206,7 @@ export const AboutStyled = styled.section`
         font-size: 0.8333333333333334vw;
         margin-bottom: 1.0416666666666667vw;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3vw;
           margin-bottom: 2vw;
         }
@@ -216,7 +216,7 @@ export const AboutStyled = styled.section`
         color: #015ccf;
         font-weight: 700;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 5vw;
         }
       }

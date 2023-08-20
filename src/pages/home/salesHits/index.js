@@ -1,4 +1,10 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useMemo,
+} from "react";
 import { Change, Like, MinusIcon, PlusIcon } from "../../../components/icon";
 import { StyledSalesHits } from "./styles";
 import Selectors from "../../../redux/selectors";
@@ -22,21 +28,27 @@ import {
   setCartRemoveCount,
 } from "../../../redux/cart-slice";
 import { setCompare } from "../../../redux/compare-slice";
+import { toast } from "react-toastify";
 
 function SalesHits({ lang, langData }) {
   const dispatch = useDispatch();
-  const categories = Selectors.useCategories();
+  const { categories } = Selectors.useCategories();
   const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
+  const { isLoading } = Selectors.useLoading();
   const compareItems = Selectors.useCompare();
   const { topProducts } = Selectors.useProducts();
   const sliderRef = useRef();
   const [active, setActive] = useState(null);
 
-  const topCategories = [...categories]?.splice(0, 5);
+  const topCategories = useMemo(
+    () => [...categories]?.reverse()?.splice(0, 5),
+    [categories]
+  );
 
   const handleFilterProducts = useCallback(
     (sub_ident) => {
+      if (!sub_ident) return;
       setActive(sub_ident);
       dispatch(setLoading(true));
       api
@@ -49,11 +61,13 @@ function SalesHits({ lang, langData }) {
             dispatch(setTopProducts(data?.result));
           } else {
             console.log(data);
+            toast.error(data?.mess);
           }
         })
-        .catch((err) => {
+        .catch(({ message }) => {
           dispatch(setLoading(false));
-          console.log(err, "error");
+          toast.error(message);
+          console.log(message);
         });
     },
     [dispatch]
@@ -81,6 +95,10 @@ function SalesHits({ lang, langData }) {
     dispatch(setCartRemoveCount(product));
   };
 
+  useEffect(() => {
+    handleFilterProducts(topCategories[0]?.ident);
+  }, [handleFilterProducts, topCategories]);
+
   return (
     <StyledSalesHits>
       <div className="flex">
@@ -106,93 +124,101 @@ function SalesHits({ lang, langData }) {
                 <button key={key} className="isLoading empty-btn" />
               ))}
         </div>
-        <Swiper
-          ref={sliderRef}
-          slidesPerView={"auto"}
-          className="motorcycle_cultivator"
-        >
-          {isActiveCategory?.ident && topProducts?.length
-            ? topProducts?.map((product) => (
-                <SwiperSlide
-                  key={product?.ident}
-                  className="motorcycle_cultivator_card"
-                >
-                  <div className="hover_body">
-                    <Link to={`/product/${product?.ident}`}>
-                      <img
-                        src={API.baseURL_IMAGE + product?.photo}
-                        alt={product?.name}
-                      />
-                    </Link>
-                    <Link to={`/product/${product?.ident}`}>
-                      <h2>{product?.name}</h2>
-                    </Link>
+        {topProducts?.length ? (
+          <Swiper
+            ref={sliderRef}
+            slidesPerView={"auto"}
+            className="motorcycle_cultivator"
+          >
+            {isActiveCategory?.ident
+              ? topProducts?.map((product) => (
+                  <SwiperSlide
+                    key={product?.ident}
+                    className="motorcycle_cultivator_card"
+                  >
+                    <div className="hover_body">
+                      <Link to={`/product/${product?.ident}`}>
+                        <img
+                          src={API.baseURL_IMAGE + product?.photo}
+                          alt={product?.name}
+                        />
+                      </Link>
+                      <Link to={`/product/${product?.ident}`}>
+                        <h2>{product?.name}</h2>
+                      </Link>
 
-                    <Link
-                      className="link-category"
-                      to={`/category/${isActiveCategory?.ident}`}
-                    >
-                      {isActiveCategory[lang === "uz" ? "name_uz" : "name"] ||
-                        isActiveCategory?.ident}
-                    </Link>
-                    <h1>{currencyString(product?.main_price)}</h1>
-                    <div className="motorcycle_cultivator_cart">
-                      <button
-                        onClick={() =>
-                          isSelectedProduct(product, cartItems)
-                            ? null
-                            : handleCart(product)
-                        }
-                        className="button"
+                      <Link
+                        className="link-category"
+                        to={`/category/${isActiveCategory?.ident}`}
                       >
-                        {isSelectedProduct(product, cartItems) ? (
-                          <>
-                            <span
-                              onClick={() => handleCartRemoveCount(product)}
-                            >
-                              <MinusIcon />
-                            </span>
-                            <span>
-                              {
-                                isSelectedProduct(product, cartItems)
-                                  ?.cart_count
-                              }
-                            </span>
-                            <span onClick={() => handleCartAddCount(product)}>
-                              <PlusIcon />
-                            </span>
-                          </>
-                        ) : (
-                          "В корзину"
-                        )}
-                      </button>
-                      <button
-                        className={`compare-btn ${
-                          isSelectedProduct(product, compareItems)
-                            ? "selected"
-                            : ""
-                        }`}
-                        onClick={() => handleCompare(product)}
+                        {isActiveCategory[lang === "uz" ? "name_uz" : "name"] ||
+                          isActiveCategory?.ident}
+                      </Link>
+                      <h1>{currencyString(product?.main_price)}</h1>
+                      <div className="motorcycle_cultivator_cart">
+                        <button
+                          onClick={() =>
+                            isSelectedProduct(product, cartItems)
+                              ? null
+                              : handleCart(product)
+                          }
+                          className="button"
+                        >
+                          {isSelectedProduct(product, cartItems) ? (
+                            <>
+                              <span
+                                onClick={() => handleCartRemoveCount(product)}
+                              >
+                                <MinusIcon />
+                              </span>
+                              <span>
+                                {
+                                  isSelectedProduct(product, cartItems)
+                                    ?.cart_count
+                                }
+                              </span>
+                              <span onClick={() => handleCartAddCount(product)}>
+                                <PlusIcon />
+                              </span>
+                            </>
+                          ) : lang === "uz" ? (
+                            "Savatga"
+                          ) : (
+                            "В корзину"
+                          )}
+                        </button>
+                        <button
+                          className={`compare-btn ${
+                            isSelectedProduct(product, compareItems)
+                              ? "selected"
+                              : ""
+                          }`}
+                          onClick={() => handleCompare(product)}
+                        >
+                          <Change color="#fff" />
+                        </button>
+                      </div>
+                      <div
+                        className="like_button"
+                        onClick={() => handleWishes(product)}
                       >
-                        <Change color="#fff" />
-                      </button>
+                        <Like liked={!!isSelectedProduct(product, wishes)} />
+                      </div>
                     </div>
-                    <div
-                      className="like_button"
-                      onClick={() => handleWishes(product)}
-                    >
-                      <Like liked={!!isSelectedProduct(product, wishes)} />
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))
-            : skeletionData.slider.map((key) => (
-                <SwiperSlide
-                  key={key}
-                  className="motorcycle_cultivator isLoading"
-                />
-              ))}
-        </Swiper>
+                  </SwiperSlide>
+                ))
+              : skeletionData.slider.map((key) => (
+                  <SwiperSlide
+                    key={key}
+                    className="motorcycle_cultivator isLoading"
+                  />
+                ))}
+          </Swiper>
+        ) : isLoading ? (
+          ""
+        ) : (
+          <h1>{langData.empty_products}</h1>
+        )}
       </div>
       <Link to={"/top-products"} className="show_all">
         {langData.show_all}

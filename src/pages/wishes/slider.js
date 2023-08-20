@@ -10,8 +10,10 @@ import {
 } from "../../redux/cart-slice";
 import { Change, Like, MinusIcon, PlusIcon } from "../../components/icon";
 import { Link } from "react-router-dom";
+import Selectors from "../../redux/selectors";
 
 const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
+  const lang = Selectors.useLang();
   const handleWishes = (product) => {
     dispatch(setLiked(product?.ident));
   };
@@ -111,6 +113,8 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
                 <PlusIcon />
               </span>
             </>
+          ) : lang === "uz" ? (
+            "Savatga"
           ) : (
             "В корзину"
           )}

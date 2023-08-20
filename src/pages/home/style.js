@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const ScrollAreaView = styled.div`
   width: 80vw;
   margin-left: auto;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
   }
 `;
 
 const HomeStyled = styled.main`
   display: flex;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 0 4.071246819338422vw;
   }

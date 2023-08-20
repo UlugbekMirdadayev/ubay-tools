@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CartStyled = styled.section`
   width: 80vw;
   margin: 0 auto;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 0 4.325699745547074vw;
   }
@@ -12,7 +12,11 @@ export const CartStyled = styled.section`
     font-size: 1.3541666666666667vw;
     font-weight: 500;
     margin-bottom: 2.0833333333333335vw;
-    @media screen and (max-width: 768px) {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 2;
+    @media only screen and (max-width: 768px) {
       font-size: 6.6157760814249365vw;
       margin-bottom: 3.816793893129771vw;
     }
@@ -23,7 +27,7 @@ export const CartStyled = styled.section`
     justify-content: space-between;
     min-height: 100vh;
     align-items: flex-start;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       grid-template-columns: 100%;
       min-height: auto;
     }
@@ -31,7 +35,7 @@ export const CartStyled = styled.section`
       display: flex;
       flex-direction: column;
       gap: 0.8333333333333334vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         gap: 5vw;
       }
       .product {
@@ -42,7 +46,7 @@ export const CartStyled = styled.section`
         display: flex;
         justify-content: space-between;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           flex-direction: column;
           padding: 2vw;
           position: relative;
@@ -55,7 +59,7 @@ export const CartStyled = styled.section`
             color: #000;
             font-size: 0.9343750000000001vw;
             font-weight: 500;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 4.071246819338422vw;
               max-width: calc(100% - 8vw);
             }
@@ -66,7 +70,7 @@ export const CartStyled = styled.section`
             background-color: rgba(217, 217, 217, 0.2);
             border-radius: 0.5208333333333334vw;
             margin-right: 2.0833333333333335vw;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               min-width: 25.445293vw;
               max-width: 25.445293vw;
               height: 30.44529262086514vw;
@@ -87,7 +91,7 @@ export const CartStyled = styled.section`
               display: flex;
               align-items: center;
               font-size: 0.9375vw;
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 font-size: 3vw;
               }
             }
@@ -99,7 +103,7 @@ export const CartStyled = styled.section`
                 color: #000;
                 font-size: 0.9343750000000001vw;
                 font-weight: 500;
-                @media screen and (max-width: 768px) {
+                @media only screen and (max-width: 768px) {
                   font-size: 4.071246819338422vw;
                 }
               }
@@ -107,7 +111,7 @@ export const CartStyled = styled.section`
                 font-size: 0.625vw;
                 font-weight: 600;
                 color: red;
-                @media screen and (max-width: 768px) {
+                @media only screen and (max-width: 768px) {
                   font-size: 2.625vw;
                 }
               }
@@ -125,7 +129,7 @@ export const CartStyled = styled.section`
               transition: 100ms ease;
               border: 1px solid #015ccf;
 
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 font-size: 2vw;
                 padding: 2vw;
               }
@@ -157,7 +161,7 @@ export const CartStyled = styled.section`
             &:active {
               background-color: #da002c36;
             }
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               padding: 0.5vw;
               position: absolute;
               top: 0vw;
@@ -169,14 +173,14 @@ export const CartStyled = styled.section`
               font-size: 0.625vw;
               font-weight: 400;
               font-family: "Inter", sans-serif;
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 display: none;
               }
             }
             svg {
               width: 1.6145833333333333vw;
               height: 1.6145833333333333vw;
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 width: 7vw;
                 height: 7vw;
               }
@@ -187,7 +191,7 @@ export const CartStyled = styled.section`
             align-items: center;
             gap: 0.8854166666666666vw;
 
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               gap: 2.8vw;
             }
 
@@ -198,7 +202,7 @@ export const CartStyled = styled.section`
               border: 0.052083333333333336vw solid #015ccf;
               border-radius: 0.40729166666666666vw;
               gap: 0.8333333333333334vw;
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 gap: 2vw;
                 padding: 0;
                 margin-top: 5vw;
@@ -214,7 +218,7 @@ export const CartStyled = styled.section`
                 background: none;
                 flex: 1;
 
-                @media screen and (max-width: 768px) {
+                @media only screen and (max-width: 768px) {
                   gap: 2vw;
                   padding: 2.2900763358778624vw;
                   border-radius: 2.0279898218829517vw;
@@ -224,7 +228,7 @@ export const CartStyled = styled.section`
                   width: 0.829375vw;
                   height: 0.829375vw;
                   stroke: #015ccf;
-                  @media screen and (max-width: 768px) {
+                  @media only screen and (max-width: 768px) {
                     width: 5.089058524173028vw;
                     height: 5.089058524173028vw;
                   }
@@ -243,7 +247,7 @@ export const CartStyled = styled.section`
                 font-weight: 500;
                 min-width: 1.5vw;
                 text-align: center;
-                @media screen and (max-width: 768px) {
+                @media only screen and (max-width: 768px) {
                   font-size: 4.0559796437659035vw;
                   min-width: 10vw;
                 }
@@ -259,7 +263,7 @@ export const CartStyled = styled.section`
               background: none;
               flex: 1;
 
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 margin-top: 5vw;
                 padding: 2.2900763358778624vw;
                 border-radius: 2.0279898218829517vw;
@@ -269,14 +273,14 @@ export const CartStyled = styled.section`
                 width: 1.25vw;
                 height: 1.25vw;
                 stroke: #015ccf;
-                @media screen and (max-width: 768px) {
+                @media only screen and (max-width: 768px) {
                   width: 5.089058524173028vw;
                   height: 5.089058524173028vw;
                 }
               }
 
               &:hover {
-                @media screen and (min-width: 768px) {
+                @media only screen and (min-width: 768px) {
                   background-color: #0071bc;
 
                   svg {
@@ -305,7 +309,7 @@ export const CartStyled = styled.section`
       position: sticky;
       top: 0;
 
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         margin-top: 5vw;
         border-radius: 0;
         background: none;
@@ -316,7 +320,7 @@ export const CartStyled = styled.section`
         border-bottom: 0.15625vw solid rgba(56, 126, 202, 0.2);
         width: 100%;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           padding: 3.053435114503817vw 0;
           border-bottom: 0.19796437659033078vw solid #e8e8e8;
         }
@@ -326,7 +330,7 @@ export const CartStyled = styled.section`
           align-items: center;
           justify-content: space-between;
           margin-bottom: 0.8333333333333334vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             margin-bottom: 2.3740458015267176vw;
           }
           .key,
@@ -335,7 +339,7 @@ export const CartStyled = styled.section`
             font-size: 0.7291666666666666vw;
             font-weight: 400;
             font-family: "SF Pro Display";
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 3.1666666666666665vw;
             }
           }
@@ -345,7 +349,7 @@ export const CartStyled = styled.section`
           .fs_18 {
             font-size: 0.9375vw;
             font-weight: 510;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 4.750127226463104vw;
             }
           }
@@ -369,7 +373,13 @@ export const CartStyled = styled.section`
         width: 100%;
         border: 0;
         margin-top: 1.5625vw;
-        @media screen and (max-width: 768px) {
+        display: grid;
+        place-content: center;
+        text-align: center;
+        &.error {
+          background-color: #da002b;
+        }
+        @media only screen and (max-width: 768px) {
           margin-top: 4.580152671755725vw;
           font-size: 3.1666666666666665vw;
           padding: 3.1666666666666665vw;

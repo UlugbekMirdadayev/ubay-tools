@@ -1,4 +1,4 @@
-import React, { useCallback, useInsertionEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { NewsSectionContainer } from "./style";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -38,7 +38,7 @@ const News = () => {
       });
   }, [dispatch]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     getNews();
   }, [getNews]);
   return (

@@ -13,6 +13,8 @@ const useQuestions = () => useSelector(({ questions }) => questions);
 const useSidebar = () => useSelector(({ sidebar }) => sidebar);
 const useSlider = () => useSelector(({ slider }) => slider);
 const useUserAddress = () => useSelector(({ userAddress }) => userAddress);
+const useOrders = () => useSelector(({ orders }) => orders);
+const useModalOpen = () => useSelector(({ modals }) => modals);
 
 const Selectors = {
   useUser,
@@ -27,7 +29,9 @@ const Selectors = {
   useQuestions,
   useSidebar,
   useSlider,
-  useUserAddress
+  useUserAddress,
+  useOrders,
+  useModalOpen
 };
 
 export default Selectors;

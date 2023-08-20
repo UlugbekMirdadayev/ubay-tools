@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CompareStyled = styled.section`
   width: 80vw;
   margin: 0 auto;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 0 4.325699745547074vw;
   }
@@ -12,7 +12,7 @@ export const CompareStyled = styled.section`
     font-size: 1.3541666666666667vw;
     font-weight: 500;
     margin-bottom: 2.0833333333333335vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 6.6157760814249365vw;
       margin-bottom: 3.816793893129771vw;
     }
@@ -24,7 +24,7 @@ export const CompareStyled = styled.section`
     display: grid;
     grid-template-columns: 18vw 80vw;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       margin-left: 0vw;
       width: 100%;
       grid-template-columns: 25vw 65vw;
@@ -34,7 +34,7 @@ export const CompareStyled = styled.section`
       width: 18vw;
       display: grid;
       border: 0.052083333333333336vw solid #dedede;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 25vw;
       }
     }
@@ -49,7 +49,7 @@ export const CompareStyled = styled.section`
       overflow-y: auto;
       display: flex;
       align-items: center;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 2vw;
         height: 10vw;
       }
@@ -57,7 +57,7 @@ export const CompareStyled = styled.section`
     .product_photo {
       height: 15vw;
       display: flex;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         height: 25vw;
       }
       img {
@@ -66,7 +66,7 @@ export const CompareStyled = styled.section`
         object-fit: contain;
         height: 100%;
         margin: 0 auto;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 25vw;
         }
       }
@@ -87,7 +87,7 @@ export const CompareStyled = styled.section`
         width: 18vw;
         position: relative;
         border-right: 0.052083333333333336vw solid #dedede;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 32.5vw;
         }
 
@@ -109,7 +109,7 @@ export const CompareStyled = styled.section`
               stroke: #babac0;
             }
           }
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 4.071246819338422vw;
             height: 4.071246819338422vw;
             border-radius: 4.071246819338422vw;

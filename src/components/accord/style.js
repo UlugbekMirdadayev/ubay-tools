@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const AccordStyled = styled.div`
   border-top: 0.052083333333333336vw solid #e2e2e2;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     border-top: 0;
     margin-top: 4.071246819338422vw;
   }
@@ -18,7 +18,7 @@ export const AccordStyled = styled.div`
     justify-content: space-between;
     cursor: pointer;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       background: #015ccf;
       padding: 1.5267175572519085vw 2.035623409669211vw;
     }
@@ -27,7 +27,7 @@ export const AccordStyled = styled.div`
       width: 1.1458333333333333vw;
       height: 1.1458333333333333vw;
 
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 5.343511450381679vw;
         height: 5.343511450381679vw;
         path {
@@ -41,7 +41,7 @@ export const AccordStyled = styled.div`
       text-align: left;
       font-weight: 700;
       font-size: 0.9375vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.5623409669211195vw;
         color: #fff;
       }
@@ -58,7 +58,7 @@ export const AccordStyled = styled.div`
     line-height: 1.1666666666666667vw;
     transition: 300ms ease;
     margin-bottom: 0px;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       background-color: #ffda00;
       font-size: 3.5623409669211195vw;
       padding: 0 2.2900763358778624vw;
@@ -67,7 +67,7 @@ export const AccordStyled = styled.div`
 
     &.open {
       margin-bottom: 20px;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         margin-bottom: 0;
       }
     }

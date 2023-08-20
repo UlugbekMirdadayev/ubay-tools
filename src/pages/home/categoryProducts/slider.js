@@ -14,8 +14,11 @@ import {
 } from "../../../redux/cart-slice";
 import { Change, Like, MinusIcon, PlusIcon } from "../../../components/icon";
 import { Link } from "react-router-dom";
+import Selectors from "../../../redux/selectors";
+import { toast } from "react-toastify";
 
 const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
+  const lang = Selectors.useLang();
   const handleWishes = (product) => {
     dispatch(setLiked(product?.ident));
   };
@@ -60,11 +63,13 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
           setRating(star);
         } else {
           console.log(data, "response data");
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
+      .catch(({ message }) => {
         setIsLoading(false);
-        console.log(err, "err set products rating");
+        toast.error(message);
+        console.log(message);
       });
   };
 
@@ -108,6 +113,8 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
                 <PlusIcon />
               </span>
             </>
+          ) : lang === "uz" ? (
+            "Savatga"
           ) : (
             "В корзину"
           )}

@@ -8,7 +8,7 @@ import { SlideArrow } from "../../../components/icon";
 import {skeletionData} from "../../../utils/constants"
 
 function ElectricSaws({ lang, langData }) {
-  const categories = Selectors.useCategories();
+  const {categories} = Selectors.useCategories();
   const [active, setActive] = useState(0);
   const sliderRef = useRef();
 

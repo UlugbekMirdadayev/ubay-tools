@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useInsertionEffect } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { CartStyled } from "./style";
 import Selectors from "../../redux/selectors";
 import locale from "../../localization/locale.json";
@@ -21,6 +21,8 @@ import {
   PlusIcon,
 } from "../../components/icon";
 import { setLiked } from "../../redux/wishes-slice";
+import { setOpenLoginModal } from "../../redux/modals-slice";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -29,29 +31,36 @@ const Cart = () => {
   const compareItems = Selectors.useCompare();
   const wishes = Selectors.useWishes();
   const { products } = Selectors.useProducts();
+  const user = Selectors.useUser();
+  const [isLoading, setIsLoading] = useState(false);
   const langData = useMemo(() => locale[lang]["cart"], [lang]);
 
   const handleFilterProducts = useCallback(() => {
     if (products?.length) return null;
+    setIsLoading(true);
     api
       .get_products({
         show_products: { main_ident: 0, sub_ident: 0 },
       })
       .then(({ data }) => {
+        setIsLoading(false);
         if (data?.res_id === 200) {
           dispatch(setProducts(data?.result));
         } else {
           console.log(data);
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "error");
+      .catch(({ message }) => {
+        setIsLoading(false);
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch, products?.length]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     handleFilterProducts();
-  }, []);
+  }, [handleFilterProducts]);
 
   const productsInCart = useMemo(
     () => products?.filter((product) => isSelectedProduct(product, cartItems)),
@@ -88,12 +97,18 @@ const Cart = () => {
         ...itemFiltered,
       }));
     const total_summ = array.reduce(
-      (currentSum, item) => currentSum + (item.main_price * item.cart_count),
+      (currentSum, item) => currentSum + item.main_price * item.cart_count,
       0
     );
 
     return { total_summ };
   }, [products, cartItems]);
+
+  const openUserModal = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    dispatch(setOpenLoginModal(true));
+  };
 
   return (
     <CartStyled>
@@ -147,7 +162,7 @@ const Cart = () => {
                     className="delete_cart"
                     onClick={() => handleRemoveCart(product)}
                   >
-                    <span>Savatda o’chirish</span>
+                    <span>{langData.delete_from_card}</span>
                     <ClearIconRed />
                   </button>
                   <div className="flex_row">
@@ -201,36 +216,22 @@ const Cart = () => {
                 <span className="key fs_18 total_value">
                   {langData.total_value}
                 </span>
-                <span className="value fs_18 black">{currencyString(total_infos.total_summ)}</span>
-              </li>
-            </ul>
-            <ul>
-              <li>
-                <span className="key">{langData.promokod}</span>
-                <span className="value">5% (25 000 so’m)</span>
-              </li>
-              <li>
-                <span className="key">{langData.shipping_cost}</span>
-                <span className="value">15 000 so’m</span>
-              </li>
-            </ul>
-            <ul>
-              <li>
-                <span className="key">{langData.payment_type}</span>
-                <span className="value">Karta orqali</span>
-              </li>
-              <li>
-                <span className="key">{langData.address}</span>
-                <span className="value">
-                  Tamarahoni uy muzeyi Mustaqillik...
+                <span className="value fs_18 black">
+                  {currencyString(total_infos.total_summ)}
                 </span>
               </li>
             </ul>
-            <button className="submit">{langData.order_booking}</button>
+            <Link
+              to={"/order-booking"}
+              onClick={user?.id ? null : openUserModal}
+              className={`submit ${user?.id ? "" : "error"}`}
+            >
+              {user?.id ? langData.order_booking : langData.not_registered}
+            </Link>
           </div>
         </div>
       ) : (
-        <div className="center">
+        <div className={`center ${isLoading ? "isLoading" : ""}`}>
           <h3 className="empty_text">{langData.empty}</h3>
           <Link to={"/"} className="go_main">
             {langData.go_main}

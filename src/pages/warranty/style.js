@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const WarrantyStyled = styled.section`
   width: 80vw;
   margin: 0 auto;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 0 4.325699745547074vw;
   }
@@ -14,7 +14,7 @@ export const WarrantyStyled = styled.section`
     color: #000;
     font-weight: 500;
     line-height: 120%;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 4.071246819338422vw;
       margin-bottom: 5vw;
     }

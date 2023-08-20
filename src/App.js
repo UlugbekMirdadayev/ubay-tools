@@ -8,12 +8,15 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "./redux/loading-slice";
 import { api } from "./api";
 import { setCategories } from "./redux/categories-slice";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const dispatch = useDispatch();
   const { isLoading } = Selectors.useLoading();
   const { pathname } = useLocation();
   const app = useRef(null);
+  
   useEffect(() => {
     app?.current?.scroll({
       top: 0,
@@ -46,6 +49,7 @@ const App = () => {
 
   return (
     <div className="app scroll-custome" ref={app}>
+      <ToastContainer limit={5} autoClose={200} position={"top-center"}/>
       {isLoading && (
         <div className={"loading"}>
           <div className="loader" />

@@ -5,7 +5,7 @@ export const StyledSalesHits = styled.div`
     max-width: 100%;
     width: 100%;
     min-height: 40vh;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       object-fit: contain;
     }
   }
@@ -64,7 +64,7 @@ export const StyledSalesHits = styled.div`
     }
     .motorcycle_cultivator {
       flex: 1;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 100%;
         margin-top: 12.72264631043257vw;
       }
@@ -85,12 +85,12 @@ export const StyledSalesHits = styled.div`
           gap: 1.5vw;
           &:hover {
             box-shadow: 0 0 4px 1px #00000026;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               box-shadow: none;
             }
           }
 
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 47vw;
             gap: 5.089058524173028vw;
             padding: 0 2.5vw;
@@ -107,7 +107,7 @@ export const StyledSalesHits = styled.div`
           svg {
             width: 0.8333333333333334vw;
             height: 0.8333333333333334vw;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               width: 4.071246819338422vw;
               height: 4.071246819338422vw;
             }
@@ -117,7 +117,7 @@ export const StyledSalesHits = styled.div`
           width: 12.65625vw;
           height: 11.40625vw;
           object-fit: contain;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 34.01246819338423vw;
             height: 27.28091603053435vw;
           }
@@ -126,7 +126,7 @@ export const StyledSalesHits = styled.div`
           color: #1d2f77;
           font-size: 0.8165104166666667vw;
           font-weight: 700;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.8343511450381675vw;
           }
         }
@@ -135,7 +135,7 @@ export const StyledSalesHits = styled.div`
           color: #00132c;
           font-size: 0.8544270833333333vw;
           cursor: pointer;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
           }
         }
@@ -143,7 +143,7 @@ export const StyledSalesHits = styled.div`
           color: #000;
           font-size: 0.9375vw;
           font-weight: 700;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 4.78295165394402vw;
           }
         }
@@ -167,7 +167,7 @@ export const StyledSalesHits = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 2.480152671755725vw;
               padding: 3vw 0;
             }
@@ -187,7 +187,7 @@ export const StyledSalesHits = styled.div`
             padding: 0.78125vw;
             border: 0;
 
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 2.480152671755725vw;
               padding: 3vw;
             }
@@ -199,7 +199,7 @@ export const StyledSalesHits = styled.div`
             svg {
               width: 1vw;
               height: 1vw;
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 width: 3vw;
                 height: 3vw;
               }

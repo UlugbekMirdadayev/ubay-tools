@@ -1,7 +1,9 @@
-import React, { useMemo, useCallback, useState, useEffect } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import HeaderStyled from "./styles";
 import {
+  Arrow,
   CartIcon,
+  CloseArrow,
   CompareIcon,
   HeartIcon,
   Logo,
@@ -13,12 +15,18 @@ import Selector from "../../redux/selectors";
 import { useDispatch } from "react-redux";
 import { setLang } from "../../redux/lang-slice";
 import locale from "../../localization/locale.json";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
 import Sidebar from "../sidebar";
-import UserModal from "../userModal";
+import AddressAdd from "../userModal/address";
+import UserUpdateForm from "../userModal/update";
+import UserPassword from "../userModal/password";
 import { api } from "../../api";
 import { setLogOut, setLogin } from "../../redux/user-slice";
+import { setOpenLoginModal } from "../../redux/modals-slice";
+import UserModal from "../userModal/login";
+import { toast } from "react-toastify";
+import { API } from "../../utils/constants";
 
 const languages = [
   {
@@ -37,8 +45,11 @@ const Header = () => {
   const wishes = Selector.useWishes();
   const cartItems = Selector.useCart();
   const compareItems = Selector.useCompare();
+  const { products } = Selector.useProducts();
   const user = Selector.useUser();
-  const [open, setOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [visible, setVisible] = useState("");
+  const [filteredData, setFilteredData] = useState(products || []);
 
   const langData = useMemo(() => locale[lang]["header"], [lang]);
 
@@ -53,10 +64,8 @@ const Header = () => {
   const openUserModal = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setOpen(true);
+    dispatch(setOpenLoginModal(true));
   };
-
-  const closeUserModal = () => setOpen(false);
 
   useEffect(() => {
     const userLocale = JSON.parse(localStorage["ubay-user-data"] || "{}");
@@ -70,11 +79,13 @@ const Header = () => {
             dispatch(setLogin(data?.result));
           } else {
             dispatch(setLogOut());
+            toast.error(data?.mess);
           }
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(({ message }) => {
           dispatch(setLogOut());
+          toast.error(message);
+          console.log(message);
         });
     }
   }, [dispatch]);
@@ -103,7 +114,7 @@ const Header = () => {
       link: "/profile/user",
       icon: <UserIcon />,
       onClick: user?.id ? null : openUserModal,
-      user_name: user?.ism ? langData.between.cabinent  : null,
+      user_name: user?.ism ? langData.between.cabinent : null,
     },
   ];
 
@@ -111,8 +122,27 @@ const Header = () => {
     dispatch(setSidebarVisible(true));
   }, [dispatch]);
 
+  const handleSearch = useCallback(
+    ({ target: { value } }) => {
+      setVisible(true);
+      setSearchValue(value);
+      setFilteredData(
+        products.filter(
+          (product) =>
+            product?.name?.includes(value) || product?.title_uz?.includes(value)
+        )
+      );
+    },
+    [products]
+  );
+
   return (
     <HeaderStyled>
+      <AddressAdd />
+      <UserUpdateForm />
+      <UserPassword />
+      <UserModal />
+
       <Sidebar
         lang={lang}
         langData={locale[lang].home.sidebar}
@@ -140,9 +170,61 @@ const Header = () => {
           <NavLink to={"/"} className="logo_box">
             <Logo className="logo" />
           </NavLink>
-          <label className="search-bar">
-            <input type="text" placeholder={langData.search_placeholder} />
-            <Search />
+          {visible && (
+            <div className="overlay" onClick={() => setVisible(false)} />
+          )}
+          <label className={`search-bar ${visible && "focused"}`}>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={handleSearch}
+              onFocus={() => setVisible(true)}
+              placeholder={langData.search_placeholder}
+            />
+            {visible ? (
+              <CloseArrow
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleSearch({ target: { value: "" } });
+                  setVisible(false);
+                }}
+                color="#999999"
+              />
+            ) : (
+              <Search />
+            )}
+
+            {visible && (
+              <div className="list_products">
+                <div className={`scroll-custome ${filteredData.length ? "" : "empty"}`}>
+                  {filteredData.length ? (
+                    filteredData.map((product) => (
+                      <Link
+                        key={product?.ident}
+                        to={`/product/${product?.ident}`}
+                        onClick={() => setVisible(false)}
+                      >
+                        <img
+                          src={API.baseURL_IMAGE + product?.photo}
+                          alt="product"
+                        />
+                        <div className="row">
+                          <span>{product?.name}</span>
+                          <Arrow />
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <Link to={"#"}>
+                      <div className="row empty">
+                        <span>Not Found 404</span>
+                      </div>
+                    </Link>
+                  )}
+                </div>
+              </div>
+            )}
           </label>
         </div>
         <div className="between">
@@ -164,7 +246,6 @@ const Header = () => {
           ))}
         </div>
       </div>
-      {open ? <UserModal handleClose={closeUserModal} /> : null}
     </HeaderStyled>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useInsertionEffect, useMemo } from "react";
+import React, { useRef, useCallback, useEffect, useMemo } from "react";
 import { api } from "../../api";
 import { useDispatch } from "react-redux";
 import { setProducts } from "../../redux/products-slice";
@@ -9,6 +9,7 @@ import Selectors from "../../redux/selectors";
 import { isSelectedProduct, skeletionData } from "../../utils/constants";
 import { WishesStyled } from "./style";
 import locale from "../../localization/locale.json";
+import { toast } from "react-toastify";
 
 function WishesScreen() {
   const dispatch = useDispatch();
@@ -31,16 +32,18 @@ function WishesScreen() {
           dispatch(setProducts(data?.result));
         } else {
           console.log(data);
+          toast.error(data.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "error");
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch, products?.length]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     handleFilterProducts();
-  }, []);
+  }, [handleFilterProducts]);
 
   const productsLiked = useMemo(
     () => products?.filter((product) => isSelectedProduct(product, wishes)),

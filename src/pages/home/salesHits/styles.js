@@ -6,7 +6,7 @@ export const StyledSalesHits = styled.div`
     padding: 2.0833333333333335vw 0.7291666666666666vw;
     padding-left: 0;
     padding-bottom: 0;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-direction: column;
       padding: 0;
     }
@@ -18,7 +18,7 @@ export const StyledSalesHits = styled.div`
       border: 0.052083333333333336vw solid #e2e2e2;
       border-bottom: 0;
       background: #fff;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         padding: 0;
         width: 100%;
         border: 0;
@@ -32,7 +32,7 @@ export const StyledSalesHits = styled.div`
         text-transform: uppercase;
         max-width: 8.333333333333334vw;
         margin-bottom: 0.9895833333333334vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           max-width: 40.712468193384225vw;
           font-size: 8.142493638676845vw;
           line-height: 1;
@@ -46,7 +46,7 @@ export const StyledSalesHits = styled.div`
         font-size: 0.7291666666666666vw;
         font-weight: 500;
         line-height: 1.2395833333333333vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.5623409669211195vw;
           line-height: 1;
           margin-bottom: 10.178117048346056vw;
@@ -77,7 +77,7 @@ export const StyledSalesHits = styled.div`
         &.active {
           border-color: #ffa73d;
         }
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.3078880407124682vw;
           line-height: 1;
           border-radius: 3.053435114503817vw;
@@ -92,7 +92,7 @@ export const StyledSalesHits = styled.div`
       &.isLoading {
         margin-right: 1vw;
       }
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 100%;
         margin-top: 12.72264631043257vw;
       }
@@ -113,12 +113,12 @@ export const StyledSalesHits = styled.div`
           gap: 1.5vw;
           &:hover {
             box-shadow: 0 0 4px 1px #00000026;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               box-shadow: none;
             }
           }
 
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 47vw;
             gap: 5.089058524173028vw;
             padding: 0 2.5vw;
@@ -135,7 +135,7 @@ export const StyledSalesHits = styled.div`
           svg {
             width: 0.8333333333333334vw;
             height: 0.8333333333333334vw;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               width: 4.071246819338422vw;
               height: 4.071246819338422vw;
             }
@@ -145,7 +145,7 @@ export const StyledSalesHits = styled.div`
           width: 12.65625vw;
           height: 11.40625vw;
           object-fit: contain;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 34.01246819338423vw;
             height: 27.28091603053435vw;
           }
@@ -154,7 +154,7 @@ export const StyledSalesHits = styled.div`
           color: #1d2f77;
           font-size: 0.8165104166666667vw;
           font-weight: 700;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.8343511450381675vw;
           }
         }
@@ -163,7 +163,7 @@ export const StyledSalesHits = styled.div`
           color: #00132c;
           font-size: 0.8544270833333333vw;
           text-decoration: underline;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
           }
         }
@@ -171,7 +171,7 @@ export const StyledSalesHits = styled.div`
           color: #000;
           font-size: 0.9375vw;
           font-weight: 700;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 4.78295165394402vw;
           }
         }
@@ -196,7 +196,7 @@ export const StyledSalesHits = styled.div`
             display: flex;
             align-items: center;
             justify-content: center;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 2.480152671755725vw;
               padding: 3vw 0;
             }
@@ -217,7 +217,7 @@ export const StyledSalesHits = styled.div`
             padding: 0.78125vw;
             border: 0;
 
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               font-size: 2.480152671755725vw;
               padding: 3vw;
             }
@@ -229,7 +229,7 @@ export const StyledSalesHits = styled.div`
             svg {
               width: 1vw;
               height: 1vw;
-              @media screen and (max-width: 768px) {
+              @media only screen and (max-width: 768px) {
                 width: 3vw;
                 height: 3vw;
               }
@@ -249,7 +249,7 @@ export const StyledSalesHits = styled.div`
     text-transform: uppercase;
     font-weight: 700;
     border-top: 0.052083333333333336vw solid #e2e2e2;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 3.053435114503817vw;
       justify-content: flex-start;
       border: 0;

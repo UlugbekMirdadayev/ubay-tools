@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const ProductStyled = styled.section`
   width: 80vw;
   margin: 0 auto;
-  @media screen and (max-width: 768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 0 4.325699745547074vw;
   }
   .title_prod {
     font-size: 2.1875vw;
     margin-bottom: 3.6458333333333335vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       font-size: 6.6157760814249365vw;
       margin-bottom: 5.066157760814249vw;
     }
@@ -19,13 +19,13 @@ export const ProductStyled = styled.section`
     display: flex;
     gap: 2.34375vw;
     justify-content: space-between;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       flex-direction: column;
     }
   }
   .slider_column {
     width: 24.258541666666666vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
     }
 
@@ -37,7 +37,7 @@ export const ProductStyled = styled.section`
         max-width: 100%;
         height: 24.258541666666666vw;
         object-fit: contain;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 100%;
           height: 43.81119592875318vw;
         }
@@ -50,7 +50,7 @@ export const ProductStyled = styled.section`
       position: relative;
       gap: 0.2604166666666667vw;
 
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         margin-top: 5.852417302798982vw;
       }
 
@@ -61,7 +61,7 @@ export const ProductStyled = styled.section`
         object-fit: contain;
         background-color: rgba(14, 50, 103, 0.04);
         border: 0.052083333333333336vw solid transparent;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 10.396692111959288vw;
           height: 10.396692111959288vw;
         }
@@ -94,7 +94,7 @@ export const ProductStyled = styled.section`
         cursor: pointer;
         border: 0;
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           min-width: 8vw;
           height: 8vw;
           border-radius: 50%;
@@ -113,7 +113,7 @@ export const ProductStyled = styled.section`
         svg {
           height: 0.4166666666666667vw;
           width: 0.7291666666666666vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             height: 3vw;
             width: 3vw;
           }
@@ -126,7 +126,7 @@ export const ProductStyled = styled.section`
     max-height: 28vw;
     overflow-y: auto;
     padding: 0 0.5vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
       max-height: none;
       overflow-y: visible;
@@ -135,7 +135,7 @@ export const ProductStyled = styled.section`
     ul {
       display: grid;
       gap: 1.0416666666666667vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         gap: 5.089058524173028vw;
       }
       li {
@@ -145,7 +145,7 @@ export const ProductStyled = styled.section`
         line-height: 1.0416666666666667vw;
         justify-content: space-between;
         width: 100%;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.5623409669211195vw;
           line-height: 5.089058524173028vw;
         }
@@ -164,7 +164,7 @@ export const ProductStyled = styled.section`
     border: 1px solid #e8e8e8;
     padding: 1.40625vw 1.3020833333333333vw;
 
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
       border-radius: 2.848854961832061vw;
       padding: 6.361323155216285vw;
@@ -176,7 +176,7 @@ export const ProductStyled = styled.section`
       font-weight: 700;
       margin-bottom: 1.4583333333333333vw;
 
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 5.222900763358778vw;
         margin-bottom: 6.6157760814249365vw;
       }
@@ -186,21 +186,21 @@ export const ProductStyled = styled.section`
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1.25vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         margin-bottom: 5.597964376590331vw;
       }
       .desc {
         color: #999;
         font-size: 0.7291666666666666vw;
         font-weight: 500;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 3.3236641221374046vw;
         }
       }
       svg {
         width: 1.25vw;
         height: 1.25vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 5.597964376590331vw;
           height: 5.597964376590331vw;
         }
@@ -210,7 +210,7 @@ export const ProductStyled = styled.section`
       font-size: 0.8333333333333334vw;
       color: #111;
       margin-bottom: 1.71875vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.7984732824427487vw;
         margin-bottom: 7.888040712468193vw;
       }
@@ -218,7 +218,7 @@ export const ProductStyled = styled.section`
         display: flex;
         align-items: center;
         margin-bottom: 0.2604166666666667vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           margin-bottom: 7.633587786259542vw;
         }
         span {
@@ -228,7 +228,7 @@ export const ProductStyled = styled.section`
           width: 1.25vw;
           height: 1.25vw;
           margin-right: 0.3645833333333333vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 5.597964376590331vw;
             height: 5.597964376590331vw;
             margin-right: 1.7811704834605597vw;
@@ -240,7 +240,7 @@ export const ProductStyled = styled.section`
         padding-left: 1.5625vw;
         max-width: 13.020833333333334vw;
         line-height: 150%;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           max-width: 60.06259541984733vw;
           padding-left: 5.597964376590331vw;
         }
@@ -252,7 +252,7 @@ export const ProductStyled = styled.section`
       padding: 1.3020833333333333vw 0;
       border-top: 0.05786458333333333vw solid #e8e8e8;
       gap: 0.8333333333333334vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         padding: 5.852417302798982vw 0;
         gap: 3.816793893129771vw;
         border-width: 0.2544529262086514vw;
@@ -266,7 +266,7 @@ export const ProductStyled = styled.section`
         justify-content: center;
         background-color: transparent;
         gap: 0.2604166666666667vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           padding: 2.7989821882951653vw 0;
           gap: 1.272264631043257vw;
           border-radius: 2.848854961832061vw;
@@ -286,7 +286,7 @@ export const ProductStyled = styled.section`
           font-weight: 500;
           line-height: 1.25vw;
           display: inline-flex;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 3.7984732824427487vw;
             line-height: 5.697709923664122vw;
           }
@@ -295,7 +295,7 @@ export const ProductStyled = styled.section`
         svg {
           width: 1.25vw;
           height: 1.25vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 5.597964376590331vw;
             height: 5.597964376590331vw;
           }
@@ -318,7 +318,7 @@ export const ProductStyled = styled.section`
             justify-content: center;
             align-items: center;
             width: 25%;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               padding: 2.7989821882951653vw 0;
             }
             &:hover {
@@ -348,7 +348,7 @@ export const ProductStyled = styled.section`
         font-size: 0.9375vw;
         font-weight: 700;
         line-height: 1.25vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 4.2732824427480915vw;
           line-height: 5.697709923664122vw;
         }
@@ -356,7 +356,7 @@ export const ProductStyled = styled.section`
       svg {
         width: 0.8333333333333334vw;
         height: 0.8333333333333334vw;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 3.816793893129771vw;
           height: 3.816793893129771vw;
         }
@@ -375,7 +375,7 @@ export const ProductStyled = styled.section`
     background: aliceblue;
     border-radius: 0.5vw;
     transition: 300ms ease;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       top: 0;
       margin: 12.72264631043257vw 0;
       gap: 2vw;
@@ -388,7 +388,7 @@ export const ProductStyled = styled.section`
       font-weight: 500;
       line-height: 1.0416666666666667vw;
       transition: 300ms ease;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.7984732824427487vw;
         line-height: 4.748091603053435vw;
       }
@@ -417,7 +417,7 @@ export const ProductStyled = styled.section`
     svg {
       width: 1.0416666666666667vw;
       height: 1.0416666666666667vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         width: 4.748091603053435vw;
         height: 4.748091603053435vw;
       }
@@ -426,7 +426,7 @@ export const ProductStyled = styled.section`
   .description {
     margin-top: 2.6041666666666665vw;
     margin-bottom: 5.208333333333333vw;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       margin: 7.633587786259542vw 0;
     }
     .title {
@@ -438,7 +438,7 @@ export const ProductStyled = styled.section`
       display: flex;
       align-items: center;
       gap: 0.5vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 5vw;
         line-height: 120%;
         gap: 2.5vw;
@@ -451,7 +451,7 @@ export const ProductStyled = styled.section`
       font-size: 0.8333333333333334vw;
       font-weight: 500;
       line-height: 1.25vw;
-      @media screen and (max-width: 768px) {
+      @media only screen and (max-width: 768px) {
         font-size: 3.5vw;
         line-height: 150%;
       }
@@ -459,7 +459,7 @@ export const ProductStyled = styled.section`
   }
   .motorcycle_cultivator {
     flex: 1;
-    @media screen and (max-width: 768px) {
+    @media only screen and (max-width: 768px) {
       width: 100%;
       margin-top: 12.72264631043257vw;
     }
@@ -480,12 +480,12 @@ export const ProductStyled = styled.section`
         gap: 1.5vw;
         &:hover {
           box-shadow: 0 0 4px 1px #00000026;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             box-shadow: none;
           }
         }
 
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 47vw;
           gap: 5.089058524173028vw;
           padding: 0 2.5vw;
@@ -502,7 +502,7 @@ export const ProductStyled = styled.section`
         svg {
           width: 0.8333333333333334vw;
           height: 0.8333333333333334vw;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             width: 4.071246819338422vw;
             height: 4.071246819338422vw;
           }
@@ -512,7 +512,7 @@ export const ProductStyled = styled.section`
         width: 12.65625vw;
         height: 11.40625vw;
         object-fit: contain;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           width: 34.01246819338423vw;
           height: 27.28091603053435vw;
         }
@@ -521,7 +521,7 @@ export const ProductStyled = styled.section`
         color: #1d2f77;
         font-size: 0.8165104166666667vw;
         font-weight: 700;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 2.8343511450381675vw;
         }
       }
@@ -530,7 +530,7 @@ export const ProductStyled = styled.section`
         color: #00132c;
         font-size: 0.8544270833333333vw;
         cursor: pointer;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 2.480152671755725vw;
         }
       }
@@ -538,7 +538,7 @@ export const ProductStyled = styled.section`
         color: #000;
         font-size: 0.9375vw;
         font-weight: 700;
-        @media screen and (max-width: 768px) {
+        @media only screen and (max-width: 768px) {
           font-size: 4.78295165394402vw;
         }
       }
@@ -562,7 +562,7 @@ export const ProductStyled = styled.section`
           display: flex;
           align-items: center;
           justify-content: center;
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
             padding: 3vw 0;
           }
@@ -582,7 +582,7 @@ export const ProductStyled = styled.section`
           padding: 0.78125vw;
           border: 0;
 
-          @media screen and (max-width: 768px) {
+          @media only screen and (max-width: 768px) {
             font-size: 2.480152671755725vw;
             padding: 3vw;
           }
@@ -594,7 +594,7 @@ export const ProductStyled = styled.section`
           svg {
             width: 1vw;
             height: 1vw;
-            @media screen and (max-width: 768px) {
+            @media only screen and (max-width: 768px) {
               width: 3vw;
               height: 3vw;
             }

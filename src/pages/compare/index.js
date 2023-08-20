@@ -9,6 +9,7 @@ import locale from "../../localization/locale.json";
 import { Link } from "react-router-dom";
 import { CloseArrow } from "../../components/icon";
 import { setCompare } from "../../redux/compare-slice";
+import { toast } from "react-toastify";
 
 const Comparison = () => {
   const dispatch = useDispatch();
@@ -30,10 +31,12 @@ const Comparison = () => {
           setData(data?.result);
         } else {
           console.log(data);
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [compareItems]);
 

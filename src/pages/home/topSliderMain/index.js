@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState, useInsertionEffect } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import { StyledImageSlider } from "./styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { setSlider } from "../../../redux/slider-slice";
 import Selectors from "../../../redux/selectors";
 import { API, skeletionData } from "../../../utils/constants";
+import { toast } from "react-toastify";
 
 function TopSliderMain() {
   const dispatch = useDispatch();
@@ -22,22 +23,23 @@ function TopSliderMain() {
   }, []);
 
   const getSliderData = useCallback(() => {
-    console.log("get SliderData");
     api
       .get_questions({ info_add: { type: 2 } })
       .then(({ data }) => {
         if (data.res_id === 200) {
           dispatch(setSlider(data?.result));
         } else {
-          console.log(data, "getSliderData");
+          console.log(data);
+          toast.error(data?.mess);
         }
       })
-      .catch((err) => {
-        console.log(err, "getSliderData");
+      .catch(({ message }) => {
+        toast.error(message);
+        console.log(message);
       });
   }, [dispatch]);
 
-  useInsertionEffect(() => {
+  useEffect(() => {
     getSliderData();
   }, [getSliderData]);
 

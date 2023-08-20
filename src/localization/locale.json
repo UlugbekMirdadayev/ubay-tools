@@ -44,6 +44,7 @@
       "certificates": "Sertifikatlar"
     },
     "home": {
+      "empty_products": "Ushbu katalogga tegishli mahsulot topilmadi",
       "sidebar": {
         "title": "Kategoriyalar"
       },
@@ -100,7 +101,38 @@
       "shipping_cost": "Yetkazib berish narxi:",
       "payment_type": "To’lov turi:",
       "address": "Manzil:",
-      "order_booking": "Buyurtmani rasmiylashtirish"
+      "add_address": "Yangi manzil qo'shing",
+      "order_booking": "Buyurtmani rasmiylashtirish",
+      "delete_from_card": "Savatda o’chirish",
+      "not_registered": "Ro'yxatdan o'tmagansiz!",
+      "booking": {
+        "title": "Savatda {{count}} ta mahsulot bor",
+        "policy": {
+          "text": "'Buyurtmani rasmiylashtirish' tugmasini bosish orqali men bunga qo'shilaman",
+          "link": " ommaviy taklif shartnomasi"
+        },
+        "user_data": "Sizning ma'lumotlaringiz",
+        "delivery_type": "Yetkazib berish usuli",
+        "delivery_courier": "Kuryer orqali etkazib berish",
+        "delivery_self": "Do'kondan olish",
+        "payment_type": "To’lov turi",
+        "cash": {
+          "title": "Naqd pul bilan to'lash",
+          "text": "To 'lov tovarni olgandan keyin o' zbekiston so ' mida qabul qilinadi."
+        },
+        "terminal": {
+          "title": "Terminal orqali to'lov",
+          "text": "To'lov UzCard va Humo bank kartalari orqali qabul qilinadi"
+        },
+        "click": "Click orqali to'lov",
+        "uzum": "Uzum orqali to'lov",
+        "commentary": {
+          "title": "Buyurtma sharhi",
+          "text": "Buyurtma haqida sharh qoldiring"
+        },
+        "purchase": "Xarid qilish"
+      },
+      "edit": "O'zgartirish"
     },
     "warranty": {
       "array": [
@@ -131,20 +163,27 @@
       "name": "Ism",
       "surename": "Familiya",
       "full_name": "Ism va familiya",
-      "id_user":"Foydalanuvchi ID'si:",
+      "id_user": "Foydalanuvchi ID'si:",
       "password": "Parol",
       "send": "Yuborish",
-      "info_user":"Shaxsiy\nma'lumotlar",
-      "current_password":"Joriy parol",
-      "edit":"O'zgartirish",
-      "delivery_address":"Yetkazib berish manzili",
-      "add":"Qo'shish +",
-      "empty_address":"Manzil qo'shilmagan",
-      "my_orders":"Mening buyurtmalarim",
-      "addresses":"Manzillar",
-      "wishes":"Tanlangan mahsulotlar",
-      "region":"Region",
-      "city":"Shahar",
+      "info_user": "Shaxsiy\nma'lumotlar",
+      "current_password": "Joriy parol",
+      "edit": "O'zgartirish",
+      "delivery_address": "Yetkazib berish manzili",
+      "add": "Qo'shish +",
+      "empty_address": "Manzil qo'shilmagan",
+      "my_orders": "Mening buyurtmalarim",
+      "addresses": "Manzillar",
+      "wishes": "Tanlangan mahsulotlar",
+      "region": "Tuman",
+      "city": "Shahar",
+      "viewing_products": "Mahsulotlarni ko'rish",
+      "pay": "To'lash",
+      "payed": "To'langan",
+      "order_date": "Buyurtma vaqti",
+      "logout": "Chiqish",
+      "home": "Uy",
+      "flat": "Xonadon",
       "breadcrumb": [
         {
           "link": "/",
@@ -155,6 +194,32 @@
           "text": "Kabinet"
         }
       ]
+    },
+    "modal": {
+      "address": {
+        "title": "Yetkazib berish manzili",
+        "closer": "Yopish",
+        "city": "Viloyat",
+        "region": "Shahar / tuman",
+        "address": "Manzil",
+        "home": "Uy",
+        "flat": "Xonadon",
+        "permanent_location": "Doimiy manzil",
+        "save": "Saqlash",
+        "cancel": "Bekor qilish",
+        "choose": "Tanlash"
+      },
+      "password": {
+        "title": "O'zgartirish",
+        "new_pass": "Yangi parol",
+        "repeat_pass": "Parolni takrorlang",
+        "updated": "Yangilandi",
+        "nomodified": "O'zgarish kiritilmagan"
+      }
+    },
+    "404": {
+      "title": "server bilan xatoli yuz berdi (404)",
+      "to_home": "Asosiy menu qaytish"
     }
   },
   "ru": {
@@ -202,6 +267,7 @@
       "certificates": "Сертификаты"
     },
     "home": {
+      "empty_products": "Товар, принадлежащий этому каталогу, не найден",
       "sidebar": {
         "title": "Категории"
       },
@@ -258,7 +324,38 @@
       "shipping_cost": "Стоимость доставки:",
       "payment_type": "Тип оплаты:",
       "address": "Адрес:",
-      "order_booking": "Оформить заказ"
+      "add_address": "Добавить новый адрес",
+      "order_booking": "Оформить заказ",
+      "delete_from_card": "Удалить в корзине",
+      "not_registered": "Вы не зарегистрированы!",
+      "booking": {
+        "title": "В корзине {{count}} товара",
+        "policy": {
+          "text": "Нажимая 'Оформить заказ', я соглашаюсь с",
+          "link": " публичным договором оферты"
+        },
+        "user_data": "Ваши данные",
+        "delivery_type": "Способ доставки",
+        "delivery_courier": "Доставка курьером",
+        "delivery_self": "Забрать из магазина",
+        "payment_type": "Способ оплаты",
+        "cash": {
+          "title": "Наличный расчет",
+          "text": "Оплата принимается в узбекских сумах при получении товара."
+        },
+        "terminal": {
+          "title": "Оплата по терминалу",
+          "text": "Оплата принимается через банковские карты UzCard и Humo"
+        },
+        "click": "Оплата через Click",
+        "uzum": "Оплата через Uzum",
+        "commentary": {
+          "title": "Комментарий к заказу",
+          "text": "Оставьте комментарий к заказу"
+        },
+        "purchase": "Покупка"
+      },
+      "edit": "Изменить"
     },
     "warranty": {
       "array": [
@@ -288,21 +385,28 @@
       "phone": "Номер телефона",
       "name": "Имя",
       "surename": "Фамилия",
-      "full_name":"Имя и фамилия:",
-      "info_user":"Персональные\nданные",
-      "id_user":"ID пользователя:",
+      "full_name": "Имя и фамилия:",
+      "info_user": "Персональные\nданные",
+      "id_user": "ID пользователя:",
       "password": "Пароль",
-      "current_password":"Текущий пароль",
-      "edit":"Изменить",
+      "current_password": "Текущий пароль",
+      "edit": "Изменить",
       "send": "Отправить",
-      "delivery_address":"Адрес доставки",
-      "add":"Добавить +",
-      "empty_address":"Адрес не добавлен",
-      "my_orders":"Мои заказы",
-      "addresses":"Адреса",
-      "wishes":"Избранные товары",
-      "region":"Регион",
-      "city":"Город",
+      "delivery_address": "Адрес доставки",
+      "add": "Добавить +",
+      "empty_address": "Адрес не добавлен",
+      "my_orders": "Мои заказы",
+      "addresses": "Адреса",
+      "wishes": "Избранные товары",
+      "region": "Регион",
+      "city": "Город",
+      "viewing_products": "Просмотр продуктов",
+      "pay": "Платить",
+      "payed": "Оплачиваемый",
+      "order_date": "Время заказа",
+      "logout": "Выход",
+      "home": "Дом",
+      "flat": "Квартира",
       "breadcrumb": [
         {
           "link": "/",
@@ -313,6 +417,32 @@
           "text": "Кабинет"
         }
       ]
+    },
+    "modal": {
+      "address": {
+        "title": "Адрес доставки",
+        "closer": "Закрыть",
+        "city": "Область",
+        "region": "Город / район",
+        "address": "Адрес",
+        "home": "Дом",
+        "flat": "Квартира",
+        "permanent_location": "Постоянный адрес",
+        "save": "Сохранить",
+        "cancel": "Отмена",
+        "choose": "Выбрать"
+      },
+      "password": {
+        "title": "Изменить",
+        "new_pass": "Новый парол",
+        "repeat_pass": "Повторите парол",
+        "updated": "Обновлено",
+        "nomodified": "Изменения не внесены"
+      }
+    },
+    "404": {
+      "title": "ошибка с сервером (404)",
+      "to_home": "Вернуться в Главное меню"
     }
   }
 }
