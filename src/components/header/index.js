@@ -50,7 +50,6 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const [visible, setVisible] = useState("");
   const [filteredData, setFilteredData] = useState(products || []);
-
   const langData = useMemo(() => locale[lang]["header"], [lang]);
 
   document.title = locale[lang].seo.title;
@@ -197,7 +196,11 @@ const Header = () => {
 
             {visible && (
               <div className="list_products">
-                <div className={`scroll-custome ${filteredData.length ? "" : "empty"}`}>
+                <div
+                  className={`scroll-custome ${
+                    filteredData.length ? "" : "empty"
+                  }`}
+                >
                   {filteredData.length ? (
                     filteredData.map((product) => (
                       <Link

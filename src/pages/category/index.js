@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import locale from "../../localization/locale.json";
 import Sidebar from "../../components/sidebar";
 import { ScrollAreaView } from "../home/style";
-import { setLoading } from "../../redux/loading-slice";
 import { setSubCategories } from "../../redux/categories-slice";
 import Slider from "../home/categoryProducts/slider";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -16,26 +15,29 @@ import { toast } from "react-toastify";
 
 const Categoty = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { id, main } = useParams();
   const lang = Selectors.useLang();
-  const { isLoading } = Selectors.useLoading();
-  const { sub_categories } = Selectors.useCategories();
+  const { sub_categories, categories } = Selectors.useCategories();
   const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
   const langData = useMemo(() => locale[lang]["home"], [lang]);
   const [isCategory, setIsCategory] = useState({});
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleGetProducts = useCallback(
     (sub_ident) => {
-      dispatch(setLoading(true));
+      setLoading(true);
+      const formData = {
+        show_products: main
+          ? { main_ident: main, sub_ident }
+          : { main_ident: sub_ident, sub_ident: 0 },
+      };
       api
-        .get_products({
-          show_products: { main_ident: 0, sub_ident },
-        })
+        .get_products(formData)
         .then(({ data }) => {
-          dispatch(setLoading(false));
+          setLoading(false);
           if (data?.res_id === 200) {
             setProducts(data?.result);
           } else {
@@ -43,20 +45,18 @@ const Categoty = () => {
           }
         })
         .catch((err) => {
-          dispatch(setLoading(false));
+          setLoading(false);
           console.log(err, "error");
         });
     },
-    [dispatch]
+    [main]
   );
 
   const handleGetSubcategory = useCallback(() => {
-    if (sub_categories?.length) return dispatch(setLoading(false));
-    dispatch(setLoading(true));
+    if (sub_categories?.length) return;
     api
       .get_sub_category({ sub_catalog: {} })
       .then(({ data }) => {
-        dispatch(setLoading(false));
         if (data?.res_id === 200) {
           dispatch(setSubCategories(data?.result));
         } else {
@@ -64,14 +64,18 @@ const Categoty = () => {
         }
       })
       .catch(({ message }) => {
-        dispatch(setLoading(false));
         toast.error(message);
         console.log(message);
       });
   }, [dispatch, sub_categories?.length]);
 
   useEffect(() => {
-    dispatch(setLoading(true));
+    if (!main) {
+      handleGetSubcategory();
+      handleGetProducts(+id);
+      setIsCategory(categories?.find((category) => category?.ident === +id));
+      return;
+    }
     api
       .get_category({ sub_catalog_one: { ident: id } })
       .then(({ data }) => {
@@ -80,23 +84,21 @@ const Categoty = () => {
           handleGetSubcategory();
           handleGetProducts(+id);
         } else {
-          dispatch(setLoading(false));
           console.log(data);
         }
       })
       .catch((err) => {
-        dispatch(setLoading(false));
         console.log(err);
       });
-  }, [id, handleGetSubcategory, handleGetProducts, dispatch]);
+  }, [id, handleGetSubcategory, categories, main, handleGetProducts]);
 
   return (
     <CategotyStyled>
       <Sidebar categoryId={id} lang={lang} langData={langData.sidebar} />
       <ScrollAreaView>
-        <h1>{isCategory.name}</h1>
-        <Swiper slidesPerView={"auto"} className="motorcycle_cultivator">
-          {isLoading ? (
+        <h1>{loading ? null : isCategory.name}</h1>
+        <Swiper slidesPerView={"auto"} className={`motorcycle_cultivator`}>
+          {loading ? (
             skeletionData.categories.map((key) => (
               <SwiperSlide
                 key={key}

@@ -68,7 +68,7 @@ export const SideabarStyled = styled.article`
 
     a {
       color: #000;
-      font-size: 0.7vw;
+      font-size: 1vw;
       margin-bottom: 1vw;
       font-weight: 500;
       display: flex;

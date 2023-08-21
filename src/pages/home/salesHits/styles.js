@@ -109,7 +109,7 @@ export const StyledSalesHits = styled.div`
           transition: 300ms ease;
           position: relative;
           padding: 1.21875vw 0.5291666666666666vw;
-          min-height: 28vw;
+          min-height: 30vw;
           gap: 1.5vw;
           &:hover {
             box-shadow: 0 0 4px 1px #00000026;

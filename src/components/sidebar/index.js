@@ -14,7 +14,7 @@ import { SideabarStyled } from "./style";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 
 const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
-  const { pathname } = useLocation();
+  const { pathname, ...props } = useLocation();
   const dispatch = useDispatch();
   const { categories, sub_categories } = Selectors.useCategories();
   const sidebar = Selectors.useSidebar();
@@ -22,6 +22,11 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
   const user = Selectors.useUser();
+
+  categoryId = useMemo(
+    () => (categoryId ? categoryId : pathname.split("/")[2]),
+    [categoryId, pathname]
+  );
 
   const openUserModal = (e) => {
     e.stopPropagation();
@@ -68,6 +73,12 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
     }
   };
 
+  const isActiveCategory = sub_categories.find(
+    (sub_category) =>
+      sub_category?.ident === +categoryId ||
+      sub_category?.main_ident === +categoryId
+  );
+
   return (
     <SideabarStyled
       aria-label={`sidebar ${sidebar}`}
@@ -94,7 +105,10 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
               ? sub_categories
                   .filter(
                     (sub_category) =>
-                      sub_category?.main_ident === category?.ident
+                      sub_category?.main_ident === category?.ident &&
+                      (isActiveCategory?.main_ident ===
+                        sub_category?.main_ident ||
+                        isActiveCategory?.ident === sub_category?.main_ident)
                   )
                   .map((sub_category) => (
                     <NavLink
@@ -103,7 +117,7 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
                       ref={(ref) => scrollToElement(ref)}
                       className="sub_category"
                       onClick={handleSidebarChange}
-                      to={`/category/${sub_category?.ident}`}
+                      to={`/category/${category?.ident}/${sub_category?.ident}`}
                     >
                       {sub_category[lang === "uz" ? "name_uz" : "name"]}
                     </NavLink>

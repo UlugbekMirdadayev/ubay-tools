@@ -76,6 +76,10 @@ export const routes = [
     element: <Categoty />,
   },
   {
+    path: "/category/:main/:id",
+    element: <Categoty />,
+  },
+  {
     path: "/order-booking",
     element: <BookingOrder />,
   },
