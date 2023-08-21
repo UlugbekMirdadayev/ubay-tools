@@ -14,7 +14,7 @@ import { SideabarStyled } from "./style";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 
 const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
-  const { pathname, ...props } = useLocation();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const { categories, sub_categories } = Selectors.useCategories();
   const sidebar = Selectors.useSidebar();
