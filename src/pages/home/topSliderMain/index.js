@@ -9,6 +9,7 @@ import { setSlider } from "../../../redux/slider-slice";
 import Selectors from "../../../redux/selectors";
 import { API, skeletionData } from "../../../utils/constants";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 function TopSliderMain() {
   const dispatch = useDispatch();
@@ -55,7 +56,9 @@ function TopSliderMain() {
         {sliderData.length
           ? sliderData?.map((slide) => (
               <SwiperSlide key={slide?.ident} className="img">
-                <img src={API.baseURL_IMAGE + slide?.name} alt="slider" />
+                <Link to={`/banner/${slide?.name}`}>
+                  <img src={API.baseURL_IMAGE + slide?.name} alt="slider" />
+                </Link>
               </SwiperSlide>
             ))
           : skeletionData.slider.map((key) => (

@@ -7,6 +7,12 @@ const HeaderStyled = styled.header`
   z-index: 99;
   background-color: #fff;
   width: 100%;
+ 
+  &.isNight {
+    nav {
+      background-color: #192128;
+    }
+  }
 
   nav {
     padding: 0 10vw;
@@ -301,6 +307,7 @@ const HeaderStyled = styled.header`
       }
     }
   }
+
 `;
 
 export default HeaderStyled;

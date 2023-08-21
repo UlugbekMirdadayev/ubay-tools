@@ -85,8 +85,17 @@ const Footer = () => {
     [pathname]
   );
 
+  const isNight = useMemo(() => {
+    const result = ["banner"].includes(pathname?.split("/")[1]);
+    document.body.style.backgroundColor = result ? "#192128" : "#fff";
+    return result;
+  }, [pathname]);
+
   return (
-    <FooterStyled style={isRight ? {} : { marginRight: "auto" }}>
+    <FooterStyled
+      style={isRight ? {} : { marginRight: "auto" }}
+      className={isNight ? "isNight" : ""}
+    >
       {langData.desc.map((text, key) => (
         <p key={key} className="desc">
           {text}

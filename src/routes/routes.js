@@ -13,6 +13,7 @@ import TopProducts from "../pages/topProducts";
 import Warranty from "../pages/warranty";
 import BookingOrder from "../pages/order-booking";
 import NotFound from "../components/404";
+import Banner from "../pages/banner";
 
 export const routes = [
   {
@@ -83,6 +84,7 @@ export const routes = [
     path: "/order-booking",
     element: <BookingOrder />,
   },
+  { path: "/banner/:id", element: <Banner /> },
   {
     path: "*",
     element: <NotFound />,

@@ -15,7 +15,7 @@ import Selector from "../../redux/selectors";
 import { useDispatch } from "react-redux";
 import { setLang } from "../../redux/lang-slice";
 import locale from "../../localization/locale.json";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { setSidebarVisible } from "../../redux/sidebar-slice";
 import Sidebar from "../sidebar";
 import AddressAdd from "../userModal/address";
@@ -47,6 +47,7 @@ const Header = () => {
   const compareItems = Selector.useCompare();
   const { products } = Selector.useProducts();
   const user = Selector.useUser();
+  const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const [visible, setVisible] = useState("");
   const [filteredData, setFilteredData] = useState(products || []);
@@ -135,8 +136,13 @@ const Header = () => {
     [products]
   );
 
+  const isNight = useMemo(
+    () => ["banner"].includes(pathname?.split("/")[1]),
+    [pathname]
+  );
+
   return (
-    <HeaderStyled>
+    <HeaderStyled className={isNight ? "isNight" : ""}>
       <AddressAdd />
       <UserUpdateForm />
       <UserPassword />

@@ -96,7 +96,7 @@ const Categoty = () => {
     <CategotyStyled>
       <Sidebar categoryId={id} lang={lang} langData={langData.sidebar} />
       <ScrollAreaView>
-        <h1>{loading ? null : isCategory.name}</h1>
+        <h1>{loading ? null : isCategory?.name}</h1>
         <Swiper slidesPerView={"auto"} className={`motorcycle_cultivator`}>
           {loading ? (
             skeletionData.categories.map((key) => (

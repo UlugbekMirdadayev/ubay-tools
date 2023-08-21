@@ -4,9 +4,20 @@ export const FooterStyled = styled.footer`
   width: 80vw;
   margin-top: 3.125vw;
   margin-left: auto;
-  @media only screen and (max-width:768px) {
+  @media only screen and (max-width: 768px) {
     width: 100%;
     padding: 4.071246819338422vw;
+  }
+  &.isNight {
+    a,
+    .mini-list span,
+    .copyright span,
+    .title_link {
+      color: #fff !important;
+    }
+    .payments img {
+      mix-blend-mode: plus-lighter;
+    }
   }
   .desc {
     color: #999;
