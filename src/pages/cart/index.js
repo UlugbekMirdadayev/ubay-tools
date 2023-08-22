@@ -23,6 +23,7 @@ import {
 import { setLiked } from "../../redux/wishes-slice";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 import { toast } from "react-toastify";
+import NotFound from "../../components/404";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -230,6 +231,8 @@ const Cart = () => {
             </Link>
           </div>
         </div>
+      ) : cartItems?.length ? (
+        <NotFound />
       ) : (
         <div className={`center ${isLoading ? "isLoading" : ""}`}>
           <h3 className="empty_text">{langData.empty}</h3>

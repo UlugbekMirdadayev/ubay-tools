@@ -83,7 +83,6 @@ const Header = () => {
           }
         })
         .catch(({ message }) => {
-          dispatch(setLogOut());
           toast.error(message);
           console.log(message);
         });

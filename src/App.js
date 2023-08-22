@@ -49,7 +49,7 @@ const App = () => {
 
   return (
     <div className="app scroll-custome" ref={app}>
-      <ToastContainer limit={5} autoClose={200} position={"top-center"}/>
+      <ToastContainer limit={4} autoClose={100} position={"top-center"}/>
       {isLoading && (
         <div className={"loading"}>
           <div className="loader" />

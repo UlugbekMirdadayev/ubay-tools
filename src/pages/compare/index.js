@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { CloseArrow } from "../../components/icon";
 import { setCompare } from "../../redux/compare-slice";
 import { toast } from "react-toastify";
+import NotFound from "../../components/404";
 
 const Comparison = () => {
   const dispatch = useDispatch();
@@ -113,7 +114,9 @@ const Comparison = () => {
             ))}
           </Swiper>
         </div>
-      ) : null}
+      ) : (
+        <NotFound />
+      )}
     </CompareStyled>
   );
 };

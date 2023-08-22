@@ -91,7 +91,7 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
         <CloseArrow onClick={handleSidebarChange} />
         <span>{langData.title}</span>
       </h1>
-      <ul className="scroll-custome">
+      <ul className={`scroll-custome ${categories?.length ? "" : "isLoading"}`}>
         {categories?.map((category) => (
           <Fragment key={category?.ident}>
             <NavLink
