@@ -18,6 +18,7 @@ const UserModal = () => {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isSignUp, setIsSignUp] = useState(null);
+  const [forgotPass, setForgotPass] = useState(null);
   const user = Selectors.useUser();
 
   const {
@@ -63,7 +64,7 @@ const UserModal = () => {
           dispatch(setLogin(data?.result));
           toast.success("Success");
           handleClose();
-        }else{
+        } else {
           toast.error(data.mess);
         }
       })
@@ -85,6 +86,7 @@ const UserModal = () => {
   const editPhone = () => {
     setValue("phone", "");
     setStep(0);
+    setForgotPass(false)
   };
 
   if (user?.id || !login) return <></>;
@@ -145,16 +147,23 @@ const UserModal = () => {
             </>
           ) : (
             <>
-              <label htmlFor={passID}>{langData.password}</label>
+              <label htmlFor={passID}>{forgotPass ? "SMS code" : langData.password}</label>
               <div className={`input_row ${errors.password ? "error" : ""}`}>
                 <input
                   className="span"
                   readOnly={loading}
-                  type="text"
+                  type={forgotPass ? "text" : "password"}
                   id={passID}
                   {...register("password", { required: true, minLength: 3 })}
                 />
               </div>
+              {forgotPass ? null : (
+                <div>
+                  <label onClick={() => setForgotPass(true)}>
+                    {langData.forgot}
+                  </label>
+                </div>
+              )}
             </>
           )
         ) : null}

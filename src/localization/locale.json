@@ -184,6 +184,7 @@
       "logout": "Chiqish",
       "home": "Uy",
       "flat": "Xonadon",
+      "forgot": "Parolni unutdingizmi ?",
       "breadcrumb": [
         {
           "link": "/",
@@ -407,6 +408,7 @@
       "logout": "Выход",
       "home": "Дом",
       "flat": "Квартира",
+      "forgot": "Забыли пароль?",
       "breadcrumb": [
         {
           "link": "/",
