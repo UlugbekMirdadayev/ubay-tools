@@ -5,11 +5,11 @@ import { LocationIcon } from "../icon";
 import Selectors from "../../redux/selectors";
 import { api } from "../../api";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../redux/loading-slice";
 import { toast } from "react-toastify";
 import locale from "../../localization/locale.json";
 import { setOpenAddressModal } from "../../redux/modals-slice";
 import { setUserAddress } from "../../redux/userAddress-slice";
+import { countries, regions } from "../../utils/constants";
 
 const Address = () => {
   const dispatch = useDispatch();
@@ -17,8 +17,7 @@ const Address = () => {
   const lang = Selectors.useLang();
   const { address } = Selectors.useModalOpen();
   const langData = useMemo(() => locale[lang]["modal"]["address"], [lang]);
-  const [regions, setRegions] = useState([]);
-  const [countries, setCountries] = useState([]);
+  const [regionsFiltered, setRegions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const {
     handleSubmit,
@@ -36,12 +35,12 @@ const Address = () => {
       lat: "7",
       lng: "8",
     };
-    dispatch(setLoading(true));
+    setIsLoading(true);
     api
       .add_address({ insert_adress: data })
       .then(({ data }) => {
         if (data?.res_id === 200) {
-          dispatch(setLoading(false));
+          setIsLoading(false);
           console.log(data);
           toast.success(langData.added_address);
           getUserAddresses();
@@ -52,58 +51,11 @@ const Address = () => {
         }
       })
       .catch(({ message = "" }) => {
-        dispatch(setLoading(false));
+        setIsLoading(false);
         toast.error(message);
         console.log(message);
       });
   };
-
-  const getCountries = useCallback(() => {
-    setIsLoading(true);
-    api
-      .get_countries({ country_list: {} })
-      .then(({ data }) => {
-        setIsLoading(false);
-        if (data?.res_id === 200) {
-          setCountries(data?.result);
-        } else {
-          setCountries([]);
-          console.log(data);
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err);
-      });
-  }, []);
-
-  const getRegions = useCallback(
-    (coid) => {
-      console.log(coid);
-      setIsLoading(true);
-      api
-        .get_region({
-          region_list_bycid: {
-            c_ident: coid,
-          },
-        })
-        .then(({ data }) => {
-          setIsLoading(false);
-          if (data?.res_id === 200) {
-            setRegions(data?.result);
-          } else {
-            setRegions([]);
-            console.log(data);
-          }
-          setValue("r_ident", "null");
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          console.log(err);
-        });
-    },
-    [setValue]
-  );
 
   const getUserAddresses = useCallback(() => {
     if (!user?.id) return;
@@ -131,13 +83,10 @@ const Address = () => {
 
   useEffect(() => {
     if (c_ident) {
-      getRegions(c_ident);
+      setRegions(regions.filter((region) => region.regionId === +c_ident));
+      setValue("r_ident", "null");
     }
-  }, [c_ident, getRegions]);
-
-  useEffect(() => {
-    getCountries();
-  }, [getCountries]);
+  }, [c_ident, setValue]);
 
   const handleClose = () => dispatch(setOpenAddressModal(false));
 
@@ -176,9 +125,9 @@ const Address = () => {
               <option value={"null"} hidden>
                 {langData.choose}
               </option>
-              {countries.map((country) => (
-                <option key={country?.ident} value={country?.ident}>
-                  {country?.name}
+              {countries?.map((country) => (
+                <option key={country?.regionId} value={country?.regionId}>
+                  {country[`name${lang === "uz" ? "UzLatn" : "Ru"}`]}
                 </option>
               ))}
             </select>
@@ -189,7 +138,7 @@ const Address = () => {
               <span> * </span>
             </p>
             <select
-              disabled={isLoading}
+              disabled={isLoading || c_ident === "null"}
               {...register("r_ident", {
                 required: true,
                 pattern: {
@@ -200,9 +149,9 @@ const Address = () => {
               <option value={"null"} hidden>
                 {langData.choose}
               </option>
-              {regions.map((region) => (
-                <option key={region?.ident} value={region?.ident}>
-                  {region?.r_name}
+              {regionsFiltered.map((region) => (
+                <option key={region?.code} value={region?.code}>
+                  {region[`name${lang === "uz" ? "UzLatn" : "Ru"}`]}
                 </option>
               ))}
             </select>
@@ -230,7 +179,7 @@ const Address = () => {
             <span>{langData.permanent_location}</span>
           </label>
           <div className="checkbox-row">
-            <button type="submit">{langData.save}</button>
+            <button type="submit" disabled={isLoading}>{langData.save}</button>
             <button type="button" onClick={handleClose}>
               {langData.cancel}
             </button>

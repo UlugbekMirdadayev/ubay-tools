@@ -26,10 +26,12 @@ const UserModal = () => {
     formState: { errors },
     register,
     setValue,
+    reset,
   } = useForm();
   const langData = useMemo(() => locale[lang]["profile"], [lang]);
 
-  const handleClose = () => dispatch(setOpenLoginModal(false));
+  const handleClose = () =>
+    loading ? null : dispatch(setOpenLoginModal(false));
 
   const handleSearchNumber = (number) => {
     setLoading(true);
@@ -63,6 +65,8 @@ const UserModal = () => {
         if (data.res_id === 200) {
           dispatch(setLogin(data?.result));
           toast.success("Success");
+          setStep(0);
+          reset();
           handleClose();
         } else {
           toast.error(data.mess);
@@ -86,7 +90,7 @@ const UserModal = () => {
   const editPhone = () => {
     setValue("phone", "");
     setStep(0);
-    setForgotPass(false)
+    setForgotPass(false);
   };
 
   if (user?.id || !login) return <></>;
@@ -95,7 +99,7 @@ const UserModal = () => {
     <ModalStyled className="scroll-custome">
       <div className="overlay" onClick={handleClose} />
       <form onSubmit={handleSubmit(onSubmit)} className="modal-body">
-        <button className="closer" onClick={handleClose}>
+        <button className="closer" type="button" onClick={handleClose}>
           <CloseArrow />
         </button>
         <h1 className="title">{langData.login}</h1>
@@ -147,7 +151,9 @@ const UserModal = () => {
             </>
           ) : (
             <>
-              <label htmlFor={passID}>{forgotPass ? "SMS code" : langData.password}</label>
+              <label htmlFor={passID}>
+                {forgotPass ? "SMS code" : langData.password}
+              </label>
               <div className={`input_row ${errors.password ? "error" : ""}`}>
                 <input
                   className="span"
