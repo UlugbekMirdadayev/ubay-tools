@@ -45,7 +45,7 @@ export const AboutSectionCont = styled.div`
       }
     }
     .prg {
-      font-size: 0.7291666666666666vw;
+      font-size: 0.9291666666666666vw;
       font-weight: 400;
       margin: 1.25vw 0;
       line-height: 150%;
@@ -65,7 +65,7 @@ export const AboutSectionCont = styled.div`
         align-items: center;
         justify-content: center;
         color: #fff;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 600;
         line-height: 140%;
         padding: 0.625vw 2.03125vw;
@@ -115,7 +115,7 @@ export const AboutSectionCont = styled.div`
     }
     .text-small {
       font-family: "SF Pro Display";
-      font-size: 0.625vw;
+      font-size: 0.95vw;
       margin-top: 0.625vw;
       display: inline-flex;
       color: #000;
@@ -199,7 +199,7 @@ export const AboutSectionCont = styled.div`
         }
       }
       .prg_card {
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 400;
         @media only screen and (max-width: 768px) {
           font-size: 3.053435114503817vw;

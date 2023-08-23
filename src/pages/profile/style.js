@@ -106,9 +106,9 @@ export const ProfileStyled = styled.section`
       }
       .editor {
         color: #015ccf;
-        font-size: 0.625vw;
+        font-size: 0.95vw;
         font-weight: 500;
-        line-height: 0.8333333333333334vw;
+        line-height: 1.0833333333333334vw;
         text-transform: uppercase;
         display: inline-block;
         border: 0;
@@ -172,9 +172,9 @@ export const ProfileStyled = styled.section`
           }
           span {
             color: #333;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 500;
-            line-height: 1.0416666666666667vw;
+            line-height: 1.2416666666666667vw;
             @media only screen and (max-width: 768px) {
               font-size: 3.66412213740458vw;
               line-height: 5.234351145038169vw;
@@ -184,9 +184,9 @@ export const ProfileStyled = styled.section`
         button {
           color: #333;
           font-family: Roboto;
-          font-size: 0.7291666666666666vw;
+          font-size: 0.9291666666666666vw;
           font-weight: 400;
-          line-height: 1.0416666666666667vw;
+          line-height: 1.2416666666666667vw;
           background-color: #fff;
           border-radius: 6px;
           border: 0.052083333333333336vw solid #b5bbbf;
@@ -226,7 +226,7 @@ export const ProfileStyled = styled.section`
             }
           }
           p {
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             color: #000;
             font-weight: 500;
             line-height: 150%;

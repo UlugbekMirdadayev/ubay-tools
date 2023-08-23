@@ -43,7 +43,7 @@ export const StyledSalesHits = styled.div`
       p {
         margin-bottom: 1.8229166666666667vw;
         color: #999;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 500;
         line-height: 1.2395833333333333vw;
         @media only screen and (max-width: 768px) {
@@ -183,7 +183,7 @@ export const StyledSalesHits = styled.div`
           .button {
             color: #fff;
             text-align: center;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 600;
             text-transform: uppercase;
             background: #015ccf;
@@ -244,7 +244,7 @@ export const StyledSalesHits = styled.div`
     align-items: center;
     justify-content: center;
     padding: 2vw;
-    font-size: 0.7291666666666666vw;
+    font-size: 0.9291666666666666vw;
     color: #1d2f77;
     text-transform: uppercase;
     font-weight: 700;

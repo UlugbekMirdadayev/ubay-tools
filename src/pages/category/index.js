@@ -94,7 +94,7 @@ const Categoty = () => {
 
   return (
     <CategotyStyled>
-      <Sidebar categoryId={id} lang={lang} langData={langData.sidebar} />
+      <Sidebar categoryId={id} lang={lang} langData={langData.sidebar} loading={loading} />
       <ScrollAreaView>
         <h1>{loading ? null : isCategory?.name}</h1>
         <Swiper slidesPerView={"auto"} className={`motorcycle_cultivator`}>

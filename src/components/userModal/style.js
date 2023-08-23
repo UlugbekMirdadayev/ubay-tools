@@ -78,9 +78,9 @@ export const ModalStyled = styled.div`
             h3 {
               color: #333;
               font-family: Roboto;
-              font-size: 0.7291666666666666vw;
+              font-size: 0.9291666666666666vw;
               font-weight: 500;
-              line-height: 1.0416666666666667vw;
+              line-height: 1.2416666666666667vw;
               @media only screen and (max-width: 768px) {
                 font-size: 3.187022900763359vw;
                 line-height: 1.2;
@@ -90,9 +90,9 @@ export const ModalStyled = styled.div`
           .closer-btn {
             color: #333;
             font-family: Roboto;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 500;
-            line-height: 1.0416666666666667vw;
+            line-height: 1.2416666666666667vw;
             padding: 0.3125vw 0.78125vw;
             background-color: #fff;
             border-radius: 0.3125vw;
@@ -127,9 +127,9 @@ export const ModalStyled = styled.div`
             position: absolute;
             color: #767676;
             font-family: Roboto;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 400;
-            line-height: 1.0416666666666667vw;
+            line-height: 1.2416666666666667vw;
             left: 0.7291666666666666vw;
             top: -0.5291666666666666vw;
             background-color: #fff;
@@ -156,9 +156,9 @@ export const ModalStyled = styled.div`
             padding: 0.8333333333333334vw;
             color: #333;
             font-family: Roboto;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 500;
-            line-height: 1.0416666666666667vw;
+            line-height: 1.2416666666666667vw;
             border: 0;
             border-radius: 0.3125vw;
             @media only screen and (max-width: 768px) {
@@ -193,9 +193,9 @@ export const ModalStyled = styled.div`
           span {
             color: #333;
             font-family: Roboto;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 400;
-            line-height: 1.0416666666666667vw;
+            line-height: 1.2416666666666667vw;
             @media only screen and (max-width: 768px) {
               font-size: 3.187022900763359vw;
               line-height: 4.325699745547074vw;

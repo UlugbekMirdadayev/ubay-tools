@@ -115,7 +115,7 @@ export const WishesStyled = styled.section`
         .button {
           color: #fff;
           text-align: center;
-          font-size: 0.7291666666666666vw;
+          font-size: 0.9291666666666666vw;
           font-weight: 600;
           text-transform: uppercase;
           background: #015ccf;

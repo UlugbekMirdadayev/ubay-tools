@@ -125,7 +125,7 @@ export const StyledElectricSaws = styled.div`
       display: inline-flex;
       margin-top: 3.5416666666666665vw;
       color: #000;
-      font-size: 0.7291666666666666vw;
+      font-size: 0.9291666666666666vw;
       font-weight: 400;
       text-decoration-line: underline;
       @media only screen and (max-width: 768px) {

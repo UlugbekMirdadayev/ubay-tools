@@ -57,7 +57,7 @@ export const QuestionSection = styled.div`
           font-weight: 700;
         }
         p {
-          font-size: 0.7291666666666666vw;
+          font-size: 0.9291666666666666vw;
           width: max-content;
           color: #015ccf;
           font-weight: 500;

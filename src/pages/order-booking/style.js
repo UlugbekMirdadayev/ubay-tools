@@ -163,7 +163,7 @@ export const BookingOrderStyled = styled.section`
       border: 0.052083333333333336vw solid #015ccf;
       background-color: #fff;
       color: #015ccf;
-      font-size: 0.7291666666666666vw;
+      font-size: 0.9291666666666666vw;
       font-weight: 500;
       line-height: 1.25vw;
       @media only screen and (max-width: 768px) {
@@ -261,9 +261,9 @@ export const BookingOrderStyled = styled.section`
         border-radius: 0.4166666666666667vw;
         border: 0.052083333333333336vw solid #015ccf;
         color: #015ccf;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 500;
-        line-height: 1.0416666666666667vw;
+        line-height: 1.2416666666666667vw;
         background-color: #fff;
         @media only screen and (max-width: 768px) {
           font-size: 3.5623409669211195vw;
@@ -401,7 +401,7 @@ export const BookingOrderStyled = styled.section`
           .value,
           input {
             color: #000;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 400;
             font-family: "SF Pro Display";
             max-width: 50%;
@@ -467,9 +467,9 @@ export const BookingOrderStyled = styled.section`
       .policy {
         margin-top: 0.78125vw;
         color: #999;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 500;
-        line-height: 1.0416666666666667vw;
+        line-height: 1.2416666666666667vw;
         a {
           color: #2b71f8;
         }

@@ -22,9 +22,9 @@ export const FooterStyled = styled.footer`
   .desc {
     color: #999;
     font-family: Roboto;
-    font-size: 0.625vw;
+    font-size: 0.95vw;
+    line-height: 1vw;
     font-weight: 400;
-    line-height: 0.8333333333333334vw;
     padding: 0 3.6458333333333335vw;
     margin-bottom: 0.8333333333333334vw;
     @media only screen and (max-width: 768px) {
@@ -204,7 +204,7 @@ export const FooterStyled = styled.footer`
     a {
       color: #000;
       font-family: Roboto;
-      font-size: 0.7291666666666666vw;
+      font-size: 0.9291666666666666vw;
       font-weight: 400;
       line-height: 0.8333333333333334vw;
       @media only screen and (max-width: 768px) {
@@ -225,9 +225,9 @@ export const FooterStyled = styled.footer`
     span {
       color: #999;
       font-family: Roboto;
-      font-size: 0.625vw;
+      font-size: 0.95vw;
+      line-height: 1.08vw;
       font-weight: 400;
-      line-height: 0.9375vw;
       @media only screen and (max-width: 768px) {
         font-size: 4.071246819338422vw;
         line-height: 1;

@@ -26,7 +26,7 @@ export const AboutStyled = styled.section`
     }
   }
   .prg {
-    font-size: 0.7291666666666666vw;
+    font-size: 0.9291666666666666vw;
     line-height: 140%;
     margin-bottom: 1.1979166666666667vw;
     @media only screen and (max-width: 768px) {
@@ -106,7 +106,7 @@ export const AboutStyled = styled.section`
   }
   .text-small {
     font-family: "SF Pro Display";
-    font-size: 0.625vw;
+    font-size: 0.95vw;
     margin-top: 0.625vw;
     display: inline-flex;
     color: #000;
@@ -143,7 +143,7 @@ export const AboutStyled = styled.section`
       align-items: center;
       justify-content: center;
       color: #015ccf;
-      font-size: 0.7291666666666666vw;
+      font-size: 0.9291666666666666vw;
       font-weight: 400;
       line-height: 140%;
       padding: 0.625vw 2.03125vw;

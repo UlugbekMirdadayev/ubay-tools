@@ -140,9 +140,9 @@ export const ProductStyled = styled.section`
       }
       li {
         display: flex;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 500;
-        line-height: 1.0416666666666667vw;
+        line-height: 1.2416666666666667vw;
         justify-content: space-between;
         width: 100%;
         @media only screen and (max-width: 768px) {
@@ -191,7 +191,7 @@ export const ProductStyled = styled.section`
       }
       .desc {
         color: #999;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 500;
         @media only screen and (max-width: 768px) {
           font-size: 3.3236641221374046vw;
@@ -386,7 +386,7 @@ export const ProductStyled = styled.section`
       color: #015ccf;
       font-size: 0.8333333333333334vw;
       font-weight: 500;
-      line-height: 1.0416666666666667vw;
+      line-height: 1.2416666666666667vw;
       transition: 300ms ease;
       @media only screen and (max-width: 768px) {
         font-size: 3.7984732824427487vw;
@@ -549,7 +549,7 @@ export const ProductStyled = styled.section`
         .button {
           color: #fff;
           text-align: center;
-          font-size: 0.7291666666666666vw;
+          font-size: 0.9291666666666666vw;
           font-weight: 600;
           text-transform: uppercase;
           background: #015ccf;

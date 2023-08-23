@@ -108,7 +108,7 @@ export const CartStyled = styled.section`
                 }
               }
               .sale_price {
-                font-size: 0.625vw;
+                font-size: 0.95vw;
                 font-weight: 600;
                 color: red;
                 @media only screen and (max-width: 768px) {
@@ -170,7 +170,7 @@ export const CartStyled = styled.section`
             }
             span {
               color: #da002b;
-              font-size: 0.625vw;
+              font-size: 0.95vw;
               font-weight: 400;
               font-family: "Inter", sans-serif;
               @media only screen and (max-width: 768px) {
@@ -336,7 +336,7 @@ export const CartStyled = styled.section`
           .key,
           .value {
             color: #000;
-            font-size: 0.7291666666666666vw;
+            font-size: 0.9291666666666666vw;
             font-weight: 400;
             font-family: "SF Pro Display";
             @media only screen and (max-width: 768px) {

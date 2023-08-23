@@ -54,7 +54,7 @@ export const AccordStyled = styled.div`
     font-weight: 500;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
-    font-size: 0.7291666666666666vw;
+    font-size: 0.9291666666666666vw;
     line-height: 1.1666666666666667vw;
     transition: 300ms ease;
     margin-bottom: 0px;

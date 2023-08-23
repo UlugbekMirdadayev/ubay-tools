@@ -74,7 +74,7 @@ export const NewsSectionContainer = styled.section`
         margin-top: 0.78125vw;
         color: #000;
         font-family: Roboto;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 400;
         line-height: 1.2497916666666666vw;
         @media only screen and (max-width: 768px) {
@@ -111,7 +111,7 @@ export const NewsSectionContainer = styled.section`
           }
         }
         span {
-          font-size: 0.625vw;
+          font-size: 0.95vw;
           color: #015ccf;
           font-family: "Montserrat", sans-serif;
           font-weight: 300;
@@ -136,9 +136,10 @@ export const NewsSectionContainer = styled.section`
     }
     .more {
       font-size: 0.9895833333333334vw;
-      font-weight: 700;
-      line-height: 1.6145833333333333vw;
       color: #000;
+      * {
+        line-height: 140%;
+      }
       @media only screen and (max-width: 768px) {
         font-size: 2vw;
         line-height: 120%;

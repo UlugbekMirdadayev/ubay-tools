@@ -13,7 +13,7 @@ import { setSidebarVisible } from "../../redux/sidebar-slice";
 import { SideabarStyled } from "./style";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 
-const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
+const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const { categories, sub_categories } = Selectors.useCategories();
@@ -91,7 +91,11 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
         <CloseArrow onClick={handleSidebarChange} />
         <span>{langData.title}</span>
       </h1>
-      <ul className={`scroll-custome ${categories?.length ? "" : "isLoading"}`}>
+      <ul
+        className={`scroll-custome ${
+          loading ? "isLoading" : categories?.length ? "" : "isLoading"
+        }`}
+      >
         {categories?.map((category) => (
           <Fragment key={category?.ident}>
             <NavLink
@@ -115,7 +119,9 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null }) => {
                       key={sub_category?.ident}
                       id={sub_category?.ident}
                       ref={(ref) => scrollToElement(ref)}
-                      className="sub_category"
+                      className={`sub_category ${
+                        +categoryId === sub_category?.ident
+                      }`}
                       onClick={handleSidebarChange}
                       to={`/category/${category?.ident}/${sub_category?.ident}`}
                     >

@@ -56,10 +56,16 @@ export const SideabarStyled = styled.article`
       line-height: 5vw;
     }
   }
+  &:has(.isLoading) {
+    cursor: progress;
+  }
   ul {
     padding: 1.1979166666666667vw 2.5vw;
     overflow-y: auto;
     height: calc(100vh - 14vw);
+    &.isLoading {
+      pointer-events: none;
+    }
     @media only screen and (max-width: 768px) {
       background-color: #fff;
       height: calc(100vh - 34vw);
@@ -69,20 +75,26 @@ export const SideabarStyled = styled.article`
     a {
       color: #000;
       font-size: 1vw;
-      margin-bottom: 1vw;
+      padding: 0.5vw;
       font-weight: 500;
       display: flex;
-      &.sub_category{
+      &.sub_category {
+        &.active {
+          background-color: #1d59d1;
+          color: #fff;
+          border-radius: 0.5vw;
+        }
         margin-left: 1vw;
         color: #1d2f77;
         font-weight: 400;
         @media only screen and (max-width: 768px) {
           margin-left: 5vw;
+          padding: 1vw;
         }
       }
       @media only screen and (max-width: 768px) {
         font-size: 4vw;
-        margin-bottom: 4vw;
+        padding: 2vw;
       }
     }
   }
@@ -95,7 +107,8 @@ export const SideabarStyled = styled.article`
       padding: 5vw 4vw;
       background-color: #fff;
       border-radius: 2.600216684723727vw;
-      box-shadow: 0px -2.1668472372697725vw 3.2502708559046587vw -4.333694474539545vw #1d2f77;
+      box-shadow: 0px -2.1668472372697725vw 3.2502708559046587vw -4.333694474539545vw
+        #1d2f77;
 
       .box {
         display: flex;

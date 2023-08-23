@@ -72,7 +72,7 @@ export const NewsSectionContainer = styled.section`
         margin-top: 0.78125vw;
         color: #000;
         font-family: Roboto;
-        font-size: 0.7291666666666666vw;
+        font-size: 0.9291666666666666vw;
         font-weight: 400;
         line-height: 1.2497916666666666vw;
         @media only screen and (max-width: 768px) {
@@ -88,7 +88,7 @@ export const NewsSectionContainer = styled.section`
     align-items: center;
     justify-content: center;
     padding: 2vw;
-    font-size: 0.7291666666666666vw;
+    font-size: 0.9291666666666666vw;
     color: #1d2f77;
     text-transform: uppercase;
     font-weight: 700;

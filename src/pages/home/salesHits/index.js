@@ -59,6 +59,7 @@ function SalesHits({ lang, langData }) {
           if (data?.res_id === 200) {
             dispatch(setTopProducts(data?.result));
           } else {
+            dispatch(setTopProducts(data?.result));
             console.log(data);
           }
         })
@@ -122,9 +123,9 @@ function SalesHits({ lang, langData }) {
                 <button key={key} className="isLoading empty-btn" />
               ))}
         </div>
-        {!topProducts.length && isLoading ? null : (
+        {isLoading ? null : !topProducts.length ? (
           <h1>{langData.empty_products}</h1>
-        )}
+        ) : null}
         <Swiper
           ref={sliderRef}
           slidesPerView={"auto"}
@@ -157,8 +158,9 @@ function SalesHits({ lang, langData }) {
                       className="link-category"
                       to={`/category/${isActiveCategory?.ident}`}
                     >
-                      {isActiveCategory[lang === "uz" ? "name_uz" : "name"] ||
-                        isActiveCategory?.ident}
+                      {lang === "uz"
+                        ? isActiveCategory?.name_uz
+                        : isActiveCategory?.name || isActiveCategory?.ident}
                     </Link>
                     <h1>{currencyString(product?.main_price)}</h1>
                     <div className="motorcycle_cultivator_cart">
