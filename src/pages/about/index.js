@@ -24,7 +24,7 @@ const About = () => {
           <div className="prg">{langData.ubay_tool_text}</div>
           <div className="row">
             <a
-              href="tel:+998 (71) 011 89 34"
+              href="tel:+998 (90) 000 50 20"
               className="link-btn"
               to={"/about"}
             >

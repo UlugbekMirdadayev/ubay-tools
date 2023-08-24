@@ -153,7 +153,7 @@ const Header = () => {
         isMobile={true}
       />
       <nav>
-        <a href="tel:+998 (71) 011 89 34">+998 (71) 011 89 34</a>
+        <a href="tel:+998 (90) 000 50 20">+998 (90) 000 50 20</a>
         <div className="flex-group">
           {languages.map((language) => (
             <button
@@ -202,9 +202,8 @@ const Header = () => {
             {visible && (
               <div className="list_products">
                 <div
-                  className={`scroll-custome ${
-                    filteredData.length ? "" : "empty"
-                  }`}
+                  className={`scroll-custome ${filteredData.length ? "" : "empty"
+                    }`}
                 >
                   {filteredData.length ? (
                     filteredData.map((product) => (

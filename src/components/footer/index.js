@@ -10,6 +10,7 @@ const Footer = () => {
   const { pathname } = useLocation();
   const lang = Selectors.useLang();
   const langData = useMemo(() => locale[lang]["footer"], [lang]);
+  const { categories, sub_categories } = Selectors.useCategories();
 
   const {
     register,
@@ -144,7 +145,7 @@ const Footer = () => {
           <div className="title_link">{langData.info_contact}</div>
           <ul className="mini-list">
             <span>{langData.hotline}</span>
-            <a href="tel:+998 99 011 89 34">99 011 89 34</a>
+            <a href="tel:+998 90 000 50 20">90 000 50 20</a>
           </ul>
           <ul className="mini-list">
             <span>{langData.contact.email}</span>
@@ -171,9 +172,9 @@ const Footer = () => {
         <div className="block">
           <div className="title_link">{langData.products}</div>
           <ul className="list">
-            {links[0].map((link) => (
-              <Link key={link.link} to={link.link}>
-                {link.name}
+            {categories.map((link) => (
+              <Link key={link.ident} to={`/category/${link.ident}`}>
+                {link[lang === "uz" ? "name_uz" : "name"]}
               </Link>
             ))}
           </ul>
@@ -184,14 +185,14 @@ const Footer = () => {
             <a
               target="_blank"
               rel="noreferrer nooperer"
-              href="https://youtube.com/"
+              href="https://www.youtube.com/@ubaytools"
             >
               <YouTubeIcon />
             </a>
             <a
               target="_blank"
               rel="noreferrer nooperer"
-              href="https://instagram.com/"
+              href="https://www.instagram.com/ubaytools.uz/"
             >
               <InstaIcon />
             </a>

@@ -39,8 +39,8 @@ const Questions = ({ langData, lang }) => {
         <h1 className="title">{langData.questions_title}</h1>
         <div className="between">
           <div className="row">
-            <a href={"tel:+998 99 011 89 34"}>
-              <span>+998 99 011 89 34</span>
+            <a href={"tel:+998 90 000 50 20"}>
+              <span>+998 90 000 50 20</span>
               <p>{langData.online_time}</p>
             </a>
             <a
@@ -70,8 +70,8 @@ const Questions = ({ langData, lang }) => {
       )}
 
       <div className="row ismobile">
-        <a href={"tel:+998 99 011 89 34"}>
-          <span>+998 99 011 89 34</span>
+        <a href={"tel:+998 90 000 50 204"}>
+          <span>+998 90 000 50 20</span>
           <p>{langData.online_time}</p>
         </a>
         <a

@@ -15,8 +15,8 @@
     },
     "footer": {
       "desc": [
-        "Mahsulot saytda fotosuratlar, fotosuratlar, matnli, sxematik va reklama materiallari bilan taqdim etiladi - sotuvchining mulki. Xaridorning iltimosiga binoan sotuvchi mahsulot to'g'risida taqdim etilgan aloqa vositalari to'g'risida batafsil ma'lumot berishi mumkin.",
-        "Ushbu saytda joylashtirilgan ma'lumotlar Rossiya Federatsiyasi fuqarolik kodeksining 437-moddasi 2-bandida, shuningdek Rossiya federatsiyasi yoki xorijiy davlatning fuqarolik qonunchiligining boshqa har qanday normalarida nazarda tutilgan ommaviy taklif emas. Ushbu ma'lumot ma'lum bir shaxslar doirasi va noma'lum shaxslar doirasi bilan har qanday munosabatlarni yakunlash uchun mahsulot to'g'risidagi ma'lumotlarni joylashtirgan sub'ektning irodasini ifoda etmaydi.ushbu saytda taqdim etilgan ma'lumotlar faqat sayt egasi erisha olgan ishlab chiqarish (yoki ulgurji savdo) sohasidagi yutuqlar to'g'risidagi ma'lumotdir. Ushbu saytda taqdim etilgan ma'lumotlardan masofadan turib tuzilgan oldi-sotdi shartnomasini tuzish, bajarish va bekor qilish uchun foydalanish mumkin emas."
+        "UbayTools vebsaytidagi barcha tovarlar litsenziyalangan va ishlab chiqaruvchi tomonidan kafolatga ega",
+        ""
       ],
       "contact": {
         "title": "Buyurtma bering va\nmaslahat\nmutaxassis",
@@ -71,10 +71,10 @@
     },
     "about": {
       "statistics": [
-        { "number": "15yil+", "title": "Tajriba" },
-        { "number": "20+", "title": "Professional hodimlar" },
-        { "number": "300+", "title": "Hamkor Do'konlar" },
-        { "number": "1000+", "title": "Dan ortiq uskunalar" }
+        {"number": "15yil+", "title": "Tajriba"},
+        {"number": "20+", "title": "Professional hodimlar"},
+        {"number": "300+", "title": "Hamkor Do'konlar"},
+        {"number": "1000+", "title": "Dan ortiq uskunalar"}
       ]
     },
     "wishes": {
@@ -239,8 +239,8 @@
     },
     "footer": {
       "desc": [
-        "Товар представлен на Сайте фотоматериалами, фотообразцами, текстовыми, схематическими, и рекламными материалами - являются собственностью Продавца. По просьбе Покупателя Продавец может предоставить подробную информацию, по предусмотренным средствам связи о Товаре.",
-        "Информация, размещенная на настоящем сайте, не является публичной офертой, предусмотренной п.2 статьи 437 Гражданского кодекса РФ, а так же возможно любыми другими нормами Гражданского законодательства РФ или иностранного государства. Данная информация не выражает волю субъекта, разместившего информацию о товаре на заключение каких-либо отношений, как определенным кругом лиц, так и с неопределенным кругом лиц. Информация, представленная на настоящем сайте, является лишь информацией о достижениях в производственной (или оптово-торговой) сфере, которые смог достигнуть собственник сайта. Информация, предоставленная на настоящем сайте, не может быть использована для заключения, исполнения и прекращения договора купли-продажи, заключаемого дистанционным способом."
+        "Все товары на сайте UbayTools лицензированы и имеют гарантию производителя.",
+        ""
       ],
       "contact": {
         "title": "Сделать заказ и\nконсультацию\nспециалиста",
@@ -295,10 +295,10 @@
     },
     "about": {
       "statistics": [
-        { "number": "15лет+", "title": "Опыт" },
-        { "number": "20+", "title": "Профессиональный персонал" },
-        { "number": "300+", "title": "Магазины-Партнеры" },
-        { "number": "1000+", "title": "Более оборудования" }
+        {"number": "15лет+", "title": "Опыт"},
+        {"number": "20+", "title": "Профессиональный персонал"},
+        {"number": "300+", "title": "Магазины-Партнеры"},
+        {"number": "1000+", "title": "Более оборудования"}
       ]
     },
     "wishes": {
