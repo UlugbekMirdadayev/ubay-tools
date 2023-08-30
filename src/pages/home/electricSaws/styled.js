@@ -37,6 +37,9 @@ export const StyledElectricSaws = styled.div`
       );
     }
   }
+  .swiper{
+    margin: 0;
+  }
   .mb-controller {
     display: none;
     align-items: center;
@@ -83,6 +86,8 @@ export const StyledElectricSaws = styled.div`
   }
   .card_electric_saws {
     display: flex;
+    flex: 1;
+    min-width: 15.104166666666666vw;
     width: 15.104166666666666vw;
 
     padding: 1.25vw;
@@ -93,6 +98,7 @@ export const StyledElectricSaws = styled.div`
     }
 
     @media only screen and (max-width: 768px) {
+      min-width: 44.020356234096695vw;
       width: 44.020356234096695vw;
       padding: 5vw 0;
       margin-right: 4.071246819338422vw;

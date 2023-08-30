@@ -81,7 +81,7 @@ const About = () => {
         </div>
       </div>
       <img
-        src="https://api.ubaytools.com/Images/b7287dd7839b8253f6ad450adc0ca8ac.png"
+        src={require("../../images/about.png")}
         className="full-img-bottom"
         alt="..."
       />

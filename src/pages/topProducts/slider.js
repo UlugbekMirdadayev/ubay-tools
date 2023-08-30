@@ -34,7 +34,7 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
     dispatch(setCartRemoveCount(product));
   };
 
-  const [rating, setRating] = useState(product?.rating);
+  const [rating, setRating] = useState(product?.grade);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -88,7 +88,7 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
           </span>
         ))}
       </div>
-      <h1>{currencyString(product?.main_price)}</h1>
+      <h1>{currencyString(product?.price)}</h1>
       <div className="motorcycle_cultivator_cart">
         <button
           onClick={() =>

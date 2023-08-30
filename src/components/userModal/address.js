@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { ModalStyled } from "./style";
 import { useForm } from "react-hook-form";
 import { LocationIcon } from "../icon";
@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import locale from "../../localization/locale.json";
 import { setOpenAddressModal } from "../../redux/modals-slice";
-import { setUserAddress } from "../../redux/userAddress-slice";
 import { countries, regions } from "../../utils/constants";
+import { setLogin } from "../../redux/user-slice";
 
 const Address = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,14 @@ const Address = () => {
   const langData = useMemo(() => locale[lang]["modal"]["address"], [lang]);
   const [regionsFiltered, setRegions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const headers = {
+    headers: {
+      "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+        ?.token,
+    },
+  };
+
   const {
     handleSubmit,
     formState: { errors },
@@ -27,70 +35,59 @@ const Address = () => {
     setValue,
     reset,
   } = useForm();
-  const onSubmit = (data) => {
-    data = {
-      ...data,
-      main_adress: +data.main_adress,
-      id: user?.id,
-      lat: "7",
-      lng: "8",
-    };
-    setIsLoading(true);
+
+  const handleActiveAddress = (address_id) => {
     api
-      .add_address({ insert_adress: data })
+      .update_address(address_id, {}, headers)
       .then(({ data }) => {
-        if (data?.res_id === 200) {
-          setIsLoading(false);
-          console.log(data);
-          toast.success(langData.added_address);
-          getUserAddresses();
-          handleClose();
-          reset();
-        } else {
-          toast.success(data.mess);
-        }
+        dispatch(
+          setLogin({ ...data, token: headers.headers["x-access-token"] })
+        );
       })
-      .catch(({ message = "" }) => {
-        setIsLoading(false);
-        toast.error(message);
-        console.log(message);
+      .catch(({ response: { data } }) => {
+        console.log(data);
       });
   };
 
-  const getUserAddresses = useCallback(() => {
-    if (!user?.id) return;
+  const onSubmit = (fdata) => {
+    const district = regions.find((region) => region.code === +fdata.district);
+    const city = countries.find((city) => city.regionId === +fdata.city);
+    fdata.district = district[`name${lang === "uz" ? "UzLatn" : "Ru"}`];
+    fdata.city = city[`name${lang === "uz" ? "UzLatn" : "Ru"}`];
+    setIsLoading(true);
     api
-      .get_user_address({
-        show_adress: { id: user?.id },
-      })
+      .add_address(user?._id, fdata, headers)
       .then(({ data }) => {
-        if (data.res_id === 200) {
-          dispatch(
-            setUserAddress(
-              data?.result?.sort((a, b) => a?.ident - b?.ident)?.reverse()
-            )
-          );
-        } else {
-          console.log(data);
+        setIsLoading(false);
+        dispatch(
+          setLogin({ ...data, token: headers.headers["x-access-token"] })
+        );
+        if (fdata?.main_address) {
+          handleActiveAddress(data?.address?.at(-1)?._id);
         }
+        toast.success(langData.added_address);
+        handleClose();
+        reset();
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(({ response: { data } }) => {
+        setIsLoading(false);
+        toast.error(data?.message || JSON.stringify(data));
+        console.log(data);
       });
-  }, [dispatch, user?.id]);
+  };
 
-  const c_ident = watch("c_ident");
+  const city = watch("city");
 
   useEffect(() => {
-    if (c_ident) {
-      setRegions(regions.filter((region) => region.regionId === +c_ident));
-      setValue("r_ident", "null");
+    if (city) {
+      setRegions(regions.filter((region) => region.regionId === +city));
+      setValue("district", "null");
     }
-  }, [c_ident, setValue]);
+  }, [city, setValue]);
 
   const handleClose = () => dispatch(setOpenAddressModal(false));
 
-  if (!user?.id || !address) return <></>;
+  if (!user?._id || !address) return <></>;
 
   return (
     <ModalStyled className="w-80 scroll-custome">
@@ -108,14 +105,14 @@ const Address = () => {
               {langData.closer}
             </button>
           </div>
-          <label className={`input-row ${errors.c_ident ? "error" : ""}`}>
+          <label className={`input-row ${errors.city ? "error" : ""}`}>
             <p>
               {langData.city}
               <span> * </span>
             </p>
             <select
               disabled={isLoading}
-              {...register("c_ident", {
+              {...register("city", {
                 required: true,
                 pattern: {
                   value: /^(0|[1-9]\d*)(\.\d+)?$/,
@@ -132,14 +129,14 @@ const Address = () => {
               ))}
             </select>
           </label>
-          <label className={`input-row ${errors.r_ident ? "error" : ""}`}>
+          <label className={`input-row ${errors.district ? "error" : ""}`}>
             <p>
               {langData.region}
               <span> * </span>
             </p>
             <select
-              disabled={isLoading || c_ident === "null"}
-              {...register("r_ident", {
+              disabled={isLoading || city === "null"}
+              {...register("district", {
                 required: true,
                 pattern: {
                   value: /^(0|[1-9]\d*)(\.\d+)?$/,
@@ -156,30 +153,32 @@ const Address = () => {
               ))}
             </select>
           </label>
-          <label className={`input-row ${errors.adress ? "error" : ""}`}>
+          <label className={`input-row ${errors.street ? "error" : ""}`}>
             <p>
               {langData.address}
               <span> * </span>
             </p>
-            <input type="text" {...register("adress", { required: true })} />
+            <input type="text" {...register("street", { required: true })} />
           </label>
-          <label className={`input-row ${errors.home ? "error" : ""}`}>
+          <label className={`input-row ${errors.house ? "error" : ""}`}>
             <p>
               {langData.home}
               <span> * </span>
             </p>
-            <input type="text" {...register("home", { required: true })} />
+            <input type="text" {...register("house", { required: true })} />
           </label>
-          <label className={`input-row ${errors.flat ? "error" : ""}`}>
+          <label className={`input-row ${errors.floor ? "error" : ""}`}>
             <p>{langData.flat}</p>
-            <input type="text" {...register("flat")} />
+            <input type="text" {...register("floor")} />
           </label>
           <label className="checkbox-row">
-            <input type="checkbox" {...register("main_adress")} />
+            <input type="checkbox" {...register("main_address")} />
             <span>{langData.permanent_location}</span>
           </label>
           <div className="checkbox-row">
-            <button type="submit" disabled={isLoading}>{langData.save}</button>
+            <button type="submit" disabled={isLoading}>
+              {langData.save}
+            </button>
             <button type="button" onClick={handleClose}>
               {langData.cancel}
             </button>

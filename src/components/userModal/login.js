@@ -14,9 +14,9 @@ const UserModal = () => {
   const dispatch = useDispatch();
   const lang = Selectors.useLang();
   const { login } = Selectors.useModalOpen();
-  const [phoneID, nameID, famID, passID] = [useId(), useId(), useId(), useId()];
-  const [step, setStep] = useState(0);
+  const [phoneID, fullName, passID] = [useId(), useId(), useId()];
   const [loading, setLoading] = useState(false);
+  const [errorText, setErrorText] = useState(null);
   const [isSignUp, setIsSignUp] = useState(null);
   const [forgotPass, setForgotPass] = useState(null);
   const user = Selectors.useUser();
@@ -33,64 +33,80 @@ const UserModal = () => {
   const handleClose = () =>
     loading ? null : dispatch(setOpenLoginModal(false));
 
-  const handleSearchNumber = (number) => {
-    setLoading(true);
+  const getUserMe = (token) => {
     api
-      .search_user({
-        phone_search: {
-          phone: "998" + number,
-        },
-      })
+      .me(token)
       .then(({ data }) => {
-        setLoading(false);
-        if (data.res_id === 200) {
-          setStep(1);
-          setIsSignUp(data.result.new_user);
-        }
-      })
-      .catch(({ message = "" }) => {
-        setLoading(false);
-        toast.error(message);
-        console.log(message);
-      });
-  };
-  const handleLogin = ({ phone, password }) => {
-    setLoading(true);
-    api
-      .login_user({
-        phoneandpassword_search: { phone: "998" + phone, password },
-      })
-      .then(({ data }) => {
-        setLoading(false);
-        if (data.res_id === 200) {
-          dispatch(setLogin(data?.result));
+        console.log(data);
+        if (data?.isActive) {
+          dispatch(setLogin({ ...data, token }));
           toast.success("Success");
-          setStep(0);
           reset();
           handleClose();
+        } else toast.info("User is not Active");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleLogin = (formData) => {
+    delete formData.fullName;
+    setLoading(true);
+    api
+      .login(formData)
+      .then(({ data }) => {
+        setLoading(false);
+        if (data?.token) {
+          getUserMe(data?.token);
         } else {
-          toast.error(data.mess);
+          console.log(data);
+        }
+        setErrorText(null);
+      })
+      .catch(({ response: { data } }) => {
+        setLoading(false);
+        toast.error(data?.message || JSON.stringify(data));
+        setErrorText(data?.message || JSON.stringify(data));
+        reset();
+        setValue("phone", formData?.phone?.replace("998", ""));
+      });
+  };
+  const handleRegister = (formData) => {
+    setLoading(true);
+    api
+      .reg_user(formData)
+      .then(({ data }) => {
+        setErrorText("");
+        setLoading(false);
+        if (data.code === 200) {
+          if (data?.data?.user?.isActive) {
+            dispatch(
+              setLogin({ ...data?.data?.user, token: data?.data?.token })
+            );
+            toast.success(data?.data);
+            reset();
+            handleClose();
+          } else toast.info("User is not Active");
+        } else {
+          console.log(data);
         }
       })
-      .catch(({ message = "" }) => {
+      .catch(({ response: { data } }) => {
         setLoading(false);
-        toast.error(message);
-        console.log(message);
+        setErrorText(data?.message);
+        toast.error(data?.message);
+        console.log(data);
       });
   };
 
   const onSubmit = (formData) => {
-    if (step) {
-      handleLogin(formData);
+    formData.phone = "998" + formData.phone;
+    if (isSignUp) {
+      handleRegister(formData);
     } else {
-      handleSearchNumber(formData.phone);
+      handleLogin(formData);
     }
-  };
-
-  const editPhone = () => {
-    setValue("phone", "");
-    setStep(0);
-    setForgotPass(false);
   };
 
   if (user?.id || !login) return <></>;
@@ -98,18 +114,25 @@ const UserModal = () => {
   return (
     <ModalStyled className="scroll-custome">
       <div className="overlay" onClick={handleClose} />
-      <form onSubmit={handleSubmit(onSubmit)} className="modal-body">
+      <form
+        autoComplete="off"
+        onSubmit={handleSubmit(onSubmit)}
+        className="modal-body"
+      >
         <button className="closer" type="button" onClick={handleClose}>
           <CloseArrow />
         </button>
         <h1 className="title">{langData.login}</h1>
+        {errorText && (
+          <label style={{ color: "#F50", display: "block" }}>{errorText}</label>
+        )}
         <label htmlFor={phoneID}>{langData.phone}</label>
         <div className={`input_row ${errors.phone ? "error" : ""}`}>
-          <span onClick={step ? editPhone : null}>+998</span>
+          <span>+998</span>
           <input
             type="tel"
             id={phoneID}
-            readOnly={loading || step}
+            readOnly={loading}
             {...register("phone", {
               required: true,
               maxLength: {
@@ -124,55 +147,79 @@ const UserModal = () => {
             })}
           />
         </div>
-        {step ? (
-          isSignUp ? (
-            <>
-              <label htmlFor={nameID}>{langData.name}</label>
-              <div className={`input_row ${errors.ism ? "error" : ""}`}>
-                <input
-                  type="text"
-                  className="span"
-                  readOnly={loading}
-                  id={nameID}
-                  {...register("ism", { required: true, minLength: 3 })}
-                />
-              </div>
+        {isSignUp && (
+          <>
+            <label htmlFor={fullName}>
+              {langData.surename} {langData.name}
+            </label>
+            <div className={`input_row ${errors.fullName ? "error" : ""}`}>
+              <input
+                className="span"
+                readOnly={loading}
+                type="text"
+                id={fullName}
+                {...register("fullName", { required: true, minLength: 3 })}
+              />
+            </div>
+          </>
+        )}
 
-              <label htmlFor={famID}>{langData.surename}</label>
-              <div className={`input_row ${errors.fam ? "error" : ""}`}>
-                <input
-                  className="span"
-                  readOnly={loading}
-                  type="text"
-                  id={famID}
-                  {...register("fam", { required: true, minLength: 3 })}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              <label htmlFor={passID}>
-                {forgotPass ? "SMS code" : langData.password}
-              </label>
-              <div className={`input_row ${errors.password ? "error" : ""}`}>
-                <input
-                  className="span"
-                  readOnly={loading}
-                  type={forgotPass ? "text" : "password"}
-                  id={passID}
-                  {...register("password", { required: true, minLength: 3 })}
-                />
-              </div>
-              {forgotPass ? null : (
-                <div>
-                  <label onClick={() => setForgotPass(true)}>
-                    {langData.forgot}
-                  </label>
-                </div>
-              )}
-            </>
-          )
-        ) : null}
+        <label htmlFor={passID}>
+          {forgotPass ? "SMS code" : langData.password}
+        </label>
+        <div className={`input_row ${errors.password ? "error" : ""}`}>
+          <input
+            className="span"
+            readOnly={loading}
+            type={forgotPass ? "text" : "password"}
+            id={passID}
+            {...register("password", { required: true, minLength: 3 })}
+          />
+        </div>
+
+        {forgotPass ? (
+          <div>
+            <label
+              onClick={() => {
+                setForgotPass(false);
+                setErrorText(null);
+              }}
+            >
+              {langData.goto_login}
+            </label>
+          </div>
+        ) : isSignUp ? (
+          <div>
+            <label
+              onClick={() => {
+                setIsSignUp(false);
+                setErrorText(null);
+              }}
+            >
+              {langData.goto_login}
+            </label>
+          </div>
+        ) : (
+          <div className="row-space-between">
+            <label
+              onClick={() => {
+                toast.info(
+                  "Texnik ish olib borilmoqda, parolni tiklash bo'yicha"
+                );
+                setErrorText(
+                  "Texnik ish olib borilmoqda, parolni tiklash bo'yicha"
+                );
+                // setForgotPass(true)
+              }}
+            >
+              {langData.forgot}
+            </label>
+            <label onClick={() => setIsSignUp(true)}>
+              {langData.go_register}
+            </label>
+          </div>
+        )}
+
         <button
           disabled={loading}
           className={`submit ${loading ? "isLoading" : ""}`}

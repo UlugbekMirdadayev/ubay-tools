@@ -35,8 +35,9 @@ export const ProductStyled = styled.section`
       min-height: 24.258541666666666vw;
       .slider_image {
         max-width: 100%;
+        width: 100%;
         height: 24.258541666666666vw;
-        object-fit: contain;
+        object-fit: cover;
         @media only screen and (max-width: 768px) {
           width: 100%;
           height: 43.81119592875318vw;
@@ -61,6 +62,7 @@ export const ProductStyled = styled.section`
         object-fit: contain;
         background-color: rgba(14, 50, 103, 0.04);
         border: 0.052083333333333336vw solid transparent;
+        overflow: hidden;
         @media only screen and (max-width: 768px) {
           width: 10.396692111959288vw;
           height: 10.396692111959288vw;
@@ -72,6 +74,8 @@ export const ProductStyled = styled.section`
           background-color: transparent;
           background: none;
           border: 0;
+          width: 100%;
+          height: 100%;
 
           img {
             width: 100%;
@@ -512,9 +516,14 @@ export const ProductStyled = styled.section`
         width: 12.65625vw;
         height: 11.40625vw;
         object-fit: contain;
+        min-width: 12.65625vw;
+        min-height: 11.40625vw;
+
         @media only screen and (max-width: 768px) {
           width: 34.01246819338423vw;
+          min-width: 34.01246819338423vw;
           height: 27.28091603053435vw;
+          min-height: 27.28091603053435vw;
         }
       }
       h2 {

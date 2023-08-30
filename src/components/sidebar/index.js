@@ -16,7 +16,7 @@ import { setOpenLoginModal } from "../../redux/modals-slice";
 const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const { categories, sub_categories } = Selectors.useCategories();
+  const { categories } = Selectors.useCategories();
   const sidebar = Selectors.useSidebar();
   const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
@@ -33,9 +33,6 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
     e.preventDefault();
     dispatch(setOpenLoginModal(true));
   };
-
-  const withChildren = useMemo(() => pathname.includes("category"), [pathname]);
-
 
   const links = [
     {
@@ -74,56 +71,48 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
     }
   };
 
-  const isActiveCategory = sub_categories.find(
-    (sub_category) =>
-      sub_category?.ident === +categoryId ||
-      sub_category?.main_ident === +categoryId
-  );
+  const isActiveCategory = (category) =>
+    categoryId === category?.seo ||
+    category?.children?.find((child) => child?.seo === categoryId);
 
   return (
     <SideabarStyled
       aria-label={`sidebar ${sidebar}`}
       aria-colcount={2}
-      className={`${sidebar ? "opened" : ""} ${isMobile ? "mobile-sidebar" : "pc-header"
-        }`}
+      className={`${sidebar ? "opened" : ""} ${
+        isMobile ? "mobile-sidebar" : "pc-header"
+      }`}
     >
       <h1 className="title-c">
         <CloseArrow onClick={handleSidebarChange} />
         <span>{langData.title}</span>
       </h1>
       <ul
-        className={`scroll-custome ${loading ? "isLoading" : categories?.length ? "" : "isLoading"
-          }`}
+        className={`scroll-custome ${
+          loading ? "isLoading" : categories?.length ? "" : "isLoading"
+        }`}
       >
         {categories?.map((category) => (
-          <Fragment key={category?.ident}>
+          <Fragment key={category?._id}>
             <NavLink
-              key={category?.ident}
               onClick={handleSidebarChange}
-              to={`/category/${category?.ident}`}
+              to={`/category/${category?.seo}`}
             >
-              {category[lang === "uz" ? "name_uz" : "name"]}
+              {category[lang === "uz" ? "title_uz" : "title"]}
             </NavLink>
-            {withChildren
-              ? sub_categories
-                .filter(
-                  (sub_category) =>
-                    sub_category?.main_ident === category?.ident &&
-                    (isActiveCategory?.main_ident ===
-                      sub_category?.main_ident ||
-                      isActiveCategory?.ident === sub_category?.main_ident)
-                )
-                .map((sub_category) => (
+            {isActiveCategory(category)
+              ? category?.children?.map((sub_category) => (
                   <NavLink
-                    key={sub_category?.ident}
-                    id={sub_category?.ident}
+                    key={sub_category?.seo}
+                    id={sub_category?.seo}
                     ref={(ref) => scrollToElement(ref)}
-                    className={`sub_category ${+categoryId === sub_category?.ident
-                      }`}
+                    className={`sub_category ${
+                      categoryId === sub_category?.seo
+                    }`}
                     onClick={handleSidebarChange}
-                    to={`/category/${category?.ident}/${sub_category?.ident}`}
+                    to={`/category/${category?.seo}/${sub_category?.seo}`}
                   >
-                    {sub_category[lang === "uz" ? "name_uz" : "name"]}
+                    {sub_category[lang === "uz" ? "title_uz" : "title"]}
                   </NavLink>
                 ))
               : null}

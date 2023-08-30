@@ -41,15 +41,16 @@ const Cart = () => {
     setIsLoading(true);
     api
       .get_products({
-        show_products: { main_ident: 0, sub_ident: 0 },
+        sort: "desc",
+        limit: 10,
       })
       .then(({ data }) => {
         setIsLoading(false);
-        if (data?.res_id === 200) {
-          dispatch(setProducts(data?.result));
+        if (data?.length) {
+          dispatch(setProducts(data?.filter((prod) => prod?.inStock)));
         } else {
+          dispatch(setProducts([]));
           console.log(data);
-          toast.error(data?.mess);
         }
       })
       .catch(({ message }) => {
@@ -72,11 +73,11 @@ const Cart = () => {
     isSelectedProduct(product, cartItems)?.cart_count;
 
   const handleCompare = (product) => {
-    dispatch(setCompare(product?.ident));
+    dispatch(setCompare(product?.seo));
   };
 
   const handleWishes = (product) => {
-    dispatch(setLiked(product?.ident));
+    dispatch(setLiked(product?.seo));
   };
   const handleCartAddCount = (product) => {
     dispatch(setCartAddCount(product));
@@ -98,7 +99,7 @@ const Cart = () => {
         ...itemFiltered,
       }));
     const total_summ = array.reduce(
-      (currentSum, item) => currentSum + item.main_price * item.cart_count,
+      (currentSum, item) => currentSum + item.price * item.cart_count,
       0
     );
 
@@ -118,23 +119,39 @@ const Cart = () => {
         <div className="grid">
           <div className="list">
             {productsInCart?.map((product) => (
-              <div className="product" key={product.ident}>
+              <div
+                className="product"
+                key={product.seo}
+                style={
+                  !product?.price
+                    ? {
+                        opacity: 0.5,
+                        pointerEvents: "none",
+                        userSelect: "none",
+                      }
+                    : {}
+                }
+              >
                 <div className="space">
-                  <div className="image-box">
+                  <Link to={`/product/${product.seo}`} className="image-box">
                     <img
-                      src={API.baseURL_IMAGE + product?.photo}
+                      src={API.baseURL_IMAGE + product?.allImages[0]?.image}
                       alt={"product"}
                     />
-                  </div>
+                  </Link>
                   <div className="infos">
-                    <h3 className="name_prod">{product?.name}</h3>
+                    <h3 className="name_prod">
+                      {lang === "uz"
+                        ? product?.title_uz || product?.title
+                        : product?.title}
+                    </h3>
                     <div className="stars">
                       {["★", "★", "★", "★", "★"].map((start, index) => (
                         <span
                           key={index}
                           style={{
                             color:
-                              index + 1 <= product?.rating
+                              index + 1 <= product?.grade
                                 ? "rgb(255, 215, 0)"
                                 : "#000",
                           }}
@@ -144,8 +161,8 @@ const Cart = () => {
                       ))}
                     </div>
                     <div className="price">
-                      <span className={"main_price"}>
-                        {currencyString(product?.main_price)}
+                      <span className={"price"}>
+                        {currencyString(product?.price)}
                       </span>
                       {product?.sale ? (
                         <span className={"sale_price"}>
@@ -153,7 +170,7 @@ const Cart = () => {
                         </span>
                       ) : null}
                     </div>
-                    <Link className="btn-more" to={`/product/${product.ident}`}>
+                    <Link className="btn-more" to={`/product/${product.seo}`}>
                       {langData.more}
                     </Link>
                   </div>
@@ -170,8 +187,9 @@ const Cart = () => {
                     <div className="count_changers">
                       <button
                         className="ranger"
+                        disabled={!product?.price}
                         onClick={() =>
-                          isProductCount(product) < product?.count
+                          isProductCount(product) < product?.qty
                             ? handleCartAddCount(product)
                             : null
                         }
@@ -224,10 +242,10 @@ const Cart = () => {
             </ul>
             <Link
               to={"/order-booking"}
-              onClick={user?.id ? null : openUserModal}
-              className={`submit ${user?.id ? "" : "error"}`}
+              onClick={user?._id ? null : openUserModal}
+              className={`submit ${user?._id ? "" : "error"}`}
             >
-              {user?.id ? langData.order_booking : langData.not_registered}
+              {user?._id ? langData.order_booking : langData.not_registered}
             </Link>
           </div>
         </div>

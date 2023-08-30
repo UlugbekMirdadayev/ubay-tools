@@ -213,6 +213,16 @@ export const ProfileStyled = styled.section`
           border-radius: 0.2vw;
           background-color: #015ecf25;
           margin-bottom: 0.2vw;
+          transition: 300ms ease;
+          cursor: pointer;
+          &:hover,
+          &.active {
+            background-color: #015ccf;
+            p,
+            h1 {
+              color: #fff;
+            }
+          }
           @media only screen and (max-width: 768px) {
             padding: 1.5267175572519085vw 4.071246819338422vw;
             margin-bottom: 1.5267175572519085vw;

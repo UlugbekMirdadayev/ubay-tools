@@ -5,7 +5,6 @@ export const AboutSectionCont = styled.div`
 
   .container_ {
     border: 0.052083333333333336vw solid #e2e2e2;
-    border-bottom: 0;
     @media only screen and (max-width: 768px) {
       border: 0;
     }

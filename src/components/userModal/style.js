@@ -366,4 +366,9 @@ export const ModalStyled = styled.div`
       }
     }
   }
+  .row-space-between{ 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;

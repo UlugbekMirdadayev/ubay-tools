@@ -1,4 +1,4 @@
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useCallback, useState, useEffect, useMemo } from "react";
 import { StyledImageSlider } from "./styles";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
@@ -25,13 +25,10 @@ function TopSliderMain() {
 
   const getSliderData = useCallback(() => {
     api
-      .get_questions({ info_add: { type: 2 } })
+      .get_sliders()
       .then(({ data }) => {
-        if (data.res_id === 200) {
-          dispatch(setSlider(data?.result));
-        } else {
-          console.log(data);
-          toast.error(data?.mess);
+        if (data?.length) {
+          dispatch(setSlider(data));
         }
       })
       .catch(({ message }) => {
@@ -44,6 +41,8 @@ function TopSliderMain() {
     getSliderData();
   }, [getSliderData]);
 
+  const isSliderTypes = useMemo(()=> sliderData?.filter(slider=> slider?.sliderType === 1),[sliderData])
+
   return (
     <StyledImageSlider>
       <Swiper
@@ -53,11 +52,11 @@ function TopSliderMain() {
         slidesPerView={"auto"}
         onSlideChange={({ activeIndex }) => handleChangeSlide(activeIndex)}
       >
-        {sliderData.length
-          ? sliderData?.map((slide) => (
-              <SwiperSlide key={slide?.ident} className="img">
-                <Link to={`/banner/${slide?.name}`}>
-                  <img src={API.baseURL_IMAGE + slide?.name} alt="slider" />
+        {isSliderTypes?.length
+          ? isSliderTypes?.map((slide) => (
+              <SwiperSlide key={slide?._id} className="img">
+                <Link to={`/banner/${slide?._id}`}>
+                  <img src={API.baseURL_IMAGE + slide?.image} alt="slider" />
                 </Link>
               </SwiperSlide>
             ))
@@ -67,10 +66,10 @@ function TopSliderMain() {
       </Swiper>
 
       <div className="pagination">
-        {sliderData.length
-          ? sliderData?.map((slide, index) => (
+        {isSliderTypes.length
+          ? isSliderTypes?.map((slide, index) => (
               <span
-                key={slide?.ident}
+                key={slide?._id}
                 onClick={() => handleChangeSlide(index)}
                 className={index === active ? "active" : null}
               />

@@ -78,9 +78,14 @@ export const WishesStyled = styled.section`
         width: 12.65625vw;
         height: 11.40625vw;
         object-fit: contain;
+        min-width: 12.65625vw;
+        min-height: 11.40625vw;
+        
         @media only screen and (max-width: 768px) {
           width: 34.01246819338423vw;
+          min-width: 34.01246819338423vw;
           height: 27.28091603053435vw;
+          min-height: 27.28091603053435vw;
         }
       }
       h2 {

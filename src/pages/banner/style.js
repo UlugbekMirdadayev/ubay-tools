@@ -8,6 +8,10 @@ export const BannerStyled = styled.section`
     display: flex;
     align-items: center;
     border-bottom: 0.052083333333333336vw solid #464646;
+    padding-bottom: 1vw;
+    @media only screen and (max-width: 768px) {
+      padding-bottom: 5vw;
+    }
     .img_place {
       width: 55vw;
       height: 34vw;
@@ -18,7 +22,8 @@ export const BannerStyled = styled.section`
       }
     }
     .infos {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 5.208333333333333vw;
       max-width: 23.020833333333332vw;
       @media only screen and (max-width: 768px) {
@@ -30,7 +35,8 @@ export const BannerStyled = styled.section`
         font-size: 7.291666666666667vw;
         font-weight: 700;
         line-height: 85.971%;
-        white-space: pre;
+        word-wrap: break-word;
+        width: 37vw;
       }
       p {
         font-size: 0.8333333333333334vw;
@@ -212,7 +218,7 @@ export const BannerStyled = styled.section`
       place-content: center;
 
       ul {
-        width: 22.083333333333332vw;
+        width: 26vw;
         margin-bottom: 6.25vw;
         @media only screen and (max-width: 768px) {
           width: 35vw;
@@ -223,14 +229,18 @@ export const BannerStyled = styled.section`
         li {
           width: 100%;
           display: flex;
-          align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           color: #fff;
           font-size: 1.25vw;
           font-weight: 700;
           line-height: 140%;
+          margin-bottom: 20px;
           @media only screen and (max-width: 768px) {
             font-size: 2vw;
+          }
+          span:nth-child(2) {
+            text-align: right;
           }
         }
       }

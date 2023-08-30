@@ -75,7 +75,7 @@ const Orders = ({ user, dispatch, data, langData, lang }) => {
                   <div className="name_product">
                     {product[`title${lang === "uz" ? "_uz" : ""}`]}
                   </div>
-                  <h3>{currencyString(product?.main_price)}</h3>
+                  <h3>{currencyString(product?.price)}</h3>
                 </div>
               </Link>
             ))}

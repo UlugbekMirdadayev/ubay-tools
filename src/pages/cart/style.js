@@ -70,6 +70,7 @@ export const CartStyled = styled.section`
             background-color: rgba(217, 217, 217, 0.2);
             border-radius: 0.5208333333333334vw;
             margin-right: 2.0833333333333335vw;
+            display: flex;
             @media only screen and (max-width: 768px) {
               min-width: 25.445293vw;
               max-width: 25.445293vw;
@@ -79,6 +80,7 @@ export const CartStyled = styled.section`
               max-width: 100%;
               height: 100%;
               object-fit: contain;
+              margin: 0 auto;
             }
           }
           .infos {
@@ -99,7 +101,7 @@ export const CartStyled = styled.section`
               display: flex;
               align-items: flex-end;
               gap: 1vw;
-              .main_price {
+              .price {
                 color: #000;
                 font-size: 0.9343750000000001vw;
                 font-weight: 500;

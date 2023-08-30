@@ -207,6 +207,10 @@ export const FooterStyled = styled.footer`
       font-size: 0.9291666666666666vw;
       font-weight: 400;
       line-height: 0.8333333333333334vw;
+      transition: 300ms ease;
+      &:hover {
+        color: #015ccf !important;
+      }
       @media only screen and (max-width: 768px) {
         font-size: 3.5623409669211195vw;
         line-height: 4.071246819338422vw;

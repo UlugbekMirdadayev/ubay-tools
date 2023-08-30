@@ -45,7 +45,7 @@ export const routes = [
     element: <TopProducts />,
   },
   {
-    path: "/product/:id",
+    path: "/product/:seo",
     element: <ProductSingle />,
   },
   {

@@ -7,12 +7,12 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     setCart(state, { payload }) {
-      const isOld = state.find(({ ident }) => ident === payload?.ident);
+      const isOld = state.find(({ seo }) => seo === payload?.seo);
       if (isOld) {
         const response = state?.map((product) => ({
           ...product,
           cart_count:
-            isOld?.ident === product?.ident
+            isOld?.seo === product?.seo
               ? (product?.cart_count || 1) + 1
               : product?.cart_count || 1,
         }));
@@ -21,15 +21,15 @@ const cartSlice = createSlice({
       }
       localStorage.setItem(
         "cart_ubay",
-        JSON.stringify([...state, { ident: payload?.ident, cart_count: 1 }])
+        JSON.stringify([...state, { seo: payload?.seo, cart_count: 1 }])
       );
-      return [...state, { ident: payload?.ident, cart_count: 1 }];
+      return [...state, { seo: payload?.seo, cart_count: 1 }];
     },
     setCartAddCount(state, { payload }) {
       const response = state?.map((product) => ({
         ...product,
         cart_count:
-          payload?.ident === product?.ident
+          payload?.seo === product?.seo
             ? (product?.cart_count || 1) + 1
             : product?.cart_count || 1,
       }));
@@ -41,29 +41,29 @@ const cartSlice = createSlice({
         const response = state?.map((product) => ({
           ...product,
           cart_count:
-            payload?.ident === product?.ident
+            payload?.seo === product?.seo
               ? payload?.cart_count
               : product?.cart_count || 1,
         }));
         localStorage.setItem("cart_ubay", JSON.stringify(response));
         return response;
       } else {
-        const response = state?.filter(({ ident }) => ident !== payload?.ident);
+        const response = state?.filter(({ seo }) => seo !== payload?.seo);
         localStorage.setItem("cart_ubay", JSON.stringify(response));
         return response;
       }
     },
     setCartRemoveCount(state, { payload }) {
-      const isProduct = state.find(({ ident }) => ident === payload?.ident);
+      const isProduct = state.find(({ seo }) => seo === payload?.seo);
       if (isProduct?.cart_count === 1) {
-        const response = state?.filter(({ ident }) => ident !== payload?.ident);
+        const response = state?.filter(({ seo }) => seo !== payload?.seo);
         localStorage.setItem("cart_ubay", JSON.stringify(response));
         return response;
       }
       const response = state?.map((product) => ({
         ...product,
         cart_count:
-          payload?.ident === product?.ident
+          payload?.seo === product?.seo
             ? (product?.cart_count || 1) - 1
             : product?.cart_count || 1,
       }));
@@ -71,7 +71,7 @@ const cartSlice = createSlice({
       return response;
     },
     setRemoveCart(state, { payload }) {
-      const response = state?.filter(({ ident }) => ident !== payload?.ident);
+      const response = state?.filter(({ seo }) => seo !== payload?.seo);
       localStorage.setItem("cart_ubay", JSON.stringify(response));
       return response;
     },

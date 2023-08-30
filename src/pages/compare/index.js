@@ -101,7 +101,7 @@ const Comparison = () => {
                 </Link>
                 <div className="info">
                   <li className="scroll-custome">{product.name}</li>
-                  <li>{currencyString(product?.main_price)}</li>
+                  <li>{currencyString(product?.price)}</li>
                 </div>
                 {names.map((key) => (
                   <li key={key} className="scroll-custome">

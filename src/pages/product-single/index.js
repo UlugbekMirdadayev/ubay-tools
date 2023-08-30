@@ -9,7 +9,7 @@ import { ProductStyled } from "./style";
 import { useParams } from "react-router-dom";
 import { api } from "../../api";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { API, currencyString, isSelectedProduct } from "../../utils/constants";
+import { API, currencyString, goContact, isSelectedProduct } from "../../utils/constants";
 import {
   Arrow,
   CarIcon,
@@ -31,11 +31,11 @@ import {
 import locale from "../../localization/locale.json";
 import Slider from "../home/categoryProducts/slider";
 import { toast } from "react-toastify";
+import NotFound from "../../components/404";
 
 const ProductSingle = () => {
   const dispatch = useDispatch();
-  const params = useParams();
-  const id = useMemo(() => Number(params?.id), [params?.id]);
+  const { seo } = useParams();
   const [data, setData] = useState({});
   const [active, setActive] = useState(0);
   const [sliderRef, paginationRef, prodSlider] = [
@@ -48,7 +48,6 @@ const ProductSingle = () => {
   const cartItems = Selectors.useCart();
   const wishes = Selectors.useWishes();
   const compareItems = Selectors.useCompare();
-  const [products, setProducts] = useState([]);
   const langData = useMemo(() => locale[lang]["product_single"], [lang]);
 
   const handlePrev = useCallback(() => {
@@ -75,64 +74,47 @@ const ProductSingle = () => {
 
   const getProduct = useCallback(() => {
     api
-      .get_products_single({ view_product: { pro_ident: id } })
+      .get_products_single(`?seo=${seo}`)
       .then(({ data }) => {
-        if (data.res_id === 200) {
-          setData(data.result[0]);
+        if (data?.inStock) {
+          setData(data);
         } else {
-          toast.error(data?.mess);
-          console.log(data);
+          setData({ notFound: true });
         }
       })
-      .catch(({ message }) => {
-        toast.error(message);
-        console.log(message);
+      .catch(({ response: { data } }) => {
+        setData({ notFound: true });
+        console.log(data);
+        toast.error(data?.message);
       });
-  }, [id]);
+  }, [seo]);
 
   const handleWishes = () => {
-    dispatch(setLiked(id));
+    dispatch(setLiked(seo));
   };
 
   const handleCart = () => {
-    dispatch(setCart({ ident: id }));
+    dispatch(setCart({ seo }));
   };
 
   const handleCartAddCount = () => {
-    dispatch(setCartAddCount({ ident: id }));
+    dispatch(setCartAddCount({ seo }));
   };
 
   const handleCartRemoveCount = () => {
-    dispatch(setCartRemoveCount({ ident: id }));
+    dispatch(setCartRemoveCount({ seo }));
   };
 
   useEffect(() => {
     getProduct();
-  }, [id, getProduct]);
+  }, [seo, getProduct]);
 
-  useEffect(() => {
-    if (data?.sub_ident) {
-      api
-        .get_products({
-          show_products: { main_ident: 0, sub_ident: data?.sub_ident },
-        })
-        .then(({ data }) => {
-          if (data?.res_id === 200) {
-            setProducts(data?.result);
-          } else {
-            console.log(data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [data?.sub_ident]);
-
-  return (
+  return data?.notFound ? (
+    <NotFound />
+  ) : (
     <ProductStyled>
       <h1 className="title_prod">
-        {data[lang === "uz" ? "title_uz" : "sub_name"]}
+        {lang === "uz" ? data.title_uz || data.title : data.title}
       </h1>
       <div className="row_main">
         <div className="slider_column">
@@ -142,19 +124,25 @@ const ProductSingle = () => {
             className="slider"
             slidesPerView={1}
           >
-            {data?.photos?.length ? (
-              data?.photos?.map((item, key) => (
+            {data?.images?.length ? (
+              data?.images?.map((item, key) => (
                 <SwiperSlide key={key}>
                   <img
                     className="slider_image"
-                    src={API.baseURL_IMAGE + item?.image}
-                    alt={item?.caption}
+                    src={API.baseURL_IMAGE + item}
+                    alt={item}
                   />
                 </SwiperSlide>
               ))
             ) : (
               <SwiperSlide>
-                <img src={API.baseURL_IMAGE + data?.photo} alt={data?.name} />
+                <img
+                  src={
+                    API.baseURL_IMAGE +
+                    (data?.images?.length ? data?.images[0] : "")
+                  }
+                  alt={data?.title}
+                />
               </SwiperSlide>
             )}
           </Swiper>
@@ -163,8 +151,8 @@ const ProductSingle = () => {
               <Arrow />
             </button>
             <Swiper ref={paginationRef} slidesPerView={"auto"} spaceBetween={5}>
-              {data?.photos?.length
-                ? data?.photos?.map((item, key) => (
+              {data?.images?.length
+                ? data?.images?.map((item, key) => (
                     <SwiperSlide
                       key={key}
                       className={`pagination-btn ${
@@ -172,10 +160,7 @@ const ProductSingle = () => {
                       }`}
                     >
                       <button onClick={() => handleChangeSlide(key)}>
-                        <img
-                          src={API.baseURL_IMAGE + item?.image}
-                          alt={item?.caption}
-                        />
+                        <img src={API.baseURL_IMAGE + item} alt={item} />
                       </button>
                     </SwiperSlide>
                   ))
@@ -188,31 +173,40 @@ const ProductSingle = () => {
         </div>
         <div className="options scroll-custome">
           <ul>
-            {data?.parametrs?.map((params,key) => (
-              <li key={key}>
-                <span className="key">
-                  {params[lang === "uz" ? "comment" : "name"] || ""}
-                </span>
-                <span className="value">{params?.value}</span>
-              </li>
-            ))}
+            <li>{langData.params}</li>
+            {data?.compare?.length
+              ? data?.compare[0]?.map((params, key) => (
+                  <li key={key}>
+                    <span className="key">
+                      {params[`name_${lang === "uz" ? "uz" : "ru"}`] || ""}
+                    </span>
+                    <span className="value">
+                      {params?.values?.length
+                        ? params?.values[0][
+                            `name_${lang === "uz" ? "uz" : "ru"}`
+                          ]
+                        : ""}
+                    </span>
+                  </li>
+                ))
+              : ""}
           </ul>
         </div>
         <div>
           <button
             className={`add_wishes ${
-              isSelectedProduct({ ident: id }, wishes) ? "active" : ""
+              isSelectedProduct({ seo }, wishes) ? "active" : ""
             }`}
             onClick={handleWishes}
           >
             <Like
               color="#015CCF"
-              liked={!!isSelectedProduct({ ident: id }, wishes)}
+              liked={!!isSelectedProduct({ seo }, wishes)}
             />
             <span>{langData.add_wishes}</span>
           </button>
           <div className="cart_card">
-            <div className="price">{currencyString(data?.main_price)}</div>
+            <div className="price">{currencyString(data?.price)}</div>
             <div className="info_row">
               <span className="desc">{langData.info_delivery}</span>
               <InfoIcon />
@@ -229,32 +223,30 @@ const ProductSingle = () => {
             <div className="bottom_btns">
               <button
                 className={`primary ${
-                  isSelectedProduct({ ident: id }, cartItems)?.cart_count
+                  isSelectedProduct({ seo }, cartItems)?.cart_count
                     ? "active"
                     : ""
                 }`}
                 onClick={
-                  isSelectedProduct({ ident: id }, cartItems)?.cart_count
+                  isSelectedProduct({ seo }, cartItems)?.cart_count
                     ? null
                     : handleCart
                 }
               >
-                {isSelectedProduct({ ident: id }, cartItems)?.cart_count ? (
+                {isSelectedProduct({ seo }, cartItems)?.cart_count ? (
                   <>
                     <span onClick={handleCartRemoveCount}>
                       <MinusIcon />
                     </span>
                     <input
                       type="number"
-                      value={
-                        isSelectedProduct({ ident: id }, cartItems)?.cart_count
-                      }
+                      value={isSelectedProduct({ seo }, cartItems)?.cart_count}
                       readOnly
                     />
                     <span
                       onClick={
-                        isSelectedProduct({ ident: id }, cartItems)
-                          ?.cart_count < data?.count
+                        isSelectedProduct({ seo }, cartItems)?.cart_count <
+                        data?.qty
                           ? handleCartAddCount
                           : null
                       }
@@ -269,12 +261,12 @@ const ProductSingle = () => {
                   </>
                 )}
               </button>
-              <button>
+              <button onClick={goContact}>
                 <span>{langData.buy_now}</span>
               </button>
             </div>
             <div className="count">
-              <span>{langData.count.replace("{{count}}", data?.count)}</span>
+              <span>{langData.count.replace("{{count}}", data?.qty)}</span>
               <MedalIcon />
             </div>
           </div>
@@ -288,8 +280,7 @@ const ProductSingle = () => {
               <span
                 key={index}
                 style={{
-                  color:
-                    index + 1 <= data?.rating ? "rgb(255, 215, 0)" : "#000",
+                  color: index + 1 <= data?.grade ? "rgb(255, 215, 0)" : "#000",
                 }}
               >
                 {start}
@@ -298,7 +289,7 @@ const ProductSingle = () => {
           </div>
         </div>
         <div className="text">
-          {data[`delivery${lang === "uz" ? "_uz" : ""}`]}
+          {data[`description${lang === "uz" ? "_uz" : ""}`]}
         </div>
       </div>
       <div className="products">
@@ -307,7 +298,7 @@ const ProductSingle = () => {
           slidesPerView={"auto"}
           className="motorcycle_cultivator"
         >
-          {products?.map((product) => (
+          {data?.variant_products?.map((product) => (
             <SwiperSlide
               key={product?.ident}
               className="motorcycle_cultivator_card"

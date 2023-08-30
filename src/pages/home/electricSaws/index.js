@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Link } from "react-router-dom";
 import { SlideArrow } from "../../../components/icon";
-import {skeletionData} from "../../../utils/constants"
+import {API, skeletionData} from "../../../utils/constants"
 
 function ElectricSaws({ lang, langData }) {
   const {categories} = Selectors.useCategories();
@@ -27,17 +27,18 @@ function ElectricSaws({ lang, langData }) {
       <Swiper
         ref={sliderRef}
         slidesPerView={"auto"}
+        className="slider_cont"
         onSlideChange={({ activeIndex }) => setActive(activeIndex)}
       >
         {categories?.length ? categories.map((category) => (
-          <SwiperSlide key={category?.ident} className="card_electric_saws">
+          <SwiperSlide key={category?._id} className="card_electric_saws">
             <div className="title">
-              <h1>{category[lang === "uz" ? "name_uz" : "name"]}</h1>
-              <Link to={`/category/${category?.ident}`}>{langData.more}</Link>
+              <h1>{category[lang === "uz" ? "title_uz" : "title"]}</h1>
+              <Link to={`/category/${category?.seo}`}>{langData.more}</Link>
             </div>
             <div className="saws_image">
               <img
-                src="https://ubaytools.com/static/media/item1.efb0870565f2a2552f7e.png"
+                src={API.baseURL_IMAGE + category?.image}
                 alt="..."
               />
             </div>

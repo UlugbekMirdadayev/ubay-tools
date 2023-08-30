@@ -21,14 +21,13 @@ import {
   RadioIcon,
   UserIcon,
 } from "../../components/icon";
-import { setUserAddress } from "../../redux/userAddress-slice";
 import { setLoading } from "../../redux/loading-slice";
 import {
   setOpenAddressModal,
   setOpenUpdateModal,
 } from "../../redux/modals-slice";
 import { toast } from "react-toastify";
-import { setOrders } from "../../redux/orders-slice";
+// import { setOrders } from "../../redux/orders-slice";
 import NotFound from "../../components/404";
 
 const BookingOrder = () => {
@@ -38,24 +37,29 @@ const BookingOrder = () => {
   const cartItems = Selectors.useCart();
   const wishes = Selectors.useWishes();
   const user = Selectors.useUser();
-  const addresses = Selectors.useUserAddress();
   const { products } = Selectors.useProducts();
   const [delivery_type, setDeliveryType] = useState("{{courier}}");
   const [payment_type, setPaymentType] = useState("cash");
   const [comment, setComment] = useState("");
-  const [promokod, setPromokod] = useState("");
+  const [isloading, setisloading] = useState(false);
+  const [promo, setPromo] = useState({
+    promoCodeId: null,
+    promoDiscount: null,
+  });
   const langData = useMemo(() => locale[lang]["cart"], [lang]);
 
   const handleFilterProducts = useCallback(() => {
     if (products?.length) return null;
     api
       .get_products({
-        show_products: { main_ident: 0, sub_ident: 0 },
+        sort: "desc",
+        limit: 10,
       })
       .then(({ data }) => {
-        if (data?.res_id === 200) {
-          dispatch(setProducts(data?.result));
+        if (data?.length) {
+          dispatch(setProducts(data?.filter((prod) => prod?.inStock)));
         } else {
+          dispatch(setProducts([]));
           console.log(data);
         }
       })
@@ -68,27 +72,30 @@ const BookingOrder = () => {
     handleFilterProducts();
   }, [handleFilterProducts]);
 
-  useEffect(() => {
-    if (addresses?.length || !user?.id) return;
-    api
-      .get_user_address({
-        show_adress: { id: user?.id },
-      })
-      .then(({ data }) => {
-        if (data.res_id === 200) {
-          dispatch(
-            setUserAddress(
-              data?.result?.sort((a, b) => a?.ident - b?.ident)?.reverse()
-            )
-          );
-        } else {
+  const handlePromo = (value) => {
+    if (value.length > 2) {
+      setisloading(true);
+      api
+        .promo(value)
+        .then(({ data }) => {
+          setisloading(false);
           console.log(data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [addresses?.length, user?.id, dispatch]);
+          setPromo({
+            promoCodeId: data?.data?.promoCodeId,
+            promoDiscount: data?.data?.discount,
+          });
+        })
+        .catch(({ response: { data } }) => {
+          setisloading(false);
+          console.log(data?.message);
+          setPromo({
+            error: true,
+            promoDiscount: null,
+            promoCodeId: null,
+          });
+        });
+    }
+  };
 
   const total_infos = useMemo(() => {
     const array = products
@@ -98,7 +105,7 @@ const BookingOrder = () => {
         ...itemFiltered,
       }));
     const total_summ = array.reduce(
-      (currentSum, item) => currentSum + item.main_price * item.cart_count,
+      (currentSum, item) => currentSum + item.price * item.cart_count,
       0
     );
 
@@ -113,12 +120,12 @@ const BookingOrder = () => {
   const isProductCount = (product) => ({
     count: isSelectedProduct(product, cartItems)?.cart_count,
     price: currencyString(
-      isSelectedProduct(product, cartItems)?.cart_count * product.main_price
+      isSelectedProduct(product, cartItems)?.cart_count * product.price
     ),
   });
 
   const handleWishes = (product) => {
-    dispatch(setLiked(product?.ident));
+    dispatch(setLiked(product?.seo));
   };
   const handleCartAddCount = (product) => {
     dispatch(setCartAddCount(product));
@@ -133,49 +140,38 @@ const BookingOrder = () => {
   };
 
   const handleSubmit = () => {
+    const fData = {
+      delivery:
+        delivery_type === "{{courier}}"
+          ? langData["booking"].delivery_courier
+          : delivery_type === "{{self}}"
+          ? langData["booking"].delivery_self
+          : langData["booking"].delivery_courier,
+      receiver_name: user?.fullName,
+      receiver_phone: user?.phone,
+      total_price: total_infos.total_summ,
+      billing_address:
+        delivery_type === "{{courier}}"
+          ? user?.address.find((addr) => addr?._id === user?.activeAdr || true)
+          : delivery_type === "{{self}}"
+          ? null
+          : user?.address.find((addr) => addr?._id === delivery_type),
+      comment,
+      products: productsInCart?.map((product) => ({
+        _id: product._id,
+        qty: isProductCount(product)?.count,
+      })),
+      payment_type,
+      promoCodeId: promo.promoCodeId,
+      promoDiscount: promo.promoDiscount,
+    };
     dispatch(setLoading(true));
     api
-      .set_booking_order({
-        insert: {
-          id: user?.id,
-          delivery_type: 15,
-          order: 1,
-          pay_type: 1,
-          comment,
-          all_price:
-            total_infos.total_summ -
-            (+promokod === new Date().getDate()
-              ? (total_infos.total_summ / 100) * new Date().getDate()
-              : 0),
-          products: productsInCart?.map((product) => ({
-            pro_ident: product.ident,
-            count: isProductCount(product)?.count,
-            main_price: product.main_price,
-          })),
-        },
-      })
+      .set_booking_order(fData)
       .then(({ data }) => {
         dispatch(setLoading(false));
-        if (data.res_id === 200) {
-          dispatch(setClearCart());
-          toast.success(data?.mess);
-          api
-            .get_user_orders({
-              show_list: { id: user?.id },
-            })
-            .then(({ data }) => {
-              if (data.res_id === 200) {
-                dispatch(setOrders(data?.result));
-              } else console.log(data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          navigate("/profile/orders");
-        } else {
-          console.log(data);
-          toast.error(JSON.stringify(data?.result));
-        }
+        dispatch(setClearCart());
+        navigate("/profile/orders");
       })
       .catch(({ message }) => {
         dispatch(setLoading(false));
@@ -184,7 +180,9 @@ const BookingOrder = () => {
       });
   };
 
-  if (!user?.id) return <NotFound />;
+  if (!user?._id) return <NotFound />;
+
+  // const
 
   return (
     <BookingOrderStyled>
@@ -195,9 +193,12 @@ const BookingOrder = () => {
         <div className="grid">
           <div className="space">
             {productsInCart.map((product) => (
-              <div key={product.ident} className="product">
-                <Link to={`/product/${product.ident}`}>
-                  <img src={API.baseURL_IMAGE + product.photo} alt="product" />
+              <div key={product.seo} className="product">
+                <Link to={`/product/${product.seo}`}>
+                  <img
+                    src={API.baseURL_IMAGE + product?.allImages[0]?.image}
+                    alt="product"
+                  />
                 </Link>
                 <div className="info">
                   <h3>{product[`title${lang === "uz" ? "_uz" : ""}`]}</h3>
@@ -229,12 +230,12 @@ const BookingOrder = () => {
             <div className="user_info">
               <li>
                 <UserIcon color="#C4C4C4" />
-                <span>{user.ism + " " + user.fam}</span>
+                <span>{user?.fullName}</span>
               </li>
               <a href={`tel:+${user.phone}`}>
                 <li>
                   <PhoneIcon />
-                  <span>{user.phone}</span>
+                  <span>{user?.phone}</span>
                 </li>
               </a>
               <button
@@ -248,11 +249,11 @@ const BookingOrder = () => {
             <div className="row_btn">
               <label
                 className={`primary ${
-                  delivery_type === "{{courier}}" ? "active" : ""
+                  delivery_type !== "{{self}}" ? "active" : ""
                 }`}
                 onClick={() => setDeliveryType("{{courier}}")}
               >
-                <RadioIcon checked={delivery_type === "{{courier}}"} />
+                <RadioIcon checked={delivery_type !== "{{self}}"} />
                 <span>{langData["booking"].delivery_courier}</span>
               </label>
               <label
@@ -266,16 +267,23 @@ const BookingOrder = () => {
               </label>
             </div>
             <div className="addresses">
-              {addresses.map((address) => (
-                <label
-                  className={delivery_type === address?.adress ? "active" : ""}
-                  key={address?.ident}
-                  onClick={() => setDeliveryType(address?.adress)}
-                >
-                  <RadioIcon checked={delivery_type === address?.adress} />
-                  <span>{address.adress}</span>
-                </label>
-              ))}
+              {[...user?.address]
+                ?.sort((a, b) => {
+                  return (
+                    Number(user?.activeAdr === b?._id) -
+                    Number(user?.activeAdr === a?._id)
+                  );
+                })
+                .map((address) => (
+                  <label
+                    className={delivery_type === address?._id ? "active" : ""}
+                    key={address?._id}
+                    onClick={() => setDeliveryType(address?._id)}
+                  >
+                    <RadioIcon checked={delivery_type === address?._id} />
+                    <span>{address.street}</span>
+                  </label>
+                ))}
             </div>
             <button
               onClick={() => dispatch(setOpenAddressModal(true))}
@@ -312,24 +320,14 @@ const BookingOrder = () => {
                   onClick={() => setPaymentType("click")}
                 >
                   <RadioIcon checked={payment_type === "click"} />
-                  <img
-                    src={
-                      "https://ubaytools.com/static/media/click.b1d66da9714e224ee48f.png"
-                    }
-                    alt="click"
-                  />
+                  <img src={require("../../images/click.png")} alt="click" />
                 </label>
                 <label
                   className={payment_type === "uzum" ? "active" : ""}
                   onClick={() => setPaymentType("uzum")}
                 >
                   <RadioIcon checked={payment_type === "uzum"} />
-                  <img
-                    src={
-                      "https://ubaytools.com/static/media/uzum.dc3fb82565b308a8ec81.png"
-                    }
-                    alt="uzum"
-                  />
+                  <img src={require("../../images/uzum.png")} alt="uzum" />
                 </label>
               </div>
               <div className="commentary">
@@ -358,8 +356,8 @@ const BookingOrder = () => {
                 <span className="value fs_18 black">
                   {currencyString(
                     total_infos.total_summ -
-                      (+promokod === new Date().getDate()
-                        ? (total_infos.total_summ / 100) * new Date().getDate()
+                      (promo?.promoDiscount
+                        ? (total_infos.total_summ / 100) * promo?.promoDiscount
                         : 0)
                   )}
                 </span>
@@ -368,17 +366,16 @@ const BookingOrder = () => {
             <ul>
               <li>
                 <span className="key">{langData.promokod}</span>
-                <span className="value" onClick={() => setPromokod("")}>
-                  {+promokod === new Date().getDate() ? (
-                    `-${new Date().getDate()}%(${currencyString(
-                      (total_infos.total_summ / 100) * new Date().getDate()
-                    )})`
+                <span className="value">
+                  {promo?.promoDiscount ? (
+                    promo?.promoDiscount + "%"
                   ) : (
                     <input
                       type="text"
-                      className={promokod.length >= 2 ? "error" : null}
+                      className={promo?.error ? "error" : null}
                       placeholder={langData.promokod.replace(":", "")}
-                      onChange={({ target: { value } }) => setPromokod(value)}
+                      onChange={({ target: { value } }) => handlePromo(value)}
+                      readOnly={isloading}
                     />
                   )}
                   &nbsp;
@@ -410,20 +407,24 @@ const BookingOrder = () => {
                     : payment_type === "click"
                     ? langData["booking"].click
                     : payment_type === "terminal"
-                    ? langData["booking"].terminal.text
+                    ? langData["booking"].terminal.title
                     : payment_type === "cash"
-                    ? langData["booking"].cash.text
+                    ? langData["booking"].cash.title
                     : "-"}
                 </span>
               </li>
               <li>
                 <span className="key">{langData.address}</span>
                 <span className="value">
-                  {delivery_type === "{{courier}}"
-                    ? user?.adress || "-"
-                    : delivery_type === "{{self}}"
-                    ? user?.adress || "-"
-                    : delivery_type || user?.adress || "-"}
+                  {delivery_type === "{{self}}"
+                    ? "-"
+                    : user?.address.find(
+                        (addr) =>
+                          addr?._id ===
+                          (delivery_type === "{{courier}}"
+                            ? user?.activeAdr
+                            : delivery_type)
+                      )?.street}
                 </span>
               </li>
             </ul>

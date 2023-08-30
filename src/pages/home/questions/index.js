@@ -13,22 +13,30 @@ const Questions = ({ langData, lang }) => {
   const questions = Selectors.useQuestions();
 
   const getQuestions = useCallback(() => {
-    console.log("get questions");
+    if (questions?.length) return;
     api
-      .get_questions({ info_add: { type: 1 } })
+      .get_questions()
       .then(({ data }) => {
-        if (data?.res_id) {
-          dispatch(setQuestions(data?.result));
+        if (data?.length) {
+          dispatch(
+            setQuestions(
+              data?.sort(
+                (a, b) =>
+                  new Date(a?.updatedAt)?.getTime() -
+                  new Date(b?.updatedAt)?.getTime()
+              )
+            )
+          );
         } else {
           console.log(data);
-          toast.error(data?.mess);
+          dispatch(setQuestions([]));
         }
       })
       .catch(({ message }) => {
         toast.error(message);
         console.log(message);
       });
-  }, [dispatch]);
+  }, [dispatch, questions?.length]);
 
   useEffect(() => {
     getQuestions();
@@ -57,12 +65,12 @@ const Questions = ({ langData, lang }) => {
           </div>
         </div>
       </div>
-      {questions.length ? (
-        questions.map((question) => (
+      {questions?.length ? (
+        questions?.map((question) => (
           <Accord
-            key={question?.ident}
-            title={question?.name}
-            body={question?.value}
+            key={question?._id}
+            title={lang === "uz" ? question?.question_uz : question?.question}
+            body={lang === "uz" ? question?.answer_uz : question?.answer}
           />
         ))
       ) : (

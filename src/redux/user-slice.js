@@ -7,8 +7,9 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setLogin(state, { payload }) {
-      const localeData = { phone: payload?.phone, id: payload?.id };
+      const localeData = { phone: payload?.phone, token: payload?.token };
       localStorage.setItem("ubay-user-data", JSON.stringify(localeData));
+      delete payload.token
       return (state = payload);
     },
     setLogOut(state, { payload }) {

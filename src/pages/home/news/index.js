@@ -16,22 +16,29 @@ const NewsSection = ({ lang, langData }) => {
   const news = Selectors.useNews();
 
   const getNews = useCallback(() => {
-    console.log("get News");
+    if (news?.length) return;
     api
-      .get_news({ news: {} })
+      .get_news()
       .then(({ data }) => {
-        if (data?.res_id === 200) {
-          dispatch(setNews(data?.result));
+        if (data?.length) {
+          dispatch(
+            setNews(
+              data?.sort(
+                (a, b) =>
+                  new Date(a?.createdAt)?.getTime() -
+                  new Date(b?.createdAt)?.getTime()
+              )
+            )
+          );
         } else {
           console.log(data);
-          toast.error(data?.mess);
         }
       })
-      .catch(({ message }) => {
-        toast.error(message);
-        console.log(message);
+      .catch(({ response: { data } }) => {
+        toast.error(data?.message || JSON.stringify(data));
+        console.log(data);
       });
-  }, [dispatch]);
+  }, [dispatch, news?.length]);
 
   useEffect(() => {
     getNews();
@@ -41,18 +48,22 @@ const NewsSection = ({ lang, langData }) => {
       <h1>{langData.news_title}</h1>
       <Swiper slidesPerView={"auto"} className="row">
         {news?.length
-          ? news?.map((single, index) => (
-              <SwiperSlide key={single?.ident} className="card">
-                <Link to={`/news/${index}`}>
+          ? news?.map((single) => (
+              <SwiperSlide key={single?._id} className="card">
+                <Link to={`/news/${single?._id}`}>
                   <div className="date">
-                    {moment(single?.datein).format("DD.MM.YYYY")}
+                    {moment(single?.createdAt).format("DD.MM.YYYY HH:MM")}
                   </div>
-                  <div className="title">{single?.title}</div>
+                  <div className="title">
+                    {lang === "uz" ? single?.title_uz : single?.title}
+                  </div>
                   <img
-                    src={API.baseURL_IMAGE + single?.photo}
+                    src={API.baseURL_IMAGE + single?.image}
                     alt="news_image"
                   />
-                  <div className="prg">{single?.short || `Title ${lang}`}</div>
+                  <div className="prg">
+                    {lang === "uz" ? single?.short_uz : single?.short}
+                  </div>
                 </Link>
               </SwiperSlide>
             ))

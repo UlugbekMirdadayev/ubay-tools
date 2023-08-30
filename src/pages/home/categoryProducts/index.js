@@ -1,42 +1,43 @@
-import React, { useRef, useCallback, useEffect } from "react";
+import React, { Fragment, useCallback, useEffect } from "react";
 import { StyledSalesHits } from "./styles";
 import { api } from "../../../api";
 import { useDispatch } from "react-redux";
 import { setProducts } from "../../../redux/products-slice";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import Slider from "./slider";
 import Selectors from "../../../redux/selectors";
-import { skeletionData } from "../../../utils/constants";
+import { API, skeletionData } from "../../../utils/constants";
 import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
 function CategoryProducts() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const sliderRef = useRef();
   const { products } = Selectors.useProducts();
+  const slider = Selectors.useSlider();
   const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
 
   const handleFilterProducts = useCallback(() => {
+    if (products?.length) return;
     api
       .get_products({
-        show_products: { main_ident: 0, sub_ident: 0 },
+        sort: "desc",
+        limit: 10,
       })
       .then(({ data }) => {
-        if (data?.res_id === 200) {
-          dispatch(setProducts(data?.result));
+        if (data?.length) {
+          dispatch(setProducts(data?.filter((prod) => prod?.inStock)));
         } else {
-          dispatch(setProducts(data?.result));
-          toast.error(data?.mess);
+          console.log(data);
+          dispatch(setProducts([]));
         }
       })
       .catch(({ message }) => {
         toast.error(message);
         console.log(message);
       });
-  }, [dispatch]);
+  }, [dispatch, products?.length]);
 
   useEffect(() => {
     handleFilterProducts();
@@ -44,102 +45,57 @@ function CategoryProducts() {
 
   return (
     <StyledSalesHits>
-      {products?.length ? (
-        <img
-          src={
-            "https://api.ubaytools.com/Images/78f97b080b2825453b7fe926d5675b5f.png"
-          }
-          alt={"category_image"}
-          className="full-image"
-        />
-      ) : (
-        <div className="full-image isLoading" />
-      )}
-      <div className="flex">
-        <Swiper
-          ref={sliderRef}
-          slidesPerView={"auto"}
-          className="motorcycle_cultivator"
-        >
-          {products?.length
-            ? products?.map((product) => (
-                <SwiperSlide
-                  key={product?.ident}
-                  className="motorcycle_cultivator_card"
-                >
-                  <Slider
-                    wishes={wishes}
-                    cartItems={cartItems}
-                    compareItems={compareItems}
-                    dispatch={dispatch}
-                    product={product}
-                  />
-                </SwiperSlide>
-              ))
-            : skeletionData.categories.map((key) => (
-                <SwiperSlide
-                  key={key}
-                  className="motorcycle_cultivator_card isLoading"
-                >
-                  <Slider
-                    wishes={wishes}
-                    cartItems={cartItems}
-                    compareItems={compareItems}
-                    dispatch={dispatch}
-                    product={{}}
-                  />
-                </SwiperSlide>
-              ))}
-        </Swiper>
-      </div>
-      {products?.length ? (
-        <img
-          src={
-            "https://api.ubaytools.com/Images/ff2a72d3ab82f271303ba3eec173531c.png"
-          }
-          alt={"category_image"}
-          className="full-image"
-        />
-      ) : (
-        <div className="full-image isLoading" />
-      )}
-      <div className="flex">
-        <Swiper
-          ref={sliderRef}
-          slidesPerView={"auto"}
-          className="motorcycle_cultivator"
-        >
-          {products?.length
-            ? products?.map((product) => (
-                <SwiperSlide
-                  key={product?.ident}
-                  className="motorcycle_cultivator_card"
-                >
-                  <Slider
-                    wishes={wishes}
-                    cartItems={cartItems}
-                    compareItems={compareItems}
-                    dispatch={dispatch}
-                    product={product}
-                  />
-                </SwiperSlide>
-              ))
-            : skeletionData.categories.map((key) => (
-                <SwiperSlide
-                  key={key}
-                  className="motorcycle_cultivator_card isLoading"
-                >
-                  <Slider
-                    wishes={wishes}
-                    cartItems={cartItems}
-                    compareItems={compareItems}
-                    dispatch={dispatch}
-                    product={{}}
-                  />
-                </SwiperSlide>
-              ))}
-        </Swiper>
-      </div>
+      {slider
+        ?.filter((slide) => slide.sliderType !== 1)
+        ?.map((slide) => (
+          <Fragment key={slide?._id}>
+            {products?.length ? (
+              <Link to={`/banner/${slide?._id}`}>
+                <img
+                  onClick={() => navigate()}
+                  src={`${API.baseURL_IMAGE}${slide.image}`}
+                  alt={"category_image"}
+                  className="full-image"
+                />
+              </Link>
+            ) : (
+              <div className="full-image isLoading" />
+            )}
+            <div className="flex">
+              <div className="motorcycle_cultivator flex_row">
+                {products?.length
+                  ? products?.map((product) => (
+                      <div
+                        key={product?._id}
+                        className="motorcycle_cultivator_card"
+                      >
+                        <Slider
+                          wishes={wishes}
+                          cartItems={cartItems}
+                          compareItems={compareItems}
+                          dispatch={dispatch}
+                          product={product}
+                        />
+                      </div>
+                    ))
+                  : skeletionData.categories.map((key) => (
+                      <div
+                        key={key}
+                        className="motorcycle_cultivator_card flex_row isLoading"
+                      >
+                        <Slider
+                          wishes={wishes}
+                          cartItems={cartItems}
+                          compareItems={compareItems}
+                          dispatch={dispatch}
+                          product={{}}
+                        />
+                      </div>
+                    ))}
+              </div>
+            </div>
+          </Fragment>
+        ))}
     </StyledSalesHits>
   );
 }

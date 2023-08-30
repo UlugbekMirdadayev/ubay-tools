@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { api } from "../../../api";
 import {
   API,
   currencyString,
@@ -15,16 +13,15 @@ import {
 import { Change, Like, MinusIcon, PlusIcon } from "../../../components/icon";
 import { Link } from "react-router-dom";
 import Selectors from "../../../redux/selectors";
-import { toast } from "react-toastify";
 
 const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
   const lang = Selectors.useLang();
   const handleWishes = (product) => {
-    dispatch(setLiked(product?.ident));
+    dispatch(setLiked(product?.seo));
   };
 
   const handleCompare = (product) => {
-    dispatch(setCompare(product?.ident));
+    dispatch(setCompare(product?.seo));
   };
 
   const handleCart = (product) => {
@@ -39,63 +36,35 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
     dispatch(setCartRemoveCount(product));
   };
 
-  const [rating, setRating] = useState(product?.rating);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const setProductRating = (pro_ident, star) => {
-    if (isLoading) return null;
-    if (star === rating) {
-      if (star === 1) {
-        star = 0;
-      } else {
-        return null;
-      }
-    }
-    setIsLoading(true);
-    api
-      .set_products_rating({
-        product_rating: { pro_ident, rating: star },
-      })
-      .then(({ data }) => {
-        setIsLoading(false);
-        if (data?.res_id === 200) {
-          setRating(star);
-        } else {
-          console.log(data, "response data");
-          toast.error(data?.mess);
-        }
-      })
-      .catch(({ message }) => {
-        setIsLoading(false);
-        toast.error(message);
-        console.log(message);
-      });
-  };
-
-  return product?.ident ? (
-    <div className={`hover_body ${isLoading ? "isLoading" : ""}`}>
-      <Link to={`/product/${product?.ident}`}>
-        <img src={API.baseURL_IMAGE + product?.photo} alt={product?.name} />
+  return product?.seo ? (
+    <div className={`hover_body`}>
+      <Link to={`/product/${product?.seo}`}>
+        {product?.allImages?.length ? (
+          <img
+            src={API.baseURL_IMAGE + product?.allImages[0]?.image}
+            alt={product?.title}
+          />
+        ) : null}
       </Link>
-      <Link to={`/product/${product?.ident}`}>
-        <h2>{product?.name}</h2>
+      <Link to={`/product/${product?.seo}`}>
+        <h2>
+          {lang === "uz" ? product?.title_uz || product?.title : product?.title}
+        </h2>
       </Link>
 
       <div className="link-category">
         {["★", "★", "★", "★", "★"].map((start, index) => (
           <span
             key={index}
-            onClick={() => setProductRating(product?.ident, index + 1)}
             style={{
-              color: index + 1 <= rating ? "rgb(255, 215, 0)" : "#000",
+              color: index + 1 <= product?.grade ? "rgb(255, 215, 0)" : "#000",
             }}
           >
             {start}
           </span>
         ))}
       </div>
-      <h1>{currencyString(product?.main_price)}</h1>
+      <h1>{currencyString(product?.price)}</h1>
       <div className="motorcycle_cultivator_cart">
         <button
           onClick={() =>
@@ -109,7 +78,14 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
                 <MinusIcon />
               </span>
               <span>{isSelectedProduct(product, cartItems)?.cart_count}</span>
-              <span onClick={() => handleCartAddCount(product)}>
+              <span
+                onClick={() =>
+                  isSelectedProduct(product, cartItems)?.cart_count <
+                  product?.qty
+                    ? handleCartAddCount(product)
+                    : null
+                }
+              >
                 <PlusIcon />
               </span>
             </>

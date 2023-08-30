@@ -7,9 +7,9 @@ const wishesSlice = createSlice({
   initialState,
   reducers: {
     setLiked(state, { payload }) {
-      const isLiked = state.find((ident) => ident === payload);
+      const isLiked = state.find((seo) => seo === payload);
       if (isLiked) {
-        const response = state?.filter((ident) => ident !== payload);
+        const response = state?.filter((seo) => seo !== payload);
         localStorage.setItem("wishes_ubay", JSON.stringify(response));
         return response;
       }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AboutSectionCont } from "./style";
 import { Link } from "react-router-dom";
 import {
@@ -8,8 +8,33 @@ import {
   TelegramIcon,
 } from "../../../components/icon";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { api } from "../../../api";
+import { toast } from "react-toastify";
+import { skeletionData, youtubeEmbed } from "../../../utils/constants";
 
 const AboutSection = ({ lang, langData }) => {
+  const [loading, setLoding] = useState(false);
+  const [videos, setVideo] = useState([]);
+  useEffect(() => {
+    setLoding(true);
+    api
+      .get_videos()
+      .then(({ data }) => {
+        setLoding(false);
+        if (data?.data?.length) {
+          setVideo(data?.data);
+        } else {
+          console.log(data);
+          setVideo([]);
+        }
+      })
+      .catch(({ message, ...err }) => {
+        setLoding(false);
+        console.log(err);
+        toast.error(message);
+      });
+  }, []);
+
   return (
     <AboutSectionCont>
       <div className="container_">
@@ -42,7 +67,7 @@ const AboutSection = ({ lang, langData }) => {
               </a>
             </div>
             <img
-              src="https://api.ubaytools.com/Images/b7287dd7839b8253f6ad450adc0ca8ac.png"
+              src={require("../../../images/about.png")}
               className="full-img-bottom"
               alt="..."
             />
@@ -78,23 +103,24 @@ const AboutSection = ({ lang, langData }) => {
           <div className="space full-cards">
             <h1 className="title">Ubay tools</h1>
             <Swiper slidesPerView={"auto"} className="row">
-              {true
-                ? [1, 1, 1, 1, 1, 1, 1, 1]?.map((_, index) => (
+              {loading
+                ? skeletionData.slider?.map((_, index) => (
+                    <SwiperSlide key={index} className="card isLoading" />
+                  ))
+                : videos?.map((video, index) => (
                     <SwiperSlide key={index} className="card">
                       <iframe
-                        src="https://www.youtube.com/embed/UrdRNXAnxYQ"
+                        src={youtubeEmbed(video?.url)}
                         title="Ubay"
                         allowFullScreen
                       />
-                      <div className="title_card">Ubay electro tools</div>
+                      <div className="title_card">
+                        {lang === "uz" ? video?.title_uz : video?.title}
+                      </div>
                       <div className="prg_card">
-                        Вас приветствует магазин электроники MacBro. У нас вы
-                        можете найти всю продукцию Apple. Уже более 14 лет
+                        {lang === "uz" ? video?.desc_uz : video?.desc}
                       </div>
                     </SwiperSlide>
-                  ))
-                : [1, 1, 1, 1, 1, 1, 1, 1]?.map((_, index) => (
-                    <SwiperSlide key={index} className="card isLoading" />
                   ))}
             </Swiper>
           </div>

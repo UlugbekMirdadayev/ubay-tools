@@ -25,14 +25,15 @@ function WishesScreen() {
     if (products?.length) return null;
     api
       .get_products({
-        show_products: { main_ident: 0, sub_ident: 0 },
+        sort: "desc",
+        limit: 10,
       })
       .then(({ data }) => {
-        if (data?.res_id === 200) {
-          dispatch(setProducts(data?.result));
+        if (data?.length) {
+          dispatch(setProducts(data?.filter(prod=> prod?.inStock)));
         } else {
           console.log(data);
-          toast.error(data.mess);
+          dispatch(setProducts([]));
         }
       })
       .catch(({ message }) => {
@@ -63,7 +64,7 @@ function WishesScreen() {
             productsLiked?.length ? (
               productsLiked?.map((product) => (
                 <SwiperSlide
-                  key={product?.ident}
+                  key={product?._id}
                   className="motorcycle_cultivator_card"
                 >
                   <Slider

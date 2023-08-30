@@ -11,6 +11,7 @@ import moment from "moment/moment";
 import { API, skeletionData } from "../../utils/constants";
 import locale from "../../localization/locale.json";
 import { DatePickerIcon } from "../../components/icon";
+import { toast } from "react-toastify";
 
 const News = () => {
   const dispatch = useDispatch();
@@ -20,23 +21,34 @@ const News = () => {
   const langData = useMemo(() => locale[lang]["home"], [lang]);
 
   const singleNews = useMemo(
-    () => news.find(({ ident }) => ident === +id),
+    () => news.find(({ _id }) => _id === id),
     [id, news]
   );
 
   const getNews = useCallback(() => {
-    console.log("get News");
+    if (news?.length) return;
     api
-      .get_news({ news: {} })
+      .get_news()
       .then(({ data }) => {
-        if (data?.res_id === 200) {
-          dispatch(setNews(data?.result));
+        if (data?.length) {
+          dispatch(
+            setNews(
+              data?.sort(
+                (a, b) =>
+                  new Date(a?.createdAt)?.getTime() -
+                  new Date(b?.createdAt)?.getTime()
+              )
+            )
+          );
+        } else {
+          console.log(data);
         }
       })
-      .catch((err) => {
-        console.log(err, "err get News");
+      .catch(({ response: { data } }) => {
+        toast.error(data?.message || JSON.stringify(data));
+        console.log(data);
       });
-  }, [dispatch]);
+  }, [dispatch, news?.length]);
 
   useEffect(() => {
     getNews();
@@ -44,29 +56,28 @@ const News = () => {
   return (
     <NewsSectionContainer>
       <h1>{langData.news_title}</h1>
-      {singleNews?.ident ? (
+      {singleNews?._id ? (
         <div className="single">
           <div className="flex">
             <div className="item">
               <DatePickerIcon />
               <span>
-                {moment(singleNews.datein).format("HH:MM / DD.MM.YYYY")}
+                {moment(singleNews?.createdAt).format("HH:MM / DD.MM.YYYY")}
               </span>
             </div>
           </div>
-          <div className="title">{singleNews.title}</div>
+          <div className="title">
+            {lang === "uz" ? singleNews.title_uz : singleNews.title}
+          </div>
           <div
             className="more"
             dangerouslySetInnerHTML={{
-              __html: singleNews?.more?.replaceAll(
-                "href",
-                `rel="noopener noreferrer" target="_blank" href`
-              ),
+              __html: lang === "uz" ? singleNews?.desc_uz : singleNews?.desc,
             }}
           />
           <img
             className="img-single"
-            src={API.baseURL_IMAGE + singleNews?.photo}
+            src={API.baseURL_IMAGE + singleNews?.image}
             alt="news"
           />
         </div>
@@ -77,22 +88,26 @@ const News = () => {
               <SwiperSlide
                 key={single?.ident}
                 style={
-                  +id === single?.ident
+                  id === single?._id
                     ? { opacity: 0.5, pointerEvents: "none" }
                     : {}
                 }
                 className="card"
               >
-                <Link to={`/news/${single?.ident}`}>
+                <Link to={`/news/${single?._id}`}>
                   <div className="date">
                     {moment(single?.datein).format("DD.MM.YYYY")}
                   </div>
-                  <div className="title">{single?.title}</div>
+                  <div className="title">
+                    {lang === "uz" ? single?.title_uz : single?.title}
+                  </div>
                   <img
-                    src={API.baseURL_IMAGE + single?.photo}
+                    src={API.baseURL_IMAGE + single?.image}
                     alt="news_image"
                   />
-                  <div className="prg">{single?.short || `Title ${lang}`}</div>
+                  <div className="prg">
+                    {lang === "uz" ? single?.short_uz : single?.short}
+                  </div>
                 </Link>
               </SwiperSlide>
             ))

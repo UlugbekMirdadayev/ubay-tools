@@ -1,6 +1,6 @@
 export const API = {
-  baseURL: "https://api.ubaytools.com/onlinemarket/",
-  baseURL_IMAGE: "https://api.ubaytools.com/Images/",
+  baseURL: "https://ub.app.techdatasoft.uz/api/v1/",
+  baseURL_IMAGE: "https://ub.app.techdatasoft.uz/uploads/images/",
 };
 
 export const arrayCreator = (count = 1) =>
@@ -26,11 +26,31 @@ export const currencyString = (string = "") =>
 export const isSelectedProduct = (product, arrayList) =>
   arrayList.find((ident) => {
     if (typeof ident === "object") {
-      return ident?.ident === product?.ident;
-    } else return ident === product?.ident;
+      return ident?.seo === product?.seo;
+    } else return ident === product?.seo;
   });
 
 export const removeDuplicates = (arr) => [...new Set(arr)];
+
+function getVideoId(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url?.match(regExp);
+
+  return match && match[2].length === 11 ? match[2] : null;
+}
+
+export const youtubeEmbed = (url) =>
+  "https://www.youtube.com/embed/" + getVideoId(url);
+
+export const goContact = () => {
+  const element = document.getElementById("contact-form");
+  if (element) {
+    element?.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      element?.children[2]?.click();
+    }, 500);
+  }
+};
 
 export const countries = [
   /*     {

@@ -41,7 +41,8 @@
       "batteries_lion": "Lion batareyalari",
       "hand_tools": "Qo'l asboblari",
       "branches": "Filiallar",
-      "certificates": "Sertifikatlar"
+      "certificates": "Sertifikatlar",
+      "our_address": "Bizning manzilimiz"
     },
     "home": {
       "empty_products": "Ushbu katalogga tegishli mahsulot topilmadi",
@@ -71,10 +72,10 @@
     },
     "about": {
       "statistics": [
-        {"number": "15yil+", "title": "Tajriba"},
-        {"number": "20+", "title": "Professional hodimlar"},
-        {"number": "300+", "title": "Hamkor Do'konlar"},
-        {"number": "1000+", "title": "Dan ortiq uskunalar"}
+        { "number": "15yil+", "title": "Tajriba" },
+        { "number": "20+", "title": "Professional hodimlar" },
+        { "number": "300+", "title": "Hamkor Do'konlar" },
+        { "number": "1000+", "title": "Dan ortiq uskunalar" }
       ]
     },
     "wishes": {
@@ -89,7 +90,8 @@
       "standart_delivery": "Standart yetkazib berish",
       "text_delivery": "1-3 ish kuni ichida kiritilgan manzilga yetkazib beriladi",
       "add_wishes": "Yoqimlilarga qo'shish",
-      "description": "Tavsif"
+      "description": "Tavsif",
+      "params": "Xususiyatlari"
     },
     "cart": {
       "title": "Savat",
@@ -185,6 +187,8 @@
       "home": "Uy",
       "flat": "Xonadon",
       "forgot": "Parolni unutdingizmi ?",
+      "goto_login": "Kirishga qaytish",
+      "go_register":"Yangi hisob yaratish",
       "breadcrumb": [
         {
           "link": "/",
@@ -221,6 +225,10 @@
     "404": {
       "title": "server bilan xatoli yuz berdi (404)",
       "to_home": "Asosiy menu qaytish"
+    },
+    "banner": {
+      "buy": "Sotib olish",
+      "catalog_open": "Katalog yuklab olish"
     }
   },
   "ru": {
@@ -265,7 +273,8 @@
       "batteries_lion": "Lion батареи",
       "hand_tools": "Ручные инструменты",
       "branches": "Филиалы",
-      "certificates": "Сертификаты"
+      "certificates": "Сертификаты",
+      "our_address": "Наш адрес"
     },
     "home": {
       "empty_products": "Товар, принадлежащий этому каталогу, не найден",
@@ -295,10 +304,10 @@
     },
     "about": {
       "statistics": [
-        {"number": "15лет+", "title": "Опыт"},
-        {"number": "20+", "title": "Профессиональный персонал"},
-        {"number": "300+", "title": "Магазины-Партнеры"},
-        {"number": "1000+", "title": "Более оборудования"}
+        { "number": "15лет+", "title": "Опыт" },
+        { "number": "20+", "title": "Профессиональный персонал" },
+        { "number": "300+", "title": "Магазины-Партнеры" },
+        { "number": "1000+", "title": "Более оборудования" }
       ]
     },
     "wishes": {
@@ -313,7 +322,8 @@
       "standart_delivery": "Стандартная доставка",
       "text_delivery": "Доставка от 1 до 3 рабочих дней исходя от адреса доставки",
       "add_wishes": "Добавить в избранное",
-      "description": "Описание"
+      "description": "Описание",
+      "params": "Характеристики"
     },
     "cart": {
       "title": "Корзинка",
@@ -409,6 +419,8 @@
       "home": "Дом",
       "flat": "Квартира",
       "forgot": "Забыли пароль?",
+      "goto_login": "Вернуться к входу",
+      "go_register":"Создание новой учетной записи",
       "breadcrumb": [
         {
           "link": "/",
@@ -445,6 +457,10 @@
     "404": {
       "title": "ошибка с сервером (404)",
       "to_home": "Вернуться в Главное меню"
+    },
+    "banner": {
+      "buy": "Купить",
+      "catalog_open": "Скачать каталог"
     }
   }
 }

@@ -32,7 +32,7 @@ const Update = () => {
   } = useForm();
   const onSubmit = (data) => {
     const formData = {
-      edit_data: { ...data, id: user?.id },
+      edit_data: { ...data, id: user?._id },
     };
     if (
       data.phone === user.phone &&
@@ -49,7 +49,7 @@ const Update = () => {
         if (data.res_id === 200) {
           console.log(formData);
           api
-            .search_user({
+            .login({
               phone_search: { phone: formData?.edit_data?.phone },
             })
             .then(({ data }) => {
@@ -81,7 +81,7 @@ const Update = () => {
 
   const handleClose = () => dispatch(setOpenUpdateModal(false));
 
-  if (!user?.id || !update) return <></>;
+  if (!user?._id || !update) return <></>;
 
   return (
     <ModalStyled className="w-80">

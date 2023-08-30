@@ -52,14 +52,15 @@ function SalesHits({ lang, langData }) {
       setLoading(true);
       api
         .get_products({
-          show_products: { main_ident: 0, sub_ident },
+          sort: "desc",
+          limit: 10,
         })
         .then(({ data }) => {
           setLoading(false);
-          if (data?.res_id === 200) {
-            dispatch(setTopProducts(data?.result));
+          if (data?.length) {
+            dispatch(setTopProducts(data?.filter(prod=> prod?.inStock)));
           } else {
-            dispatch(setTopProducts(data?.result));
+            dispatch(setTopProducts([]));
             console.log(data);
           }
         })
@@ -72,14 +73,14 @@ function SalesHits({ lang, langData }) {
     [dispatch]
   );
 
-  const isActiveCategory = topCategories?.find(({ ident }) => ident === active);
+  const isActiveCategory = topCategories?.find(({ seo }) => seo === active);
 
   const handleWishes = (product) => {
-    dispatch(setLiked(product?.ident));
+    dispatch(setLiked(product?.seo));
   };
 
   const handleCompare = (product) => {
-    dispatch(setCompare(product?.ident));
+    dispatch(setCompare(product?.seo));
   };
 
   const handleCart = (product) => {
@@ -95,7 +96,7 @@ function SalesHits({ lang, langData }) {
   };
 
   useEffect(() => {
-    handleFilterProducts(topCategories[0]?.ident);
+    handleFilterProducts(topCategories[0]?.seo);
   }, [handleFilterProducts, topCategories]);
 
   return (
@@ -108,22 +109,22 @@ function SalesHits({ lang, langData }) {
             ? topCategories?.map((category) => (
                 <button
                   onClick={() =>
-                    category?.ident === active
+                    category?.seo === active
                       ? null
-                      : handleFilterProducts(category?.ident)
+                      : handleFilterProducts(category?.seo)
                   }
-                  className={active === category?.ident ? "active" : null}
-                  key={category?.ident}
+                  className={active === category?.seo ? "active" : null}
+                  key={category?.seo}
                 >
-                  {category[lang === "uz" ? "name_uz" : "name"] ||
-                    category?.ident}
+                  {category[lang === "uz" ? "title_uz" : "title"] ||
+                    category?.seo}
                 </button>
               ))
             : skeletionData.slider.map((key) => (
                 <button key={key} className="isLoading empty-btn" />
               ))}
         </div>
-        {isLoading ? null : !topProducts.length ? (
+        {isLoading ? null : !topProducts?.length ? (
           <h1>{langData.empty_products}</h1>
         ) : null}
         <Swiper
@@ -140,29 +141,33 @@ function SalesHits({ lang, langData }) {
               ))
             : topProducts?.map((product) => (
                 <SwiperSlide
-                  key={product?.ident}
+                  key={product?.seo}
                   className="motorcycle_cultivator_card"
                 >
                   <div className="hover_body">
-                    <Link to={`/product/${product?.ident}`}>
+                    <Link to={`/product/${product?.seo}`}>
                       <img
-                        src={API.baseURL_IMAGE + product?.photo}
-                        alt={product?.name}
+                        src={API.baseURL_IMAGE + product?.allImages[0]?.image}
+                        alt={product?.title}
                       />
                     </Link>
-                    <Link to={`/product/${product?.ident}`}>
-                      <h2>{product?.name}</h2>
+                    <Link to={`/product/${product?.seo}`}>
+                      <h2>
+                        {lang === "uz"
+                          ? product?.title_uz || product?.title
+                          : product?.title}
+                      </h2>
                     </Link>
 
                     <Link
                       className="link-category"
-                      to={`/category/${isActiveCategory?.ident}`}
+                      to={`/category/${isActiveCategory?.seo}`}
                     >
                       {lang === "uz"
-                        ? isActiveCategory?.name_uz
-                        : isActiveCategory?.name || isActiveCategory?.ident}
+                        ? isActiveCategory?.title_uz
+                        : isActiveCategory?.title}
                     </Link>
-                    <h1>{currencyString(product?.main_price)}</h1>
+                    <h1>{currencyString(product?.price)}</h1>
                     <div className="motorcycle_cultivator_cart">
                       <button
                         onClick={() =>

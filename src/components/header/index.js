@@ -22,7 +22,7 @@ import AddressAdd from "../userModal/address";
 import UserUpdateForm from "../userModal/update";
 import UserPassword from "../userModal/password";
 import { api } from "../../api";
-import { setLogOut, setLogin } from "../../redux/user-slice";
+import { setLogin } from "../../redux/user-slice";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 import UserModal from "../userModal/login";
 import { toast } from "react-toastify";
@@ -69,18 +69,11 @@ const Header = () => {
 
   useEffect(() => {
     const userLocale = JSON.parse(localStorage["ubay-user-data"] || "{}");
-    if (userLocale.phone) {
+    if (userLocale.token) {
       api
-        .search_user({
-          phone_search: { phone: userLocale.phone },
-        })
+        .me(userLocale.token)
         .then(({ data }) => {
-          if (data.res_id === 200) {
-            dispatch(setLogin(data?.result));
-          } else {
-            dispatch(setLogOut());
-            toast.error(data?.mess);
-          }
+          dispatch(setLogin({ ...data, token: userLocale.token }));
         })
         .catch(({ message }) => {
           toast.error(message);
@@ -112,8 +105,8 @@ const Header = () => {
       key: "user",
       link: "/profile/user",
       icon: <UserIcon />,
-      onClick: user?.id ? null : openUserModal,
-      user_name: user?.ism ? langData.between.cabinent : null,
+      onClick: user?._id ? null : openUserModal,
+      user_name: user?._id ? langData.between.cabinent : null,
     },
   ];
 
@@ -202,14 +195,15 @@ const Header = () => {
             {visible && (
               <div className="list_products">
                 <div
-                  className={`scroll-custome ${filteredData.length ? "" : "empty"
-                    }`}
+                  className={`scroll-custome ${
+                    filteredData.length ? "" : "empty"
+                  }`}
                 >
                   {filteredData.length ? (
                     filteredData.map((product) => (
                       <Link
-                        key={product?.ident}
-                        to={`/product/${product?.ident}`}
+                        key={product?.seo}
+                        to={`/product/${product?.seo}`}
                         onClick={() => setVisible(false)}
                       >
                         <img

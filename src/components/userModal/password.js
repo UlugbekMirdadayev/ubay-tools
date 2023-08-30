@@ -31,7 +31,7 @@ const Password = () => {
   } = useForm();
   const onSubmit = (data) => {
     const formData = {
-      edit_password: { password: data?.password_new, id: user?.id },
+      edit_password: { password: data?.password_new, id: user?._id },
     };
     dispatch(setLoading(true));
     api
@@ -55,7 +55,7 @@ const Password = () => {
 
   const handleClose = () => dispatch(setOpenPasswordModal(false));
 
-  if (!user?.id || !password) return <></>;
+  if (!user?._id || !password) return <></>;
 
   return (
     <ModalStyled className="w-80">

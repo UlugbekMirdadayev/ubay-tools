@@ -10,7 +10,7 @@ const Footer = () => {
   const { pathname } = useLocation();
   const lang = Selectors.useLang();
   const langData = useMemo(() => locale[lang]["footer"], [lang]);
-  const { categories, sub_categories } = Selectors.useCategories();
+  const { categories } = Selectors.useCategories();
 
   const {
     register,
@@ -26,20 +26,20 @@ const Footer = () => {
 
   const links = [
     [
-      {
-        name: langData.organizations,
-        link: "/organizations",
-      },
+      // {
+      //   name: langData.organizations,
+      //   link: "/organizations",
+      // },
 
-      {
-        name: langData.landlords,
-        link: "/landlords",
-      },
+      // {
+      //   name: langData.landlords,
+      //   link: "/landlords",
+      // },
 
-      {
-        name: langData.contacts,
-        link: "/contacts",
-      },
+      // {
+      //   name: langData.contacts,
+      //   link: "/contacts",
+      // },
     ],
     [
       {
@@ -51,33 +51,37 @@ const Footer = () => {
         link: "/news",
       },
       {
-        name: langData.our_stores,
-        link: "/our-stores",
+        name: langData.our_address,
+        link: "/our-address",
       },
-      {
-        name: langData.sales,
-        link: "/sales",
-      },
-      {
-        name: langData.vacancies,
-        link: "/vacancies",
-      },
-      {
-        name: langData.batteries_lion,
-        link: "/batteries-lion",
-      },
-      {
-        name: langData.hand_tools,
-        link: "/hand-tools",
-      },
-      {
-        name: langData.branches,
-        link: "/branches",
-      },
-      {
-        name: langData.certificates,
-        link: "/certificates",
-      },
+      // {
+      //   name: langData.our_stores,
+      //   link: "/our-stores",
+      // },
+      // {
+      //   name: langData.sales,
+      //   link: "/sales",
+      // },
+      // {
+      //   name: langData.vacancies,
+      //   link: "/vacancies",
+      // },
+      // {
+      //   name: langData.batteries_lion,
+      //   link: "/batteries-lion",
+      // },
+      // {
+      //   name: langData.hand_tools,
+      //   link: "/hand-tools",
+      // },
+      // {
+      //   name: langData.branches,
+      //   link: "/branches",
+      // },
+      // {
+      //   name: langData.certificates,
+      //   link: "/certificates",
+      // },
     ],
   ];
 
@@ -102,7 +106,7 @@ const Footer = () => {
           {text}
         </p>
       ))}
-      <form onSubmit={handleSubmit(onSubmit)} className="contact">
+      <form onSubmit={handleSubmit(onSubmit)} className="contact" id="contact-form">
         <h1 className="title">{langData.contact.title}</h1>
         <div className="col">
           <label className={`input_card ${errors.name ? "error" : ""}`}>
@@ -135,10 +139,7 @@ const Footer = () => {
           </div>
         </div>
         <button>{langData.contact.submit}</button>
-        <img
-          src="https://ubaytools.com/static/media/form_img.75d3a22d7ad3b67c6633.png"
-          alt="img"
-        />
+        <img src={require("../../images/footer-drell.png")} alt="img" />
       </form>
       <nav aria-label="nav-link">
         <div className="block">
@@ -173,8 +174,8 @@ const Footer = () => {
           <div className="title_link">{langData.products}</div>
           <ul className="list">
             {categories.map((link) => (
-              <Link key={link.ident} to={`/category/${link.ident}`}>
-                {link[lang === "uz" ? "name_uz" : "name"]}
+              <Link key={link._id} to={`/category/${link.seo}`}>
+                {link[lang === "uz" ? "title_uz" : "title"]}
               </Link>
             ))}
           </ul>
@@ -207,14 +208,8 @@ const Footer = () => {
           <ul className="mini-list">
             <a href={"#pay"}>{langData.payment}</a>
             <div className="payments">
-              <img
-                src="https://ubaytools.com/static/media/click.b1d66da9714e224ee48f.png"
-                alt="payment"
-              />
-              <img
-                src="https://ubaytools.com/static/media/uzum.dc3fb82565b308a8ec81.png"
-                alt="payment"
-              />
+              <img src={require("../../images/click.png")} alt="payment" />
+              <img src={require("../../images/uzum.png")} alt="payment" />
             </div>
           </ul>
         </div>
