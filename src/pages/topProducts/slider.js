@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { api } from "../../api";
 import { API, currencyString, isSelectedProduct } from "../../utils/constants";
 import { setLiked } from "../../redux/wishes-slice";
 import { setCompare } from "../../redux/compare-slice";
@@ -15,11 +13,11 @@ import Selectors from "../../redux/selectors";
 const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
   const lang = Selectors.useLang();
   const handleWishes = (product) => {
-    dispatch(setLiked(product?.ident));
+    dispatch(setLiked(product?.seo));
   };
 
   const handleCompare = (product) => {
-    dispatch(setCompare(product?.ident));
+    dispatch(setCompare(product?.seo));
   };
 
   const handleCart = (product) => {
@@ -34,54 +32,23 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
     dispatch(setCartRemoveCount(product));
   };
 
-  const [rating, setRating] = useState(product?.grade);
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const setProductRating = (pro_ident, star) => {
-    if (isLoading) return null;
-    if (star === rating) {
-      if (star === 1) {
-        star = 0;
-      } else {
-        return null;
-      }
-    }
-    setIsLoading(true);
-    api
-      .set_products_rating({
-        product_rating: { pro_ident, rating: star },
-      })
-      .then(({ data }) => {
-        setIsLoading(false);
-        if (data?.res_id === 200) {
-          setRating(star);
-        } else {
-          console.log(data, "response data");
-        }
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        console.log(err, "err set products rating");
-      });
-  };
-
-  return product?.ident ? (
-    <div className={`hover_body ${isLoading ? "isLoading" : ""}`}>
-      <Link to={`/product/${product?.ident}`}>
-        <img src={API.baseURL_IMAGE + product?.photo} alt={product?.name} />
+  return product?._id ? (
+    <div className={"hover_body"}>
+      <Link to={`/product/${product?.seo}`}>
+        <img src={API.baseURL_IMAGE + product?.images} alt={product?.title} />
       </Link>
-      <Link to={`/product/${product?.ident}`}>
-        <h2>{product?.name}</h2>
+      <Link to={`/product/${product?.seo}`}>
+        <h2>
+          {lang === "uz" ? product?.title_uz || product?.title : product?.title}
+        </h2>
       </Link>
 
       <div className="link-category">
         {["★", "★", "★", "★", "★"].map((start, index) => (
           <span
             key={index}
-            onClick={() => setProductRating(product?.ident, index + 1)}
             style={{
-              color: index + 1 <= rating ? "rgb(255, 215, 0)" : "#000",
+              color: index + 1 <= product?.grade ? "rgb(255, 215, 0)" : "#000",
             }}
           >
             {start}

@@ -39,12 +39,7 @@ const Slider = ({ product, dispatch, wishes, cartItems, compareItems }) => {
   return product?.seo ? (
     <div className={`hover_body`}>
       <Link to={`/product/${product?.seo}`}>
-        {product?.allImages?.length ? (
-          <img
-            src={API.baseURL_IMAGE + product?.allImages[0]?.image}
-            alt={product?.title}
-          />
-        ) : null}
+        <img src={API.baseURL_IMAGE + product?.images} alt={product?.title} />
       </Link>
       <Link to={`/product/${product?.seo}`}>
         <h2>

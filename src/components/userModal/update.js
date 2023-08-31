@@ -24,6 +24,14 @@ const Update = () => {
     }),
     [lang]
   );
+
+  const headers = {
+    headers: {
+      "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+        ?.token,
+    },
+  };
+
   const {
     handleSubmit,
     formState: { errors },
@@ -31,52 +39,34 @@ const Update = () => {
     setValue,
   } = useForm();
   const onSubmit = (data) => {
-    const formData = {
-      edit_data: { ...data, id: user?._id },
-    };
     if (
-      data.phone === user.phone &&
-      data.ism === user.ism &&
-      data.fam === user.fam
+      // data.phone === user.phone &&
+      // data.ism === user.ism &&
+      data.fullName === user?.fullName
     ) {
       return toast.info(langData.nomodified);
     }
     dispatch(setLoading(true));
     api
-      .update_user(formData)
+      .update_user(data, headers)
       .then(({ data }) => {
         dispatch(setLoading(false));
-        if (data.res_id === 200) {
-          console.log(formData);
-          api
-            .login({
-              phone_search: { phone: formData?.edit_data?.phone },
-            })
-            .then(({ data }) => {
-              if (data.res_id === 200) {
-                dispatch(setLogin(data?.result));
-              }
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          toast.success(langData.updated);
-          handleClose();
-        } else {
-          toast.error(data.mess);
-        }
+        toast.success(langData.updated);
+        handleClose();
+        dispatch(
+          setLogin({ ...data, token: headers.headers["x-access-token"] })
+        );
       })
-      .catch(({ message = "" }) => {
+      .catch(({ response: { data } }) => {
         dispatch(setLoading(false));
-        toast.error(message);
-        console.log(message);
+        toast.error(data?.message);
+        console.log(data);
       });
   };
 
   useEffect(() => {
-    setValue("ism", user?.ism);
-    setValue("fam", user?.fam);
-    setValue("phone", user?.phone);
+    setValue("fullName", user?.fullName);
+    // setValue("phone", user?.phone);
   }, [user, update, setValue]);
 
   const handleClose = () => dispatch(setOpenUpdateModal(false));
@@ -99,18 +89,18 @@ const Update = () => {
               {langData.closer}
             </button>
           </div>
-          <label className={`input-row ${errors.ism ? "error" : ""}`}>
+          <label className={`input-row ${errors.fullName ? "error" : ""}`}>
             <p>
-              {langData.name}
+              {langData.surename} {langData.name}
               <span> * </span>
             </p>
             <input
               type="text"
-              {...register("ism", { required: true })}
-              defaultValue={user?.ism}
+              {...register("fullName", { required: true })}
+              defaultValue={user?.fullName}
             />
           </label>
-          <label className={`input-row ${errors.fam ? "error" : ""}`}>
+          {/* <label className={`input-row ${errors.fam ? "error" : ""}`}>
             <p>
               {langData.surename}
               <span> * </span>
@@ -142,7 +132,7 @@ const Update = () => {
               })}
               defaultValue={user?.phone}
             />
-          </label>
+          </label> */}
           <div className="checkbox-row">
             <button type="submit">{langData.save}</button>
             <button type="button" onClick={handleClose}>

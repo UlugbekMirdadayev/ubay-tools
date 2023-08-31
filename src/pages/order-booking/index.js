@@ -29,6 +29,7 @@ import {
 import { toast } from "react-toastify";
 // import { setOrders } from "../../redux/orders-slice";
 import NotFound from "../../components/404";
+import { setOrders } from "../../redux/orders-slice";
 
 const BookingOrder = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const BookingOrder = () => {
     api
       .get_products({
         sort: "desc",
-        limit: 10,
+        limit: 50,
       })
       .then(({ data }) => {
         if (data?.length) {
@@ -139,6 +140,20 @@ const BookingOrder = () => {
     dispatch(setRemoveCart(product));
   };
 
+  const getOrders = () => {
+    api
+      .get_user_orders()
+      .then(({ data }) => {
+        if (data?.length) {
+          dispatch(setOrders(data));
+        }
+      })
+      .catch(({ response: { data } }) => {
+        toast.error(data?.message || JSON.stringify(data));
+        console.log(data);
+      });
+  };
+
   const handleSubmit = () => {
     const fData = {
       delivery:
@@ -170,6 +185,7 @@ const BookingOrder = () => {
       .set_booking_order(fData)
       .then(({ data }) => {
         dispatch(setLoading(false));
+        getOrders();
         dispatch(setClearCart());
         navigate("/profile/orders");
       })
@@ -196,7 +212,7 @@ const BookingOrder = () => {
               <div key={product.seo} className="product">
                 <Link to={`/product/${product.seo}`}>
                   <img
-                    src={API.baseURL_IMAGE + product?.allImages[0]?.image}
+                    src={API.baseURL_IMAGE + product?.images}
                     alt="product"
                   />
                 </Link>

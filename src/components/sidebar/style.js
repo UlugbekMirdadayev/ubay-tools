@@ -78,6 +78,12 @@ export const SideabarStyled = styled.article`
       padding: 0.5vw;
       font-weight: 500;
       display: flex;
+      &:not(.sub_category){
+        &.active{
+          color: #1d2f77;
+          font-weight: 700;
+        }
+      }
       &.sub_category {
         &.active {
           background-color: #1d59d1;

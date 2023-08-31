@@ -11,6 +11,7 @@ import { setCompare } from "../../redux/compare-slice";
 import {
   setCartAddCount,
   setCartRemoveCount,
+  setClearCart,
   setRemoveCart,
 } from "../../redux/cart-slice";
 import {
@@ -42,7 +43,7 @@ const Cart = () => {
     api
       .get_products({
         sort: "desc",
-        limit: 10,
+        limit: 50,
       })
       .then(({ data }) => {
         setIsLoading(false);
@@ -64,10 +65,18 @@ const Cart = () => {
     handleFilterProducts();
   }, [handleFilterProducts]);
 
-  const productsInCart = useMemo(
-    () => products?.filter((product) => isSelectedProduct(product, cartItems)),
-    [products, cartItems]
-  );
+  useEffect(() => {
+    if (!cartItems?.length || !products?.length) return;
+    cartItems
+      ?.filter((product) => !isSelectedProduct(product, products))
+      .forEach((item) => {
+        dispatch(setRemoveCart(item));
+      });
+  }, [cartItems, products, dispatch]);
+
+  const productsInCart = useMemo(() => {
+    return products?.filter((product) => isSelectedProduct(product, cartItems));
+  }, [products, cartItems]);
 
   const isProductCount = (product) =>
     isSelectedProduct(product, cartItems)?.cart_count;
@@ -135,7 +144,7 @@ const Cart = () => {
                 <div className="space">
                   <Link to={`/product/${product.seo}`} className="image-box">
                     <img
-                      src={API.baseURL_IMAGE + product?.allImages[0]?.image}
+                      src={API.baseURL_IMAGE + product?.images}
                       alt={"product"}
                     />
                   </Link>
@@ -252,7 +261,10 @@ const Cart = () => {
       ) : cartItems?.length ? (
         <NotFound />
       ) : (
-        <div className={`center ${isLoading ? "isLoading" : ""}`}>
+        <div
+          className={`center ${isLoading ? "isLoading" : ""}`}
+          onClick={() => dispatch(setClearCart())}
+        >
           <h3 className="empty_text">{langData.empty}</h3>
           <Link to={"/"} className="go_main">
             {langData.go_main}

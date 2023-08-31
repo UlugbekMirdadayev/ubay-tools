@@ -30,26 +30,24 @@ const Password = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
-    const formData = {
-      edit_password: { password: data?.password_new, id: user?._id },
-    };
+    const formData = { password: data?.password_new };
     dispatch(setLoading(true));
     api
       .update_pass(formData)
       .then(({ data }) => {
+        localStorage.setItem(
+          "ubay-user-data",
+          JSON.stringify({ phone: user?.phone, token: data?.token })
+        );
         dispatch(setLoading(false));
-        if (data.res_id === 200) {
-          handleClose();
-          toast.success(langData.updated);
-          reset();
-        } else {
-          toast.error(data.mess);
-        }
+        handleClose();
+        toast.success(langData.updated);
+        reset();
       })
-      .catch(({ message = "" }) => {
+      .catch(({ response: { data } }) => {
         dispatch(setLoading(false));
-        toast.error(message);
-        console.log(message);
+        toast.error(data?.message);
+        console.log(data);
       });
   };
 

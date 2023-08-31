@@ -86,7 +86,7 @@ const News = () => {
         {news?.length
           ? news?.map((single) => (
               <SwiperSlide
-                key={single?.ident}
+                key={single?._id}
                 style={
                   id === single?._id
                     ? { opacity: 0.5, pointerEvents: "none" }

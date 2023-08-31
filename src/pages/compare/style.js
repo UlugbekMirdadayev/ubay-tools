@@ -101,6 +101,8 @@ export const CompareStyled = styled.section`
           width: 1.6666666666666667vw;
           height: 1.6666666666666667vw;
           padding: 0.3125vw;
+          display: grid;
+          place-content: center;
 
           svg {
             width: 100%;

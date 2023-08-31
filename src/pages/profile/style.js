@@ -204,7 +204,7 @@ export const ProfileStyled = styled.section`
         max-height: 40vh;
         padding-right: 0.3vw;
         @media only screen and (max-width: 768px) {
-          max-height: none;
+          max-height: 60vh;
           padding-right: 0;
         }
         .address {
@@ -260,6 +260,16 @@ export const ProfileStyled = styled.section`
           color: #fff !important;
         }
       }
+      &.canceled {
+        background-color: #e74c3c2b;
+        border-color: #e74c3c;
+        * {
+          border-color: #e74c3c !important;
+        }
+        .product {
+          background-color: rgba(255, 255, 255, 0.5);
+        }
+      }
       @media only screen and (max-width: 768px) {
         margin-bottom: 1.5267175572519085vw;
         border-radius: 0.5267175572519085vw;
@@ -304,6 +314,12 @@ export const ProfileStyled = styled.section`
           gap: 0.8333333333333334vw;
           @media only screen and (max-width: 768px) {
             font-size: 2.544529262086514vw;
+          }
+          span {
+            &.promo {
+              color: #e74c3c;
+              font-family: "SF Pro Display";
+            }
           }
         }
         .pay {

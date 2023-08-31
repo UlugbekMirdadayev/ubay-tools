@@ -25,6 +25,8 @@ export const WishesStyled = styled.section`
   }
   .motorcycle_cultivator {
     flex: 1;
+    display: flex;
+    flex-wrap: wrap;
     @media only screen and (max-width: 768px) {
       width: 100%;
       margin-top: 12.72264631043257vw;
@@ -77,10 +79,10 @@ export const WishesStyled = styled.section`
       img {
         width: 12.65625vw;
         height: 11.40625vw;
-        object-fit: contain;
+        object-fit: cover;
         min-width: 12.65625vw;
         min-height: 11.40625vw;
-        
+
         @media only screen and (max-width: 768px) {
           width: 34.01246819338423vw;
           min-width: 34.01246819338423vw;

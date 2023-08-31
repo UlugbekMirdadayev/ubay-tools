@@ -27,7 +27,9 @@ const get_sliders = (options = {}) => get("homesliderpublic", options);
 const get_videos = (options = {}) => get("video", options);
 const get_news = (id = "", options = {}) => get(`news/${id}`, options);
 const me = (token) => get("me", { headers: { "x-access-token": token } });
-const promo = (promocode, options = headers) => get(`discount/${promocode}`, options);
+const promo = (promocode, options = headers) =>
+  get(`discount/${promocode}`, options);
+const get_user_orders = (options = headers) => get("/my/orders", options);
 const update_address = (id, body = {}, options = {}) =>
   patch(body, `set/address/${id}`, options);
 
@@ -45,17 +47,22 @@ const reg_user = (body = {}) => post(body, "register/phone", {});
 const get_user_address = (body = {}) => post(body, "users/show_adress/", {});
 const add_address = (id, body = {}, options = {}) =>
   post(body, `add/address/${id}`, options);
-const get_user_orders = (body = {}) =>
-  post(body, "formalization/show_list", {});
+
 const set_booking_order = (body = {}, options = headers) =>
   post(body, "orders/add", options);
-const update_pass = (body = {}) => post(body, "users/edit_password/", {});
-const update_user = (body = {}) => post(body, "users/edit_data/", {});
+const update_pass = (body = {}, options = headers) =>
+  post(body, "update-password", options);
+const update_user = (body = {}, options = headers) =>
+  patch(body, "update/user", options);
+  const application_add = (body = {}, options = {}) =>
+  post(body, "application/add", options);
 
 export const api = {
+  get,
   me,
   promo,
   get_category,
+  application_add,
   get_categories,
   get_videos,
   update_address,

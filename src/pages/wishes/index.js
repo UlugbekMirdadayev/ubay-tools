@@ -10,6 +10,7 @@ import { isSelectedProduct, skeletionData } from "../../utils/constants";
 import { WishesStyled } from "./style";
 import locale from "../../localization/locale.json";
 import { toast } from "react-toastify";
+import { setRemoveLike } from "../../redux/wishes-slice";
 
 function WishesScreen() {
   const dispatch = useDispatch();
@@ -26,11 +27,11 @@ function WishesScreen() {
     api
       .get_products({
         sort: "desc",
-        limit: 10,
+        limit: 50,
       })
       .then(({ data }) => {
         if (data?.length) {
-          dispatch(setProducts(data?.filter(prod=> prod?.inStock)));
+          dispatch(setProducts(data?.filter((prod) => prod?.inStock)));
         } else {
           console.log(data);
           dispatch(setProducts([]));
@@ -50,6 +51,15 @@ function WishesScreen() {
     () => products?.filter((product) => isSelectedProduct(product, wishes)),
     [products, wishes]
   );
+
+  useEffect(() => {
+    if (!wishes?.length || !products?.length) return;
+    wishes
+      ?.filter((seo) => !isSelectedProduct({ seo }, products))
+      .forEach((item) => {
+        dispatch(setRemoveLike(item));
+      });
+  }, [wishes, products, dispatch]);
 
   return (
     <WishesStyled>

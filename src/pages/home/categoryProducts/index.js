@@ -23,7 +23,7 @@ function CategoryProducts() {
     api
       .get_products({
         sort: "desc",
-        limit: 10,
+        limit: 50,
       })
       .then(({ data }) => {
         if (data?.length) {

@@ -73,11 +73,11 @@ export const routes = [
     element: <Profile />,
   },
   {
-    path: "/category/:id",
+    path: "/category/:main",
     element: <Categoty />,
   },
   {
-    path: "/category/:main/:id",
+    path: "/category/:main/:seo",
     element: <Categoty />,
   },
   {

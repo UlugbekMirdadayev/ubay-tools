@@ -5,10 +5,13 @@ import { useForm } from "react-hook-form";
 import { InstaIcon, TIcon, YouTubeIcon } from "../icon";
 import Selectors from "../../redux/selectors";
 import locale from "../../localization/locale.json";
+import { api } from "../../api";
+import { toast } from "react-toastify";
 
 const Footer = () => {
   const { pathname } = useLocation();
   const lang = Selectors.useLang();
+  const user = Selectors.useUser();
   const langData = useMemo(() => locale[lang]["footer"], [lang]);
   const { categories } = Selectors.useCategories();
 
@@ -20,8 +23,20 @@ const Footer = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    // data.product_id = "product_id";
+    data.phone = "998" + data.phone;
     console.log(data);
-    reset();
+
+    api
+      .application_add(data)
+      .then(({ data }) => {
+        toast.success(data?.message);
+        reset();
+      })
+      .catch(({ response: { data } }) => {
+        console.log(data);
+        toast.error(data?.message || JSON.stringify(data));
+      });
   };
 
   const links = [
@@ -30,12 +45,10 @@ const Footer = () => {
       //   name: langData.organizations,
       //   link: "/organizations",
       // },
-
       // {
       //   name: langData.landlords,
       //   link: "/landlords",
       // },
-
       // {
       //   name: langData.contacts,
       //   link: "/contacts",
@@ -92,7 +105,9 @@ const Footer = () => {
 
   const isNight = useMemo(() => {
     const result = ["banner"].includes(pathname?.split("/")[1]);
-    document.body.style.backgroundColor = result ? "#192128" : "#fff";
+    result
+      ? (document.body.style.backgroundColor = "#192128")
+      : document.body.removeAttribute("style");
     return result;
   }, [pathname]);
 
@@ -106,26 +121,43 @@ const Footer = () => {
           {text}
         </p>
       ))}
-      <form onSubmit={handleSubmit(onSubmit)} className="contact" id="contact-form">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="contact"
+        id="contact-form"
+      >
         <h1 className="title">{langData.contact.title}</h1>
         <div className="col">
-          <label className={`input_card ${errors.name ? "error" : ""}`}>
+          <label className={`input_card ${errors.fullName ? "error" : ""}`}>
             <p>{langData.contact.name}</p>
             <input
               type="text"
               placeholder="John Doe"
-              {...register("name", { required: true })}
+              defaultValue={user?.fullName}
+              {...register("fullName", { required: true })}
             />
           </label>
           <div className="row">
             <label
-              className={`row_input input_card ${errors.number ? "error" : ""}`}
+              className={`row_input input_card ${errors.phone ? "error" : ""}`}
             >
               <span>+998</span>
               <input
                 type="tel"
+                defaultValue={user?.phone?.replace("998", "")}
                 placeholder="771234567"
-                {...register("number", { required: true, maxLength: 9 })}
+                {...register("phone", {
+                  required: true,
+                  maxLength: {
+                    value: 9,
+                  },
+                  minLength: {
+                    value: 9,
+                  },
+                  pattern: {
+                    value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                  },
+                })}
               />
             </label>
             <label className={`input_card ${errors.email ? "error" : ""}`}>

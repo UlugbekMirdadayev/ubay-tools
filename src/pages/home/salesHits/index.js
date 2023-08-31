@@ -41,24 +41,28 @@ function SalesHits({ lang, langData }) {
   const [isLoading, setLoading] = useState(false);
 
   const topCategories = useMemo(
-    () => [...categories]?.reverse()?.splice(0, 5),
+    () => [...categories]?.filter((category) => category?.top)?.splice(0, 5),
     [categories]
   );
 
   const handleFilterProducts = useCallback(
     (sub_ident) => {
-      if (!sub_ident) return;
+      if (!sub_ident || topProducts?.length) return;
       setActive(sub_ident);
       setLoading(true);
       api
         .get_products({
           sort: "desc",
-          limit: 10,
+          limit: 50,
         })
         .then(({ data }) => {
           setLoading(false);
           if (data?.length) {
-            dispatch(setTopProducts(data?.filter(prod=> prod?.inStock)));
+            dispatch(
+              setTopProducts(
+                data?.filter((prod) => prod?.inStock && prod?.filter === 0)
+              )
+            );
           } else {
             dispatch(setTopProducts([]));
             console.log(data);
@@ -70,10 +74,18 @@ function SalesHits({ lang, langData }) {
           console.log(message);
         });
     },
-    [dispatch]
+    [dispatch, topProducts?.length]
   );
 
   const isActiveCategory = topCategories?.find(({ seo }) => seo === active);
+
+  const filteredProducts = useMemo(
+    () =>
+      topProducts?.filter(
+        (product) => product?.categories_id === isActiveCategory?._id
+      ),
+    [isActiveCategory, topProducts]
+  );
 
   const handleWishes = (product) => {
     dispatch(setLiked(product?.seo));
@@ -109,9 +121,7 @@ function SalesHits({ lang, langData }) {
             ? topCategories?.map((category) => (
                 <button
                   onClick={() =>
-                    category?.seo === active
-                      ? null
-                      : handleFilterProducts(category?.seo)
+                    category?.seo === active ? null : setActive(category?.seo)
                   }
                   className={active === category?.seo ? "active" : null}
                   key={category?.seo}
@@ -124,7 +134,7 @@ function SalesHits({ lang, langData }) {
                 <button key={key} className="isLoading empty-btn" />
               ))}
         </div>
-        {isLoading ? null : !topProducts?.length ? (
+        {isLoading ? null : !filteredProducts?.length ? (
           <h1>{langData.empty_products}</h1>
         ) : null}
         <Swiper
@@ -139,7 +149,7 @@ function SalesHits({ lang, langData }) {
                   className="motorcycle_cultivator isLoading"
                 />
               ))
-            : topProducts?.map((product) => (
+            : filteredProducts?.map((product) => (
                 <SwiperSlide
                   key={product?.seo}
                   className="motorcycle_cultivator_card"
@@ -147,7 +157,7 @@ function SalesHits({ lang, langData }) {
                   <div className="hover_body">
                     <Link to={`/product/${product?.seo}`}>
                       <img
-                        src={API.baseURL_IMAGE + product?.allImages[0]?.image}
+                        src={API.baseURL_IMAGE + product?.images}
                         alt={product?.title}
                       />
                     </Link>

@@ -77,7 +77,7 @@ export const WishesStyled = styled.section`
       img {
         width: 12.65625vw;
         height: 11.40625vw;
-        object-fit: contain;
+        object-fit: cover;
         min-width: 12.65625vw;
         min-height: 11.40625vw;
         

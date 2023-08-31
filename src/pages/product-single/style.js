@@ -455,6 +455,8 @@ export const ProductStyled = styled.section`
       font-size: 0.8333333333333334vw;
       font-weight: 500;
       line-height: 1.25vw;
+      white-space: pre;
+      overflow-x: auto;
       @media only screen and (max-width: 768px) {
         font-size: 3.5vw;
         line-height: 150%;
@@ -515,7 +517,7 @@ export const ProductStyled = styled.section`
       img {
         width: 12.65625vw;
         height: 11.40625vw;
-        object-fit: contain;
+        object-fit: cover;
         min-width: 12.65625vw;
         min-height: 11.40625vw;
 

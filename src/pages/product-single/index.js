@@ -9,7 +9,12 @@ import { ProductStyled } from "./style";
 import { useParams } from "react-router-dom";
 import { api } from "../../api";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { API, currencyString, goContact, isSelectedProduct } from "../../utils/constants";
+import {
+  API,
+  currencyString,
+  goContact,
+  isSelectedProduct,
+} from "../../utils/constants";
 import {
   Arrow,
   CarIcon,
@@ -76,7 +81,7 @@ const ProductSingle = () => {
     api
       .get_products_single(`?seo=${seo}`)
       .then(({ data }) => {
-        if (data?.inStock) {
+        if (data?.inStock && data?.isActive) {
           setData(data);
         } else {
           setData({ notFound: true });
@@ -175,17 +180,13 @@ const ProductSingle = () => {
           <ul>
             <li>{langData.params}</li>
             {data?.compare?.length
-              ? data?.compare[0]?.map((params, key) => (
+              ? data?.compare?.map((params, key) => (
                   <li key={key}>
                     <span className="key">
                       {params[`name_${lang === "uz" ? "uz" : "ru"}`] || ""}
                     </span>
                     <span className="value">
-                      {params?.values?.length
-                        ? params?.values[0][
-                            `name_${lang === "uz" ? "uz" : "ru"}`
-                          ]
-                        : ""}
+                      {params[`desc_${lang === "uz" ? "uz" : "ru"}`]}
                     </span>
                   </li>
                 ))
@@ -288,7 +289,7 @@ const ProductSingle = () => {
             ))}
           </div>
         </div>
-        <div className="text">
+        <div className="text scroll-custome">
           {data[`description${lang === "uz" ? "_uz" : ""}`]}
         </div>
       </div>

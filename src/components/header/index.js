@@ -27,6 +27,7 @@ import { setOpenLoginModal } from "../../redux/modals-slice";
 import UserModal from "../userModal/login";
 import { toast } from "react-toastify";
 import { API } from "../../utils/constants";
+import { setProducts } from "../../redux/products-slice";
 
 const languages = [
   {
@@ -52,6 +53,27 @@ const Header = () => {
   const [visible, setVisible] = useState("");
   const [filteredData, setFilteredData] = useState(products || []);
   const langData = useMemo(() => locale[lang]["header"], [lang]);
+
+  const handleGetProducts = useCallback(() => {
+    if (products?.length) return;
+    const formData = {
+      sort: "desc",
+      limit: 50,
+    };
+    api
+      .get_products(formData)
+      .then(({ data }) => {
+        if (data?.length) {
+          dispatch(setProducts(data?.filter((prod) => prod?.inStock)));
+        } else {
+          console.log(data);
+          dispatch(setProducts([]));
+        }
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
+  }, [dispatch, products?.length]);
 
   document.title = locale[lang].seo.title;
   const handleChangeLang = useCallback(
@@ -118,12 +140,17 @@ const Header = () => {
     ({ target: { value } }) => {
       setVisible(true);
       setSearchValue(value);
-      setFilteredData(
-        products.filter(
-          (product) =>
-            product?.name?.includes(value) || product?.title_uz?.includes(value)
-        )
-      );
+      if (value?.length >= 2) {
+        setFilteredData(
+          products?.filter(
+            (product) =>
+              product?.title?.toLowerCase()?.includes(value?.toLowerCase()) ||
+              product?.title_uz?.toLowerCase()?.includes(value?.toLowerCase())
+          )
+        );
+      } else {
+        setFilteredData([]);
+      }
     },
     [products]
   );
@@ -132,6 +159,10 @@ const Header = () => {
     () => ["banner"].includes(pathname?.split("/")[1]),
     [pathname]
   );
+
+  useEffect(() => {
+    handleGetProducts();
+  }, [handleGetProducts]);
 
   return (
     <HeaderStyled className={isNight ? "isNight" : ""}>
@@ -192,26 +223,30 @@ const Header = () => {
               <Search />
             )}
 
-            {visible && (
+            {visible && searchValue?.length >= 2 && (
               <div className="list_products">
                 <div
                   className={`scroll-custome ${
-                    filteredData.length ? "" : "empty"
+                    filteredData?.length ? "" : "empty"
                   }`}
                 >
-                  {filteredData.length ? (
-                    filteredData.map((product) => (
+                  {filteredData?.length ? (
+                    filteredData?.map((product) => (
                       <Link
                         key={product?.seo}
                         to={`/product/${product?.seo}`}
                         onClick={() => setVisible(false)}
                       >
                         <img
-                          src={API.baseURL_IMAGE + product?.photo}
+                          src={API.baseURL_IMAGE + product?.images}
                           alt="product"
                         />
                         <div className="row">
-                          <span>{product?.name}</span>
+                          <span>
+                            {lang === "uz"
+                              ? product?.title_uz || product?.title
+                              : product?.title}
+                          </span>
                           <Arrow />
                         </div>
                       </Link>

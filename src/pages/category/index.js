@@ -12,7 +12,7 @@ import { skeletionData } from "../../utils/constants";
 
 const Categoty = () => {
   const dispatch = useDispatch();
-  const { seo, main } = useParams();
+  const { main, seo } = useParams();
   const lang = Selectors.useLang();
   const { categories } = Selectors.useCategories();
   const wishes = Selectors.useWishes();
@@ -21,13 +21,14 @@ const Categoty = () => {
   const langData = useMemo(() => locale[lang]["home"], [lang]);
   const [isCategory, setIsCategory] = useState({});
   const [products, setProducts] = useState([]);
+  const [productsFiltered, setProductsFiltered] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleGetProducts = useCallback(() => {
     setLoading(true);
     const formData = {
       sort: "desc",
-      limit: 10,
+      limit: 50,
     };
     api
       .get_products(formData)
@@ -47,27 +48,32 @@ const Categoty = () => {
   }, []);
 
   useEffect(() => {
-    if (!main) {
-      handleGetProducts(seo);
-      setIsCategory(categories?.find((category) => category?.seo === seo));
-      return;
+    if (seo) {
+      const category =
+        categories
+          ?.find((category) =>
+            category?.children.find((child) => child.seo === seo)
+          )
+          ?.children?.find((child) => child.seo === seo) || {};
+      setIsCategory(category);
+      setProductsFiltered(
+        products?.filter((product) => product?.categories_id === category?._id)
+      );
+    } else {
+      const category =
+        categories?.find((category) => category?.seo === main) || {};
+      setIsCategory(category);
+      setProductsFiltered(
+        products?.filter((product) =>
+          category?.children.find((child) => child._id === product?.categories_id)
+        )
+      );
     }
-    api
-      .get_category({ sub_catalog_one: { seo: seo } })
-      .then(({ data }) => {
-        if (data?.res_id === 200) {
-          setIsCategory(data?.result);
-          handleGetProducts(seo);
-        } else {
-          console.log(data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [seo, categories, main, handleGetProducts]);
+  }, [seo, main, categories, products]);
 
-  console.log({ main, seo });
+  useEffect(() => {
+    handleGetProducts();
+  }, [handleGetProducts]);
 
   return (
     <CategotyStyled>
@@ -78,7 +84,13 @@ const Categoty = () => {
         loading={loading}
       />
       <ScrollAreaView>
-        <h1>{loading ? null : isCategory?.name}</h1>
+        <h1>
+          {loading
+            ? null
+            : lang === "uz"
+            ? isCategory?.title_uz
+            : isCategory?.title}
+        </h1>
         <div className={`motorcycle_cultivator`}>
           {loading ? (
             skeletionData.categories.map((key) => (
@@ -92,8 +104,8 @@ const Categoty = () => {
                 />
               </div>
             ))
-          ) : products?.length ? (
-            products?.map((product) => (
+          ) : productsFiltered?.length ? (
+            productsFiltered?.map((product) => (
               <div key={product?._id} className="motorcycle_cultivator_card">
                 <Slider
                   wishes={wishes}
