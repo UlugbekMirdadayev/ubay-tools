@@ -75,34 +75,40 @@ const Banner = () => {
             className="banner_bg"
           />
           <img
-            src={API.baseURL_IMAGE + data?.slider?.image}
+            // src={API.baseURL_IMAGE + data?.slider?.image}
+            src={require("../../images/prod.png")}
             className="prod_image"
             alt="prod"
           />
         </div>
         <div className="infos">
-          <h1 title={data?.slider?.title}>{data?.slider?.title}</h1>
+          <h1 title={data?.slider?.title}>
+            {/* {data?.slider?.title} */}
+            {"Ubay\nDrills"}
+          </h1>
           <p>
-            {/* <span>Ubey</span> */}
-            {data?.slider?.description}
+            <span>Ubey</span>
+            Ubey is simply dummy text of the printing and typesetting industry.
+            Lorem Ipsum has been the industry's standard dummy text ever since
+            the 1500s, when an unknown printer took a
           </p>
           <div className="row_btn">
             <button
               className="primary"
-              onClick={() =>
-                data?.slider?.link
-                  ? window.open(data?.slider?.link)
-                  : toast.error("Invalid link")
-              }
+              // onClick={() =>
+              //   data?.slider?.link
+              //     ? window.open(data?.slider?.link)
+              //     : toast.error("Invalid link")
+              // }
             >
               {langData.buy}
             </button>
             <button
-              onClick={() =>
-                data?.slider?.categories_id
-                  ? navigate(`/category/${data?.slider?.categories_id}`)
-                  : toast.error("invalid category")
-              }
+            // onClick={() =>
+            //   data?.slider?.categories_id
+            //     ? navigate(`/category/${data?.slider?.categories_id}`)
+            //     : toast.error("invalid category")
+            // }
             >
               {langData.catalog_open}
             </button>
@@ -117,14 +123,27 @@ const Banner = () => {
             className="banner_bg"
           />
           <img
-            src={API.baseURL_IMAGE + data?.slider?.image}
+            // src={API.baseURL_IMAGE + data?.slider?.image}
+            src={require("../../images/prod.png")}
             className="prod_image"
             alt="prod"
           />
         </div>
         <div className="infos">
-          <h3>{product?.main_name}</h3>
-          <p>{product?.delivery}</p>
+          <h3>
+            {/* {product?.main_name} */}
+            Drill 907
+          </h3>
+          <p>
+            {/* {product?.delivery} */}
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book. It has survived not
+            only five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the releas
+          </p>
         </div>
       </div>
       <div className="threed_row">
@@ -139,7 +158,13 @@ const Banner = () => {
         </div>
         <div className="right">
           <div className="top">
-            <p>{product.sub_name}</p>
+            <p>
+              {/* {product.sub_name} */}
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and
+            </p>
           </div>
           <div className="bottom">
             <div className="img_place">
@@ -159,7 +184,7 @@ const Banner = () => {
       </div>
       <div className="fourth_row">
         <div className="space">
-          <ul>
+          {/* <ul>
             {product?.parametrs?.map((params, key) =>
               key >= product?.parametrs?.length / 2 ? null : (
                 <li key={key}>
@@ -183,6 +208,26 @@ const Banner = () => {
                 </li>
               )
             )}
+          </ul> */}
+          <ul>
+            <li>
+              <span>TORQUE :</span>
+              <span>115IN -IBS</span>
+            </li>
+            <li>
+              <span>RPM :</span>
+              <span>0-650</span>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <span>TORQUE :</span>
+              <span>115IN -IBS</span>
+            </li>
+            <li>
+              <span>RPM :</span>
+              <span>0-650</span>
+            </li>
           </ul>
         </div>
         <div className="center">
