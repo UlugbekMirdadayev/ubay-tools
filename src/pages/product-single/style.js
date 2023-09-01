@@ -158,6 +158,7 @@ export const ProductStyled = styled.section`
         }
         .value {
           color: #111;
+          text-align: right;
         }
       }
     }

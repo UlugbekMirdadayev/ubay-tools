@@ -200,6 +200,10 @@ export const AboutSectionCont = styled.div`
       .prg_card {
         font-size: 0.9291666666666666vw;
         font-weight: 400;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
         @media only screen and (max-width: 768px) {
           font-size: 3.053435114503817vw;
         }
