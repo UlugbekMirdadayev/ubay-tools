@@ -1,19 +1,26 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  // useCallback, useEffect,
+  useMemo,
+  // , useState
+} from "react";
 import { BannerStyled } from "./style";
-import { useNavigate, useParams } from "react-router-dom";
-import { API } from "../../utils/constants";
+import {
+  // useNavigate,
+  useParams,
+} from "react-router-dom";
+// import { API } from "../../utils/constants";
 import Selectors from "../../redux/selectors";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { setSlider } from "../../redux/slider-slice";
-import { api } from "../../api";
+// import { useDispatch } from "react-redux";
+// import { toast } from "react-toastify";
+// import { setSlider } from "../../redux/slider-slice";
+// import { api } from "../../api";
 import locale from "../../localization/locale.json";
 
 const Banner = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate();
   const sliderData = Selectors.useSlider();
-  const [product, setProduct] = useState({});
+  // const [product, setProduct] = useState({});
   const { id } = useParams();
   const lang = Selectors.useLang();
   const langData = useMemo(() => locale[lang]["banner"], [lang]);
@@ -24,46 +31,46 @@ const Banner = () => {
     return { slider, productID };
   }, [id, sliderData]);
 
-  const getSliderData = useCallback(() => {
-    if (sliderData?.length) return;
-    api
-      .get_sliders()
-      .then(({ data }) => {
-        if (data?.length) {
-          dispatch(setSlider(data));
-        }
-      })
-      .catch(({ message }) => {
-        toast.error(message);
-        console.log(message);
-      });
-  }, [dispatch, sliderData?.length]);
+  // const getSliderData = useCallback(() => {
+  //   if (sliderData?.length) return;
+  //   api
+  //     .get_sliders()
+  //     .then(({ data }) => {
+  //       if (data?.length) {
+  //         dispatch(setSlider(data));
+  //       }
+  //     })
+  //     .catch(({ message }) => {
+  //       toast.error(message);
+  //       console.log(message);
+  //     });
+  // }, [dispatch, sliderData?.length]);
 
-  const getProduct = useCallback(() => {
-    if (!data?.productID) return;
-    api
-      .get_products_single({ view_product: { pro_ident: data?.productID } })
-      .then(({ data }) => {
-        if (data.res_id === 200) {
-          setProduct(data.result[0]);
-        } else {
-          toast.error(data?.mess);
-          console.log(data);
-        }
-      })
-      .catch(({ message }) => {
-        toast.error(message);
-        console.log(message);
-      });
-  }, [data?.productID]);
+  // const getProduct = useCallback(() => {
+  //   if (!data?.productID) return;
+  //   api
+  //     .get_products_single({ view_product: { pro_ident: data?.productID } })
+  //     .then(({ data }) => {
+  //       if (data.res_id === 200) {
+  //         setProduct(data.result[0]);
+  //       } else {
+  //         toast.error(data?.mess);
+  //         console.log(data);
+  //       }
+  //     })
+  //     .catch(({ message }) => {
+  //       toast.error(message);
+  //       console.log(message);
+  //     });
+  // }, [data?.productID]);
 
-  useEffect(() => {
-    getSliderData();
-  }, [getSliderData]);
+  // useEffect(() => {
+  //   getSliderData();
+  // }, [getSliderData]);
 
-  useEffect(() => {
-    getProduct();
-  }, [getProduct, data?.productID]);
+  // useEffect(() => {
+  //   getProduct();
+  // }, [getProduct, data?.productID]);
 
   return (
     <BannerStyled>
