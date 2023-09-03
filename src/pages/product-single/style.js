@@ -493,7 +493,7 @@ export const ProductStyled = styled.section`
         }
 
         @media only screen and (max-width: 768px) {
-          width: 47vw;
+          width: 44vw;
           gap: 5.089058524173028vw;
           padding: 0 2.5vw;
           min-height: 80vw;

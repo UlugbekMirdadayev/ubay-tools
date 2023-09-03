@@ -235,7 +235,10 @@ const Header = () => {
                       <Link
                         key={product?.seo}
                         to={`/product/${product?.seo}`}
-                        onClick={() => setVisible(false)}
+                        onClick={() => {
+                          handleSearch({ target: { value: "" } });
+                          setVisible(false);
+                        }}
                       >
                         <img
                           src={API.baseURL_IMAGE + product?.images}
