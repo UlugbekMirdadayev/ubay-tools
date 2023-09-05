@@ -7,7 +7,7 @@ const HeaderStyled = styled.header`
   z-index: 99;
   background-color: #fff;
   width: 100%;
- 
+
   &.isNight {
     nav {
       background-color: #192128;
@@ -307,7 +307,17 @@ const HeaderStyled = styled.header`
       }
     }
   }
-
+  .loader-icon {
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
 
 export default HeaderStyled;

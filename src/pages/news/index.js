@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { NewsSectionContainer } from "./style";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import { Link, useParams } from "react-router-dom";
 import Selectors from "../../redux/selectors";
 import { api } from "../../api";
@@ -82,10 +80,10 @@ const News = () => {
           />
         </div>
       ) : null}
-      <Swiper slidesPerView={"auto"} className="row">
+      <div className="row">
         {news?.length
           ? news?.map((single) => (
-              <SwiperSlide
+              <div
                 key={single?._id}
                 style={
                   id === single?._id
@@ -109,12 +107,12 @@ const News = () => {
                     {lang === "uz" ? single?.short_uz : single?.short}
                   </div>
                 </Link>
-              </SwiperSlide>
+              </div>
             ))
           : skeletionData.slider.map((key) => (
-              <SwiperSlide key={key} className="card isLoading" />
+              <div key={key} className="card isLoading" />
             ))}
-      </Swiper>
+      </div>
     </NewsSectionContainer>
   );
 };

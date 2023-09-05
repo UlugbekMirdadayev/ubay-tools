@@ -28,7 +28,6 @@ export const ProductStyled = styled.section`
     @media only screen and (max-width: 768px) {
       width: 100%;
     }
-
     .slider {
       border-radius: 0.625vw;
       background-color: rgba(14, 50, 103, 0.04);
@@ -38,6 +37,7 @@ export const ProductStyled = styled.section`
         width: 100%;
         height: 24.258541666666666vw;
         object-fit: cover;
+        cursor: zoom-in;
         @media only screen and (max-width: 768px) {
           width: 100%;
           height: 43.81119592875318vw;
@@ -122,6 +122,54 @@ export const ProductStyled = styled.section`
             width: 3vw;
           }
         }
+      }
+    }
+    &.modal {
+      .position {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(5px);
+        z-index: 99;
+        display: grid;
+        place-content: center;
+
+        .center {
+          width: 90vw;
+          height: 90vh;
+          position: relative;
+          z-index: 2;
+
+          .slider_image {
+            width: 90vw;
+            height: 80vh;
+            cursor: default;
+          }
+        }
+        .close-btn {
+          position: absolute;
+          top: 2vh;
+          right: 3vw;
+          z-index: 3;
+          width: 1.5vw;
+          height: 1.5vw;
+          cursor: pointer;
+          @media only screen and (max-width: 768px) {
+            width: 5vw;
+            height: 5vw;
+          }
+        }
+        .closer {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          cursor: alias;
+        }
+      }
+      .btn-ctrl {
+        display: none;
       }
     }
   }
@@ -456,7 +504,7 @@ export const ProductStyled = styled.section`
       font-size: 0.8333333333333334vw;
       font-weight: 500;
       line-height: 1.25vw;
-      white-space: pre;
+      white-space: break-spaces;
       overflow-x: auto;
       @media only screen and (max-width: 768px) {
         font-size: 3.5vw;

@@ -1,7 +1,19 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { CompareStyled } from "./style";
 import Selectors from "../../redux/selectors";
-import { API, currencyString, removeDuplicates } from "../../utils/constants";
+import {
+  API,
+  currencyString,
+  isSelectedProduct,
+  removeDuplicates,
+} from "../../utils/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch } from "react-redux";
 import locale from "../../localization/locale.json";
@@ -18,6 +30,7 @@ const Comparison = () => {
   const lang = Selectors.useLang();
   const [data, setData] = useState([]);
   const sliderRef = useRef();
+  const [panding, setTransition] = useTransition();
   const langData = useMemo(() => locale[lang]["compare"], [lang]);
 
   const getProducts = useCallback(() => {
@@ -26,7 +39,7 @@ const Comparison = () => {
 
   useEffect(() => {
     if (!data.length) {
-      getProducts();
+      setTransition(() => getProducts());
     }
   }, [getProducts, data.length]);
 
@@ -69,6 +82,15 @@ const Comparison = () => {
   useEffect(() => {
     handleGetProducts();
   }, [handleGetProducts]);
+
+  useEffect(() => {
+    if (!compareItems?.length || !products?.length) return;
+    compareItems
+      ?.filter((seo) => !isSelectedProduct({ seo }, products))
+      .forEach((item) => {
+        dispatch(setCompare(item));
+      });
+  }, [compareItems, products, dispatch]);
 
   return (
     <CompareStyled>
@@ -120,7 +142,7 @@ const Comparison = () => {
             ))}
           </Swiper>
         </div>
-      ) : (
+      ) : panding ? null : (
         <div onClick={() => dispatch(setCompareClear())}>
           <NotFound />
         </div>

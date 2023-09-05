@@ -6,6 +6,7 @@ import {
   CloseArrow,
   CompareIcon,
   HeartIcon,
+  LoaderIcon,
   Logo,
   MenuIcon,
   Search,
@@ -22,12 +23,13 @@ import AddressAdd from "../userModal/address";
 import UserUpdateForm from "../userModal/update";
 import UserPassword from "../userModal/password";
 import { api } from "../../api";
-import { setLogin } from "../../redux/user-slice";
+import { setLogOut, setLogin } from "../../redux/user-slice";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 import UserModal from "../userModal/login";
 import { toast } from "react-toastify";
 import { API } from "../../utils/constants";
 import { setProducts } from "../../redux/products-slice";
+import { useTransition } from "react";
 
 const languages = [
   {
@@ -51,6 +53,7 @@ const Header = () => {
   const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState("");
   const [visible, setVisible] = useState("");
+  const [isPending, startTransition] = useTransition();
   const [filteredData, setFilteredData] = useState(products || []);
   const langData = useMemo(() => locale[lang]["header"], [lang]);
 
@@ -97,9 +100,12 @@ const Header = () => {
         .then(({ data }) => {
           dispatch(setLogin({ ...data, token: userLocale.token }));
         })
-        .catch(({ message }) => {
-          toast.error(message);
-          console.log(message);
+        .catch(({ response: { data } }) => {
+          toast.error(data?.message);
+          if (data?.cod === 401) {
+            dispatch(setLogOut());
+          }
+          console.log(data);
         });
     }
   }, [dispatch]);
@@ -138,19 +144,24 @@ const Header = () => {
 
   const handleSearch = useCallback(
     ({ target: { value } }) => {
-      setVisible(true);
-      setSearchValue(value);
-      if (value?.length >= 2) {
-        setFilteredData(
-          products?.filter(
-            (product) =>
-              product?.title?.toLowerCase()?.includes(value?.toLowerCase()) ||
-              product?.title_uz?.toLowerCase()?.includes(value?.toLowerCase())
-          )
-        );
-      } else {
-        setFilteredData([]);
-      }
+      startTransition(() => {
+        setVisible(true);
+        setSearchValue(value);
+        if (value?.length >= 2) {
+          setFilteredData(
+            products?.filter(
+              (product) =>
+                product?.title?.toLowerCase()?.includes(value?.toLowerCase()) ||
+                product?.title_uz
+                  ?.toLowerCase()
+                  ?.includes(value?.toLowerCase()) ||
+                product?.seo?.toLowerCase()?.includes(value?.toLowerCase())
+            )
+          );
+        } else {
+          setFilteredData([]);
+        }
+      });
     },
     [products]
   );
@@ -210,15 +221,19 @@ const Header = () => {
               placeholder={langData.search_placeholder}
             />
             {visible ? (
-              <CloseArrow
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  handleSearch({ target: { value: "" } });
-                  setVisible(false);
-                }}
-                color="#999999"
-              />
+              isPending ? (
+                <LoaderIcon className="loader-icon" />
+              ) : (
+                <CloseArrow
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleSearch({ target: { value: "" } });
+                    setVisible(false);
+                  }}
+                  color="#999999"
+                />
+              )
             ) : (
               <Search />
             )}

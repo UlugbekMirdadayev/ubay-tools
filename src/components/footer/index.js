@@ -22,8 +22,9 @@ const Footer = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // data.product_id = "product_id";
+  const onSubmit = (data, product_id,form) => {
+    data.product_id = product_id;
+    !product_id && delete data.product_id;
     data.phone = "998" + data.phone;
     console.log(data);
 
@@ -32,6 +33,7 @@ const Footer = () => {
       .then(({ data }) => {
         toast.success(data?.message);
         reset();
+        form?.target?.removeAttribute("data-prod-id")
       })
       .catch(({ response: { data } }) => {
         console.log(data);
@@ -122,7 +124,11 @@ const Footer = () => {
         </p>
       ))}
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={(e) => {
+          handleSubmit((data) =>
+            onSubmit(data, e.target.attributes?.["data-prod-id"]?.value, e)
+          )(e);
+        }}
         className="contact"
         id="contact-form"
       >

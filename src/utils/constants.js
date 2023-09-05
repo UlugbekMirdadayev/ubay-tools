@@ -42,13 +42,14 @@ function getVideoId(url) {
 export const youtubeEmbed = (url) =>
   "https://www.youtube.com/embed/" + getVideoId(url);
 
-export const goContact = () => {
+export const goContact = (propsElement) => {
+  const { product } = propsElement;
   const element = document.getElementById("contact-form");
   if (element) {
     element?.scrollIntoView({ behavior: "smooth" });
-    setTimeout(() => {
-      element?.children[2]?.click();
-    }, 500);
+    if (product?._id) {
+      element.setAttribute("data-prod-id", product?._id);
+    } else element.removeAttribute("data-prod-id");
   }
 };
 

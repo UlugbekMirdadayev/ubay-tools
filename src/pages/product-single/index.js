@@ -19,6 +19,7 @@ import {
   Arrow,
   CarIcon,
   CartIconSecond,
+  CloseArrow,
   InfoIcon,
   Like,
   MedalIcon,
@@ -43,6 +44,7 @@ const ProductSingle = () => {
   const { seo } = useParams();
   const [data, setData] = useState({});
   const [active, setActive] = useState(0);
+  const [modal, setModal] = useState(false);
   const [sliderRef, paginationRef, prodSlider] = [
     useRef(),
     useRef(),
@@ -122,58 +124,75 @@ const ProductSingle = () => {
         {lang === "uz" ? data.title_uz || data.title : data.title}
       </h1>
       <div className="row_main">
-        <div className="slider_column">
-          <Swiper
-            ref={sliderRef}
-            onSlideChange={({ activeIndex }) => handleChangeSlide(activeIndex)}
-            className="slider"
-            slidesPerView={1}
-          >
-            {data?.images?.length ? (
-              data?.images?.map((item, key) => (
-                <SwiperSlide key={key}>
-                  <img
-                    className="slider_image"
-                    src={API.baseURL_IMAGE + item}
-                    alt={item}
-                  />
-                </SwiperSlide>
-              ))
-            ) : (
-              <SwiperSlide>
-                <img
-                  src={
-                    API.baseURL_IMAGE +
-                    (data?.images?.length ? data?.images[0] : "")
-                  }
-                  alt={data?.title}
-                />
-              </SwiperSlide>
+        <div className={`slider_column ${modal ? "modal" : ""}`}>
+          <div className="position">
+            <div className="closer" onClick={() => setModal(!modal)} />
+            {modal && (
+              <CloseArrow
+                className="close-btn"
+                onClick={() => setModal(false)}
+              />
             )}
-          </Swiper>
-          <div className="pagination">
-            <button className="prev btn-ctrl" onClick={handlePrev}>
-              <Arrow />
-            </button>
-            <Swiper ref={paginationRef} slidesPerView={"auto"} spaceBetween={5}>
-              {data?.images?.length
-                ? data?.images?.map((item, key) => (
-                    <SwiperSlide
-                      key={key}
-                      className={`pagination-btn ${
-                        active === key ? "slide-active" : ""
-                      }`}
-                    >
-                      <button onClick={() => handleChangeSlide(key)}>
-                        <img src={API.baseURL_IMAGE + item} alt={item} />
-                      </button>
+            <div className="center">
+              <Swiper
+                ref={sliderRef}
+                onSlideChange={({ activeIndex }) =>
+                  handleChangeSlide(activeIndex)
+                }
+                className="slider"
+                slidesPerView={1}
+              >
+                {data?.images?.length ? (
+                  data?.images?.map((item, key) => (
+                    <SwiperSlide key={key} onClick={() => setModal(true)}>
+                      <img
+                        className="slider_image"
+                        src={API.baseURL_IMAGE + item}
+                        alt={item}
+                      />
                     </SwiperSlide>
                   ))
-                : null}
-            </Swiper>
-            <button className="next btn-ctrl" onClick={handleNext}>
-              <Arrow />
-            </button>
+                ) : (
+                  <SwiperSlide>
+                    <img
+                      src={
+                        API.baseURL_IMAGE +
+                        (data?.images?.length ? data?.images[0] : "")
+                      }
+                      alt={data?.title}
+                    />
+                  </SwiperSlide>
+                )}
+              </Swiper>
+              <div className="pagination">
+                <button className="prev btn-ctrl" onClick={handlePrev}>
+                  <Arrow />
+                </button>
+                <Swiper
+                  ref={paginationRef}
+                  slidesPerView={"auto"}
+                  spaceBetween={5}
+                >
+                  {data?.images?.length
+                    ? data?.images?.map((item, key) => (
+                        <SwiperSlide
+                          key={key}
+                          className={`pagination-btn ${
+                            active === key ? "slide-active" : ""
+                          }`}
+                        >
+                          <button onClick={() => handleChangeSlide(key)}>
+                            <img src={API.baseURL_IMAGE + item} alt={item} />
+                          </button>
+                        </SwiperSlide>
+                      ))
+                    : null}
+                </Swiper>
+                <button className="next btn-ctrl" onClick={handleNext}>
+                  <Arrow />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="options scroll-custome">
@@ -262,7 +281,9 @@ const ProductSingle = () => {
                   </>
                 )}
               </button>
-              <button onClick={goContact}>
+              <button type="button"
+                onClick={(element) => goContact({ ...element, product: data })}
+              >
                 <span>{langData.buy_now}</span>
               </button>
             </div>
