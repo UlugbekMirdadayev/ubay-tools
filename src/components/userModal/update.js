@@ -25,13 +25,6 @@ const Update = () => {
     [lang]
   );
 
-  const headers = {
-    headers: {
-      "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
-        ?.token,
-    },
-  };
-
   const {
     handleSubmit,
     formState: { errors },
@@ -46,6 +39,12 @@ const Update = () => {
     ) {
       return toast.info(langData.nomodified);
     }
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
     dispatch(setLoading(true));
     api
       .update_user(data, headers)
@@ -57,7 +56,7 @@ const Update = () => {
           setLogin({ ...data, token: headers.headers["x-access-token"] })
         );
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         dispatch(setLoading(false));
         toast.error(data?.message);
         console.log(data);

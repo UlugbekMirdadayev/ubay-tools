@@ -74,10 +74,16 @@ const BookingOrder = () => {
   }, [handleFilterProducts]);
 
   const handlePromo = (value) => {
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
     if (value.length > 2) {
       setisloading(true);
       api
-        .promo(value)
+        .promo(value, headers)
         .then(({ data }) => {
           setisloading(false);
           console.log(data);
@@ -86,7 +92,7 @@ const BookingOrder = () => {
             promoDiscount: data?.data?.discount,
           });
         })
-        .catch(({ response: { data } }) => {
+        .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
           setisloading(false);
           console.log(data?.message);
           setPromo({
@@ -141,20 +147,32 @@ const BookingOrder = () => {
   };
 
   const getOrders = () => {
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
     api
-      .get_user_orders()
+      .get_user_orders(headers)
       .then(({ data }) => {
         if (data?.length) {
           dispatch(setOrders(data));
         }
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         toast.error(data?.message || JSON.stringify(data));
         console.log(data);
       });
   };
 
   const handleSubmit = () => {
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
     const fData = {
       delivery:
         delivery_type === "{{courier}}"
@@ -182,7 +200,7 @@ const BookingOrder = () => {
     };
     dispatch(setLoading(true));
     api
-      .set_booking_order(fData)
+      .set_booking_order(fData, headers)
       .then(({ data }) => {
         dispatch(setLoading(false));
         getOrders();

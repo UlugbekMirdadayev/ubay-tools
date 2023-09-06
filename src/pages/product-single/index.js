@@ -89,7 +89,7 @@ const ProductSingle = () => {
           setData({ notFound: true });
         }
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         setData({ notFound: true });
         console.log(data);
         toast.error(data?.message);

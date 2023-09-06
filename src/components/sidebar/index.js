@@ -57,7 +57,7 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
       key: "user",
       link: "/profile/user",
       icon: <UserIcon />,
-      onClick: user.id ? null : openUserModal,
+      onClick: user?._id ? null : openUserModal,
     },
   ];
 

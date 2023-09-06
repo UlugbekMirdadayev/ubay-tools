@@ -1,7 +1,5 @@
 import React, { useCallback, useEffect } from "react";
 import { NewsSectionContainer } from "./style";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import { Link } from "react-router-dom";
 import Selectors from "../../../redux/selectors";
 import { api } from "../../../api";
@@ -34,7 +32,7 @@ const NewsSection = ({ lang, langData }) => {
           console.log(data);
         }
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         toast.error(data?.message || JSON.stringify(data));
         console.log(data);
       });
@@ -46,10 +44,10 @@ const NewsSection = ({ lang, langData }) => {
   return (
     <NewsSectionContainer>
       <h1>{langData.news_title}</h1>
-      <Swiper slidesPerView={"auto"} className="row">
+      <div className="row">
         {news?.length
-          ? news?.map((single) => (
-              <SwiperSlide key={single?._id} className="card">
+          ? [...news]?.splice(0, 4)?.map((single) => (
+              <div key={single?._id} className="card">
                 <Link to={`/news/${single?._id}`}>
                   <div className="date">
                     {moment(single?.createdAt).format("DD.MM.YYYY HH:MM")}
@@ -65,12 +63,12 @@ const NewsSection = ({ lang, langData }) => {
                     {lang === "uz" ? single?.short_uz : single?.short}
                   </div>
                 </Link>
-              </SwiperSlide>
+              </div>
             ))
           : skeletionData.slider.map((key) => (
-              <SwiperSlide key={key} className="card isLoading" />
+              <div key={key} className="card isLoading" />
             ))}
-      </Swiper>
+      </div>
       <Link to={"/news"} className="show_all">
         {langData.all_news}
       </Link>

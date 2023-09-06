@@ -100,7 +100,7 @@ const Header = () => {
         .then(({ data }) => {
           dispatch(setLogin({ ...data, token: userLocale.token }));
         })
-        .catch(({ response: { data } }) => {
+        .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
           toast.error(data?.message);
           if (data?.cod === 401) {
             dispatch(setLogOut());

@@ -42,7 +42,7 @@ const News = () => {
           console.log(data);
         }
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         toast.error(data?.message || JSON.stringify(data));
         console.log(data);
       });

@@ -26,7 +26,7 @@ const About = () => {
             <a
               href="tel:+998 (90) 000 50 20"
               className="link-btn"
-              to={"/about"}
+              to={"/about-us"}
             >
               {langData.call_me}
             </a>

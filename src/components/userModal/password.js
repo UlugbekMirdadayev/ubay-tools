@@ -30,10 +30,16 @@ const Password = () => {
     reset,
   } = useForm();
   const onSubmit = (data) => {
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
     const formData = { password: data?.password_new };
     dispatch(setLoading(true));
     api
-      .update_pass(formData)
+      .update_pass(formData, headers)
       .then(({ data }) => {
         localStorage.setItem(
           "ubay-user-data",
@@ -44,7 +50,7 @@ const Password = () => {
         toast.success(langData.updated);
         reset();
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         dispatch(setLoading(false));
         toast.error(data?.message);
         console.log(data);

@@ -9,14 +9,20 @@ import { toast } from "react-toastify";
 const Orders = ({ user, dispatch, data, langData, lang }) => {
   useEffect(() => {
     if (data?.length || !user?._id) return;
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
     api
-      .get_user_orders()
+      .get_user_orders(headers)
       .then(({ data }) => {
         if (data?.length) {
           dispatch(setOrders(data));
         }
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         toast.error(data?.message || JSON.stringify(data));
         console.log(data);
       });

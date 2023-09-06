@@ -43,10 +43,10 @@ const AboutSection = ({ lang, langData }) => {
             <h1 className="title">Ubay tools</h1>
             <div className="prg">{langData.ubay_tool_text}</div>
             <div className="row">
-              <Link className="link-btn" to={"/about"}>
+              <Link className="link-btn" to={"/about-us"}>
                 {langData.btn_more}
               </Link>
-              <Link className="link-btn" to={"/about"}>
+              <Link className="link-btn" to={"/about-us"}>
                 {langData.more_video}
               </Link>
               <a

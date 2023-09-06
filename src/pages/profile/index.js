@@ -47,7 +47,7 @@ const Profile = () => {
           setLogin({ ...data, token: headers.headers["x-access-token"] })
         );
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         console.log(data);
       });
   };

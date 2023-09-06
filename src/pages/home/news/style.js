@@ -17,6 +17,8 @@ export const NewsSectionContainer = styled.section`
   .row {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
     .card {
       width: 18.979166666666668vw;

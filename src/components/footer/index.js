@@ -22,20 +22,18 @@ const Footer = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data, product_id,form) => {
+  const onSubmit = (data, product_id, form) => {
     data.product_id = product_id;
     !product_id && delete data.product_id;
     data.phone = "998" + data.phone;
-    console.log(data);
-
     api
       .application_add(data)
       .then(({ data }) => {
         toast.success(data?.message);
         reset();
-        form?.target?.removeAttribute("data-prod-id")
+        form?.target?.removeAttribute("data-prod-id");
       })
-      .catch(({ response: { data } }) => {
+      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
         console.log(data);
         toast.error(data?.message || JSON.stringify(data));
       });
@@ -166,12 +164,12 @@ const Footer = () => {
                 })}
               />
             </label>
-            <label className={`input_card ${errors.email ? "error" : ""}`}>
+            <label className={"input_card"}>
               <p>{langData.contact.email}</p>
               <input
                 type="email"
                 placeholder="ok@gmail.com"
-                {...register("email", { required: true })}
+                {...register("email")}
               />
             </label>
           </div>

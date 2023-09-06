@@ -146,6 +146,7 @@ export const ProductStyled = styled.section`
             width: 90vw;
             height: 80vh;
             cursor: default;
+            object-fit: contain;
           }
         }
         .close-btn {
