@@ -155,24 +155,26 @@ const UserModal = () => {
   };
 
   const handleSendResetPass = () => {
-    setForgotPass(true);
-    setLoading(true);
-    const fData = {
-      phone: "998" + phone,
-    };
-    api
-      .reset_pass_send(fData)
-      .then(({ data }) => {
-        setLoading(false);
-        console.log(data, "200");
-        toast.info(data?.message);
-      })
-      .catch(
-        ({ response: { data } = { data: { message: "Network error" } } }) => {
-          console.log(data);
+    if (phone?.length === 9) {
+      setForgotPass(true);
+      setLoading(true);
+      const fData = {
+        phone: "998" + phone,
+      };
+      api
+        .reset_pass_send(fData)
+        .then(({ data }) => {
           setLoading(false);
-        }
-      );
+          console.log(data, "200");
+          toast.info(data?.message);
+        })
+        .catch(
+          ({ response: { data } = { data: { message: "Network error" } } }) => {
+            console.log(data);
+            setLoading(false);
+          }
+        );
+    }else toast.info("Telefon raqamini to'gri kiriting")
   };
 
   const onSubmit = (formData) => {
