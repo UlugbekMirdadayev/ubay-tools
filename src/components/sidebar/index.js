@@ -118,27 +118,53 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
               : null}
           </Fragment>
         ))}
-      </ul>
-      <div className="mobile_bar">
-        {links.map((item) => (
-          <NavLink
-            to={item.link}
-            key={item.key}
-            className="box"
-            onClick={(e) => {
-              item?.onClick && item?.onClick(e);
-              handleSidebarChange();
-            }}
-          >
-            <div className="icon">
-              {item.count ? (
-                <span>{item?.count > 9 ? "9+" : item?.count}</span>
-              ) : null}
-              {item.icon}
-            </div>
-          </NavLink>
+        {categories?.map((category) => (
+          <Fragment key={category?._id}>
+            <NavLink
+              onClick={handleSidebarChange}
+              to={`/category/${category?.seo}`}
+            >
+              {category[lang === "uz" ? "title_uz" : "title"]}
+            </NavLink>
+            {isActiveCategory(category)
+              ? category?.children?.map((sub_category) => (
+                  <NavLink
+                    key={sub_category?.seo}
+                    id={sub_category?.seo}
+                    ref={(ref) => scrollToElement(ref)}
+                    className={`sub_category ${
+                      categoryId === sub_category?.seo
+                    }`}
+                    onClick={handleSidebarChange}
+                    to={`/category/${category?.seo}/${sub_category?.seo}`}
+                  >
+                    {sub_category[lang === "uz" ? "title_uz" : "title"]}
+                  </NavLink>
+                ))
+              : null}
+          </Fragment>
         ))}
-      </div>
+        <div className="mobile_bar">
+          {links.map((item) => (
+            <NavLink
+              to={item.link}
+              key={item.key}
+              className="box"
+              onClick={(e) => {
+                item?.onClick && item?.onClick(e);
+                handleSidebarChange();
+              }}
+            >
+              <div className="icon">
+                {item.count ? (
+                  <span>{item?.count > 9 ? "9+" : item?.count}</span>
+                ) : null}
+                {item.icon}
+              </div>
+            </NavLink>
+          ))}
+        </div>
+      </ul>
     </SideabarStyled>
   );
 };

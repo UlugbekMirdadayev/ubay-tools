@@ -68,7 +68,7 @@ export const SideabarStyled = styled.article`
     }
     @media only screen and (max-width: 768px) {
       background-color: #fff;
-      height: calc(100vh - 34vw);
+      height: calc(100vh - 24vw);
       padding: 0 4vw;
     }
 
@@ -107,14 +107,17 @@ export const SideabarStyled = styled.article`
   .mobile_bar {
     display: none;
     @media only screen and (max-width: 768px) {
+      position: static;
+      bottom: 0;
+      z-index: 5;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 5vw 4vw;
       background-color: #fff;
       border-radius: 2.600216684723727vw;
-      box-shadow: 0px -2.1668472372697725vw 3.2502708559046587vw -4.333694474539545vw
-        #1d2f77;
+      /* box-shadow: 0px -2.1668472372697725vw 3.2502708559046587vw -4.333694474539545vw
+        #1d2f77; */
 
       .box {
         display: flex;
