@@ -107,7 +107,7 @@ export const SideabarStyled = styled.article`
   .mobile_bar {
     display: none;
     @media only screen and (max-width: 768px) {
-      position: static;
+      position: sticky;
       bottom: 0;
       z-index: 5;
       display: flex;
