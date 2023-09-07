@@ -67,7 +67,7 @@ export const SideabarStyled = styled.article`
     }
     @media only screen and (max-width: 768px) {
       background-color: #fff;
-      height: calc(100vh - 20vw);
+      height: 87vh;
       padding: 0 4vw;
     }
 
