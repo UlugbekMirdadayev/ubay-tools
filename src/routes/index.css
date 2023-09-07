@@ -20,9 +20,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: calc(100vh - 9vw);
-  height: 100%;
-  margin-top: 9vw;
+  height: 100vh;
   overflow-x: hidden;
 }
 
@@ -137,11 +135,6 @@
 @media only screen and (max-width: 768px) {
   .page-container {
     width: 100%;
-  }
-
-  .app {
-    margin-top: 46vw;
-    max-height: calc(100vh - 46vw);
   }
 }
 

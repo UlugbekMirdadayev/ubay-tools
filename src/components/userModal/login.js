@@ -71,7 +71,7 @@ const UserModal = () => {
         ({ response: { data } = { data: { message: "Network error" } } }) => {
           setLoading(false);
           toast.error(data?.message || JSON.stringify(data));
-          setErrorText(data?.message || JSON.stringify(data));
+          setErrorText(data?.message || "Phone or Password incorrect");
           reset();
           setValue("phone", formData?.phone?.replace("998", ""));
         }
