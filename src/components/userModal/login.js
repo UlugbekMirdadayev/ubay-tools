@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../../redux/user-slice";
 import { setOpenLoginModal } from "../../redux/modals-slice";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const UserModal = () => {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const lang = Selectors.useLang();
   const { login } = Selectors.useModalOpen();
@@ -46,6 +48,7 @@ const UserModal = () => {
           toast.success("Success");
           reset();
           handleClose();
+          navigate("/profile/user");
         } else toast.info("User is not Active");
       })
       .catch((err) => {
