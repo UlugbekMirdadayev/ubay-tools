@@ -12,6 +12,7 @@ import {
 import { setSidebarVisible } from "../../redux/sidebar-slice";
 import { SideabarStyled } from "./style";
 import { setOpenLoginModal } from "../../redux/modals-slice";
+import useWindowSize from "../../utils/hooks";
 
 const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
   const { pathname } = useLocation();
@@ -74,11 +75,12 @@ const Sidebar = ({ langData, lang, isMobile, categoryId = null, loading }) => {
   const isActiveCategory = (category) =>
     categoryId === category?.seo ||
     category?.children?.find((child) => child?.seo === categoryId);
-
+  const windowSize = useWindowSize();
   return (
     <SideabarStyled
       aria-label={`sidebar ${sidebar}`}
       aria-colcount={2}
+      style={sidebar ? { height: windowSize.height } : {}}
       className={`${sidebar ? "opened" : ""} ${
         isMobile ? "mobile-sidebar" : "pc-header"
       }`}

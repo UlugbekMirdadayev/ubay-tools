@@ -7,7 +7,10 @@ const HeaderStyled = styled.header`
   z-index: 99;
   background-color: #fff;
   width: 100%;
-
+  padding-bottom: 1vw;
+  @media only screen and (max-width: 768px) {
+    padding-bottom: 5vw;
+  }
   &.isNight {
     nav {
       background-color: #192128;

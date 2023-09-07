@@ -28,7 +28,6 @@ export const SideabarStyled = styled.article`
     &.opened {
       left: 0;
       max-height: none;
-      height: 100vh;
     }
   }
 
@@ -68,7 +67,7 @@ export const SideabarStyled = styled.article`
     }
     @media only screen and (max-width: 768px) {
       background-color: #fff;
-      height: calc(100vh - 45vw);
+      height: calc(100vh - 20vw);
       padding: 0 4vw;
     }
 

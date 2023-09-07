@@ -10,6 +10,7 @@ import { api } from "./api";
 import { setCategories } from "./redux/categories-slice";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useWindowSize from "./utils/hooks";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -45,8 +46,10 @@ const App = () => {
     getCategories();
   }, [getCategories]);
 
+  const windowSize = useWindowSize();
+
   return (
-    <div className="app scroll-custome" ref={app}>
+    <div className="app scroll-custome" style={windowSize} ref={app}>
       <ToastContainer limit={4} autoClose={100} position={"top-center"} />
       {isLoading && (
         <div className={"loading"}>
