@@ -219,4 +219,22 @@ export const StyledSalesHits = styled.div`
     flex-wrap: wrap;
     gap: 2%;
   }
+  .show_all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2vw;
+    font-size: 0.9291666666666666vw;
+    color: #1d2f77;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-top: 0.052083333333333336vw solid #e2e2e2;
+    @media only screen and (max-width: 768px) {
+      font-size: 3.053435114503817vw;
+      justify-content: flex-start;
+      border: 0;
+      padding: 3vw;
+      width: max-content;
+    }
+  }
 `;

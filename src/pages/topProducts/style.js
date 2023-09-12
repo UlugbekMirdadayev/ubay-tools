@@ -8,6 +8,8 @@ export const WishesStyled = styled.section`
     padding: 0 4.325699745547074vw;
   }
   h1.title {
+    position: sticky;
+    top: 0;
     font-size: 1.4583333333333333vw;
     padding-bottom: 2.6041666666666665vw;
     @media only screen and (max-width: 768px) {
@@ -36,7 +38,7 @@ export const WishesStyled = styled.section`
       padding: 0.5vw 0.2vw;
 
       .hover_body {
-        width: 14.0625vw;
+        width: 15.5625vw;
         display: flex;
         flex-direction: column;
         justify-content: space-between;

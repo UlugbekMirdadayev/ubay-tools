@@ -115,8 +115,18 @@ export const BannerStyled = styled.section`
         font-size: 0.8333333333333334vw;
         font-weight: 400;
         line-height: 140%;
+        white-space: pre-line;
+
         @media only screen and (max-width: 768px) {
           font-size: 2vw;
+        }
+        &:first-line {
+          font-size: 1.539375vw;
+          font-weight: 500;
+          line-height: 140%;
+          @media only screen and (max-width: 768px) {
+            font-size: 3.539375vw;
+          }
         }
       }
     }

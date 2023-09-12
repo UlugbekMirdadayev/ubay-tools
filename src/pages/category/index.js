@@ -52,9 +52,9 @@ const Categoty = () => {
       const category =
         categories
           ?.find((category) =>
-            category?.children.find((child) => child.seo === seo)
+            category?.children?.find((child) => child?.seo === seo)
           )
-          ?.children?.find((child) => child.seo === seo) || {};
+          ?.children?.find((child) => child?.seo === seo) || {};
       setIsCategory(category);
       setProductsFiltered(
         products?.filter((product) => product?.categories_id === category?._id)
@@ -65,7 +65,7 @@ const Categoty = () => {
       setIsCategory(category);
       setProductsFiltered(
         products?.filter((product) =>
-          category?.children.find((child) => child._id === product?.categories_id)
+          category?.children?.find((child) => child?._id === product?.categories_id)
         )
       );
     }

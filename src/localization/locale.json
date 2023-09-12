@@ -235,7 +235,8 @@
     },
     "banner": {
       "buy": "Sotib olish",
-      "catalog_open": "Katalog yuklab olish"
+      "catalog_open": "Katalog yuklab olish",
+      "catalog_not_found": "Katalog topilmadi"
     }
   },
   "ru": {
@@ -474,7 +475,8 @@
     },
     "banner": {
       "buy": "Купить",
-      "catalog_open": "Скачать каталог"
+      "catalog_open": "Скачать каталог",
+      "catalog_not_found": "Каталог не найден"
     }
   }
 }

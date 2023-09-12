@@ -17,11 +17,14 @@ export const NewsSectionContainer = styled.section`
   .row {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     flex-wrap: wrap;
-
+    gap: 1vw;
+    @media only screen and (max-width: 768px) {
+      gap: 2vw;
+    }
     .card {
       width: 18.979166666666668vw;
+      margin-bottom: 1vw;
       &.isLoading {
         min-height: 20vh;
         margin: 1vw;
@@ -36,6 +39,7 @@ export const NewsSectionContainer = styled.section`
         gap: 0.78125vw;
         transition: 300ms ease;
         padding: 1vw;
+        height: 100%;
         @media only screen and (max-width: 768px) {
           gap: 5.089058524173028vw;
         }
@@ -77,6 +81,16 @@ export const NewsSectionContainer = styled.section`
         font-size: 0.9291666666666666vw;
         font-weight: 400;
         line-height: 1.2497916666666666vw;
+        white-space: pre-line;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+
         @media only screen and (max-width: 768px) {
           font-size: 3.0358778625954197vw;
           line-height: 150%;

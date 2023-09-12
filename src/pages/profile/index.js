@@ -38,7 +38,6 @@ const Profile = () => {
     },
   };
 
-
   const handleActiveAddress = (address_id) => {
     api
       .update_address(address_id, {}, headers)
@@ -47,9 +46,11 @@ const Profile = () => {
           setLogin({ ...data, token: headers.headers["x-access-token"] })
         );
       })
-      .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
-        console.log(data);
-      });
+      .catch(
+        ({ response: { data } = { data: { message: "Network error" } } }) => {
+          console.log(data);
+        }
+      );
   };
 
   const routes = {
@@ -105,8 +106,12 @@ const Profile = () => {
                   );
                 })
                 ?.map((address) => (
-                  <div 
-                  onClick={()=> handleActiveAddress(address?._id)}
+                  <div
+                    onClick={() =>
+                      user?.activeAdr === address?._id
+                        ? null
+                        : handleActiveAddress(address?._id)
+                    }
                     key={address?._id}
                     className={`address ${
                       user?.activeAdr === address?._id ? "active" : ""

@@ -9,14 +9,18 @@ import { API, skeletionData } from "../../../utils/constants";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
-function CategoryProducts() {
+function CategoryProducts({ langData }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { products } = Selectors.useProducts();
   const slider = Selectors.useSlider();
+  const { categories } = Selectors.useCategories();
   const wishes = Selectors.useWishes();
   const cartItems = Selectors.useCart();
   const compareItems = Selectors.useCompare();
+
+  const isCategory = (id) =>
+    [...categories]?.find((category) => category._id === id);
 
   const handleFilterProducts = useCallback(() => {
     if (products?.length) return;
@@ -50,7 +54,7 @@ function CategoryProducts() {
         ?.map((slide) => (
           <Fragment key={slide?._id}>
             {products?.length ? (
-              <Link to={`/banner/${slide?._id}`}>
+              <Link to={slide?.link ? `/banner/${slide?.link}` : "#"}>
                 <img
                   onClick={() => navigate()}
                   src={`${API.baseURL_IMAGE}${slide.image}`}
@@ -64,20 +68,29 @@ function CategoryProducts() {
             <div className="flex">
               <div className="motorcycle_cultivator flex_row">
                 {products?.length
-                  ? products?.map((product) => (
-                      <div
-                        key={product?._id}
-                        className="motorcycle_cultivator_card"
-                      >
-                        <Slider
-                          wishes={wishes}
-                          cartItems={cartItems}
-                          compareItems={compareItems}
-                          dispatch={dispatch}
-                          product={product}
-                        />
-                      </div>
-                    ))
+                  ? products
+                      ?.filter(
+                        (product) =>
+                          isCategory(slide?.categories_id)?._id ===
+                            product?.categories_id ||
+                          isCategory(slide?.categories_id)?.children?.find(
+                            (cate) => cate?._id === product?.categories_id
+                          )
+                      )
+                      ?.map((product) => (
+                        <div
+                          key={product?._id}
+                          className="motorcycle_cultivator_card"
+                        >
+                          <Slider
+                            wishes={wishes}
+                            cartItems={cartItems}
+                            compareItems={compareItems}
+                            dispatch={dispatch}
+                            product={product}
+                          />
+                        </div>
+                      ))
                   : skeletionData.categories.map((key) => (
                       <div
                         key={key}
@@ -96,6 +109,9 @@ function CategoryProducts() {
             </div>
           </Fragment>
         ))}
+      <Link to={"/all-products"} className="show_all">
+        {langData.show_all}
+      </Link>
     </StyledSalesHits>
   );
 }

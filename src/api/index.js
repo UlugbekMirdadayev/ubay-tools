@@ -24,6 +24,7 @@ const me = (token) => get("me", { headers: { "x-access-token": token } });
 const promo = (promocode, options = {}) =>
   get(`discount/${promocode}`, options);
 const get_user_orders = (options = {}) => get("/my/orders", options);
+const get_banner = (link, options = {}) => get(`/banner/${link}`, options);
 const update_address = (id, body = {}, options = {}) =>
   patch(body, `set/address/${id}`, options);
 
@@ -56,6 +57,7 @@ const application_add = (body = {}, options = {}) =>
 
 export const api = {
   get,
+  get_banner,
   me,
   promo,
   reset_pass,

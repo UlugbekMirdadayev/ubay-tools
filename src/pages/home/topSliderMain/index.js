@@ -55,7 +55,7 @@ function TopSliderMain() {
         {isSliderTypes?.length
           ? isSliderTypes?.map((slide) => (
               <SwiperSlide key={slide?._id} className="img">
-                <Link to={`/banner/${slide?._id}`}>
+                <Link to={slide?.link ? `/banner/${slide?.link}` : "#"}>
                   <img src={API.baseURL_IMAGE + slide?.image} alt="slider" />
                 </Link>
               </SwiperSlide>

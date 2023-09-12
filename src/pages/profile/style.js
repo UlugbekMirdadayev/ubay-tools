@@ -223,6 +223,9 @@ export const ProfileStyled = styled.section`
               color: #fff;
             }
           }
+          &:hover{
+            background-color: #015ecf95;
+          }
           @media only screen and (max-width: 768px) {
             padding: 1.5267175572519085vw 4.071246819338422vw;
             margin-bottom: 1.5267175572519085vw;

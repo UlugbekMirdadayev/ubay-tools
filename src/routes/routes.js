@@ -45,6 +45,10 @@ export const routes = [
     element: <TopProducts />,
   },
   {
+    path: "/all-products",
+    element: <TopProducts />,
+  },
+  {
     path: "/product/:seo",
     element: <ProductSingle />,
   },

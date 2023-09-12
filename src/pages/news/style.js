@@ -138,6 +138,7 @@ export const NewsSectionContainer = styled.section`
     .more {
       font-size: 0.9895833333333334vw;
       color: #000;
+      white-space: pre-line;
       * {
         line-height: 140%;
       }
