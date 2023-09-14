@@ -30,6 +30,7 @@ import { toast } from "react-toastify";
 import { API } from "../../utils/constants";
 import { setProducts } from "../../redux/products-slice";
 import { useTransition } from "react";
+import { setOrders } from "../../redux/orders-slice";
 
 const languages = [
   {
@@ -49,6 +50,7 @@ const Header = () => {
   const cartItems = Selector.useCart();
   const compareItems = Selector.useCompare();
   const { products } = Selector.useProducts();
+  const orders = Selector.useOrders();
   const user = Selector.useUser();
   const { pathname } = useLocation();
   const [searchValue, setSearchValue] = useState("");
@@ -100,13 +102,15 @@ const Header = () => {
         .then(({ data }) => {
           dispatch(setLogin({ ...data, token: userLocale.token }));
         })
-        .catch(({ response: { data } = { data: { message: "Network error"} } }) => {
-          toast.error(data?.message);
-          if (data?.cod === 401) {
-            dispatch(setLogOut());
+        .catch(
+          ({ response: { data } = { data: { message: "Network error" } } }) => {
+            toast.error(data?.message);
+            if (data?.cod === 401) {
+              dispatch(setLogOut());
+            }
+            console.log(data);
           }
-          console.log(data);
-        });
+        );
     }
   }, [dispatch]);
 
@@ -135,6 +139,7 @@ const Header = () => {
       icon: <UserIcon />,
       onClick: user?._id ? null : openUserModal,
       user_name: user?._id ? langData.between.cabinent : null,
+      count: orders?.length,
     },
   ];
 
@@ -171,9 +176,32 @@ const Header = () => {
     [pathname]
   );
 
+  const handleGetOrders = useCallback(() => {
+    if (orders?.length) return;
+    const headers = {
+      headers: {
+        "x-access-token": JSON.parse(localStorage["ubay-user-data"] || "{}")
+          ?.token,
+      },
+    };
+    api
+      .get_user_orders(headers)
+      .then(({ data }) => {
+        if (data?.length) {
+          dispatch(setOrders(data));
+        }
+      })
+      .catch(
+        ({ response: { data } = { data: { message: "Network error" } } }) => {
+          console.log(data);
+        }
+      );
+  }, [dispatch, orders?.length]);
+
   useEffect(() => {
     handleGetProducts();
-  }, [handleGetProducts]);
+    handleGetOrders();
+  }, [handleGetProducts, handleGetOrders]);
 
   return (
     <HeaderStyled className={isNight ? "isNight" : ""}>
